@@ -1,0 +1,407 @@
+/* ------- Mini-chat-box template ------- */
+#chatx {
+    display: none;
+}
+.chat {
+    width: 285px;
+    margin: 0 auto;
+    z-index: 99999;
+    font-family: sans-serif;
+    font-size: 12px !important;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+.chat header {
+  cursor: move;
+}
+.chat header:before,
+.chat header:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.chat header h2,
+.chat .body ul li .content h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  float: left;
+}
+.chat header h2 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.chat .body {
+  position: relative;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.chat .body::-webkit-scrollbar {
+    width: .5em;
+}
+.chat .body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 4px solid #d8d8d8;
+}
+.chat .body::-webkit-scrollbar-track {
+    background: #d8d8d8;
+}
+
+.chat footer a {
+  background: #bd6982;
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+.chat footer a:hover {
+  background: #cd8ca0;
+  -webkit-transition: background 0.3s linear 0s;
+  -moz-transition: background 0.3s linear 0s;
+  -ms-transition: background 0.3s linear 0s;
+  -o-transition: background 0.3s linear 0s;
+  transition: background 0.3s linear 0s;
+}
+
+/* ------- The main content ------- */
+
+.shoutbox {
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.chat h1 {
+    background-color:  #87bfef;
+    box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative;
+    height: 36px;
+    text-align: left;
+    margin: 0;
+    color:  #ffffff;
+    border-radius: 7px 7px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 36px;
+}
+
+.left-icon {
+    position: relative;
+    top: 9px;
+    padding-right: 20px;
+    left: 10px;
+    width: 17px;
+    height: 18px;
+    float: left;
+    z-index: 1;
+}
+
+/* ------- The comments content ------- */
+
+.shoutbox-content {
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.shoutbox-content li {
+    padding: 11px;
+    border-bottom: 1px solid #d5dbe1;
+}
+
+.shoutbox-content li:nth-child(odd) {
+    background: #f7f7f7;
+}
+
+.shoutbox-username {
+    display: inline;
+    color:  #87bfef;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    margin-right: 5px;
+}
+
+.shoutbox-comment {
+    display: inline;
+    color:  #717c87;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    word-break: break-word;
+}
+
+.shoutbox-comment-details {
+    width: 100%;
+    margin: 5px auto;
+    height: 11px;
+}
+
+.shoutbox-comment-reply {
+    display: inline-block;
+    float: left;
+    color:  #5896cb;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: left;
+    height: 9px;
+    cursor: pointer;
+}
+
+.shoutbox-comment-ago {
+    display: inline-block;
+    float: right;
+    color: #cbd0d6;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: right;
+    height: 11px;
+}
+
+
+/* ------- Writing a new comment form ------- */
+
+.chat h2 {
+    position: relative;
+    background-color:  #f9fafb;
+    border-bottom: 2px solid #e2e8eb;
+    max-width: 100%;
+    height: 35px;
+    margin: 0;
+    text-align: center;
+    color:  #5896d3;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 35px;
+    cursor: pointer;
+}
+
+.chat h2 span {
+    display: none;
+    position: absolute;
+    float: right;
+    right: 13px;
+    font-size: 22px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    z-index: 20px;
+}
+
+.shoutbox-form form {
+    display: block;
+    background-color:  #f9fafb;
+    border-top: 1px solid #87bfef;
+    border-radius: 0 0 7px 7px;
+    box-shadow: 0px 2px 0px 0.00px #e2e8eb;
+    max-width: 100%;
+    text-align: left;
+    padding: 0;
+}
+
+.shoutbox-form form label {
+    display: inline-block;
+    color:  #df377a;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    width: 80px;
+    height: 11px;
+    line-height: 11px;
+    margin-bottom: 15px;
+}
+
+.shoutbox-form form .shoutbox-comment-label {
+    position: relative;
+    top: -75px;
+}
+
+#false_shoutbox_name {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 95px;
+    height: 26px;
+    padding: 0;
+    color: #fff;
+    font-size: 14px;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.shoutbox-form form #shoutbox-comment {
+    display: inline-block;
+    vertical-align: top;
+    width: 220px;
+    left: 0;
+    margin: 0px 5px 5px 10px;
+    padding: 0;
+    padding-top: 10px;
+    color: inherit;
+    background-color: #f9fafb;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    resize: none;
+    font-weight: normal;
+    font: inherit;
+    font-size: 14px;
+    line-height: 20px !important;
+    overflow: hidden;
+}
+
+.shoutbox-form form input[type=submit] {
+    background: transparent;
+    border: 0;
+    width: 33px;
+    height: 33px;
+    right: 0;
+    position: absolute;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* ------- Make the page responsive ------- */
+
+@media(max-width: 445px) {
+    .shoutbox-form form .shoutbox-comment-label {
+        top: 0;
+    }
+    .shoutbox-form form input[type=submit] {
+        margin-left: 0;
+    }
+}
+
+/* ------- Additional ------- */
+
+#false_shoutbox_name::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #51718c;
+  text-align: center;
+}
+#false_shoutbox_name::-moz-placeholder { /* Firefox 19+ */
+  color: #51718c;
+  text-align: center;
+}
+#false_shoutbox_name:-ms-input-placeholder { /* IE 10+ */
+  color: #51718c;
+  text-align: center;
+}
+#false_shoutbox_name:-moz-placeholder { /* Firefox 18- */
+  color: #51718c;
+  text-align: center;
+}
+
+.icon-chat {
+    padding-left: 10px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+button#send_message {
+    display: inline-block;
+    vertical-align: top;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    margin-top: 10px;
+    padding: 0;
+    font-size: 32px;
+    color: #87bfef;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
+    outline: none;
+}
+.icon-send:hover {
+    color: #5896cb;
+}
+.icon-gear {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    top: 3px;
+    color:#fff;
+}
+.icon-gear:active {
+    color: #d8edff;
+}
+
+.icon-refresh {
+    position: absolute;
+    top: 3px;
+    right: 40px;
+    width: 17px;
+    height: 18px;
+    font-size: 20px;
+    float:right;
+    cursor: pointer;
+}
+.icon-refresh:active {
+    color: #d8edff;
+}
+.chat_popover_parent {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.chat_popover {display:none;right: 0;background:rgba(72, 72, 72, 0.95);border-radius:4px;position:absolute;top:3em;z-index:1;width:220px;color:#fff;font-family: sans-serif;line-height: 25px;}
+.chat_popover:before {content:"";position: absolute;right:10px;top: -20px;width: 0;height: 0; border: 10px solid transparent;border-bottom: 10px solid rgba(72, 72, 72, 0.95);}
+.chat_popover span {padding: 0 10px; font-size: 12px !important;}
+.chat_popover div {margin: 12px;}
+.active .chat_popover{display:block;}
+
+.chat input[type=checkbox] {
+  display: none;
+}
+.chat label{
+  width:45px;
+  height:25px;
+  box-sizing:border-box;
+  border:2px solid;
+  float:left;
+  border-radius:100px;
+  position:relative;
+  cursor:pointer;
+  transition:.3s ease;
+}
+.chat input[type=checkbox]:checked + label{
+  background:#87bfef;
+}
+.chat input[type=checkbox]:checked + label:before{
+  left:20px;
+}
+.chat label:before{
+  transition:.3s ease;
+  content:'';
+  width:19px;
+  height:19px;
+  position:absolute;
+  background:white;
+  left:2px;
+  top:1px;
+  box-sizing:border-box;
+  border:2px solid;
+  color:#fff;
+  border-radius:100px;
+}
