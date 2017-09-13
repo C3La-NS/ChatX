@@ -69,8 +69,9 @@ Copy ChatX code and <b>make sure all the links are pointing straight to your Cha
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emojione@3.1.2/extras/css/emojione.min.css" />
 <link href="https://file.myfontastic.com/pK2gUqLQUfCn3ScMEZhDmc/icons.css" rel="stylesheet">
 <link rel="stylesheet" href="./assets/css/chatx_styles.css" />
+```
 
-
+```
 <div id='chatx' class='chat'>
             <header>
                 <h1><i class="icon-chat"></i> ChatX | Chat <input id="false_shoutbox_name" type="name" maxlength="15" placeholder="Enter name" onblur="javascript:getElementById('shoutbox-name').value=this.value"/> <i class="icon-refresh"></i>
@@ -97,8 +98,9 @@ Copy ChatX code and <b>make sure all the links are pointing straight to your Cha
         </div>
     <!-- chat End -->
     <!-- Include jQuery and the EmojiOne library -->
+```
     
-    
+```    
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"></script>
