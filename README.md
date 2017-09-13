@@ -8,6 +8,8 @@ The script uses flat file database only, built with the use of Flywheel and Rela
 <br />
 The idea that stood behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
+<center><img src="http://celans.ru/ChatX/wp-content/uploads/sites/4/2017/09/snip_20170913215406.png"></center>
+<br />
 <h2>Main features:</h2>
 <li>Flat file storing</li>
 <li>Easy installation</li>
@@ -57,6 +59,11 @@ Thanks me for all the patience during the development :)
 <br />
 More to come, help us and you'll be here too.
 
-<h2>DOWNLOAD CHATX</h2>
+<h2>Installation</h2>
+Coming soon!
 
+<h2>Demo</h2>
+Coming soon!
+
+<h2>DOWNLOAD CHATX</h2>
 Coming soon!
