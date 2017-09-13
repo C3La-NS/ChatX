@@ -42,7 +42,7 @@ ChatX is still under development. We are expecting more improvements and feature
 <h3>Nearest perspective:</h3>
 <li>Make separate .css file for easy-customizable chat color-scheme</li>
 <li>A tooltip for the required name field</li>
-<li>Bring English localization back!</li>
+<li><del>Bring English localization back!</del></li>
 <li>Make simple installation instructions on demo-page (INDEX.HTML)</li>
 <li>Introduce simple formatting tags (bold, italic and more)</li>
 <li>Templates</li>
