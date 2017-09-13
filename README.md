@@ -1,5 +1,5 @@
 # ChatX
-Simple, free PHP &amp; jQuery chat project with flat file database
+Simple free PHP &amp; jQuery chat project with flat file database
 
 <h2>What is ChatX?</h2>
 ChatX is a highly customized and refined version of the first iteration of the ShoutBox script originally introduced on <a href="https://tutorialzine.com/2015/01/shoutbox-php-jquery">Tutorialzine</a> in 2015.
