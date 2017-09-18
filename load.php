@@ -28,7 +28,7 @@ if($deleteOldComments) {
     
 }
 
-// Send the 50 latest shouts as json
+// Send the 20 latest shouts as json
 
 $shouts = $repo->query()
         ->orderBy('createdAt ASC')
