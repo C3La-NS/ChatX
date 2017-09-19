@@ -116,3 +116,6 @@ If done ChatX must work correctly.
 
 <h2>Demo</h2>
 Coming soon!
+
+
+<h2>ChatX official web-site (Russian): https://celans.ru/ChatX/</h2>
