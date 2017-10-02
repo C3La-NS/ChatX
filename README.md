@@ -14,12 +14,12 @@ The idea that stood behind the development of ChatX was to create an easy-to-use
 <h2>Main features:</h2>
 <li>Flat file storing</li>
 <li>Easy installation</li>
-<li>Modest. Don't need a bunch of dependencies, does not load your hosting resources too much</li>
-<li>Works well with any websites (more improvement to come)</li>
+<li>Modest. Doesn't need a bunch of dependencies, does not load your hosting resources too much</li>
+<li>Works well with any websites (more improvements to come)</li>
 <li>Compact and modern look</li>
 <li>Draggable, ability to remember coordinates on the page</li>
 <li>Autoloads new shouts through JSON every 15 sec on slow track and every 5 sec on fast track (customizable)</li>
-<li>Slow & fast track is togglable through chat settings, stored in LocalStorage</li>
+<li>Slow & fast tracks are togglable through chat settings, stored in LocalStorage</li>
 <li>Also provides manual refresh button</li>
 <li>Nick-name is stored in LocalStorage, not cleared on submit anymore.</li>
 <li>Loads 20 recent shouts (customizable)</li>
@@ -38,7 +38,7 @@ The idea that stood behind the development of ChatX was to create an easy-to-use
 
 
 <h2>ToDo list:</h2>
-ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you help us with the development. Below we enlisted ToDo vector of progress. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
+ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
 <h3>Nearest perspective:</h3>
 <li>Make separate .css file for easy-customizable chat color-scheme</li>
 <li>A tooltip for the required name field</li>
