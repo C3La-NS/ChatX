@@ -1,6 +1,7 @@
 <?php
 
 require 'vendor/autoload.php';
+include 'bbcode.php';
 
 // Configure the data store
 
@@ -14,13 +15,15 @@ $repo = new \JamesMoss\Flywheel\Repository('shouts', $config);
     
 // Store the posted shout data to the data store
 
-if(isset($_POST["name"]) && isset($_POST["comment"]) && strlen($_POST["name"]) <= 15 && !empty($_POST['comment'])&& strlen($_POST["comment"]) <= 240) {
+if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 15 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= 240) {
     
     $name = htmlspecialchars($_POST["name"]);
     $name = str_replace(array("\n", "\r"), '', $name);
 
     $comment = htmlspecialchars($_POST["comment"]);
     $comment = str_replace(array("\n", "\r"), '', $comment);
+    $comment = showBBcodes($comment);
+
 
     // Storing a new shout
 

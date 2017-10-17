@@ -1,0 +1,139 @@
+/*
+###################################################################
+               Customize color scheme of your ChatX app
+               in this file.
+               — STYLE: CHATX DEFAULT BLUE —
+               # Author: C3La-NS
+               # More ChatX templates: https://celans.ru/chatx
+###################################################################
+*/
+
+.chat h1 { /* Chat header */
+    background: #87bfef;
+    color:  #fff; /* Header text and icons */
+}
+
+#false_shoutbox_name {  /* Username field */
+    background: transparent;
+    color: #fff;
+}
+
+.name-required {
+    background: rgba(255, 187, 187, 0.95);
+    color: #bb5a5a;
+}
+
+.name-required:before {
+    border-bottom-color: rgba(255, 187, 187, 0.95);
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.chat .body { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
+    border-left-color: #d5dbe1;
+}
+
+.shoutbox-content li:nth-child(even) { /* Background and color for even shouts */
+    background: #fff;
+    color:  #717c87;
+}
+
+.shoutbox-content li:nth-child(odd) { /* Background and color for odd shouts */
+    background: #f9fafb;
+    color:  #717c87;
+}
+
+.shoutbox-content li {
+    border-bottom-color: #d5dbe1;
+}
+
+.shoutbox-content li:last-child { /* Making the border of the last shout in the shout-list transparent so that it didn't controdict in style with the following .shoutbox-helper block border */
+    border-bottom-color: transparent;   
+}
+
+.shoutbox-username {
+    color:  #87bfef;
+}
+
+.shoutbox-content a { /* Links color in messages. "!important" property may be required in some cases */
+    color: #5896cb !important;
+}
+
+.shoutbox-comment-reply { /* Reply button and icon */
+    color:  #5896cb;
+}
+
+.shoutbox-comment-ago { /* Time ago */
+    color: #cbd0d6;
+}
+
+.shoutbox-helper {
+    background: #f9fafb;
+    color: #717c87;
+    border-top-color: #d5dbe1;
+}
+
+.shoutbox-form form { /* Reply form */
+    background-color:  #f9fafb;
+    color: #87bfef;
+    border-top-color: #87bfef;
+    border-left-color: #d5dbe1;
+    border-bottom-color: #d5dbe1;
+    border-right-color: #d5dbe1;
+}
+
+#shoutbox-comment { /* Textarea. Preferable to leave background transparent, but you may want to customize the text color inside textarea */
+    background-color: transparent;
+    color: #717c87;
+}
+
+#false_shoutbox_name::-webkit-input-placeholder {
+ /* Chrome/Opera/Safari */
+  color: #51718c;
+}
+
+#false_shoutbox_name::-moz-placeholder {
+ /* Firefox 19+ */
+  color: #51718c;
+}
+
+#false_shoutbox_name:-ms-input-placeholder {
+ /* IE 10+ */
+  color: #51718c;
+}
+
+#false_shoutbox_name:-moz-placeholder {
+ /* Firefox 18- */
+  color: #51718c;
+}
+
+.icon-gear:active, .icon-refresh:active, .icon-send:hover {
+  filter: brightness(92%);
+}
+
+.chat_popover {
+    background: rgba(72, 72, 72, 0.95);
+    color: #fff;
+}
+
+.chat_popover:before {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: rgba(72, 72, 72, 0.95);
+    border-left-color: transparent;
+}
+
+.chat input[type=checkbox]:checked + label {
+  background: #87bfef;
+}
+
+.chat label:before {
+  background: #fff;
+  color: #fff;
+}
+
+.dropzone+.status.bg-danger {
+  background: rgba(255, 187, 187, 0.95);
+  color: #bb5a5a;
+}

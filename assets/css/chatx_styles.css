@@ -1,407 +1,461 @@
 /* ------- Mini-chat-box template ------- */
+
+@import 'color_scheme.css';
+
 #chatx {
-    display: none;
+  display: none;
 }
+
 .chat {
-    width: 285px;
-    margin: 0 auto;
-    z-index: 99999;
-    font-family: sans-serif;
-    font-size: 12px !important;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  width: 285px;
+  margin: 0 auto;
+  z-index: 99999;
+  font-family: sans-serif;
+  font-size: 14px !important;
 }
+
 .chat header {
   cursor: move;
 }
-.chat header:before,
-.chat header:after {
-  display: block;
-  content: '';
-  clear: both;
-}
-.chat header h2,
-.chat .body ul li .content h3 {
+
+.chat h1 {
+  box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: relative;
+  height: 36px;
+  text-align: left;
   margin: 0;
-  padding: 0;
-  font-size: 14px;
-  float: left;
-}
-.chat header h2 a {
-  color: #ffffff;
-  text-decoration: none;
+  border-radius: 7px 7px 0 0;
+  font-size: 16px;
+  line-height: 36px;
 }
 
 .chat .body {
   position: relative;
   max-height: 360px;
   overflow-y: auto;
+  border-style: solid;
+  border-width: 0 0 0 1px;
 }
 
 .chat .body::-webkit-scrollbar {
-    width: .5em;
+  width: .5em;
 }
+
 .chat .body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 4px solid #d8d8d8;
 }
+
 .chat .body::-webkit-scrollbar-track {
-    background: #d8d8d8;
+  background: #d8d8d8;
 }
 
-.chat footer a {
-  background: #bd6982;
-  display: block;
-  width: 100%;
-  padding: 10px 15px;
-  color: #ffffff;
-  font-size: 14px;
-  text-align: center;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-.chat footer a:hover {
-  background: #cd8ca0;
-  -webkit-transition: background 0.3s linear 0s;
-  -moz-transition: background 0.3s linear 0s;
-  -ms-transition: background 0.3s linear 0s;
-  -o-transition: background 0.3s linear 0s;
-  transition: background 0.3s linear 0s;
-}
-
-/* ------- The main content ------- */
-
-.shoutbox {
-    margin: 0 auto;
-    overflow: hidden;
-}
-
-.chat h1 {
-    background-color:  #87bfef;
-    box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: relative;
-    height: 36px;
-    text-align: left;
-    margin: 0;
-    color:  #ffffff;
-    border-radius: 7px 7px 0 0;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 36px;
-}
-
-.left-icon {
-    position: relative;
-    top: 9px;
-    padding-right: 20px;
-    left: 10px;
-    width: 17px;
-    height: 18px;
-    float: left;
-    z-index: 1;
-}
 
 /* ------- The comments content ------- */
 
 .shoutbox-content {
-    list-style: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 700;
-    text-align: left;
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: 20px;
+  font-weight: 700;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .shoutbox-content li {
-    padding: 11px;
-    border-bottom: 1px solid #d5dbe1;
-}
-
-.shoutbox-content li:nth-child(odd) {
-    background: #f7f7f7;
+  padding: 11px;
+  border-style: solid;
+  border-width: 0 0 1px 0;
 }
 
 .shoutbox-username {
-    display: inline;
-    color:  #87bfef;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: left;
-    margin-right: 5px;
+  display: inline;
+  text-align: left;
+  margin-right: 5px;
 }
 
 .shoutbox-comment {
-    display: inline;
-    color:  #717c87;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: left;
-    word-break: break-word;
+  display: inline;
+  font-weight: 400;
+  text-align: left;
 }
 
 .shoutbox-comment-details {
-    width: 100%;
-    margin: 5px auto;
-    height: 11px;
+  width: 100%;
+  margin: 5px auto;
+  height: 11px;
 }
 
 .shoutbox-comment-reply {
-    display: inline-block;
-    float: left;
-    color:  #5896cb;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 20px;
-    text-align: left;
-    height: 9px;
-    cursor: pointer;
+  display: inline-block;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: left;
+  cursor: pointer;
 }
 
 .shoutbox-comment-ago {
-    display: inline-block;
-    float: right;
-    color: #cbd0d6;
-    font-size: 11px;
-    font-weight: normal;
-    line-height: 20px;
-    text-align: right;
-    height: 11px;
+  display: inline-block;
+  float: right;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 20px;
+  text-align: right;
 }
 
+/* ------- ShoutBox helper ------- */
+.shoutbox-helper {
+  padding: 10px 15px;
+  border-style: solid;
+  border-width: 2px 0 0 0;
+}
+
+.shoutbox-helper p {
+  margin: 0;
+  text-align: center;
+  font-size: inherit;
+  text-transform: uppercase;
+}
+
+.shoutbox-helper span {
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.shoutbox-helper hr {
+  width: 75%;
+  height: 2px;
+  background: #d5dbe1;
+  border: 0;
+}
 
 /* ------- Writing a new comment form ------- */
 
-.chat h2 {
-    position: relative;
-    background-color:  #f9fafb;
-    border-bottom: 2px solid #e2e8eb;
-    max-width: 100%;
-    height: 35px;
-    margin: 0;
-    text-align: center;
-    color:  #5896d3;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 35px;
-    cursor: pointer;
-}
-
-.chat h2 span {
-    display: none;
-    position: absolute;
-    float: right;
-    right: 13px;
-    font-size: 22px;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    z-index: 20px;
-}
-
 .shoutbox-form form {
-    display: block;
-    background-color:  #f9fafb;
-    border-top: 1px solid #87bfef;
-    border-radius: 0 0 7px 7px;
-    box-shadow: 0px 2px 0px 0.00px #e2e8eb;
-    max-width: 100%;
-    text-align: left;
-    padding: 0;
-}
-
-.shoutbox-form form label {
-    display: inline-block;
-    color:  #df377a;
-    font-size: 14px;
-    font-weight: 700;
-    text-align: left;
-    width: 80px;
-    height: 11px;
-    line-height: 11px;
-    margin-bottom: 15px;
-}
-
-.shoutbox-form form .shoutbox-comment-label {
-    position: relative;
-    top: -75px;
+  display: block;
+  max-width: 100%;
+  text-align: left;
+  padding: 0;
+  border-style: solid;
+  border-width: 1px 1px 2px 1px;
+  border-radius: 0 0 7px 7px;
 }
 
 #false_shoutbox_name {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    max-width: 95px;
-    height: 26px;
-    padding: 0;
-    color: #fff;
-    font-size: 14px;
-    border: 0;
-    border-bottom: 2px solid #fff;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-    outline: none;
-    box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 95px;
+  height: 26px;
+  padding: 0;
+  font-family: inherit;
+  font-size: 14px;
+  border: 0;
+  border-bottom: 2px solid;
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.name-required {
+  display: none;
+  position: absolute;
+  width: 73%;
+  height: 35px;
+  top: 4em;
+  right: 0;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.name-required:before {
+  content: "";
+  position: absolute;
+  right: 50%;
+  margin-right: -10px;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.chat_btn {
+  color: inherit !important;
 }
 
 .shoutbox-form form #shoutbox-comment {
-    display: inline-block;
-    vertical-align: top;
-    width: 220px;
-    left: 0;
-    margin: 0px 5px 5px 10px;
-    padding: 0;
-    padding-top: 10px;
-    color: inherit;
-    background-color: #f9fafb;
-    border: 0;
-    border-radius: 0;
-    outline: none;
-    resize: none;
-    font-weight: normal;
-    font: inherit;
-    font-size: 14px;
-    line-height: 20px !important;
-    overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+  width: 220px;
+  min-height: 50px;
+  left: 0;
+  margin: 10px 5px 5px 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  resize: none;
+  font-weight: normal;
+  font: inherit;
+  font-size: inherit;
+  line-height: 18px !important;
+  text-indent: 26px;
+  overflow: hidden;
 }
 
 .shoutbox-form form input[type=submit] {
-    background: transparent;
-    border: 0;
-    width: 33px;
-    height: 33px;
-    right: 0;
-    position: absolute;
-    outline: none;
-    cursor: pointer;
-    padding: 0;
+  background: transparent;
+  border: 0;
+  width: 33px;
+  height: 33px;
+  right: 0;
+  position: absolute;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
 }
 
-/* ------- Make the page responsive ------- */
-
-@media(max-width: 445px) {
-    .shoutbox-form form .shoutbox-comment-label {
-        top: 0;
-    }
-    .shoutbox-form form input[type=submit] {
-        margin-left: 0;
-    }
+.shoutbox-content .chatx_img {
+  max-width: 100%;
+  max-height: 200px;
+  margin: 10px auto;
+  display: block;
 }
 
-/* ------- Additional ------- */
+.shoutbox-content .emojione {
+  display: inline-block;
+  margin: 0;
+}
 
-#false_shoutbox_name::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #51718c;
+#send_message {
+  display: inline-block;
+  vertical-align: top;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 0;
+  font-size: 32px;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ------- Placeholders and some fixes ------- */
+
+#false_shoutbox_name::-webkit-input-placeholder {
+ /* Chrome/Opera/Safari */
   text-align: center;
 }
-#false_shoutbox_name::-moz-placeholder { /* Firefox 19+ */
-  color: #51718c;
-  text-align: center;
-}
-#false_shoutbox_name:-ms-input-placeholder { /* IE 10+ */
-  color: #51718c;
-  text-align: center;
-}
-#false_shoutbox_name:-moz-placeholder { /* Firefox 18- */
-  color: #51718c;
+
+#false_shoutbox_name::-moz-placeholder {
+ /* Firefox 19+ */
   text-align: center;
 }
 
+#false_shoutbox_name:-ms-input-placeholder {
+ /* IE 10+ */
+  text-align: center;
+}
+
+#false_shoutbox_name:-moz-placeholder {
+ /* Firefox 18- */
+  text-align: center;
+}
+
+.shoutbox-form form #shoutbox-comment::-webkit-input-placeholder {
+ /* fixing text-indent for IOS Safari */
+  text-indent: 26px;
+}
+
+/* ------- Icons ------- */
 .icon-chat {
-    padding-left: 10px;
-    font-size: 20px;
-    vertical-align: middle;
+  padding-left: 10px;
+  font-size: 20px;
+  vertical-align: middle;
 }
 
-button#send_message {
-    display: inline-block;
-    vertical-align: top;
-    right: 0;
-    width: 32px;
-    height: 32px;
-    margin-right: 10px;
-    margin-top: 10px;
-    padding: 0;
-    font-size: 32px;
-    color: #87bfef;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    cursor: pointer;
-    outline: none;
-}
-.icon-send:hover {
-    color: #5896cb;
-}
 .icon-gear {
-    position: absolute;
-    right: 10px;
-    font-size: 20px;
-    top: 3px;
-    color:#fff;
-}
-.icon-gear:active {
-    color: #d8edff;
+  position: absolute;
+  right: 10px;
+  font-size: 20px;
+  top: 3px;
 }
 
 .icon-refresh {
-    position: absolute;
-    top: 3px;
-    right: 40px;
-    width: 17px;
-    height: 18px;
-    font-size: 20px;
-    float:right;
-    cursor: pointer;
+  position: absolute;
+  top: 3px;
+  right: 35px;
+  font-size: 20px;
+  float: right;
+  cursor: pointer;
 }
-.icon-refresh:active {
-    color: #d8edff;
-}
+
 .chat_popover_parent {
-    position: absolute;
-    right: 0;
-    top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
-.chat_popover {display:none;right: 0;background:rgba(72, 72, 72, 0.95);border-radius:4px;position:absolute;top:3em;z-index:1;width:220px;color:#fff;font-family: sans-serif;line-height: 25px;}
-.chat_popover:before {content:"";position: absolute;right:10px;top: -20px;width: 0;height: 0; border: 10px solid transparent;border-bottom: 10px solid rgba(72, 72, 72, 0.95);}
-.chat_popover span {padding: 0 10px; font-size: 12px !important;}
-.chat_popover div {margin: 12px;}
-.active .chat_popover{display:block;}
+
+.chat_popover {
+  display: none;
+  right: 0;
+  border-radius: 4px;
+  position: absolute;
+  top: 3em;
+  z-index: 1;
+  width: 220px;
+  font-family: sans-serif;
+  line-height: 25px;
+}
+
+.chat_popover:before {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.chat_popover span {
+  padding: 0 10px;
+  font-size: 12px !important;
+}
+
+.chat_popover div {
+  margin: 12px;
+}
+
+.active .chat_popover {
+  display: block;
+}
 
 .chat input[type=checkbox] {
   display: none;
 }
-.chat label{
-  width:45px;
-  height:25px;
-  box-sizing:border-box;
-  border:2px solid;
-  float:left;
-  border-radius:100px;
-  position:relative;
-  cursor:pointer;
-  transition:.3s ease;
+
+.chat label {
+  width: 45px;
+  height: 25px;
+  box-sizing: border-box;
+  border: 2px solid;
+  float: left;
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+  transition: .3s ease;
 }
-.chat input[type=checkbox]:checked + label{
-  background:#87bfef;
+
+.chat input[type=checkbox]:checked + label:before {
+  left: 20px;
 }
-.chat input[type=checkbox]:checked + label:before{
-  left:20px;
+
+.chat label:before {
+  transition: .3s ease;
+  content: '';
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  box-sizing: border-box;
+  border: 2px solid;
+  border-radius: 100px;
 }
-.chat label:before{
-  transition:.3s ease;
-  content:'';
-  width:19px;
-  height:19px;
-  position:absolute;
-  background:white;
-  left:2px;
-  top:1px;
-  box-sizing:border-box;
-  border:2px solid;
-  color:#fff;
-  border-radius:100px;
+
+.dropzone {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin-top: 12px;
+  margin-left: 10px;
+  font-size: 16px;
+  overflow: hidden;
 }
+
+.dropzone input[type=file] {
+  height: 100%;
+  left: 0;
+  outline: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.dropzone+.status {
+}
+
+.dropzone+.status.bg-danger {
+  position: absolute;
+  width: 80%;
+  height: 35px;
+  margin-top: -40px;
+  text-align: center;
+  line-height: 35px;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.status.bg-danger:after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 35px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top: 10px solid rgba(255, 187, 187, 0.95);
+}
+
+.dropzone.dropzone-dragging {
+  border-color: #000;
+}
+
+.loading-modal {
+  background-color: rgba(72, 72, 72, 0.95);
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 85px;
+  margin-top: -58px;
+  border-radius: 7px;
+  height: 115px;
+  width: 115px;
+}
+
+.loading-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -16px 0 0 -16px;
+}
+
+.busy .loading-modal {
+  display: block;
+}
+
+/* ------- Emoji One styles ------- */
+.emojione{font-size:inherit;height:3ex;width:3.1ex;min-height:20px;min-width:20px;display:inline-block;margin:-.2ex .15em .2ex;line-height:normal;vertical-align:middle}img.emojione{width:auto}
