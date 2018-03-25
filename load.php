@@ -2,7 +2,7 @@
 require 'vendor/autoload.php';
 
 // If you want to delete old comments, make this true. We use it to clean up the demo.
-$deleteOldComments = false;
+$deleteOldComments = true;
 
 // Setting up the data store
 

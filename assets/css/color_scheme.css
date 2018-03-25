@@ -8,7 +8,7 @@
 ###################################################################
 */
 
-.chat h1 { /* Chat header */
+#chatx h1 { /* Chat header */
     background: #87bfef;
     color:  #fff; /* Header text and icons */
 }
@@ -30,8 +30,9 @@
     border-right-color: transparent;
 }
 
-.chat .body { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
+#chatx .body { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
     border-left-color: #d5dbe1;
+    border-right-color: #d5dbe1;
 }
 
 .shoutbox-content li:nth-child(even) { /* Background and color for even shouts */
@@ -68,7 +69,7 @@
     color: #cbd0d6;
 }
 
-.shoutbox-helper {
+.shoutbox-helper, .shoutbox-content {
     background: #f9fafb;
     color: #717c87;
     border-top-color: #d5dbe1;
@@ -108,7 +109,7 @@
   color: #51718c;
 }
 
-.icon-gear:active, .icon-refresh:active, .icon-send:hover {
+.icon-gear:active, .icon-refresh:active, .icon-minimize:active, .icon-expand:active, .icon-send:hover {
   filter: brightness(92%);
 }
 
@@ -124,11 +125,11 @@
     border-left-color: transparent;
 }
 
-.chat input[type=checkbox]:checked + label {
+#chatx input[type=checkbox]:checked + label {
   background: #87bfef;
 }
 
-.chat label:before {
+#chatx label:before {
   background: #fff;
   color: #fff;
 }
@@ -136,4 +137,12 @@
 .dropzone+.status.bg-danger {
   background: rgba(255, 187, 187, 0.95);
   color: #bb5a5a;
+}
+
+.pulsating-circle:before {
+    background-color: #fff;
+}
+
+.pulsating-circle:after {
+    background-color: #fff;
 }

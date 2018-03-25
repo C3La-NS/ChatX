@@ -24,8 +24,8 @@ function showBBcodes($text) {
 		'<i>$1</i>',
 		'<span style="text-decoration:underline;">$1</span>',
 		'<span style="color:$1;">$2</span>',
-		'<a href="$1">$1</a>',
-		'<a href="$1">$2</a>',
+		'<a href="$1" target="_blank">$1</a>',
+		'<a href="$1" target="_blank">$2</a>',
 		'has shared an image: <img class="chatx_img" src="$1" />'
 	);
 	// Replacing the BBcodes with corresponding HTML tags
