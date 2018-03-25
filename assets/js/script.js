@@ -7,7 +7,7 @@
 */
 
 
-var siteurl = 'http://fh7915c7.bget.ru/folder/eng/1.4.0'; // Replace dot with the ChatX URL if you gonna use chat on other pages
+var siteurl = '.'; // Replace dot with the ChatX URL if you gonna use chat on other pages
 
 
 /*
