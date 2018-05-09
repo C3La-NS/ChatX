@@ -59,7 +59,7 @@ ChatX is still under development. We are expecting more improvements and feature
 <h3>Long perspective:</h3>
 <li><del>Close button that minifies chat</del></li>
 <li>Chat history (probably in another tab)</li>
-<li>Autentification</li>
+<li>Authentication</li>
 
 <h2>Acknowledgements</h2>
 Thanks Tutorialzine for the initial shoutbox release.
