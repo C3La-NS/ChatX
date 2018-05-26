@@ -571,4 +571,4 @@ function valName() {
 
 }
 
-$.getScript('https://celans.ru/files/test/chatx/dynamic_js.php', function () {});
+$.getScript(chatx_server + 'dynamic_js.php', function () {});
