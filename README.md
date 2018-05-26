@@ -48,14 +48,14 @@ ver 1.4.0
 <li>Simplier code (in process of developing universal widget)</li>
 <li>Upadated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
 ver 1.5.0
-<li>better way of loading CSS</li>
+<li>a better way of loading CSS</li>
 <li>Interface translation simplified</li>
 <li>UI improvements</li>
 <li>Moderation page</li>
 <li>Updated icon while uploading image</li>
-<li>Fixied when image was uploaded but not sent due to the empty name field</li>
+<li>Fixed when image was uploaded but not sent due to the empty name field</li>
 <li>script.js --> core.js</li>
-<li>Updated widget (simplier installation)</li>
+<li>Updated widget (simpler installation)</li>
 <li>Beta Authentification (login & sign up)</li>
 <li>Public & Private mode</li>
 <li>New Settings.php file with easilty customizable ChatX settings</li>
