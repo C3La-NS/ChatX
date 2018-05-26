@@ -1,8 +1,15 @@
 <?php
+
 require 'vendor/autoload.php';
+include 'settings.php';
+
+if ( $restrictedAccess === true ) {
+    session_start();
+}
+
 
 // If you want to delete old comments, make this true. We use it to clean up the demo.
-$deleteOldComments = true;
+$deleteOldComments = false;
 
 // Setting up the data store
 
@@ -31,7 +38,7 @@ if($deleteOldComments) {
 // Send the 20 latest shouts as json
 
 $shouts = $repo->query()
-        ->orderBy('createdAt ASC')
+        ->orderBy('createdAt DESC')
         ->limit(20,0)
         ->execute();
 
@@ -51,6 +58,19 @@ foreach($shouts as $shout) {
     $results[] = $shout;
 }
 
-header('Content-type: application/json; charset=utf-8');
-echo json_encode($results, JSON_UNESCAPED_UNICODE);
 
+header('Content-type: application/json; charset=utf-8');
+if ( $restrictedAccess === true ) {
+
+    
+    if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) ) {
+        
+        echo '[{"text":"<span style=\"color:red\">ACCESS DENIED</span>. You are not logged in or using application from non-authorized source.","name":"ChatX","timeAgo":"long ago"}]';
+    } else {
+        
+        echo json_encode($results, JSON_UNESCAPED_UNICODE);
+    }
+} else {
+    
+    echo json_encode($results, JSON_UNESCAPED_UNICODE);
+}

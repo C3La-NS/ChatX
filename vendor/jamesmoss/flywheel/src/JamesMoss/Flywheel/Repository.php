@@ -13,6 +13,8 @@ class Repository
     protected $name;
     protected $path;
     protected $formatter;
+    protected $queryClass;
+    protected $documentClass;
 
     /**
      * Constructor
@@ -23,17 +25,22 @@ class Repository
     public function __construct($name, Config $config)
     {
         // Setup class properties
-        $this->name      = $name;
-        $this->path      = $config->getPath() . DIRECTORY_SEPARATOR . $name;
-        $this->formatter = $config->getOption('formatter');
+        $this->name          = $name;
+        $this->path          = $config->getPath() . DIRECTORY_SEPARATOR . $name;
+        $this->formatter     = $config->getOption('formatter');
+        $this->queryClass    = $config->getOption('query_class');
+        $this->documentClass = $config->getOption('document_class');
 
         // Ensure the repo name is valid
         $this->validateName($this->name);
 
         // Ensure directory exists and we can write there
-        if (!file_exists($this->path)) {
-            mkdir($this->path);
-            chmod($this->path, 0777);
+        if (!is_dir($this->path)) {
+            if (!@mkdir($this->path, 0777, true)) {
+                throw new \RuntimeException(sprintf('`%s` doesn\'t exist and can\'t be created.', $this->path));
+            }
+        } else if (!is_writable($this->path)) {
+            throw new \RuntimeException(sprintf('`%s` is not writable.', $this->path));
         }
     }
 
@@ -64,7 +71,9 @@ class Repository
      */
     public function query()
     {
-        return new Query($this);
+        $className = $this->queryClass;
+
+        return new $className($this);
     }
 
     /**
@@ -75,17 +84,203 @@ class Repository
     public function findAll()
     {
         $ext       = $this->formatter->getFileExtension();
-        $files     = glob($this->path . DIRECTORY_SEPARATOR . '*.' . $ext);
+        $files     = $this->getAllFiles();
         $documents = array();
 
         foreach ($files as $file) {
-            $data = $this->formatter->decode(file_get_contents($file));
+            $fp       = fopen($file, 'r');
+            $contents = fread($fp, filesize($file));
+            fclose($fp);
+
+            $data = $this->formatter->decode($contents);
+
             if (null !== $data) {
-                $documents[] = new Document((array) $data);
+                $doc = new $this->documentClass((array) $data);
+                $doc->setId($this->getIdFromPath($file, $ext));
+
+                $documents[] = $doc;
             }
         }
 
         return $documents;
+    }
+
+    /**
+     * Returns a single document based on it's ID
+     *
+     * @param  string $id The ID of the document to find
+     *
+     * @return Document|boolean  The document if it exists, false if not.
+     */
+    public function findById($id)
+    {
+        if(!file_exists($path = $this->getPathForDocument($id))) {
+            return false;
+        }
+
+        $fp       = fopen($path, 'r');
+        $contents = fread($fp, filesize($path));
+        fclose($fp);
+
+        $data = $this->formatter->decode($contents);
+
+        if($data === null) {
+            return false;
+        }
+
+        $ext = $this->formatter->getFileExtension();
+
+        $doc = new $this->documentClass((array) $data);
+        $doc->setId($this->getIdFromPath($path, $ext));
+
+        return $doc;
+    }
+
+    /**
+     * Store a Document in the repository.
+     *
+     * @param Document $document The document to store
+     *
+     * @return bool True if stored, otherwise false
+     */
+    public function store(DocumentInterface $document)
+    {
+        $id = $document->getId();
+
+        // Generate an id if none has been defined
+        if (is_null($id)) {
+            $id = $document->setId($this->generateId());
+        }
+
+        if (!$this->validateId($id)) {
+            throw new \Exception(sprintf('`%s` is not a valid document ID.', $id));
+        }
+
+        $path = $this->getPathForDocument($id);
+        $data = get_object_vars($document);
+        $data = $this->formatter->encode($data);
+
+        if(!$this->write($path, $data)) {
+            return false;
+        }
+
+        return $id;
+        
+    }
+
+    /**
+     * Store a Document in the repository, but only if it already
+     * exists. The document must have an ID.
+     *
+     * @param Document $document The document to store
+     *
+     * @return bool True if stored, otherwise false
+     */
+    public function update(DocumentInterface $document)
+    {
+        if (!$document->getId()) {
+            return false;
+        }
+
+        $oldPath = $this->getPathForDocument($document->getInitialId());
+
+        if(!file_exists($oldPath)) {
+            return false;
+        }
+
+        // If the ID has changed we need to delete the old document.
+        if($document->getId() !== $document->getInitialId()) {
+            if(file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+        }
+
+        return $this->store($document);
+        
+
+    }
+
+    /**
+     * Delete a document from the repository using its ID.
+     *
+     * @param mixed $id The ID of the document (or the document itself) to delete
+     *
+     * @return boolean True if deleted, false if not.
+     */
+    public function delete($id)
+    {
+        if ($id instanceof DocumentInterface) {
+            $id = $id->getId();
+        }
+
+        $path = $this->getPathForDocument($id);
+
+        return unlink($path);
+    }
+
+    /**
+     * Get the filesystem path for a document based on it's ID.
+     *
+     * @param string $id The ID of the document.
+     *
+     * @return string The full filesystem path of the document.
+     */
+    public function getPathForDocument($id)
+    {
+        if(!$this->validateId($id)) {
+            throw new \Exception(sprintf('`%s` is not a valid document ID.', $id));
+        }
+
+        return $this->path . DIRECTORY_SEPARATOR . $this->getFilename($id);
+    }
+
+    /**
+     * Gets just the filename for a document based on it's ID.
+     *
+     * @param string $id The ID of the document.
+     *
+     * @return string The filename of the document, including extension.
+     */
+    public function getFilename($id)
+    {
+        return $id . '.' . $this->formatter->getFileExtension();
+    }
+
+    /**
+     * Get an array containing the path of all files in this repository
+     *
+     * @return array An array, item is a file
+     */
+    public function getAllFiles()
+    {
+        $ext       = $this->formatter->getFileExtension();
+        $filesystemIterator = new \FilesystemIterator($this->path, \FilesystemIterator::SKIP_DOTS);
+        $files = new \RegexIterator($filesystemIterator, "/\\.{$ext}$/");
+
+        return $files;
+    }
+
+    /**
+     * Writes data to the filesystem.
+     *
+     * @todo  Abstract this into a filesystem layer.
+     *
+     * @param  string $path     The absolute file path to write to
+     * @param  string $contents The contents of the file to write
+     *
+     * @return boolean          Returns true if write was successful, false if not.
+     */
+    protected function write($path, $contents)
+    {
+        $fp = fopen($path, 'w');
+        if(!flock($fp, LOCK_EX)) {
+            return false;
+        }
+        $result = fwrite($fp, $contents);
+        flock($fp, LOCK_UN);
+        fclose($fp);
+
+        return $result !== false;
     }
 
     /**
@@ -106,60 +301,15 @@ class Repository
     }
 
     /**
-     * Store a Document in the repository.
+     * Checks to see if a document ID is valid
      *
-     * @param Document $document The document to store
+     * @param  string $id The ID to check
      *
-     * @return bool True if stored, otherwise false
+     * @return bool     True if valid, otherwise false
      */
-    public function store(Document $document)
+    protected function validateId($id)
     {
-        if (!isset($document->id)) {
-            $document->id = $this->generateId();
-        }
-
-        $path    = $this->getPathForDocument($document->id);
-        $data    = $this->formatter->encode((array) $document);
-
-        return file_put_contents($path, $data);
-    }
-
-    /**
-     * Delete a document from the repository using its ID.
-     *
-     * @param string $id The ID of the document to delete
-     *
-     * @return boolean True or deleted, false if not.
-     */
-    public function delete($id)
-    {
-        $path = $this->getPathForDocument($id);
-
-        return unlink($path);
-    }
-
-    /**
-     * Get the filesystem path for a document based on it's ID.
-     *
-     * @param string $id The ID of the document.
-     *
-     * @return string The full filesystem path of the document.
-     */
-    public function getPathForDocument($id)
-    {
-        return $this->path . DIRECTORY_SEPARATOR . $this->getFilename($id);
-    }
-
-    /**
-     * Gets just the filename for a document based on it's ID.
-     *
-     * @param string $id The ID of the document.
-     *
-     * @return string The filename of the document, including extension.
-     */
-    public function getFilename($id)
-    {
-        return $id . '_' . sha1($id) . '.' . $this->formatter->getFileExtension();
+        return (boolean)preg_match('/^[^\\/\\?\\*:;{}\\\\\\n]+$/us', $id);
     }
 
     /**
@@ -176,6 +326,19 @@ class Repository
             $id .= $choices[ mt_rand(0, strlen($choices) - 1) ];
         }
         return $id;
+    }
+
+    /**
+     * Get a document's ID base on its filesystem path
+     *
+     * @param  string $path The full path to the file (including file extension)
+     * @param  string $ext  The file extension (without the period)
+     *
+     * @return string       The ID of the document
+     */
+    protected function getIdFromPath($path, $ext)
+    {
+        return basename($path, '.' . $ext);
     }
 
 }

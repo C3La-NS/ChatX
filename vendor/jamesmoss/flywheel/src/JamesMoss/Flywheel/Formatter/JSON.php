@@ -2,7 +2,7 @@
 
 namespace JamesMoss\Flywheel\Formatter;
 
-class JSON implements Format
+class JSON implements FormatInterface
 {
     public function getFileExtension()
     {
@@ -13,7 +13,7 @@ class JSON implements Format
     {
         $options = defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT : null;
 
-        return json_encode($data, JSON_UNESCAPED_UNICODE); // originally was $options but to make cyrillic look nice had to replace it with JSON_UNESCAPED_UNICODE, soz
+        return json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
     public function decode($data)

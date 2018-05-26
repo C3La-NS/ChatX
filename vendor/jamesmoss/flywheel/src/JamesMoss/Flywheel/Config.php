@@ -23,17 +23,11 @@ class Config
     {
         $path = rtrim($path, DIRECTORY_SEPARATOR);
 
-        if (!is_dir($path)) {
-            throw new \RuntimeException(sprintf('`%s` is not a directory.', $path));
-        }
-
-        if (!is_writable($path)) {
-            throw new \RuntimeException(sprintf('`%s` is not writable.', $path));
-        }
-
         // Merge supplied options with the defaults
         $options = array_merge(array(
-            'formatter' => new Formatter\Json,
+            'formatter'      => new Formatter\JSON,
+            'query_class'    => $this->hasAPC() ? '\\JamesMoss\\Flywheel\\CachedQuery' : '\\JamesMoss\\Flywheel\\Query',
+            'document_class' => '\\JamesMoss\\Flywheel\\Document',
         ), $options);
 
         $this->path    = $path;
@@ -60,5 +54,10 @@ class Config
     public function getOption($name)
     {
         return isset($this->options[$name]) ? $this->options[$name] : null;
+    }
+
+    public function hasAPC()
+    {
+        return function_exists('apcu_fetch') || function_exists('apc_fetch');
     }
 }

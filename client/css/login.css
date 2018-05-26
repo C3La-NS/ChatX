@@ -1,0 +1,194 @@
+@font-face {
+  font-family: "chatx-icons";
+  src: url("../../assets/css/fonts/chatx-icons.woff.php") format("woff");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "chatx-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "chatx-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-send:before {
+  content: "\e000";
+}
+.icon-chat:before {
+  content: "\e001";
+}
+.icon-gear:before {
+  content: "\e002";
+}
+.icon-refresh:before {
+  content: "\e003";
+}
+.icon-reply:before {
+  content: "\e004";
+}
+.icon-upload:before {
+  content: "\e005";
+}
+.icon-minimize:before {
+  content: "\e006";
+}
+.icon-expand:before {
+  content: "\e007";
+}
+.icon-login:before {
+  content: "\e008";
+}
+.icon-logout:before {
+  content: "\e009";
+}
+.icon-user:before {
+  content: "\e00a";
+}
+.icon-lock:before {
+  content: "\e00b";
+}
+
+
+
+body{
+  background-color: #fff;
+}
+.login-box{
+  position:relative;
+  width: 500px;
+  height: 300px;
+  background-color: #fbfbfb;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  margin: calc(50vh - 150px) auto;
+}
+.lb-header{
+  position:relative;
+  color: #00415d;
+  margin: 5px 5px 10px 5px;
+  padding-bottom:10px;
+  border-bottom: 1px solid #eee;
+  text-align:center;
+  height:28px;
+}
+.lb-header a{
+  margin: 0 25px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #666;
+  font-weight: bold;
+  font-size: 15px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+.lb-header .active{
+  color: #99cebd;
+  font-size: 18px;
+}
+.email-login,.email-signup{
+  position:relative;
+  float: left;
+  width: 100%;
+  height:auto;
+  margin-top: 20px;
+  text-align:center;
+}
+.u-form-group{
+  width:100%;
+  margin-bottom: 10px;
+}
+.u-form-group input[type="name"],
+.u-form-group input[type="password"]{
+  width: calc(50% - 22px);
+  height:45px;
+  outline: none;
+  border: 1px solid #ddd;
+  padding: 0 10px;
+  border-radius: 2px;
+  color: #333;
+  font-size:0.8rem;
+  -webkit-transition:all 0.1s linear;
+  -moz-transition:all 0.1s linear;
+  transition:all 0.1s linear;
+  text-indent: 50px;
+}
+.u-form-group input:focus{
+  border-color: #99cebd;
+}
+.u-form-group button{
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    background-color: #99cebd;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 26px;
+    line-height: 53px;
+    font-weight: normal;
+    border-radius: 100%;
+}
+.forgot-password{
+  width:50%;
+  text-align: left;
+  text-decoration: underline;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+label {
+    display: inline-block;
+    position: absolute;
+    width: 43px;
+    height: 43px;
+    margin: 1px;
+    padding: 12px;
+    background: #ddd;
+    color: #7d7d7d;
+    transition: all .3s ease-in-out;
+    border-top-left-radius: 1px;
+    border-bottom-left-radius: 1px;
+}
+
+.error {
+    color: #ffdede;
+    text-align: center;
+    background: #ec7777;
+    padding: 10px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.disabled {
+    display: none;
+    text-align: center;
+    padding: 30px 0;
+    color: #ffbaba;
+    text-transform: uppercase;
+}

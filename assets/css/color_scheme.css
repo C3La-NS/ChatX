@@ -8,7 +8,7 @@
 ###################################################################
 */
 
-#chatx h1 { /* Chat header */
+#chatx .chx-bar { /* Chat header */
     background: #87bfef;
     color:  #fff; /* Header text and icons */
 }
@@ -125,6 +125,10 @@
     border-left-color: transparent;
 }
 
+#chatx .chatx_management {
+    color: #ccc;
+}
+
 #chatx input[type=checkbox]:checked + label {
   background: #87bfef;
 }
@@ -145,4 +149,33 @@
 
 .pulsating-circle:after {
     background-color: #fff;
+}
+
+#notsent {
+    background: rgba(255, 187, 187, 0.95);
+    color: #bb5a5a;
+}
+
+#notsent:after {
+    border-bottom-color: transparent;
+    border-top-color: rgba(255, 187, 187, 0.95);
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.chx-login-form {
+    background-color: rgba(72, 72, 72, 0.95);
+}
+
+.chx-login-form input {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.chx-login-form button[type="submit"] {
+    background: rgba(0, 0, 0, 0.2);
+    color: #f9fafb;
+}
+
+.chx-login-form button[type="submit"]:hover {
+    color: #87c0ef;
 }

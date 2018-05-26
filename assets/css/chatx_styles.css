@@ -1,12 +1,90 @@
 /* ------- Mini-chat-box template ------- */
- @import 'color_scheme.css';
- @import 'https://file.myfontastic.com/pK2gUqLQUfCn3ScMEZhDmc/icons.css';
+
+@import 'color_scheme.css';
+
+@font-face {
+  font-family: "chatx-icons";
+  src: url("fonts/chatx-icons.woff.php") format("woff");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "chatx-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "chatx-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-send:before {
+  content: "\e000";
+}
+.icon-chat:before {
+  content: "\e001";
+}
+.icon-gear:before {
+  content: "\e002";
+}
+.icon-refresh:before {
+  content: "\e003";
+}
+.icon-reply:before {
+  content: "\e004";
+}
+.icon-upload:before {
+  content: "\e005";
+}
+.icon-minimize:before {
+  content: "\e006";
+}
+.icon-expand:before {
+  content: "\e007";
+}
+.icon-login:before {
+  content: "\e008";
+}
+.icon-logout:before {
+  content: "\e009";
+}
+.icon-user:before {
+  content: "\e00a";
+}
+.icon-lock:before {
+  content: "\e00b";
+}
+.icon-verified:before {
+  content: "\e00c";
+}
+
+
+
  #chatx {
      width: 285px;
      margin: 0 auto;
      z-index: 99999;
      font-family: sans-serif;
      font-size: 14px !important;
+     line-height: 20px;
 }
  #chatx.expanded header {
      cursor: move !important;
@@ -15,17 +93,30 @@
      right: 0;
      bottom: unset;
 }
- #chatx h1 {
+ #chatx .chx-bar {
      box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.1);
      width: 100%;
      position: relative;
      height: 36px;
      text-align: left;
      margin: 0;
+     padding: 8px 0 0;
      border-radius: 7px 7px 0 0;
      font-size: 16px;
-     line-height: 36px;
+     box-sizing: border-box;
 }
+
+#chatx .chx-bar span{
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 5px;
+    font-weight: 700;
+}
+
+#chatx .chx-bar .chat_popover span{
+    border: 0;
+}
+
  #chatx.expanded .body {
      display: block !important;
      position: relative;
@@ -51,7 +142,7 @@
      overflow-wrap: break-word;
 }
  .shoutbox-content:before {
-     content: "b";
+     content: "\e001";
      position: absolute;
      left: 120px;
      font-size: 43px;
@@ -118,6 +209,7 @@
  .shoutbox-helper hr {
      width: 75%;
      height: 2px;
+     margin: 7px auto;
      background: #d5dbe1;
      border: 0;
 }
@@ -135,20 +227,23 @@
      border-radius: 0 0 7px 7px;
 }
  .expanded #false_shoutbox_name {
-     display: inline-block;
-     position: relative;
-     width: 100%;
-     max-width: 85px;
-     height: 26px;
-     padding: 0;
-     font-family: inherit;
-     font-size: 14px;
-     border: 0;
-     border-bottom: 2px solid;
-     border-radius: 0;
-     box-shadow: none;
-     outline: none;
-     box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 105px;
+    height: 24px;
+    margin: 0 6px;
+    padding: 0;
+    font-family: inherit;
+    font-size: 14px;
+    text-align: center;
+    border: 0;
+    border-bottom: 2px solid;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    box-sizing: border-box;
+    vertical-align: top;
 }
  .name-required {
      display: none;
@@ -156,7 +251,7 @@
      width: 73%;
      height: 35px;
      top: 4em;
-     right: 0;
+     right: 8.5%;
      text-align: center;
      line-height: 35px;
      border-radius: 4px;
@@ -180,23 +275,24 @@
      color: inherit !important;
 }
  .shoutbox-form form #shoutbox-comment {
-     display: inline-block;
-     vertical-align: top;
-     width: 220px;
-     min-height: 50px;
-     left: 0;
-     margin: 10px 5px 5px 10px;
-     padding: 0;
-     border: 0;
-     border-radius: 0;
-     outline: none;
-     resize: none;
-     font-weight: normal;
-     font: inherit;
-     font-size: inherit;
-     line-height: 18px !important;
-     text-indent: 26px;
-     overflow: hidden;
+    vertical-align: top;
+    display: inline-block;
+    width: 237px;
+    min-height: 50px;
+    left: 0;
+    margin: 0;
+    padding: 10px 5px 5px 10px;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    resize: none;
+    font-weight: normal;
+    font: inherit;
+    font-size: inherit;
+    line-height: 18px;
+    text-indent: 26px;
+    overflow: hidden;
+    box-sizing: border-box;
 }
  .shoutbox-form form input[type=submit] {
      background: transparent;
@@ -260,33 +356,33 @@
 }
 /* ------- Icons ------- */
  .icon-chat {
-     padding-left: 10px;
-     font-size: 20px;
-     vertical-align: middle;
+    display: inline-block;
+    padding-left: 10px;
+    font-size: 20px;
+    height: 21px;
 }
  .expanded .icon-gear {
      position: absolute;
      display: block;
      right: 25px;
+     top: 8px;
      font-size: 20px;
-     top: 3px;
 }
  .expanded .icon-refresh {
-     position: absolute;
-     display: block;
-     top: 3px;
-     right: 50px;
-     font-size: 20px;
-     float: right;
-     cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    height: 20px;
+    margin: 0 5px 0;
+    cursor: pointer;
+    \: middle;
 }
  .expanded .icon-minimize {
-     right: 5px;
-     position: absolute;
-     display: block;
-     top: 3px;
-     font-size: 18px;
-     cursor: pointer;
+    display: inline-block;
+    float: right;
+    font-size: 18px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 5px 0;
 }
  .chat_popover_parent {
      position: absolute;
@@ -320,6 +416,16 @@
 }
  .chat_popover div {
      margin: 12px;
+}
+
+.chat_popover p {
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+#chatx .chatx_management {
+    font-size: 12px;
+    text-decoration: none;
 }
  .active .chat_popover {
      display: block;
@@ -435,7 +541,7 @@
 img.emojione{
     width:auto
 }
- header {
+ header.ui-draggable-handle {
      bottom: 0;
      right:30px;
      position:fixed;
@@ -448,21 +554,25 @@ img.emojione{
  .minimized .pulsating-circle {
      display:none !important;
 }
+ .minimized .chx-login-form {
+     display:none !important;
+ }
+
  .icon-expand {
      display: block;
 }
  .icon-expand {
-     position: absolute;
-     top: 4px;
-     right: 10px;
-     display: inline-block;
-     font-size: 20px;
-     cursor: pointer;
+    float: right;
+    display: inline-block;
+    font-size: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 10px 0;
 }
  .pulsating-circle {
      display: none;
      position: absolute;
-     right: 26%;
+     right: 28%;
      top: 50%;
      -webkit-transform: translateX(-50%) translateY(-50%);
      transform: translateX(-50%) translateY(-50%);
@@ -663,4 +773,83 @@ img.emojione{
 }
  .scrollbar-macosx > .scroll-element.scroll-y.scroll-scrollx_visible .scroll-element_size {
      top: -11px;
+}
+
+/*************** BETA ***************/
+
+#notsent {
+    display: none;
+    position: absolute;
+    width: 73%;
+    height: 35px;
+    bottom: 5em;
+    right: 13.5%;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+    z-index: 3;
+}
+
+#notsent:after {
+    content: "";
+    position: absolute;
+    right: 50%;
+    margin-right: -10px;
+    top: 35px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px;
+}
+
+.chx-login-form {
+    position: absolute;
+    display: none;
+    top: calc(50% - 117px);
+    left: 25px;
+    z-index: 2;
+    width: 235px;
+    height: 235px;
+    border-radius: 7px;
+    padding-top: 40px;
+    box-sizing: border-box;
+}
+.chx-login-form.active {
+    display: block;
+}
+.chx-login-form input {
+    display: block;
+    border: 0;
+    margin: 10px auto;
+    padding: 10px;
+    text-align: center;
+    color: #87bfef;
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.chx-login-form button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    font-size: 28px;
+    line-height: 60px;
+    cursor: pointer;
+    outline: none;
+}
+.chx-login-form button[type="submit"]:hover {
+    transition: .5s;
+}
+
+
+[data-loggedIn="true"]:before {
+    content: "\e00c"; margin-right:5px; text-align:center; width: 14px; height: 14px; font-size: 14px; font-family: "chatx-icons"; font-weight: 300; vertical-align: top;
+    
 }
