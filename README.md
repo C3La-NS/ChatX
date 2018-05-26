@@ -91,7 +91,7 @@ ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you condsider 
 a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
 
-b) open .htaccess and define your domain instead of "*": Header set Access-Control-Allow-Origin "*" 
+b) open .htaccess and define your domain instead of "&#42;": Header set Access-Control-Allow-Origin "&#42;" 
 example: Header set Access-Control-Allow-Origin "https://your-domain.com" (without final "/")
 If done ChatX must work correctly.
 
