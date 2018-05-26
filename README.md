@@ -71,9 +71,11 @@ ChatX is still under development. We are expecting more improvements and feature
 <li><del>Make simple installation instructions</del></li>
 <li><del>Introduce simple formatting tags (bold, italic and more)</del></li>
 <li>Templates</li>
+<li>Chat history for users (in another tab)</li>
+<li>Easily customizable chat settings via moderation page</li>
+<li>General improvements</li>
 <h3>Long perspective:</h3>
 <li><del>Close button that minifies chat</del></li>
-<li>Chat history (probably in another tab)</li>
 <li><del>Authentication</del></li>
 
 <h2>Acknowledgements</h2>
