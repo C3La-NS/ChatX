@@ -46,6 +46,21 @@ ver 1.4.0
 <li>Open links in new window</li>
 <li>Simplier code (in process of developing universal widget)</li>
 <li>Upadated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
+ver 1.5.0
+<li>better way of loading CSS</li>
+<li>Interface translation simplified</li>
+<li>UI improvements</li>
+<li>Moderation page</li>
+<li>Updated icon while uploading image</li>
+<li>Fixied when image was uploaded but not sent due to the empty name field</li>
+<li>script.js --> core.js</li>
+<li>Updated widget (simplier installation)</li>
+<li>Beta Authentification (login & sign up)</li>
+<li>Public & Private mode</li>
+<li>New Settings.php file with easilty customizable ChatX settings</li>
+<li>Logged In users have a verification icon</li>
+<li>Usergroups: users and moderators.</li>
+<li>Updated Flywheel library (more developed database in perspective)</li>
 
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
@@ -53,13 +68,13 @@ ChatX is still under development. We are expecting more improvements and feature
 <li><del>Make separate .css file for easy-customizable chat color-scheme</del></li>
 <li><del>A tooltip for the required name field</del></li>
 <li><del>Bring English localization back!</del></li>
-<li>Make simple installation instructions on demo-page (INDEX.HTML)</li>
+<li><del>Make simple installation instructions</del></li>
 <li><del>Introduce simple formatting tags (bold, italic and more)</del></li>
 <li>Templates</li>
 <h3>Long perspective:</h3>
 <li><del>Close button that minifies chat</del></li>
 <li>Chat history (probably in another tab)</li>
-<li>Authentication</li>
+<li><del>Authentication</del></li>
 
 <h2>Acknowledgements</h2>
 Thanks Tutorialzine for the initial shoutbox release.
@@ -73,27 +88,10 @@ More to come, help us and you'll be here too.
 <h2>Installation</h2>
 ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you condsider using it on other web-sites or directories, you are to complete a simple installation:
 <br />
-Copy ChatX code and <b>make sure all the links are pointing straight to your ChatX directory</b>
+1) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
-1) Check if your website uses jQuery library, add one if necessary
-
-```
-    <!-- Include jQuery, core and the EmojiOne library -->
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script> 
-
-```
-Insert ChatX widget and make sure you pointed direct link to your server
-
-```
-    <script src="./assets/js/script.js" charset="UTF-8" async></script>
-    <script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"></script>
-
-```
-It's advisable to add JS files to Footer.
-Then procede to script.js (assets/js) and print the straight link to your ChatX directory once again.
-```
-siteurl = '.'; // Replace dot with the ChatX URL if you gonna use chat on other pages
-```
+2) open .htaccess and define your domain instead of "*": Header set Access-Control-Allow-Origin "*" 
+example: Header set Access-Control-Allow-Origin "https://your-domain.com" (without final "/")
 If done ChatX must work correctly.
 
 <h2>Demo</h2>
