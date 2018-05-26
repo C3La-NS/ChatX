@@ -9,7 +9,7 @@ The script uses flat file database only, built with the use of Flywheel and Rela
 The idea that stood behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://imgur.com/7M3YFBw.png">
+<img src="https://i.imgur.com/i16D6yH.png">
 <br />
 <h2>Main features:</h2>
 <li>Flat file storing</li>
@@ -88,9 +88,10 @@ More to come, help us and you'll be here too.
 <h2>Installation</h2>
 ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you condsider using it on other web-sites or directories, you are to complete a simple installation:
 <br />
-1) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
+a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
-2) open .htaccess and define your domain instead of "*": Header set Access-Control-Allow-Origin "*" 
+
+b) open .htaccess and define your domain instead of "*": Header set Access-Control-Allow-Origin "*" 
 example: Header set Access-Control-Allow-Origin "https://your-domain.com" (without final "/")
 If done ChatX must work correctly.
 
