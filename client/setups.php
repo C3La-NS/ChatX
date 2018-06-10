@@ -137,11 +137,10 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
       }
       if( !empty($_POST['s_d']) ) {
         $url = preg_replace("#/$#", "", $_POST['s_d']);
-        $updateSettings->siteDomain = $url;
         
         echo '<script>var sd = '; echo $updateSettings->siteDomain = $_POST['s_d']; echo '; $("#siteDomain_input").val(sd);</script>';
       }
-      
+      $updateSettings->siteDomain = $url;
       $repoSettings->update($updateSettings);
       echo '
     <script>
