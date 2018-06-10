@@ -1,14 +1,10 @@
 <?php
 include '../settings.php';
+session_name("ChatX_SESSION");
 session_start();
 
 require '../vendor/autoload.php';
-// Configure the data store
-$dir = '../data';
-$config = new \JamesMoss\Flywheel\Config($dir, array(
-    'formatter' => new \JamesMoss\Flywheel\Formatter\JSON,
-));
-$repo = new \JamesMoss\Flywheel\Repository('profiles', $config);
+
 
 
 function loggedIn_redirect () {
@@ -16,15 +12,18 @@ function loggedIn_redirect () {
 }
   
 
-if ($regAllowed == 'true') {
+if ($r_e == '1') {
  if(!empty($_POST['reg_u']) && mb_strlen($_POST['reg_u'], 'utf-8') <= 15 && !empty($_POST['reg_p']) && mb_strlen($_POST['reg_p'], 'utf-8') <= 15 && $_POST['reg_p'] == $_POST['c_reg_p']) {
     
     $reg_u = htmlspecialchars($_POST["reg_u"]);
     $reg_u = str_replace(array("\n", "\r"), '', $reg_u);
-    $hashed_password = md5($salt.$_POST['reg_p']);
+    $reg_u = mb_strtolower($reg_u);
     
-    $checkProfile = $repo->query()
-    ->where('username', '==', $_POST['reg_u'])
+    $reg_l = htmlspecialchars($_POST["reg_u"]);
+    $hashed_password = PASSWORD_HASH($_POST['reg_p'], PASSWORD_BCRYPT);
+    
+    $checkProfile = $repoProfiles->query()
+    ->where('username', '==', $reg_u)
     ->execute();
  
     foreach($checkProfile as $takenProfile) {
@@ -32,59 +31,65 @@ if ($regAllowed == 'true') {
     }
 
     // Storing a new profile in does not already exists
-  if ($_POST['reg_u'] != $t)  {
+  if ($reg_u != $t)  {
     $profile = new \JamesMoss\Flywheel\Document(array(
         'username' => $reg_u,
+        'login' => $reg_l, //logical mistake "username" should be used instead
         'password' => $hashed_password
     ));
     
-    $repo->store($profile);
+    $repoProfiles->store($profile);
    } else {
           echo '<p class="error">Sorry, the username is already taken.</p>';
    }
     
   }
 } else {
+
   function regDisabled() {
-    echo '<p class="disabled">Whoa, user registration is disabled</p>';
+    echo '
+      <form method="post" class="email-signup">
+        <div class="u-form-group">
+        <p class="disabled">Sorry, user registration is disabled.</p>
+        </div>
+      </form>
+    ';
   }
+
 }
 
 
-?>
 
-<?php 
-
-$getProfile = $repo->query()
-    ->where('username', '==', $_POST['u'])
+if( isset( $_POST['s']) ) {   
+   
+    
+    $getProfile = $repoProfiles->query()
+    ->where('username', '==', mb_strtolower($_POST['u']))
     ->execute();
     foreach($getProfile as $profile) {
         $u = $profile->username;
+        $l = $profile->login;
         $p = $profile->password;
         $m = $profile->moderator;
     }
-    
 
-if( isset( $_POST['s']) ) {        
-  if ($_POST['u'] == $u && md5($salt.$_POST['p']) == $p)  {
+    
+  if (mb_strtolower($_POST['u']) == mb_strtolower($u) && password_verify($_POST['p'], $p))  {
 
       if ($m == 'true') {
          $_SESSION['mod_loggedin'] = true;
-      } else{
+      } else {
          $_SESSION['loggedin'] = true;
       }
-         $_SESSION['username'] = $_POST['u'];
-         $_SESSION['password'] = md5($salt.$_POST['p']);
-         
-        loggedIn_redirect();
-        exit();
+    
+      $_SESSION['username'] = $l;
+      loggedIn_redirect();
+      exit();
        
   } else {
     echo '<p class="error">Username or password is not recognized</p>';
   }
 }
-
-
 
 ?>
 
@@ -103,14 +108,11 @@ if( isset( $_POST['s']) ) {
 </head>
 
 <body>
-<?php
 
-    if ( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] ) {
-        loggedIn_redirect();
-        exit();
+    <?php if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) { ?>
+        <?php loggedIn_redirect(); exit(); ?>
 
-    } else {
-  echo '
+    <?php } else { ?>
         
   <div class="login-box">
     <div class="lb-header">
@@ -131,9 +133,9 @@ if( isset( $_POST['s']) ) {
       </div>
     </form>
     
-  ';
-        if ($regAllowed == 'true') {
-  echo '
+
+        <?php if ($r_e == '1') { ?>
+
     <form method="post" class="email-signup">
       <div class="u-form-group">
         <label><i class="icon-user"></i></label>
@@ -151,19 +153,17 @@ if( isset( $_POST['s']) ) {
         <button class="icon-login"></button>
       </div>
     </form>
-  ';
-        } else {
-            regDisabled();
-        }
-  echo '
+
+        <?php } else { ?>
+            <?php regDisabled(); ?>
+        <?php } ?>
+
   </div>        
-  ';
 
-    }
+    <?php } ?>
 
-
-?>
     <script src="js/login.js"></script>
+    
 </body>
 
 </html>

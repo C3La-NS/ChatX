@@ -1,6 +1,6 @@
 @font-face {
   font-family: "chatx-icons";
-  src: url("../../assets/css/fonts/chatx-icons.woff.php") format("woff");
+  src: url("../../assets/css/fonts/chatx-icons.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 
@@ -105,7 +105,7 @@ body{
   transition: all 0.1s linear;
 }
 .lb-header .active{
-  color: #99cebd;
+  color: #88adc7;
   font-size: 18px;
 }
 .email-login,.email-signup{
@@ -136,13 +136,13 @@ body{
   text-indent: 50px;
 }
 .u-form-group input:focus{
-  border-color: #99cebd;
+  border-color: #88adc7;
 }
 .u-form-group button{
     width: 50px;
     height: 50px;
     padding: 0;
-    background-color: #99cebd;
+    background-color: #88adc7;
     border: none;
     outline: none;
     color: #fff;

@@ -61,7 +61,7 @@ const markup = `
                     <div class="dropzone"></div>
                     <textarea id="shoutbox-comment" class="js-elasticArea" rows="2" data-min-rows="2" placeholder="${translation.newMessagePlaceholder}" name="comment" maxlength='240'></textarea>
                     <div id="notsent">${translation.notSentError}</div>
-                    <button id="send_message" type="submit"><i class="icon-send"></i></button>
+                    <div id="send_message" type="submit"><i class="icon-send"></i></div>
                 </form>
             </div>
 `;	
@@ -75,8 +75,11 @@ document.getElementById('chatx').innerHTML = markup;
 ###################################################################
 */
 
-
 $(function () {
+    
+  $.getScript(chatx_server + 'dynamic_js.php', function () {
+
+
 
 	// Storing some elements in variables for a cleaner code base
 
@@ -89,7 +92,7 @@ $(function () {
 		icd = $('#icd');
 
 	// Replace :) with emoji icons:
-	emojione.ascii = true;
+	emojione.ascii = e_o;
 
 	// Load the comments.
 	load();
@@ -157,19 +160,19 @@ $(function () {
 	var loadInt;
 	var checkInt = +localStorage.getItem('intLoad');
 	icd.prop('checked', !!checkInt);
-	var time = checkInt ? 3000 : 15000;
+	var time = checkInt ? fastTrack : slowTrack;
 	loadInt = setInterval(load, time);
 	
 	// Automatically refresh the shouts every 15 seconds
 	icd.on('change', function () {
 		clearInterval(loadInt);
-		loadInt = setInterval(load, ($(this).prop('checked') ? 3000 : 15000));
+		loadInt = setInterval(load, ($(this).prop('checked') ? fastTrack : slowTrack));
 		localStorage.setItem('intLoad', $(this).prop('checked') * 1);
 	});
 
 
 	$('.chat').on('click', '.icon-expand', function () {
-		loadInt = setInterval(load, ($(icd).prop('checked') ? 3000 : 15000));
+		loadInt = setInterval(load, ($(icd).prop('checked') ? fastTrack : slowTrack));
 		$("#chatx").draggable('enable');
 		$( "#chatx" ).removeClass( "minimized" );
 
@@ -276,7 +279,7 @@ function load() {
 	
 
     // Loading custom scrollbar library
-	$.getScript(chatx_server + 'assets/js/scrollbar.min.js', function () {});
+	$.getScript(chatx_server + 'assets/js/scrollbar.min.js');
 	
 		// Loading Deaggabe.min library and executing draggable afrer library is loaded
 	$.getScript(chatx_server + 'assets/js/draggable.min.js', function () {
@@ -293,6 +296,9 @@ function load() {
 
 
 	});
+
+
+  });
 
 });
 
@@ -559,7 +565,7 @@ var feedback = function (res) {
 };
 
 // Imgur variables
-new Imgur({
+new Imgur ({
 	clientid: 'b12794161e11f2b',
 	callback: feedback
 });
@@ -571,4 +577,31 @@ function valName() {
 
 }
 
-$.getScript(chatx_server + 'dynamic_js.php', function () {});
+
+
+$.fn.isVisible = function() {
+    // Am I visible?
+    // Height and Width are not explicitly necessary in visibility detection, the bottom, right, top and left are the
+    // essential checks. If an image is 0x0, it is technically not visible, so it should not be marked as such.
+    // That is why either width or height have to be > 0.
+    var rect = this[0].getBoundingClientRect();
+    return (
+        (rect.height > 0 || rect.width > 0) &&
+        rect.bottom >= 0 &&
+        rect.right >= 0 &&
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.left <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
+$( window ).on( "load", function() {
+  if (!$('#chatx .chx-bar').isVisible()) {
+    $("#chatx").css({"top": "15px", "left": "15px"});
+    localStorage.removeItem("chat_custom_position");
+  }
+});
+
+
+
+
+

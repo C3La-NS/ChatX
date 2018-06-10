@@ -1,32 +1,20 @@
 <?php
-session_start();
+include '../settings.php';
 include 'panel_dom.php';
 
-require '../vendor/autoload.php';
-
-// Configure the data store
-
-$dir = '../data';
-
-$config = new \JamesMoss\Flywheel\Config($dir, array(
-    'formatter' => new \JamesMoss\Flywheel\Formatter\JSON,
-));
-
-$repo = new \JamesMoss\Flywheel\Repository('shouts', $config);
-    
 
 if( isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && isset($_SESSION['mod_loggedin']) ) {
-    $repo->delete($_POST["deleteShout"]);
+    $repoShouts->delete($_POST["deleteShout"]);
 }
 
 if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && isset($_SESSION['mod_loggedin']) ) {
 
-    $oldShouts = $repo->query()
+    $oldShouts = $repoShouts->query()
                 ->where('createdAt', '<', strtotime('-0 second'))
                 ->execute();
 
     foreach($oldShouts as $old) {
-        $repo->delete($old);
+        $repoShouts->delete($old);
     }
 
 }
@@ -49,21 +37,14 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
 <body>
 
 <?php
-    if ($_SESSION['mod_loggedin'] && $_SESSION['password'] == '582e81644558c84074c7d02a199e48a6') {
-        echo '<div class="password-alert"><p>Alert! We noticed that you are using <span style="color:red">default password</span> for moderation panel. It can make ChatX management easily accessible for non-authorized users. Change your password as soon as possible! <a href="#">How do I change my password?</a></p></div>';
-    }
-?>
-
-<?php
         navbar();
     if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) {
+        
         if ( isset($_SESSION['mod_loggedin']) ) {
             modpandel();
         } else {
             userpanel();
         }
-
-
 
     } else {
         echo '

@@ -3,7 +3,7 @@
 function navbar() {
     echo '
     <div class="admin-bar"><div class="container">
-        <a href="./"><img src="https://imgur.com/CnbMYGn.png" class="logo"></a>
+        <a href="./"><img src="../assets/img/logo.png" class="logo"></a>
     ';
     if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) {
         echo '<span><i class="icon-user"></i> Howdy, <strong>';
@@ -19,18 +19,21 @@ function navbar() {
 
 function modpandel() {
      echo '
-<div id="main" class="container">
+<div id="main" class="container modpanel">
 <div class="copied"></div>
 <aside id="secondary" class="widget-area col-md-4" role="complementary">
 <h2>Navigation</h2>
+<li><a href="index.php">Shout Management & widget</a></li>
 <li><a href="userlist.php">User Management</a></li>
+<li><a href="setups.php">ChatX Settings</a></li>
 <li><a href="https://github.com/C3La-NS/ChatX">GtiHub</a></li>
 <h2>ChatX Widget & Installation</h2>
         <p><strong>1)</strong> Make sure your website is using jQuery library. If it doesn\'t, install one:</p>
         <div class="codebox">
                 &lt;script src="https://code.jquery.com/jquery-2.1.3.min.js"&gt;&lt;/script&gt;
         </div>
-        <p><strong>2)</strong> Add ChatX widget to any place where you want it to appear:</p>
+        <p><strong>2)</strong> If you are planning to use ChatX on external domain make sure you have set it in <a href="setups.php">ChatX Setttings</a>. This is needed to coply with CORS policy.</p>
+        <p><strong>3)</strong> Add ChatX widget to any place where you want it to appear:</p>
         <div class="codebox">
                 &lt;div id="chatx" class="chat" style="display: none"&gt;&lt;/div&gt;
                 <br>
@@ -41,13 +44,8 @@ function modpandel() {
                 <br>
                 &lt;script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"&gt;&lt;/script&gt;
         </div>
-        <p><strong>3)</strong> Done!</p>
-        
-<h2>Preliminary authentication</h2>
-            <p>You can use authentication to prevent non-authorized users from viewing and sending messages. Edit settings.php, defining <i>$restrictedAccess = false;</i> as true. <mark>Notice: It\'s still beta</mark>. If you are going to use it on other domains plese define it in .htaccess in order to avoid CORS policy: <i>Header set Access-Control-Allow-Origin "https://your-domain-goes-here.com"</i></p>
+        <p><strong>4)</strong> Done!</p>
 
-<h2>Additional Info</h2>
-<div class="alert-box"></div>
 </aside>
 <div id="primary" class="col-md-8 mb-xs-24"> 
 
@@ -96,8 +94,15 @@ function modpandel() {
 
 function userlist() {
     echo '
-<div id="main" class="container">
+<div id="main" class="container userlist">
 <aside id="secondary" class="widget-area col-md-4" role="complementary">
+    <h2>Navigation</h2>
+    <li><a href="index.php">Shout Management & widget</a></li>
+    <li><a href="userlist.php">User Management</a></li>
+    <li><a href="setups.php">ChatX Settings</a></li>
+    <li><a href="https://github.com/C3La-NS/ChatX">GtiHub</a></li>
+
+    <h2>Userlist</h2>
 </aside>
 <div id="primary" class="col-md-8 mb-xs-24">
 <div class="row">
@@ -105,7 +110,7 @@ function userlist() {
       <h1>Changing User Password</h1>
       <p>Enter existing username and then specify a new user password.</p>
     </section>
-    <form method="post" class="changepw">
+    <form method="post">
     <div>
       <span>
         <input class="basic-slide" name="u" type="name" placeholder="Enter Existing Username"/>
@@ -130,15 +135,57 @@ function userlist() {
       </span>
     </div>  
     </form>
+    
+    <section>
+      <h1>Deleting Users</h1>
+      <p>Enter existing username to delete them from database.</p>
+    </section>
+    <form method="post">
+    <div>
+      <span>
+        <input class="basic-slide" name="u" type="name" placeholder="Enter Existing Username"/>
+        <label><i class="icon-user"></i></label>
+      </span>
+    </div>
+    <div>
+      <span>
+        <button name="s_d" class="button">Delete User</button>
+      </span>
+    </div> 
+    </form>
+    
+    <section>
+      <h1>Adding moderators</h1>
+      <p>Enter existing username to make them moderators.</p>
+    </section>
+    <form method="post">
+    <div>
+      <span>
+        <input class="basic-slide" name="u" type="name" placeholder="Enter Existing Username"/>
+        <label><i class="icon-user"></i></label>
+      </span>
+    </div>
+    <div>
+      <span>
+        <button name="s_m" class="button">Add Moderator</button>
+      </span>
+    </div> 
+    </form>
 </div><!-- .row -->
 </div><!-- #primary -->
-</div><!-- #main.container -->    
+</div><!-- #main.container -->
+
+<script>$( ".total, .u-list" ).appendTo( $( "#secondary" ) );</script>
     ';
 }
+function settingsPage() {
+    echo '
 
+    ';
+}
 function userpanel() {
     echo '
-<div id="main" class="container">
+<div id="main" class="container userpanel">
     <div class="row">
         <section>
           <h1>

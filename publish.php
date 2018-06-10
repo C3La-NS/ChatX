@@ -1,21 +1,7 @@
 <?php
-require 'vendor/autoload.php';
-
 include 'settings.php';
 include 'bbcode.php';
 
-session_start();
-
-
-// Configure the data store
-
-$dir = __DIR__.'/data';
-
-$config = new \JamesMoss\Flywheel\Config($dir, array(
-    'formatter' => new \JamesMoss\Flywheel\Formatter\JSON,
-));
-
-$repo = new \JamesMoss\Flywheel\Repository('shouts', $config);
     
 // Store the posted shout data to the data store
 
@@ -29,9 +15,10 @@ if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name']
     $comment = showBBcodes($comment);
 
 
-    if ( $restrictedAccess === true ) {
+    if ( $r_a === '1' ) {
         if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) ) {
-          echo 'Access Denied'; 
+          echo 'Access Denied';
+          die();
         } else {
          // Storing a new shout
         $shout = new \JamesMoss\Flywheel\Document(array(
@@ -40,7 +27,7 @@ if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name']
             'loggedIn' => 'true', 
             'createdAt' => time()
         ));
-        $repo->store($shout);
+        $repoShouts->store($shout);
         }
     } else {
         if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) ) {  
@@ -58,7 +45,7 @@ if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name']
             'createdAt' => time()
         ));
         }
-        $repo->store($shout);
+        $repoShouts->store($shout);
     }
     
 

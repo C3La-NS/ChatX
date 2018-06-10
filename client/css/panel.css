@@ -1,6 +1,6 @@
 @font-face {
   font-family: "chatx-icons";
-  src: url("../../assets/css/fonts/chatx-icons.woff.php") format("woff");
+  src: url("../../assets/css/fonts/chatx-icons.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 
@@ -185,14 +185,32 @@ html, body {
     border-left: 1px solid #ddd
 }
 
-section, .changepw {
+section, .userlist form {
     background: #fbfbfb;
     border: 1px solid #ddd;
     padding: 10px 20px;
     width: 100%;
     text-align: center;
 }
-.changepw span {
+.userlist section:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin-top: 10px;
+    margin-left: -16px;
+    border-style: solid;
+    border-width: 16px;
+    border-top-color: #ddd;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+
+.userlist form {
+    margin: 10px 0;
+}
+.userlist form span {
     margin: 5px 10px !important;
 }
 .codebox {
@@ -316,16 +334,18 @@ img.chatx_img {
   font-weight: 300;
 }
 .basic-slide + label {
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 11px 15px;
-  text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
-  background: #d9dada;
-  transition: all .3s ease-in-out;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 43px;
+    padding: 14px;
+    height: 43px;
+    text-shadow: 0 1px 0 rgba(19, 74, 70, 0.4);
+    background: #d9dada;
+    transition: all .3s ease-in-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 .basic-slide:focus,
@@ -387,7 +407,7 @@ img.chatx_img {
 	top: 0;
 	left: 0;
 	text-align: center;
-	padding: 15px;
+	padding: 13px;
 	display: none;
 	font-size: 18px;
 	box-sizing: border-box;
@@ -444,14 +464,112 @@ article.legend p {
     vertical-align: middle;
 }
 
-.success {
-    color: #deffe4;
+.success, .error {
     text-align: center;
-    background: #77ec96;
     padding: 10px;
     text-transform: uppercase;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
+}
+
+.success {
+    color: #deffe4;
+    background: #77ec96;
+}
+
+.error {
+    color: #ffdede;
+    background: #ec7777;
+}
+
+ #settings {
+     width: 100%;
+ }
+ #settings p {
+     margin-bottom: 0;
+ }
+ #settings input[type=checkbox] {
+     display: none;
+}
+ #settings label {
+     width: 45px;
+     height: 25px;
+     box-sizing: border-box;
+     border: 2px solid;
+     float: left;
+     border-radius: 100px;
+     position: relative;
+     cursor: pointer;
+     transition: .3s ease;
+}
+ #settings input[type=checkbox]:checked + label:before {
+     left: 20px;
+}
+ #settings label:before {
+     transition: .3s ease;
+     content: '';
+     width: 19px;
+     height: 19px;
+     position: absolute;
+     left: 2px;
+     top: 1px;
+     box-sizing: border-box;
+     border: 2px solid;
+     border-radius: 100px;
+}
+
+ #settings input[type=checkbox]:checked + label {
+  background: #87bfef;
+}
+
+ #settings label:before {
+  background: #7d7d7d;
+  color: #7d7d7d;
+}
+#settings div {
+    display: inline-block;
+    height: 55px;
+    padding: 10px;
+    background: #fbfbfb;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+ }
+ 
+#settings .button { 
+    margin: 0 auto;
+    display: block;
+}
+
+.u-list {
+    width: 46%;
+    text-align: center;
+    margin: 0 2%;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.total, .u-list {
+    display: none;
+}
+#secondary .total {
+    display: block;
+}
+
+#secondary .u-list {
+    display: inline-block;
+}
+
+.setups input[type="text"] {
+    border: 1px solid #ddd;
+    color: #7d7d7d;
+    padding: 4px 10px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+  .admin-bar {
+      padding: 0;
+  }
 }
