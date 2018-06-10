@@ -62,6 +62,16 @@ ver 1.5.0
 <li>Logged In users have a verification icon</li>
 <li>Usergroups: users and moderators.</li>
 <li>Updated Flywheel library (more developed database in perspective)</li>
+ver 1.6.0
+<li>Private mode no longer in beta</li>
+<li>Passwords are hashed with PASSWORD_BCRYPT</li>
+<li>Cookies secured</li>
+<li>Json files no longer accessible directly</li>
+<li>General security improvements</li>
+<li>Complete userlist page</li>
+<li>New page - Setups.php. Easy way of editing settings</li>
+<li>ChatX now checks when it is outside viewpoint and restores its position</li>
+<li>General improvements</li>
 
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
@@ -73,8 +83,8 @@ ChatX is still under development. We are expecting more improvements and feature
 <li><del>Introduce simple formatting tags (bold, italic and more)</del></li>
 <li>Templates</li>
 <li>Chat history for users (in another tab)</li>
-<li>Easily customizable chat settings via moderation page</li>
-<li>General improvements</li>
+<li><del>Easily customizable chat settings via moderation page</del></li>
+
 <h3>Long perspective:</h3>
 <li><del>Close button that minifies chat</del></li>
 <li><del>Authentication</del></li>
@@ -94,8 +104,7 @@ ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you condsider 
 a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
 
-b) open .htaccess and define your domain instead of "&#42;": Header set Access-Control-Allow-Origin "&#42;" 
-example: Header set Access-Control-Allow-Origin "https://your-domain.com" (without final "/")
+b) open /setups.php and define your external domain. For example "https://your-domain.com" (without final "/")
 If done ChatX must work correctly.
 
 <h2>Demo</h2>
