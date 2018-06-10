@@ -1,10 +1,18 @@
 <FilesMatch \.php$>
   <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
     Header set Access-Control-Allow-Credentials: true
   </IfModule>
 </FilesMatch>
 
-<FilesMatch "\.(jpg|jpeg|png|gif|js|woff|woff2)$">
+<FilesMatch "\.(jpg|jpeg|png|gif|js|css|woff|woff2)$">
 Header set Cache-Control "max-age=31536050"
 </FilesMatch>
+
+<Files ~ "^delete_old_shouts\.php|json">
+  Order allow,deny
+  Deny from all
+</Files>
+
+php_value session.gc_maxlifetime 604800
+php_value session.cookie_lifetime 604800
+php_value session.cookie_httponly 1
