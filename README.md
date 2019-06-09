@@ -109,7 +109,7 @@ b) open /setups.php and define your external domain. For example "https://your-d
 If done ChatX must work correctly.
 
 <h2>Demo</h2>
-Coming soon!
+Probably coming some day
 
 
-<h2>ChatX official web-site (Russian): https://celans.ru/ChatX/</h2>
+<h2>ChatX official web-site (Russian): https://xlns.ru/blog/category/chatx/</h2>
