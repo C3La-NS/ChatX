@@ -9,7 +9,7 @@ The script uses flat file database only, built with the use of Flywheel and Rela
 The idea that stood behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://imgur.com/ov8wDvR.png">
+<img src="https://i.imgur.com/jPpLLtX.png">
 
 <br />
 <h2>Main features:</h2>
@@ -71,23 +71,24 @@ ver 1.6.0
 <li>Complete userlist page</li>
 <li>New page - Setups.php. Easy way of editing settings</li>
 <li>ChatX now checks when it is outside viewpoint and restores its position</li>
-<li>General improvements</li>
+ver 1.7.0
+<li>Featherlight library allows viewing uploaded images in modal window</li>
+<li>New prompt menu for bb-tags</li>
+<li>Resize widget horizontally</li>
+<li>Updates for moderator's panel with new options and settings</li>
+<li>Changeble widget language (Rus/Eng)</li>
+<li>Widget works better with various websites</li>
+<li>General improvements and updates</li>
 
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
 <h3>Nearest perspective:</h3>
-<li><del>Make separate .css file for easy-customizable chat color-scheme</del></li>
-<li><del>A tooltip for the required name field</del></li>
-<li><del>Bring English localization back!</del></li>
-<li><del>Make simple installation instructions</del></li>
-<li><del>Introduce simple formatting tags (bold, italic and more)</del></li>
 <li>Templates</li>
 <li>Chat history for users (in another tab)</li>
-<li><del>Easily customizable chat settings via moderation page</del></li>
+<li>Integration with MyBB.ru</li>
 
 <h3>Long perspective:</h3>
-<li><del>Close button that minifies chat</del></li>
-<li><del>Authentication</del></li>
+<li>Notification for the new messages when widget is minimized</li>
 
 <h2>Acknowledgements</h2>
 Thanks Tutorialzine for the initial shoutbox release.
