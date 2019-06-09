@@ -1,10 +1,11 @@
+
 /* ------- Mini-chat-box template ------- */
 
 @import 'color_scheme.css';
 
 @font-face {
   font-family: "chatx-icons";
-  src: url(data:application/font-woff2;charset=utf-8;base64,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) format('woff2');
+  src: url(data:application/font-woff2;charset=utf-8;base64,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) format('woff2');
         
   font-weight: normal;
   font-style: normal;
@@ -52,7 +53,7 @@
 .icon-reply:before {
   content: "\e004";
 }
-.icon-upload:before {
+.icon-upload-old:before {
   content: "\e005";
 }
 .icon-minimize:before {
@@ -67,27 +68,90 @@
 .icon-logout:before {
   content: "\e009";
 }
-.icon-user:before {
-  content: "\e00a";
-}
 .icon-lock:before {
   content: "\e00b";
 }
-.icon-verified:before {
+.icon-link:before {
+  content: "\e00d";
+}
+.icon-photo:before {
+  content: "\e00e";
+}
+.icon-color:before {
+  content: "\e00f";
+}
+.icon-hue:before {
+  content: "\e010";
+}
+.icon-upload:before {
+  content: "\e011";
+}
+.icon-plus:before {
+  content: "\e012";
+}
+.icon-user:before {
+  content: "\e00a";
+}
+.icon-resize:before {
   content: "\e00c";
 }
 
+.icon-link:before, .icon-photo:before, .icon-color:before {
+    vertical-align: middle;
+}
 
+/* normalize */
+#chatx * {
+    box-sizing: border-box;
+}
 
+/* creating custom chatx html-tags as an alternative to default tags */
+chx_div { /* div */
+    display: block;
+}
+chx_ul { /* ul */
+    display: block;
+    list-style-type: disc;
+    margin-top: 1em;
+    margin-bottom: 1 em;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 40px;
+}
+chx_li { /* li */
+    display: list-item;
+}
+chx_p { /* p */
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+chx_hr { /* hr */
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+/* application */
  #chatx {
      width: 285px;
      margin: 0 auto;
      z-index: 99999;
+     position: fixed;
      font-family: sans-serif;
      font-size: 14px !important;
      line-height: 20px;
+     opacity: 0;
+     transition: opacity .2s linear;
 }
- #chatx.expanded header {
+ #chatx.expanded chx_header {
      cursor: move !important;
      position: relative;
      width: 100%;
@@ -95,7 +159,7 @@
      bottom: unset;
 }
  #chatx .chx-bar {
-     box-shadow: 0px 1px 1px 0.00px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
      width: 100%;
      position: relative;
      height: 36px;
@@ -104,26 +168,33 @@
      padding: 8px 0 0;
      border-radius: 7px 7px 0 0;
      font-size: 16px;
-     box-sizing: border-box;
 }
 
-#chatx .chx-bar span{
+#chatx .chx-bar chx_span{
     display: inline-block;
     vertical-align: top;
     padding-right: 5px;
     font-weight: 700;
 }
 
-#chatx .chx-bar .chat_popover span{
+#chatx .chx-bar .chat_popover chx_span{
     border: 0;
 }
 
- #chatx.expanded .body {
+.chat_popover .chatx_login span {
+    vertical-align: middle !important;
+    line-height: 12px;
+}
+
+ #chatx.expanded .chx-container {
      display: block !important;
      position: relative;
-     height: 360px;
+     min-height: 360px;
+     height: 360px; 
+     max-height: 80vh;
      border-style: solid;
      border-width: 0 1px 0 1px;
+     overflow: hidden;
 }
 /* ------- webkit scroll ------- */
 /* ------- The comments content ------- */
@@ -150,9 +221,9 @@
      font-family: "chatx-icons";
      z-index: 1;
 }
- .shoutbox-content li {
+ .shoutbox-content chx_li {
      position: relative;
-     padding: 8px 11px;
+     padding: 8px 10px;
      border-style: solid;
      border-width: 0 0 1px 0;
      z-index: 2;
@@ -195,28 +266,32 @@
      border-style: solid;
      border-width: 2px 0 0 0;
 }
- .shoutbox-helper p {
+ .shoutbox-helper chx_p {
      margin: 0;
      text-align: center;
      font-size: inherit;
      text-transform: uppercase;
 }
- .shoutbox-helper span {
+ .shoutbox-helper chx_span {
      font-size: 13px;
      line-height: 20px;
 }
- .shoutbox-helper hr {
+ .shoutbox-helper chx_hr {
      width: 75%;
      height: 2px;
      margin: 7px auto;
      background: #d5dbe1;
      border: 0;
 }
+ .shoutbox-helper chx_li {
+     margin-left: 15px;
+     font-size: 13px;
+ }
 /* ------- Writing a new comment form ------- */
  .expanded .shoutbox-form {
      display: block;
 }
- .shoutbox-form form {
+ .shoutbox-form form:not(#imgur_uploader) {
      display: block;
      max-width: 100%;
      text-align: left;
@@ -289,7 +364,7 @@
     font: inherit;
     font-size: inherit;
     line-height: 18px;
-    text-indent: 26px;
+    text-indent: 24px;
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -307,15 +382,16 @@
  .shoutbox-content .chatx_img {
      max-width: 100%;
      max-height: 200px;
-     margin: 10px auto;
+     margin: 3px auto;
      display: block;
+     cursor: pointer;
 }
  .shoutbox-content .emojione {
      display: inline-block;
      margin: 0;
      pointer-events: none;
 }
- #send_message {
+ #chx-send-message {
      display: inline-block;
      vertical-align: top;
      right: 0;
@@ -409,23 +485,31 @@
      border-style: solid;
      border-width: 10px;
 }
- .chat_popover span {
+ .chat_popover chx_span {
      padding: 0 10px;
-     font-size: 12px !important;
+     font-size: 12px;
 }
- .chat_popover div {
+ .chat_popover chx_div {
      margin: 12px;
 }
-
-.chat_popover p {
-    margin: 5px 0 0 0;
-    text-align: center;
+.chat_popover chx_div:nth-child(2) {
+    margin: 0;
+    padding: 0 12px;
+    border-top: 1px solid;
 }
-
-#chatx .chatx_management {
+#chatx .chatx_management, #chatx .chatx_logout, #chatx .chatx_login {
     font-size: 12px;
+    margin: 5px 0 5px 0;
     text-decoration: none;
+    cursor: pointer;
 }
+#chatx .chatx_management {
+    float: left;
+}
+#chatx .chatx_logout, #chatx .chatx_login {
+    float: right;
+}
+
  .active .chat_popover {
      display: block;
 }
@@ -458,55 +542,19 @@
      border: 2px solid;
      border-radius: 100px;
 }
- .dropzone {
-     width: 16px;
-     height: 16px;
-     position: absolute;
-     margin-top: 12px;
-     margin-left: 10px;
-     font-size: 16px;
-     overflow: hidden;
-}
- .dropzone input[type=file] {
-     height: 100%;
-     left: -1px;
-     outline: 0;
-     opacity: 0;
-     position: absolute;
-     top: -5px;
-     width: 100%;
-     font-size: 0;
-     cursor: pointer;
-}
- .dropzone+.status {
-}
- .dropzone+.status.bg-danger {
-     position: absolute;
-     width: 80%;
-     height: 35px;
-     margin-top: -40px;
-     text-align: center;
-     line-height: 35px;
-     text-transform: uppercase;
-     border-radius: 4px;
-     z-index: 3;
-}
- .status.bg-danger:after {
-     content: "";
-     position: absolute;
-     left: 10px;
-     top: 35px;
-     width: 0;
-     height: 0;
-     border: 10px solid transparent;
-     border-top: 10px solid rgba(255, 187, 187, 0.95);
-}
- .dropzone.dropzone-dragging {
-     border-color: #000;
+
+ .chx-imgur-uploader input[type=file] {
+    width: 23px;
+    height: 35px;
+    right: 32px;
+    outline: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 0;
+    cursor: pointer;
 }
  .loading-modal {
      background-color: rgba(72, 72, 72, 0.95);
-     display: none;
      position: absolute;
      top: 50%;
      left: 85px;
@@ -540,17 +588,17 @@
 img.emojione{
     width:auto
 }
- header.ui-draggable-handle {
+ chx_header.ui-draggable-handle {
      bottom: 0;
      right:30px;
      position:fixed;
      width: 200px;
      cursor: auto !important;
 }
- .body, .shoutbox-form, #false_shoutbox_name, .icon-refresh, .icon-gear, .icon-minimize, .expanded .icon-expand {
+ .chx-container, .shoutbox-form, #false_shoutbox_name, .icon-refresh, .icon-gear, .icon-minimize, .expanded .icon-expand {
      display:none;
 }
- .minimized .pulsating-circle {
+ .minimized .chx-pulsating-circle {
      display:none !important;
 }
  .minimized .chx-login-form {
@@ -568,7 +616,7 @@ img.emojione{
     cursor: pointer;
     margin: 0 10px 0;
 }
- .pulsating-circle {
+ .chx-pulsating-circle {
      display: none;
      position: absolute;
      right: 28%;
@@ -579,7 +627,7 @@ img.emojione{
      height: 6px;
      z-index: 1;
 }
- .pulsating-circle:before {
+ .chx-pulsating-circle:before {
      content: '';
      position: relative;
      display: block;
@@ -593,7 +641,7 @@ img.emojione{
      -webkit-animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
      animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
- .pulsating-circle:after {
+ .chx-pulsating-circle:after {
      content: '';
      position: absolute;
      left: 0;
@@ -696,7 +744,7 @@ img.emojione{
      margin: 0;
      padding: 0;
      position: absolute;
-     z-index: 10;
+     z-index: 2;
 }
  .scrollbar-macosx > .scroll-element div {
      display: block;
@@ -776,7 +824,7 @@ img.emojione{
 
 /*************** BETA ***************/
 
-#notsent {
+#chx-not-sent {
     display: none;
     position: absolute;
     width: 73%;
@@ -792,7 +840,7 @@ img.emojione{
     z-index: 3;
 }
 
-#notsent:after {
+#chx-not-sent:after {
     content: "";
     position: absolute;
     right: 50%;
@@ -809,12 +857,13 @@ img.emojione{
     display: none;
     top: calc(50% - 117px);
     left: 25px;
-    z-index: 2;
+    z-index: 3;
     width: 235px;
     height: 235px;
     border-radius: 7px;
     padding-top: 40px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 .chx-login-form.active {
     display: block;
@@ -830,25 +879,243 @@ img.emojione{
     box-sizing: border-box;
 }
 
-.chx-login-form button[type="submit"] {
+.chx-login-button {
     display: block;
     margin: 0 auto;
     padding: 0;
     border: 0;
     width: 50px;
     height: 50px;
+    text-align: center;
     border-radius: 100%;
     font-size: 28px;
-    line-height: 60px;
     cursor: pointer;
     outline: none;
 }
-.chx-login-form button[type="submit"]:hover {
+.chx-login-button:hover {
     transition: .5s;
+}
+.chx-login-button.icon-login::before {
+    line-height: 50px;
+}
+
+[data-loggedIn="true"]:before {
+    content: "\e00a"; margin-right:5px; text-align:center; width: 14px; height: 14px; font-size: 14px; font-family: "chatx-icons"; font-weight: 300; vertical-align: top;
+    
 }
 
 
-[data-loggedIn="true"]:before {
-    content: "\e00c"; margin-right:5px; text-align:center; width: 14px; height: 14px; font-size: 14px; font-family: "chatx-icons"; font-weight: 300; vertical-align: top;
+
+
+
+
+
+
+
+.bb-popup {
+    display: none;
+    position: absolute;
+    width: 180px;
+    height: 35px;
+    left: 0;
+    margin-top: -40px;
+    text-align: center;
+    line-height: 35px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    z-index: 3;
+    background: rgba(72, 72, 72, 0.95);
+    color: #fff;
+    font-weight: bold;
+    }  
     
+.bb-popup:before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 35px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px;
+    border-top-color: rgba(72, 72, 72, 0.95);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.bb-popup chx_div {
+    display: inline-block;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+
+.chx-key {
+    padding: 0px 7px;
+    border: 1px solid #87bfef;
+    border-bottom: 2px solid #87bfef;
+    border-radius: 4px;
+}
+
+
+.chx-color-bb-prompt {
+    position: absolute;
+    display: none;
+    z-index: 2;
+    width: 99%;
+    background: #f9fafb;
+    padding: 15px 10px 0 10px;
+    box-sizing: border-box;
+    border-radius: 0 0 7px 7px;
+}
+
+.icon-hue {
+    font-size: 19px;
+    padding: 0 1px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.red {
+    color: red;
+}
+.orange {
+    color: orange;
+}
+
+.yellow {
+    color: yellow;
+}
+.green {
+    color: green; 
+}
+.lightblue {
+    color: lightblue;
+}
+.blue {
+    color: blue;
+}
+.purple {
+    color: purple;
+}
+
+.chx-imgur-uploader i {
+    font-size: 13px;
+    vertical-align: sub;
+}
+
+.icon-plus {
+     width: 20px;
+     height: 20px;
+     position: absolute;
+     margin-top: 12px;
+     margin-left: 10px;
+     font-size: 16px;
+     overflow: hidden;
+     cursor: pointer;
+}
+
+.icon-hue {
+    cursor: pointer;
+}
+
+.chx-login-form p {
+    font-size: 12px;
+    text-align: center;
+    color: #da8080;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin: 0;
+}
+
+.chx-pre-textarea {
+    width: 237px;
+    display: inline-block;
+    max-height: 105px !important; /* needed as a fix for smooth textarea resize */
+    line-height: 0; /* why? */
+    overflow-y: auto;
+}
+
+.chx-login-form .icon-plus {
+    top: 0;
+    right: 10px;
+    padding: 2px;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    transform: rotate(45deg);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+}
+.chx-login-form .icon-plus:hover {
+    transition: .5s;
+    color: #87c0ef;
+}
+
+
+
+
+/**
+ * Featherlight - ultra slim jQuery lightbox
+ * Version 1.7.13 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483647;text-align:center;white-space:nowrap;cursor:pointer;background:#333}.featherlight:last-of-type{background:rgba(0,0,0,.8)}.featherlight:before{content:'';display:inline-block;height:100%;vertical-align:middle}.featherlight .featherlight-content{position:relative;text-align:left;vertical-align:middle;display:inline-block;overflow:auto;padding:5px 5px 0;border-bottom:5px solid transparent;margin-left:5%;margin-right:5%;max-height:95%;background:#fff;cursor:auto;white-space:normal}.featherlight .featherlight-inner{display:block}.featherlight link.featherlight-inner,.featherlight script.featherlight-inner,.featherlight style.featherlight-inner{display:none}.featherlight .featherlight-close-icon{position:absolute;z-index:9999;top:5px;right:5px;line-height:25px;width:25px;height:25px;cursor:pointer;text-align:center;font-family:Arial,sans-serif;background:#fff;background:rgba(255,255,255,.3);color:#000;border:0;padding:0}.featherlight .featherlight-close-icon::-moz-focus-inner{border:0;padding:0}.featherlight .featherlight-image{width:100%}.featherlight-iframe .featherlight-content{border-bottom:0;padding:0;-webkit-overflow-scrolling:touch}.featherlight iframe{border:0}.featherlight *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}@media only screen and (max-width:1024px){.featherlight .featherlight-content{margin-left:0;margin-right:0;max-height:98%}}@media print{html.with-featherlight>*>:not(.featherlight){display:none}}
+
+.featherlight-close .icon-plus {
+    top: 4px;
+    right: 4px;
+    margin: 0;
+    transform: rotate(45deg);
+    color: #fff;
+    line-height: 0;
+}
+
+
+
+
+.ui-resizable {
+	position: relative;
+}
+.ui-resizable-handle {
+	position: absolute;
+	font-size: 0.1px;
+	display: block;
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.ui-resizable-disabled .ui-resizable-handle,
+.ui-resizable-autohide .ui-resizable-handle {
+	display: none;
+}
+.ui-resizable-s {
+	cursor: s-resize;
+	border-top: 1px solid #87bfef;
+	background: #f9fafb;
+	height: 14px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	transition: .5s;
+	z-index: 2 !important;
+}
+
+.ui-resizable-s:hover, .ui-resizable-s:active {
+    opacity: 1;
+}
+
+#chatx .resize-helper {
+    position: absolute;
+    width: 34px;
+    top: 4px;
+    color: #87bfef;
+    padding: 1px 0;
+    border-width: 2px 0 2px;
+    border-style: solid;
+    left: calc(50% - 18px);
 }

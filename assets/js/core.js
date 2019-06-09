@@ -1,4 +1,3 @@
-
 /*
 ###################################################################
             CHATX BUILDING MARKUP, UI TEXT AND ADDING CSS STYLES
@@ -7,66 +6,90 @@
 */
 
 // loading styles
-$('<link>').appendTo('head').attr({
-      type: 'text/css', 
-      rel: 'stylesheet',
-      href: chatx_server + 'assets/css/chatx_styles.css'
+jQuery('<link>').appendTo('head').attr({
+    type: 'text/css',
+    rel: 'stylesheet',
+    href: chatx_server + 'assets/css/chatx_styles.css'
 });
 
-const translation = {
-    nameInputValue: 'Enter name',
-    management: 'ChatX management',
-    noNameError: 'Please insert your name',
-    fastUpdate: 'Fast track update',
-    newMessagesAbove: 'New messages above',
-    formattingTags: 'Formatting tags',
-    helperValueText: 'Text',
-    resultsIn: 'results in',
-    producesImage: 'produces an image',
-    producesLink: 'produces a link',
-    newMessagePlaceholder: 'Start typing...',
-    notSentError: 'Message not sent',
-    ss: chatx_server
-};
-
 const markup = `
-            <header>
-                <div class="chx-bar"><i class="icon-chat"></i> <span>ChatX</span> <div class="pulsating-circle"></div><input id="false_shoutbox_name" type="name" maxlength="15" placeholder="${translation.nameInputValue}" onblur="valName()"/><div class="name-required">${translation.noNameError}</div> <i class="icon-refresh"></i>
-                    <div class="chat_popover_parent"><a href="javascript:void(0);" class="chat_btn"><i class="icon-gear"></i></a>
-                        <div class="chat_popover"><div><span>${translation.fastUpdate}</span><input type="checkbox" id="icd" name="icd" value="icd" /><label for="icd"></label><p><a class="chatx_management" href="${translation.ss}client/index.php" target="_blank">${translation.management}</a></p></div></div>
-                    </div>
-                    <i class="icon-minimize"></i><i class="icon-expand"></i>
-                </div>
-            </header>
-            <div class="body scrollbar-macosx">
-                <div class="shoutbox">
-                    <ul class="shoutbox-content"></ul>
-                    <div class="shoutbox-helper">
-                        <p>${translation.newMessagesAbove}</p>
-                        <hr>
-                        <span>${translation.formattingTags}:
-                        <li>[b]${translation.helperValueText}[/b] ${translation.resultsIn}: <b>${translation.helperValueText}</b></li>
-                        <li>[i]${translation.helperValueText}[/i] ${translation.resultsIn}: <i>${translation.helperValueText}</i></li>
-                        <li>[u]${translation.helperValueText}[/u] ${translation.resultsIn}: <u>${translation.helperValueText}</u></li>
-                        <li>[color=red]${translation.helperValueText}[/color] ${translation.resultsIn}: <span style="color: red">${translation.helperValueText}</span></li>
-                        <li>[img]Img.jpg[/img] ${translation.producesImage}</li>
-                        <li>[url]Url[/url] ${translation.producesLink}</li>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="shoutbox-form">
-                <form id="NewMessage">
-                    <input type="hidden" id="shoutbox-name" name="name" maxlength="15" />
-                    <div class="dropzone"></div>
-                    <textarea id="shoutbox-comment" class="js-elasticArea" rows="2" data-min-rows="2" placeholder="${translation.newMessagePlaceholder}" name="comment" maxlength='240'></textarea>
-                    <div id="notsent">${translation.notSentError}</div>
-                    <div id="send_message" type="submit"><i class="icon-send"></i></div>
+            <chx_header>
+                <chx_div class="chx-bar">
+                    <chx_i class="icon-chat"></chx_i>
+                    <chx_span>ChatX</chx_span>
+                    <chx_div class="chx-pulsating-circle"></chx_div>
+                    <input id="false_shoutbox_name" type="name" maxlength="15" placeholder onblur="valName()"/>
+                    <chx_div class="name-required"></chx_div>
+                    <chx_i class="icon-refresh"></chx_i>
+                    <chx_div class="chat_popover_parent">
+                        <a href="javascript:void(0);" class="chat_btn"><chx_i class="icon-gear"></chx_i></a>
+                        <chx_div class="chat_popover">
+                            <chx_div>
+                                <chx_span class="chx-fast-track"></chx_span>
+                                <input type="checkbox" id="icd" name="icd" value="icd" />
+                                <label for="icd"></label>
+                            </chx_div>
+                            <chx_div>
+                                <a class="chatx_management" target="_blank"></a>
+                                <a class="chatx_logout"><span class="logout"></span> <i class="icon-logout"></i></a>
+                            </chx_div>
+                        </chx_div>
+                    </chx_div>
+                    <chx_i class="icon-minimize"></chx_i><chx_i class="icon-expand"></chx_i>
+                </chx_div>
+            </chx_header>
+            <chx_div class="chx-login-form">
+                <chx_i class="icon-plus chx-close"></chx_i>
+                <form name="chx-login">
+                    <input name="u" placeholder required>
+                    <input type="password" name="p" placeholder required>
+                    <chx_div class="chx-login-button icon-login" onClick="jQuery(this).closest('form').submit();"></chx_div>
                 </form>
+            </chx_div>
+            <div class="chx-container scrollbar-macosx">
+                <chx_div class="shoutbox">
+                    <chx_ul class="shoutbox-content"></chx_ul>
+                    <chx_div class="shoutbox-helper">
+                        <chx_p></chx_p>
+                        <chx_hr></chx_hr>
+                        <chx_span class="helper"></chx_span>
+                        <chx_li><chx_span class="chx-key">Alt</chx_span> + <chx_span class="chx-key">Q</chx_span> <chx_span class="desc1"></chx_span></chx_li>
+                        <chx_li><chx_span class="desc2"></chx_span></chx_li>
+                        <chx_li><chx_span class="chx-key">Enter</chx_span> <chx_span class="desc3"></chx_span></chx_li>
+                    </chx_div>
+                </chx_div>
             </div>
-`;	
+            <chx_div class="shoutbox-form">
+                <form id="chx-new-message">
+                    <input type="hidden" id="shoutbox-name" name="name" maxlength="15" />
+                    <chx_div class="bb-popup">
+                        <chx_div id="bb1">B</chx_div>
+                        <chx_div id="bb2">U</chx_div>
+                        <chx_div id="bb3">I</chx_div>
+                        <chx_div id="bb4"><chx_i class="icon-color"></chx_i></chx_div>
+                        <chx_div id="bb5"><chx_i class="icon-photo"></chx_i></chx_div>
+                        <chx_div class="chx-imgur-uploader"></chx_div>
+                        <chx_div id="bb6"><chx_i class="icon-link"></chx_i></chx_div>
+                    </chx_div>
+                    <chx_div class="chx-color-bb-prompt">
+                        <chx_i id="bb4_1" class="icon-hue red"></chx_i>
+                        <chx_i id="bb4_2" class="icon-hue orange"></chx_i>
+                        <chx_i id="bb4_3" class="icon-hue yellow"></chx_i>
+                        <chx_i id="bb4_4" class="icon-hue green"></chx_i>
+                        <chx_i id="bb4_5" class="icon-hue lightblue"></chx_i>
+                        <chx_i id="bb4_6" class="icon-hue blue"></chx_i>
+                        <chx_i id="bb4_7" class="icon-hue purple"></chx_i>
+                    </chx_div>
+                    <chx_div class="chx-pre-textarea scrollbar-macosx">
+                        <chx_i class="icon-plus"></chx_i>
+                        <textarea id="shoutbox-comment" rows="2" data-min-rows="2" placeholder name="comment" maxlength='240'></textarea>
+                    </chx_div>
+                    <chx_div id="chx-not-sent"></chx_div>
+                    <chx_div id="chx-send-message" type="submit"><chx_i class="icon-send"></chx_i></chx_div>
+                </form>
+            </chx_div>
+`;
 document.getElementById('chatx').innerHTML = markup;
-
 
 /*
 ###################################################################
@@ -75,231 +98,271 @@ document.getElementById('chatx').innerHTML = markup;
 ###################################################################
 */
 
-$(function () {
-    
-  $.getScript(chatx_server + 'dynamic_js.php', function () {
+jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
+    // Storing some elements in variables for a cleaner code base
 
+    var refreshButton = jQuery('.chx-bar .icon-refresh'),
+        shoutboxForm = jQuery('.shoutbox-form'),
+        form = shoutboxForm.find('form'),
+        nameElement = form.find('#shoutbox-name'),
+        commentElement = form.find('#shoutbox-comment'),
+        ul = jQuery('chx_ul.shoutbox-content'),
+        icd = jQuery('#icd');
+    chx_resize = 'chx-container';
 
-	// Storing some elements in variables for a cleaner code base
+    // Replace :) with emoji icons:
+    if (e_o === true) {
+        emojione.ascii = true;
+    }
 
-	var refreshButton = $('.chx-bar .icon-refresh'),
-		shoutboxForm = $('.shoutbox-form'),
-		form = shoutboxForm.find('form'),
-		nameElement = form.find('#shoutbox-name'),
-		commentElement = form.find('#shoutbox-comment'),
-		ul = $('ul.shoutbox-content'),
-		icd = $('#icd');
+    // Load the comments.
+    load();
 
-	// Replace :) with emoji icons:
-	emojione.ascii = e_o;
+    nameElement.val(localStorage.getItem('nameElement') || "");
 
-	// Load the comments.
-	load();
+    // On form submit, if everything is filled in, publish the shout to the database
 
-	nameElement.val(localStorage.getItem('nameElement') || "");
+    var canPostComment = true;
 
-	// On form submit, if everything is filled in, publish the shout to the database
+    form.submit(function(e) {
+        e.preventDefault();
 
-	var canPostComment = true;
+        if (!canPostComment) return;
 
-	form.submit(function (e) {
-		e.preventDefault();
+        var name = nameElement.val().trim();
+        var comment = commentElement.val().trim();
 
-		if (!canPostComment) return;
+        if (name.length && comment.length && comment.length <= 240) {
 
-		var name = nameElement.val().trim();
-		var comment = commentElement.val().trim();
+            publish(name, comment);
 
-		if (name.length && comment.length && comment.length <= 240) {
+            // Prevent new shouts from being published
 
-			publish(name, comment);
+            canPostComment = false;
 
-			// Prevent new shouts from being published
+            // Allow a new comment to be posted after 0.5 seconds
 
-			canPostComment = false;
+            setTimeout(function() {
+                canPostComment = true;
+            }, 500);
 
-			// Allow a new comment to be posted after 0.5 seconds
-
-			setTimeout(function () {
-				canPostComment = true;
-			}, 500);
-
-		}
-
-	});
-
-	// Clicking on the REPLY button writes the name of the person you want to reply to into the textbox.
-
-	ul.on('click', '.shoutbox-comment-reply', function (e) {
-
-		var replyName = $(this).data('name');
-
-		commentElement.val('@' + '[b]' + replyName + '[/b] ').focus();
-
-	});
-
-	// Clicking the refresh button will force the load function
-
-	var canReload = true;
-
-	refreshButton.click(function () {
-
-		if (!canReload) return false;
-
-		load();
-		canReload = false;
-
-		// Allow additional reloads after 500 millisecond
-		setTimeout(function () {
-			canReload = true;
-		}, 500);
-	});
-
-
-	var loadInt;
-	var checkInt = +localStorage.getItem('intLoad');
-	icd.prop('checked', !!checkInt);
-	var time = checkInt ? fastTrack : slowTrack;
-	loadInt = setInterval(load, time);
-	
-	// Automatically refresh the shouts every 15 seconds
-	icd.on('change', function () {
-		clearInterval(loadInt);
-		loadInt = setInterval(load, ($(this).prop('checked') ? fastTrack : slowTrack));
-		localStorage.setItem('intLoad', $(this).prop('checked') * 1);
-	});
-
-
-	$('.chat').on('click', '.icon-expand', function () {
-		loadInt = setInterval(load, ($(icd).prop('checked') ? fastTrack : slowTrack));
-		$("#chatx").draggable('enable');
-		$( "#chatx" ).removeClass( "minimized" );
-
-	});
-
-	$('.chat').on('click', '.icon-minimize', function () {
-		clearInterval(loadInt);
-		$("#chatx").draggable('disable');
-		$( "#chatx" ).addClass( "minimized" );
-	});
-
-
-	if (localStorage.toggled != "expanded") {
-		clearInterval(loadInt);
-	}
-
-// Storing shouts in the database
-function publish(name, comment) {
-
-    var published = $.ajax({
-        
-        url: chatx_server + 'publish.php',
-        type: "POST",
-        crossDomain: true,
-        dataType: "json",
-        data: {
-            name: name,
-		    comment: comment
-        },
-        xhrFields: {
-        withCredentials: true
         }
-   
+
     });
 
-    published.complete(function() {
-			localStorage.setItem('nameElement', nameElement.val());
-			commentElement.val("");
-			function delayedLoad() {
-			load();
-			}
-			setTimeout(delayedLoad, 50);
+    // Clicking on the REPLY button writes the name of the person you want to reply to into the textbox.
+
+    ul.on('click', '.shoutbox-comment-reply', function(e) {
+
+        var replyName = jQuery(this).data('name');
+
+        commentElement.val('@' + '[b]' + replyName + '[/b] ').focus();
+
     });
 
-}
+    // Clicking the refresh button will force the load function
 
+    var canReload = true;
 
+    refreshButton.click(function() {
 
-function load() {	
-    $.ajax({
-        dataType: "json",
-        url: chatx_server + 'load.php',
-        xhrFields: {
-        withCredentials: true
-        },
-        success: function(data) {appendComments(data);}
-   
+        if (!canReload) return false;
+
+        load();
+        canReload = false;
+
+        // Allow additional reloads after 500 millisecond
+        setTimeout(function() {
+            canReload = true;
+        }, 500);
     });
-}
+
+
+    var loadInt;
+    var checkInt = +localStorage.getItem('intLoad');
+    icd.prop('checked', !!checkInt);
+    var time = checkInt ? fastTrack : slowTrack;
+    loadInt = setInterval(load, time);
+
+    // Automatically refresh the shouts in slow and fast track mode. Do not refrech when minimized
+    icd.on('change', function() {
+        clearInterval(loadInt);
+        loadInt = setInterval(load, (jQuery(this).prop('checked') ? fastTrack : slowTrack));
+        localStorage.setItem('intLoad', jQuery(this).prop('checked') * 1);
+    });
+
+
+    jQuery('.chat').on('click', '.icon-expand', function() {
+        loadInt = setInterval(load, (jQuery(icd).prop('checked') ? fastTrack : slowTrack));
+        jQuery("#chatx").draggable('enable');
+        jQuery("#chatx").removeClass("minimized");
+
+    });
+
+    jQuery('.chat').on('click', '.icon-minimize', function() {
+        clearInterval(loadInt);
+        jQuery("#chatx").draggable('disable');
+        jQuery("#chatx").addClass("minimized");
+    });
+
+
+    if (localStorage.toggled != "expanded") {
+        clearInterval(loadInt);
+    }
+
+    // sending shouts to the database
+    function publish(name, comment) {
+
+        var published = jQuery.ajax({
+
+            url: chatx_server + 'publish.php',
+            type: "POST",
+            crossDomain: true,
+            dataType: "json",
+            data: {
+                name: name,
+                comment: comment
+            },
+            xhrFields: {
+                withCredentials: true
+            }
+
+        });
+
+        published.complete(function() {
+            localStorage.setItem('nameElement', nameElement.val());
+            commentElement.val("");
+            load();
+
+        });
+
+    }
 
 
 
-	// Rendering an array of shouts as HTML
-	function appendComments(data) {
+    function load() {
+        jQuery.ajax({
+            dataType: "json",
+            url: chatx_server + 'load.php',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(data) {
+                appendComments(data);
+            }
 
-		ul.empty();
+        });
+    }
 
-		data.forEach(function (d) {
-			ul.append('<li>' +
-				'<span class="shoutbox-username"><b data-loggedin="'+ d.loggedIn +'">' + d.name + '</b></span>' +
-				'<p class="shoutbox-comment">' + emojione.toImage(d.text) + '</p>' +
-				'<div class="shoutbox-comment-details"><span class="shoutbox-comment-reply" data-name="' + d.name + '">Reply<i class="icon-reply"></i></span>' +
-				'<span class="shoutbox-comment-ago">' + d.timeAgo + '</span></div>' +
-				'</li>');
-		});
 
-	}
-	
+
+    // Rendering an array of shouts as HTML
+    function appendComments(data) {
+
+        ul.empty();
+
+        data.forEach(function(d) {
+            ul.append('<chx_li>' +
+                '<chx_span class="shoutbox-username"><b data-loggedin="' + d.loggedIn + '">' + d.name + '</b></chx_span>' +
+                '<chx_p class="shoutbox-comment">' + (e_o === true ? emojione.toImage(d.text) : d.text) + '</chx_p>' +
+                '<chx_div class="shoutbox-comment-details"><chx_span class="shoutbox-comment-reply" data-name="' + d.name + '"><chx_span></chx_span><chx_i class="icon-reply"></chx_i></chx_span>' +
+                '<chx_span class="shoutbox-comment-ago">' + d.timeAgo + '</chx_span></chx_div>' +
+                '</chx_li>');
+        });
+
+    }
+
 
 
 
     // Making bleeping online indicator when fast-track update is on
-	$('#icd').click(function () {
-		if ($(this).prop('checked')) {
-			$("div.pulsating-circle").css("display", "block");
-			$("#false_shoutbox_name").css({
-				"padding-right": "15px",
-				"transition": "0.3s ease"
-			});
-		} else {
-			$("div.pulsating-circle").css("display", "none");
-			$("#false_shoutbox_name").css({
-				"padding-right": "0",
-				"transition": "0.3s ease"
-			});
-		}
-	});
+    jQuery('#icd').click(function() {
+        if (jQuery(this).prop('checked')) {
+            jQuery(".chx-pulsating-circle").show();
+            jQuery("#false_shoutbox_name").css({"padding-right": "15px", "transition": "0.3s ease"});
+        } else {
+            jQuery(".chx-pulsating-circle").hide();
+            jQuery("#false_shoutbox_name").css({"padding-right": "0", "transition": "0.3s ease"});
+        }
+    });
 
-	if ($('#icd').prop('checked')) {
-		$("div.pulsating-circle").css("display", "block");
-		$("#false_shoutbox_name").css("padding-right", "15px");
-	}
-	
-	
+    if (jQuery('#icd').prop('checked')) {
+        jQuery("div.chx-pulsating-circle").show();
+        jQuery("#false_shoutbox_name").css("padding-right", "15px");
+    }
+
 
     // Loading custom scrollbar library
-	$.getScript(chatx_server + 'assets/js/scrollbar.min.js');
-	
-		// Loading Deaggabe.min library and executing draggable afrer library is loaded
-	$.getScript(chatx_server + 'assets/js/draggable.min.js', function () {
+    jQuery.getScript(chatx_server + 'assets/js/scrollbar.min.js', function() {
 
-		$("#chatx").draggable({
-			containment: "window",
-			handle: 'header',
-			scroll: false,
-			stop: function (event, ui) {
-				chat_custom_position[this.id] = ui.position;
-				localStorage.chat_custom_position = JSON.stringify(chat_custom_position);
-			}
-		});
+        var chx_height = localStorage.getItem(chx_resize);
 
+        if (chx_height === null) chx_height = {};
+        else chx_height = JSON.parse(chx_height);
+        jQuery('.' + chx_resize).css(chx_height);
 
-	});
+    });
 
+    // Loading jquery-ui.min library and executing draggable and resizable afrer library is loaded
+    jQuery.getScript(chatx_server + 'assets/js/jquery-ui.min.js', function() {
 
-  });
+        jQuery("#chatx").draggable({
+            containment: "window",
+            handle: 'chx_header',
+            scroll: false,
+            stop: function(event, ui) {
+                chat_custom_position[this.id] = ui.position;
+                localStorage.chat_custom_position = JSON.stringify(chat_custom_position);
+            }
+        });
 
+        jQuery(".chx-container").resizable({
+            handles: "s",
+            resize: function() {
+                var sizeHistory = JSON.stringify({
+                    height: this.style.height
+                });
+                localStorage.setItem(chx_resize, sizeHistory);
+            }
+        });
+        jQuery('#chatx .ui-resizable-s').first().remove(); // two elements created for some reason. not good
+
+        jQuery(".chx-container").resize(function() {
+            var a = "#chatx .scroll-bar";
+            jQuery(a).fadeOut(0);
+            clearTimeout(window.resizedFinished);
+            window.resizedFinished = setTimeout(function() {
+                jQuery(a).fadeIn(200);
+            }, 500);
+        });
+        jQuery('<div class="resize-helper"></div>').appendTo('#chatx .ui-resizable-s');
+
+    });
+
+    // Loading featherlight gallery if option is on
+    if (f_g === 1) {
+        jQuery.getScript(chatx_server + 'assets/js/featherlight.min.js');
+    }
+
+    // language pack
+    jQuery.getScript(chatx_server + 'data/languages/app_lang.' + l_g + '.php', function() {
+        jQuery("#false_shoutbox_name").attr("placeholder", nameInputValue);
+        jQuery(".chatx_management").text(management);
+        jQuery(".logout").text(logout);
+        jQuery(".name-required").text(noNameError);
+        jQuery(".chx-fast-track").text(fastUpdate);
+        jQuery("input[name='u']").attr("placeholder", userName);
+        jQuery("input[name='p']").attr("placeholder", passWord);
+        jQuery(".shoutbox-helper chx_p").text(newMessagesAbove);
+        jQuery(".helper").text(helper);
+        jQuery(".desc1").text(helper1stDesc);
+        jQuery(".desc2").text(helper2ndDesc);
+        jQuery(".desc3").text(helper3rdDesc);
+        jQuery("#shoutbox-comment").attr("placeholder", newMessagePlaceholder);
+        jQuery("head").append('<style>.shoutbox-comment-reply chx_span, .chatx_login span {font-size:0 !important}.shoutbox-comment-reply chx_span::after {content: "' + reply + '";font-size:12px} .chatx_login span::after{content: "' + login + '"; font-size: 12px}</style>'); // not good but ok for now
+        jQuery("#chx-not-sent").text(notSentError);
+    });
 });
 
 
@@ -310,266 +373,152 @@ function load() {
 ###################################################################
 */
 
-	// Setting ChatX in expanded and minimized mode
-	$('#chatx').addClass(localStorage.toggled);
+// Setting ChatX in expanded and minimized mode
+jQuery('#chatx').addClass(localStorage.toggled);
 
-	$('.icon-expand').on('click', function () {
+jQuery('.icon-expand').on('click', function() {
 
-		if (localStorage.toggled != "expanded") {
-			$('#chatx').addClass("expanded", true);
-			localStorage.toggled = "expanded";
-		}
+    if (localStorage.toggled != "expanded") {
+        jQuery('#chatx').addClass("expanded", true);
+        localStorage.toggled = "expanded";
+    }
 
-	});
-
-	$('.icon-minimize').on('click', function () {
-		$('#chatx').removeClass('expanded');
-		localStorage.toggled = "minimized";
-	});
-
-// Keep nickname input in localstorage
-$(document).ready(function () {
-	$(window).unload(saveSettings);
-	loadSettings();
 });
 
-function loadSettings() {
-	$('#false_shoutbox_name').val(localStorage.nameElement);
+jQuery('.icon-minimize').on('click', function() {
+    jQuery('#chatx').removeClass('expanded');
+    localStorage.toggled = "minimized";
+});
+
+// Keep nickname input in localstorage
+jQuery(document).ready(function() {
+    jQuery(window).unload(saveNickname);
+});
+
+function loadNickname() {
+    jQuery('#false_shoutbox_name').val(localStorage.nameElement);
 }
 
-function saveSettings() {
-	localStorage.nameElement = $('#false_shoutbox_name').val();
+function saveNickname() {
+    localStorage.nameElement = jQuery('#false_shoutbox_name').val();
 }
 
 // Autoresize textarea
 const textarea = document.getElementById('shoutbox-comment');
 
-textarea.addEventListener('input', function () {
-	this.rows = 2; // Erm...
-	this.rows = countRows(this.scrollHeight);
+textarea.addEventListener('input', function() {
+    this.rows = 2;
+    this.rows = countRows(this.scrollHeight);
 });
 
 function countRows(scrollHeight) {
-	return Math.floor(scrollHeight / 18); // 18px = line-height
+    return Math.floor(scrollHeight / 18); // 18px = line-height
 }
 
 
 // Submit by Enter
-$(document).ready(function () {
-	$("#shoutbox-comment").on("keypress", function (event) {
-		if ((event.keyCode == 10 || event.keyCode == 13)) {
-			event.preventDefault();
-			chatSubmit();
-		}
-	});
+jQuery(document).ready(function() {
+    jQuery("#shoutbox-comment").on("keypress", function(event) {
+        if ((event.keyCode == 10 || event.keyCode == 13)) {
+            event.preventDefault();
+            chatSubmit();
+        }
+    });
 });
 
 // registring function that shows warning message when name is not filled in
 function errorNameEmpty() {
-    $('.name-required').css({
-			'display': 'block'
-		});
-		setTimeout(function () {
-			$('.name-required').fadeOut(500);
-		}, 2000);
+    jQuery('.name-required').css({
+        'display': 'block'
+    });
+    setTimeout(function() {
+        jQuery('.name-required').fadeOut(500);
+    }, 2000);
 }
 
 function errorMessageEmpty() {
-    $('#notsent').css({
-			'display': 'block'
-		});
-		setTimeout(function () {
-			$('#notsent').fadeOut(500);
-		}, 2000);
+    jQuery('#chx-not-sent').css({
+        'display': 'block'
+    });
+    setTimeout(function() {
+        jQuery('#chx-not-sent').fadeOut(500);
+    }, 2000);
 }
 
 
 // Submit form if name field is filled, otherwise show warning
 function chatSubmit() {
-	if ($('#false_shoutbox_name').val() === '') {
-		errorNameEmpty();
-	} else {
-		$("#NewMessage").submit();
+    if (jQuery('#false_shoutbox_name').val() === '') {
+        errorNameEmpty();
+    } else {
+        jQuery("#chx-new-message").submit();
 
-	}
+    }
 }
 
-
 // invoke chatsubmit() when clicked on submit button
-$( "#send_message" ).click(function() {
+jQuery("#chx-send-message").click(function() {
     chatSubmit();
 });
 
 
 // Resizing textarea to initial height on submit
-$("#NewMessage").submit(function (event) {
-	event.preventDefault();
-	$('#shoutbox-comment').attr('rows', 2);
+jQuery("#chx-new-message").submit(function(event) {
+    event.preventDefault();
+    jQuery('#shoutbox-comment').attr('rows', 2);
 });
 
 // Disable new lines by enter
-$('#shoutbox-comment').keydown(function (e) {
-	var s = $('#shoutbox-comment').val();
-	while (s.indexOf("\n") > -1)
-		s = s.replace("\n", "");
-	$('#shoutbox-comment').val(s);
+jQuery('#shoutbox-comment').keydown(function(e) {
+    var s = jQuery('#shoutbox-comment').val();
+    while (s.indexOf("\n") > -1)
+        s = s.replace("\n", "");
+    jQuery('#shoutbox-comment').val(s);
 });
 
 
-$('.chat_popover_parent a').on('click', function () {
-	$('.chat_popover_parent > a').not(this).parent().removeClass('active');
-	$(this).parent().toggleClass('active');
+jQuery('.chat_popover_parent a').on('click', function() {
+    jQuery('.chat_popover_parent > a').not(this).parent().removeClass('active');
+    jQuery(this).parent().toggleClass('active');
 });
 
 
 // Hide settings widnow when clicked off
-$(document).on('click touchstart', function (event) {
-	if (!$(event.target).closest('.chat_popover_parent').length) {
-		// Hide the menus.
-		$('.chat_popover_parent.active').removeClass('active');
-	}
+jQuery(document).on('click touchstart', function(event) {
+    if (!jQuery(event.target).closest('.chat_popover_parent').length) {
+        jQuery('.chat_popover_parent.active').removeClass('active');
+    }
 });
+
 
 // Working with position of chat
 var sPositions = localStorage.chat_custom_position || "{}",
-	chat_custom_position = JSON.parse(sPositions);
-$.each(chat_custom_position, function (id, pos) {
-	$("#" + id).css(pos);
+    chat_custom_position = JSON.parse(sPositions);
+jQuery.each(chat_custom_position, function(id, pos) {
+    jQuery("#" + id).css(pos);
 });
 
 if (localStorage.getItem("chat_custom_position") === null) {
-	$("#chatx").css({"position": "fixed", "top": "15px", "left": "15px"});
-} else {
-	$("#chatx").css({"position": "fixed"});
+    jQuery("#chatx").css({
+        "top": "15px",
+        "left": "15px"
+    });
 }
 
 // making ChatX appear after pageload complete
-$( window ).on( "load", function() {
-	$("#chatx").fadeIn(600);
-});
-
-/*! imgur 2.0.4 | (c) 2016 Pedro RogГ©rio | MIT License */
-! function (a, b) {
-	"use strict";
-	"function" == typeof define && define.amd ? define([], b) : "object" == typeof exports ? module.exports = b() : a.Imgur = b();
-}(this, function () {
-	"use strict";
-	var a = function (b) {
-		if (!(this && this instanceof a)) return new a(b);
-		if (b || (b = {}), !b.clientid) throw "Provide a valid Client Id here: http://api.imgur.com/";
-		this.clientid = b.clientid, this.endpoint = "https://api.imgur.com/3/image", this.callback = b.callback || void 0, this.dropzone = document.querySelectorAll(".dropzone"), this.run()
-	};
-	return a.prototype = {
-		createEls: function (a, b, c) {
-			var d, e = document.createElement(a);
-			for (d in b) b.hasOwnProperty(d) && (e[d] = b[d]);
-			return c && e.appendChild(document.createTextNode(c)), e
-		},
-		insertAfter: function (a, b) {
-			a.parentNode.insertBefore(b, a.nextSibling)
-		},
-		post: function (a, b, c) {
-			var d = new XMLHttpRequest;
-			d.open("POST", a, !0), d.setRequestHeader("Authorization", "Client-ID " + this.clientid), d.onreadystatechange = function () {
-				if (4 === this.readyState) {
-					if (!(this.status >= 200 && this.status < 300)) throw new Error(this.status + " - " + this.statusText);
-					var a = "";
-					try {
-						a = JSON.parse(this.responseText)
-					} catch (b) {
-						a = this.responseText
-					}
-					c.call(window, a)
-				}
-			}, d.send(b), d = null
-		},
-		createDragZone: function () {
-			var a, b;
-			a = this.createEls("i", {
-				className: "icon-upload"
-			}), b = this.createEls("input", {
-				type: "file",
-				accept: "image/*"
-			}), Array.prototype.forEach.call(this.dropzone, function (c) {
-				c.appendChild(a), c.appendChild(b), this.status(c), this.upload(c)
-			}.bind(this))
-		},
-		loading: function () {
-			var a, b;
-			a = this.createEls("div", {
-				className: "loading-modal"
-			}), b = this.createEls("img", {
-				className: "loading-image",
-				src: chatx_server + "assets/img/loading.svg"
-			}), a.appendChild(b), document.getElementById('chatx').appendChild(a)
-		},
-		status: function (a) {
-			var b = this.createEls("div", {
-				className: "status"
-			});
-			this.insertAfter(a, b)
-		},
-		matchFiles: function (a, b) {
-			var c = b.nextSibling;
-			if (a.type.match(/image/) && "image/svg+xml" !== a.type) {
-				document.getElementById('chatx').classList.add("busy"), c.classList.remove("bg-success", "bg-danger"), c.innerHTML = "";
-				var d = new FormData;
-				d.append("image", a), this.post(this.endpoint, d, function (a) {
-					document.getElementById('chatx').classList.remove("busy"), "function" == typeof this.callback && this.callback.call(this, a)
-				}.bind(this))
-			} else c.classList.remove("bg-success"), c.classList.add("bg-danger"), c.innerHTML = "Invalid Archive"
-		},
-		upload: function (a) {
-			var b, c, d, e, f = ["dragenter", "dragleave", "dragover", "drop"];
-			a.addEventListener("change", function (f) {
-				if (f.target && "INPUT" === f.target.nodeName && "file" === f.target.type)
-					for (c = f.target.files, d = 0, e = c.length; e > d; d += 1) b = c[d], this.matchFiles(b, a)
-			}.bind(this), !1), f.map(function (b) {
-				a.addEventListener(b, function (a) {
-					a.target && "INPUT" === a.target.nodeName && "file" === a.target.type && ("dragleave" === b || "drop" === b ? a.target.parentNode.classList.remove("dropzone-dragging") : a.target.parentNode.classList.add("dropzone-dragging"))
-				}, !1)
-			})
-		},
-		run: function () {
-			var a = document.querySelector(".loading-modal");
-			a || this.loading(), this.createDragZone()
-		}
-	}, a
-});
-
-
-// Clearing textarea then getting image link from Imgur and auto-submitting it  
-var feedback = function (res) {
-	if (res.success === true) {
-		$('#shoutbox-comment').val('');
-		$('#shoutbox-comment').val($('#shoutbox-comment').val() + '[url=' + res.data.link + '][img]' + res.data.link + '[/img][/url] ');
-		
-		
-		if($('#false_shoutbox_name').val() == ''){
-		    $('#shoutbox-comment').attr('rows', 4);
-		    errorNameEmpty();
-		    
-		} else {
-		    chatSubmit();
-		}
-		
-		if ($('#false_shoutbox_name').val() == ''){
-		    $( "#send_message" ).one("click", function() {
-                $('#shoutbox-comment').val('');
-                errorMessageEmpty();
+jQuery(window).on("load", function() {
+    jQuery.when(jQuery("#chatx").fadeIn(350))
+        .done(function() {
+            chatxVisibility();
+            jQuery(this).css({
+                "opacity": "1"
             });
-            
-        }
-		
-	}
-};
+            loadNickname();
 
-// Imgur variables
-new Imgur ({
-	clientid: 'b12794161e11f2b',
-	callback: feedback
+
+        });
+
 });
-
 
 function valName() {
     var getFalseShoutBoxName = document.getElementById("false_shoutbox_name").value;
@@ -577,31 +526,298 @@ function valName() {
 
 }
 
+! function(t) {
+    var i = t(window);
+    t.fn.visible = function(t, e, o) {
+        if (!(this.length < 1)) {
+            var r = this.length > 1 ? this.eq(0) : this,
+                n = r.get(0),
+                f = i.width(),
+                h = i.height(),
+                o = o ? o : "both",
+                l = e === !0 ? n.offsetWidth * n.offsetHeight : !0;
+            if ("function" == typeof n.getBoundingClientRect) {
+                var g = n.getBoundingClientRect(),
+                    u = g.top >= 0 && g.top < h,
+                    s = g.bottom > 0 && g.bottom <= h,
+                    c = g.left >= 0 && g.left < f,
+                    a = g.right > 0 && g.right <= f,
+                    v = t ? u || s : u && s,
+                    b = t ? c || a : c && a;
+                if ("both" === o) return l && v && b;
+                if ("vertical" === o) return l && v;
+                if ("horizontal" === o) return l && b
+            } else {
+                var d = i.scrollTop(),
+                    p = d + h,
+                    w = i.scrollLeft(),
+                    m = w + f,
+                    y = r.offset(),
+                    z = y.top,
+                    B = z + r.height(),
+                    C = y.left,
+                    R = C + r.width(),
+                    j = t === !0 ? B : z,
+                    q = t === !0 ? z : B,
+                    H = t === !0 ? R : C,
+                    L = t === !0 ? C : R;
+                if ("both" === o) return !!l && p >= q && j >= d && m >= L && H >= w;
+                if ("vertical" === o) return !!l && p >= q && j >= d;
+                if ("horizontal" === o) return !!l && m >= L && H >= w
+            }
+        }
+    }
+}(jQuery);
 
+function chatxVisibility() {
 
-$.fn.isVisible = function() {
-    // Am I visible?
-    // Height and Width are not explicitly necessary in visibility detection, the bottom, right, top and left are the
-    // essential checks. If an image is 0x0, it is technically not visible, so it should not be marked as such.
-    // That is why either width or height have to be > 0.
-    var rect = this[0].getBoundingClientRect();
-    return (
-        (rect.height > 0 || rect.width > 0) &&
-        rect.bottom >= 0 &&
-        rect.right >= 0 &&
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.left <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-};
+    jQuery(window).on("load resize", function() {
+        if (!jQuery('#chatx .chx-bar').visible()) {
+            jQuery('#chatx').animate({
+                top: '15px',
+                left: '15px'
+            }, 500);
+        }
+    });
 
-$( window ).on( "load", function() {
-  if (!$('#chatx .chx-bar').isVisible()) {
-    $("#chatx").css({"top": "15px", "left": "15px"});
-    localStorage.removeItem("chat_custom_position");
-  }
+}
+
+function bbtags(h, a, i) {
+    var g = document.getElementById(h);
+    g.focus();
+    if (g.setSelectionRange) {
+        var c = g.scrollTop;
+        var e = g.selectionStart;
+        var f = g.selectionEnd;
+        g.value = g.value.substring(0, g.selectionStart) + a + g.value.substring(g.selectionStart, g.selectionEnd) + i + g.value.substring(g.selectionEnd, g.value.length);
+        g.selectionStart = e;
+        g.selectionEnd = f + a.length + i.length;
+        g.scrollTop = c;
+    } else {
+        if (document.selection && document.selection.createRange) {
+            g.focus();
+            var b = document.selection.createRange();
+            if (b.text != "") {
+                b.text = a + b.text + i;
+            } else {
+                b.text = a + "REPLACE" + i;
+            }
+            g.focus();
+        }
+    }
+    textarea.rows = countRows(textarea.scrollHeight);
+}
+
+jQuery(document).on('keydown', function(e) {
+    if ((e.metaKey || e.altKey) && (String.fromCharCode(e.which).toLowerCase() === 'q')) {
+        jQuery(".bb-popup").fadeIn(300);
+    }
 });
 
+jQuery(document).on('click touchstart', function(event) {
+    if (!jQuery(event.target).closest('.bb-popup, .chx-color-bb-prompt, .icon-plus').length) {
 
+        jQuery('.bb-popup, .chx-color-bb-prompt').fadeOut(300);
+    }
+});
 
+jQuery(".shoutbox-form .icon-plus").click(function() {
+    jQuery(".bb-popup").fadeIn(300);
+});
 
+bb1.onclick = function() {
+    javascript: bbtags("shoutbox-comment", "[b]", "[/b]");
+}
+bb2.onclick = function() {
+    javascript: bbtags("shoutbox-comment", "[u]", "[/u]");
+}
+bb3.onclick = function() {
+    javascript: bbtags("shoutbox-comment", "[i]", "[/i]");
+}
+bb4.onclick = function() {
 
+    var height = jQuery(".shoutbox-form").height();
+    jQuery(".chx-color-bb-prompt").css({
+        height: height - 3
+    });
+    jQuery(".chx-color-bb-prompt").fadeIn(300);
+
+    bb4_1.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=red]", "[/color]");
+    }
+    bb4_2.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=orange]", "[/color]");
+    }
+    bb4_3.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=yellow]", "[/color]");
+    }
+    bb4_4.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=green]", "[/color]");
+    }
+    bb4_5.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=lightblue]", "[/color]");
+    }
+    bb4_6.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=blue]", "[/color]");
+    }
+    bb4_7.onclick = function() {
+        javascript: bbtags("shoutbox-comment", "[color=purple]", "[/color]");
+    }
+
+    jQuery(".icon-hue").click(function() {
+        jQuery(".chx-color-bb-prompt").fadeOut(300);
+    });
+}
+bb5.onclick = function() {
+    javascript: bbtags("shoutbox-comment", "[img]", "[/img]");
+}
+bb6.onclick = function() {
+    javascript: bbtags("shoutbox-comment", "[url]", "[/url]");
+}
+
+function loginForm() {
+    jQuery("#chatx").click(function(e) {
+        var target = jQuery(e.target);
+        if (target.hasClass("chx-close")) {
+            jQuery(".expanded .chx-login-form").fadeOut(500);
+        } else {
+            jQuery(".expanded .chx-login-form").fadeIn(500);
+        }
+    });
+}
+
+function ajaxFormSubmitted() {
+    jQuery(".chx-login-form form").one("submit", function(e) {
+        jQuery.ajax({
+            type: "POST",
+            url: chatx_server + "client/auth.php",
+            data: jQuery(".chx-login-form form").serialize(),
+            dataType: "json",
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function(data) {
+                jQuery.getScript(chatx_server + "dynamic_js.php");
+                if (data.success) {
+
+                    jQuery(".icon-refresh").trigger("click");
+
+                } else {
+
+                    if (jQuery(".chx-login-form p").length == 0) {
+                        jQuery(".chx-login-form").append("<p>" + data.message + "</p>");
+                    }
+                    setTimeout(function() {
+                        jQuery(".chx-login-form p").remove();
+                    }, 2000);
+
+                }
+            }
+        });
+        e.preventDefault();
+    });
+}
+
+function ajaxLogOutClicked() {
+    jQuery(".chatx_logout").one("click", function() {
+        jQuery.ajax({
+            url: chatx_server + "client/logout.php?ajax",
+            method: "GET",
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function() {
+                jQuery.getScript(chatx_server + "dynamic_js.php");
+                jQuery(".icon-refresh").trigger("click");
+            }
+        });
+    });
+}
+
+function loggingIn() {
+    jQuery("#false_shoutbox_name").css({
+        "visibility": "hidden"
+    });
+    loginForm();
+    jQuery(".chatx_logout").hide();
+    ajaxFormSubmitted();
+}
+
+function loggingOut() {
+    jQuery("#false_shoutbox_name").css({
+        "visibility": "visible"
+    });
+    jQuery("#false_shoutbox_name").val(sessionName);
+    jQuery("#false_shoutbox_name").prop("disabled", true);
+    valName();
+    jQuery(".chx-login-form").hide();
+    jQuery("#chatx").off('click');
+    jQuery(".chatx_logout").css("display", "block");
+    ajaxLogOutClicked();
+
+}
+
+jQuery(".chatx_management").attr("href", chatx_server + "client/index.php");
+
+function publicScenarioLoggingIn() {
+    jQuery("#false_shoutbox_name").val('').prop("disabled", false);
+    jQuery('.chatx_logout').removeClass('chatx_logout').addClass('chatx_login').html("<span>Login</span> <i class='icon-login'></i>");
+    jQuery(".chatx_login").click(function(e) {
+        jQuery(".expanded .chx-login-form").fadeIn(500);
+    });
+    jQuery(".icon-plus.chx-close").click(function(e) {
+        jQuery(".expanded .chx-login-form").fadeOut(500);
+    });
+    ajaxFormSubmitted();
+}
+
+function publicScenarioLoggingOut() {
+    jQuery("#false_shoutbox_name").val(sessionName);
+    jQuery("#false_shoutbox_name").prop("disabled", true);
+    jQuery(".expanded .chx-login-form").hide();
+    jQuery('.chatx_login').removeClass('chatx_login').addClass('chatx_logout').html("<span>Logout</span> <i class='icon-logout'></i>");
+    ajaxLogOutClicked();
+}
+
+jQuery('.chx-imgur-uploader').append('<form id="imgur_uploader"><i class="icon-upload"></i><input type="file" accept="image/*" name="chximg"></form>');
+
+jQuery("[name='chximg']").on('change', function() {
+    var file_data = jQuery('#imgur_uploader input').prop('files')[0];
+    var form_data = new FormData();
+    form_data.append('chximg', file_data);
+    var url = chatx_server + "imgur_uploader.php";
+    jQuery('<div class="loading-modal"><img class="loading-image" src="' + chatx_server + 'assets/img/loading.svg"></div>').appendTo('#chatx');
+    jQuery.ajax({
+        type: "POST",
+        url: url,
+        data: form_data,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function(res) {
+
+            if (res !== '') {
+                jQuery('#shoutbox-comment').val('');
+                jQuery('#shoutbox-comment').val(jQuery('#shoutbox-comment').val() + '[url=' + res + ']' + openDirectLink + '[/url][img]' + res + '[/img] ');
+
+                if (jQuery('#false_shoutbox_name').val() == '') {
+                    jQuery('#shoutbox-comment').attr('rows', 4);
+                    errorNameEmpty();
+
+                } else {
+                    chatSubmit();
+                }
+
+                if (jQuery('#false_shoutbox_name').val() == '') {
+                    jQuery("#chx-send-message").one("click", function() {
+                        jQuery('#shoutbox-comment').val('');
+                        errorMessageEmpty();
+                    });
+
+                }
+            }
+            jQuery('.loading-modal').remove();
+
+        }
+    });
+});

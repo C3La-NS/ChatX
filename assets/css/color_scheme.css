@@ -30,26 +30,26 @@
     border-right-color: transparent;
 }
 
-#chatx .body { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
+#chatx .chx-container { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
     border-left-color: #d5dbe1;
     border-right-color: #d5dbe1;
 }
 
-.shoutbox-content li:nth-child(even) { /* Background and color for even shouts */
+.shoutbox-content chx_li:nth-child(even) { /* Background and color for even shouts */
     background: #fff;
     color:  #717c87;
 }
 
-.shoutbox-content li:nth-child(odd) { /* Background and color for odd shouts */
+.shoutbox-content chx_li:nth-child(odd) { /* Background and color for odd shouts */
     background: #f9fafb;
     color:  #717c87;
 }
 
-.shoutbox-content li {
+.shoutbox-content chx_li {
     border-bottom-color: #d5dbe1;
 }
 
-.shoutbox-content li:last-child { /* Making the border of the last shout in the shout-list transparent so that it didn't controdict in style with the following .shoutbox-helper block border */
+.shoutbox-content chx_li:last-child { /* Making the border of the last shout in the shout-list transparent so that it didn't controdict in style with the following .shoutbox-helper block border */
     border-bottom-color: transparent;   
 }
 
@@ -70,13 +70,13 @@
 }
 
 .shoutbox-helper, .shoutbox-content {
-    background: #f9fafb;
     color: #717c87;
     border-top-color: #d5dbe1;
 }
-
-.shoutbox-form form { /* Reply form */
+.shoutbox-form form:not(#imgur_uploader), .scrollbar-macosx { /* Reply form background & scrollbar background */
     background-color:  #f9fafb;
+}
+.shoutbox-form form:not(#imgur_uploader) { /* Reply form */
     color: #87bfef;
     border-top-color: #87bfef;
     border-left-color: #d5dbe1;
@@ -125,7 +125,7 @@
     border-left-color: transparent;
 }
 
-#chatx .chatx_management {
+#chatx .chatx_management, #chatx .chatx_logout, #chatx .chatx_login {
     color: #ccc;
 }
 
@@ -138,25 +138,20 @@
   color: #fff;
 }
 
-.dropzone+.status.bg-danger {
-  background: rgba(255, 187, 187, 0.95);
-  color: #bb5a5a;
-}
-
-.pulsating-circle:before {
+.chx-pulsating-circle:before {
     background-color: #fff;
 }
 
-.pulsating-circle:after {
+.chx-pulsating-circle:after {
     background-color: #fff;
 }
 
-#notsent {
+#chx-not-sent {
     background: rgba(255, 187, 187, 0.95);
     color: #bb5a5a;
 }
 
-#notsent:after {
+#chx-not-sent:after {
     border-bottom-color: transparent;
     border-top-color: rgba(255, 187, 187, 0.95);
     border-left-color: transparent;
@@ -171,11 +166,15 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-.chx-login-form button[type="submit"] {
+.chx-login-button {
     background: rgba(0, 0, 0, 0.2);
     color: #f9fafb;
 }
 
-.chx-login-form button[type="submit"]:hover {
+.chx-login-button:hover {
     color: #87c0ef;
+}
+
+.chat_popover chx_div:nth-child(2) {
+    color: rgba(0, 0, 0, 0.2);
 }

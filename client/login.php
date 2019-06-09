@@ -1,11 +1,7 @@
 <?php
 include '../settings.php';
-session_name("ChatX_SESSION");
-session_start();
-
+include '../data/languages/lang.' . $l_g . '.php';
 require '../vendor/autoload.php';
-
-
 
 function loggedIn_redirect () {
     echo '<script>window.location.replace("index.php");</script>';
@@ -39,8 +35,9 @@ if ($r_e == '1') {
     ));
     
     $repoProfiles->store($profile);
+    echo '<p class="success">' . $lang['REGISTRATION_COMPLETE'] . '</p>';
    } else {
-          echo '<p class="error">Sorry, the username is already taken.</p>';
+          echo '<p class="error">' . $lang['USERNAME_TAKEN'] . '</p>';
    }
     
   }
@@ -50,7 +47,7 @@ if ($r_e == '1') {
     echo '
       <form method="post" class="email-signup">
         <div class="u-form-group">
-        <p class="disabled">Sorry, user registration is disabled.</p>
+        <p class="disabled">Unavailable</p>
         </div>
       </form>
     ';
@@ -60,21 +57,22 @@ if ($r_e == '1') {
 
 
 
-if( isset( $_POST['s']) ) {   
+if(isset($_POST['s'])) {
    
     
     $getProfile = $repoProfiles->query()
-    ->where('username', '==', mb_strtolower($_POST['u']))
+    ->where('username', '==', mb_strtolower(htmlspecialchars($_POST['u'])))
     ->execute();
     foreach($getProfile as $profile) {
         $u = $profile->username;
         $l = $profile->login;
         $p = $profile->password;
         $m = $profile->moderator;
+        $b = $profile->banned;
     }
 
     
-  if (mb_strtolower($_POST['u']) == mb_strtolower($u) && password_verify($_POST['p'], $p))  {
+  if (mb_strtolower(htmlspecialchars($_POST['u'])) == mb_strtolower($u) && password_verify(htmlspecialchars($_POST['p']), $p) && $b !== 'true')  {
 
       if ($m == 'true') {
          $_SESSION['mod_loggedin'] = true;
@@ -87,8 +85,14 @@ if( isset( $_POST['s']) ) {
       exit();
        
   } else {
-    echo '<p class="error">Username or password is not recognized</p>';
+      if($b !== 'true'){
+          echo '<p class="error">' . $lang['USERNAME_PASSWORD_NOT_RECOGNIZED'] . '</p>';
+      }
+      else {
+          echo '<p class="error">' . $lang['LOGIN_USER_BANNED'] . '</p>';
+      }
   }
+  
 }
 
 ?>
@@ -99,7 +103,7 @@ if( isset( $_POST['s']) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ChatX Moderation</title>
+    <title><?php echo $lang['CHATX_LOGIN']; ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600,700&amp;subset=cyrillic" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
@@ -116,17 +120,17 @@ if( isset( $_POST['s']) ) {
         
   <div class="login-box">
     <div class="lb-header">
-      <a href="#" class="active" id="login-box-link">Login</a>
-      <a href="#" id="signup-box-link">Sign Up</a>
+      <a href="#" class="active" id="login-box-link"><?php echo $lang['LOGIN']; ?></a>
+      <a href="#" id="signup-box-link"><?php echo $lang['SIGN_UP']; ?></a>
     </div>
     <form method="post" class="email-login">
       <div class="u-form-group">
         <label><i class="icon-user"></i></label>
-        <input type="name" name="u" placeholder="Enter your name" required/>
+        <input type="name" name="u" placeholder="<?php echo $lang['ENTER_YOUR_NAME']; ?>" required/>
       </div>
       <div class="u-form-group">
         <label><i class="icon-lock"></i></label>
-        <input type="password" name="p" placeholder="Enter your password" required/>
+        <input type="password" name="p" placeholder="<?php echo $lang['ENTER_YOUR_PASSWORD']; ?>" required/>
       </div>
       <div class="u-form-group">
         <button name="s" class="icon-login"></button>
@@ -139,15 +143,15 @@ if( isset( $_POST['s']) ) {
     <form method="post" class="email-signup">
       <div class="u-form-group">
         <label><i class="icon-user"></i></label>
-        <input name="reg_u" type="name" placeholder="Choose a Nickname"/>
+        <input name="reg_u" type="name" placeholder="<?php echo $lang['ENTER_YOUR_NAME']; ?>"/>
       </div>
       <div class="u-form-group">
         <label><i class="icon-lock"></i></label>
-        <input name="reg_p" type="password" placeholder="Enter Password"/>
+        <input name="reg_p" type="password" placeholder="<?php echo $lang['ENTER_YOUR_PASSWORD']; ?>"/>
       </div>
       <div class="u-form-group">
         <label><i class="icon-lock"></i></label>
-        <input name="c_reg_p" type="password" placeholder="Confirm Password"/>
+        <input name="c_reg_p" type="password" placeholder="<?php echo $lang['CONFIRM_PASSWORD']; ?>"/>
       </div>
       <div class="u-form-group">
         <button class="icon-login"></button>

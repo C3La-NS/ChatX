@@ -26,7 +26,7 @@ function showBBcodes($text) {
 		'<span style="color:$1;">$2</span>',
 		'<a href="$1" target="_blank">$1</a>',
 		'<a href="$1" target="_blank">$2</a>',
-		'has shared an image: <img class="chatx_img" src="$1" />'
+		'<img class="chatx_img" src="$1" data-featherlight="$1" />'
 	);
 	// Replacing the BBcodes with corresponding HTML tags
 	return preg_replace($find,$replace,$text);

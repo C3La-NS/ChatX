@@ -5,7 +5,7 @@ include 'bbcode.php';
     
 // Store the posted shout data to the data store
 
-if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 15 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $maxShoutChars) {
+if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 15 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $maxShoutChars && mb_strtolower($_SESSION['username']) !== $b_u) {
     
     $name = htmlspecialchars($_POST["name"]);
     $name = str_replace(array("\n", "\r"), '', $name);

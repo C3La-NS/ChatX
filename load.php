@@ -1,8 +1,6 @@
 <?php
 include 'settings.php';
 
-
-// Send the 20 latest shouts as json
 $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
         ->limit(20,0)
@@ -11,7 +9,7 @@ $shouts = $repoShouts->query()
 $results = array();
 
 $config = array(
-    'language' => '\RelativeTime\Languages\English',
+    'language' => '\RelativeTime\Languages\L' . $l_g,
     'truncate' => 1,
 );
 
@@ -22,14 +20,16 @@ foreach($shouts as $shout) {
     $results[] = $shout;
 }
 
-
 header('Content-type: application/json; charset=utf-8');
 if ( $r_a === '1' ) {
-
-    
-    if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) ) {
-        
-        echo '[{"text":"<span style=\"color:red\">ACCESS DENIED</span>. You are not logged in or using application from non-authorized source.","name":"ChatX","timeAgo":""}]';
+    if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) || mb_strtolower($_SESSION['username']) === $b_u ) {
+        if(mb_strtolower($_SESSION['username']) === $b_u) {
+            session_unset();
+            session_destroy();
+        } else {
+            include 'data/languages/app_lang.extra.' . $l_g . '.php';
+            echo '[{"text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
+        }
         die();
     } else {
         echo json_encode($results, JSON_UNESCAPED_UNICODE);
