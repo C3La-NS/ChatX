@@ -532,16 +532,12 @@ article.legend p {
     border-bottom: 1px solid #ddd;
 }
 
-.total, .u-list, .legend {
-    display: none;
-}
-
 #secondary .total, #secondary .legend, .shoutbox-content .legend {
-    display: block;
+    display: block !important;
 }
 
 #secondary .u-list {
-    display: inline-block;
+    display: inline-block !important;
 }
 
 .setups input[type="text"], select {
@@ -575,12 +571,65 @@ article.legend p {
     left: 0;
     background: #fff;
     text-align: center;
-    z-index:1;
+    z-index:2;
 }
 .modal-loading svg {
   width: 54px;
   height: 100px;
 }
+
+[data-tooltip] {
+	position: relative;
+	z-index: 1;
+	cursor: pointer;
+}
+
+[data-tooltip]:before,
+[data-tooltip]:after {
+  visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+
+[data-tooltip]:before {
+	position: absolute;
+	bottom: 150%;
+	left: 50%;
+	margin-bottom: 5px;
+	margin-left: -140px;
+	padding: 7px;
+	width: 280px;
+	border-radius:         3px;
+	background-color: #000;
+	background-color: hsla(0, 0%, 20%, 1);
+	color: #fff;
+	content: attr(data-tooltip);
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.2;
+}
+
+[data-tooltip]:after {
+	position: absolute;
+	bottom: 150%;
+	left: 50%;
+	margin-left: -5px;
+	width: 0;
+	border-top: 5px solid #000;
+	border-top: 5px solid hsla(0, 0%, 20%, 1);
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+	content: " ";
+	font-size: 0;
+	line-height: 0;
+}
+
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+	visibility: visible;
+	opacity: 1;
+}
+
 /* Media and mobile fix */
 
 @media (max-width: 768px) {

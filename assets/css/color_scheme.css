@@ -146,18 +146,6 @@
     background-color: #fff;
 }
 
-#chx-not-sent {
-    background: rgba(255, 187, 187, 0.95);
-    color: #bb5a5a;
-}
-
-#chx-not-sent:after {
-    border-bottom-color: transparent;
-    border-top-color: rgba(255, 187, 187, 0.95);
-    border-left-color: transparent;
-    border-right-color: transparent;
-}
-
 .chx-login-form {
     background-color: rgba(72, 72, 72, 0.95);
 }
@@ -177,4 +165,13 @@
 
 .chat_popover chx_div:nth-child(2) {
     color: rgba(0, 0, 0, 0.2);
+}
+
+#chatx .resize-helper {
+    color: #87bfef;
+}
+
+.chx-emojione-error {
+    background: rgba(255, 187, 187, 0.95);
+    color: #bb5a5a;
 }

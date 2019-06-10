@@ -822,36 +822,6 @@ img.emojione{
      top: -11px;
 }
 
-/*************** BETA ***************/
-
-#chx-not-sent {
-    display: none;
-    position: absolute;
-    width: 73%;
-    height: 35px;
-    bottom: 5em;
-    right: 13.5%;
-    text-align: center;
-    line-height: 35px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 300;
-    text-transform: uppercase;
-    z-index: 3;
-}
-
-#chx-not-sent:after {
-    content: "";
-    position: absolute;
-    right: 50%;
-    margin-right: -10px;
-    top: 35px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px;
-}
-
 .chx-login-form {
     position: absolute;
     display: none;
@@ -1075,9 +1045,6 @@ html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed
     line-height: 0;
 }
 
-
-
-
 .ui-resizable {
 	position: relative;
 }
@@ -1113,9 +1080,16 @@ html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed
     position: absolute;
     width: 34px;
     top: 4px;
-    color: #87bfef;
     padding: 1px 0;
     border-width: 2px 0 2px;
     border-style: solid;
     left: calc(50% - 18px);
+}
+
+.chx-emojione-error {
+    position: absolute;
+    padding: 8px 10px;
+    z-index: 2;
+    text-transform: uppercase;
+    font-size: 12px;
 }

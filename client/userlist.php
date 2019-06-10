@@ -10,12 +10,12 @@ function displayList() {} // not working function
     ->execute();
 
     echo '
-    <p class="total">' . $lang['REGISTERED_USERS'] . '<b>' . $getProfile->total() . '</b></p>
-    <p class="legend"><span class="moderator">M</span> — ' . $lang['USER_MODERATOR'] . '</p>
-    <p class="legend"><span class="banned">B</span> — ' . $lang['USER_BANNED'] . '</p>
+    <p class="total" style="display: none">' . $lang['REGISTERED_USERS'] . '<b>' . $getProfile->total() . '</b></p>
+    <p class="legend" style="display: none"><span class="moderator">M</span> — ' . $lang['USER_MODERATOR'] . '</p>
+    <p class="legend" style="display: none"><span class="banned">B</span> — ' . $lang['USER_BANNED'] . '</p>
     ';
     foreach($getProfile as $singleProfile) {
-        echo '<div class="u-list"><b>' . $singleProfile->login . '</b>'; if($singleProfile->moderator == true) {echo '<span class="moderator">M</span>';} elseif($singleProfile->banned == true) {echo '<span class="banned">B</span>';} echo '</div>';
+        echo '<div class="u-list" style="display: none"><b>' . $singleProfile->login . '</b>'; if($singleProfile->moderator == true) {echo '<span class="moderator">M</span>';} elseif($singleProfile->banned == true) {echo '<span class="banned">B</span>';} echo '</div>';
     }
   }
 

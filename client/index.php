@@ -69,19 +69,19 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
       </div>
       <p><strong>2)</strong> <?php echo $lang['CHATX_WIDGET_DESC2']; ?></p>
       <p><strong>3)</strong> <?php echo $lang['CHATX_WIDGET_DESC3']; ?></p>
-      <div class="codebox">
-         &lt;chx_div id="chatx" class="chat" style="display: none"&gt;&lt;/chx_div&gt;
-         <br>
-         &lt;script&gt;
-         var chatx_server = "<span class=style-link></span>";
-         jQuery.getScript(chatx_server + 'assets/js/core.js');
-         &lt;/script&gt;
-      </div>
       <?php if ( $e_o === "true" ) { ?>
       <div class="codebox">
          &lt;script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"&gt;&lt;/script&gt;
       </div>
       <?php } ?>
+      <div class="codebox">
+         &lt;chx_div id="chatx" class="chat" style="display: none"&gt;&lt;/chx_div&gt;
+         <br>
+         &lt;script&gt;
+         var chatx_server = "<span class=document-url></span>";
+         jQuery.getScript(chatx_server + 'assets/js/core.js');
+         &lt;/script&gt;
+      </div>
       <p><strong>4)</strong> <?php echo $lang['CHATX_WIDGET_DESC4']; ?></p>
    </aside>
    <div id="primary" class="col-md-8 mb-xs-24">
@@ -130,10 +130,8 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
 <div id="main" class="container userpanel">
     <div class="row">
         <section>
-          <h1>
-          Welcome back!
-          </h1>
-          <p>You have successfully Logged In.</p>
+          <h1><?php echo $lang['WELCOME_BACK']; ?></h1>
+          <p><?php echo $lang['LOGGED_IN_SUCCESSFULLY']; ?></p>
         </section>
     </div>
 </div><!-- #main.container -->

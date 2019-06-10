@@ -40,6 +40,7 @@ $lang['AUTO_PURGING_DESC1'] = 'In order to preserve ChatX speed it is advisable 
 $lang['AUTO_PURGING_DESC2'] = 'If your server supports CRON, create manually a job that will run <b>delete_old_shouts.php</b> script every 15 minutes-1 hour.';
 $lang['ZERO_NOT_ALLOWED'] = 'Zero is not allowed';
 $lang['UPDATING_PLEASE_WAIT'] = 'Updating settings. Please wait.';
+$lang['TOOLTIP_EMOJIONE_DESC'] = 'This library may affect loading speed of your website. Update widget code after applying this feature.';
 
 // Index Page (Moderator)
 $lang['CHATX_WIDGET'] = 'ChatX Widget & Installation';
@@ -94,3 +95,7 @@ $lang['SIGN_UP'] = 'Sign Up';
 $lang['ENTER_YOUR_NAME'] = 'Enter your name';
 $lang['ENTER_YOUR_PASSWORD'] = 'Enter your password';
 $lang['LOGIN_USER_BANNED'] = 'Username banned';
+
+// Index Page (User)
+$lang['WELCOME_BACK'] = 'Welcome back!';
+$lang['LOGGED_IN_SUCCESSFULLY'] = 'You have successfully Logged In.';

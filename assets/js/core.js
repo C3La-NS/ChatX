@@ -84,7 +84,6 @@ const markup = `
                         <chx_i class="icon-plus"></chx_i>
                         <textarea id="shoutbox-comment" rows="2" data-min-rows="2" placeholder name="comment" maxlength='240'></textarea>
                     </chx_div>
-                    <chx_div id="chx-not-sent"></chx_div>
                     <chx_div id="chx-send-message" type="submit"><chx_i class="icon-send"></chx_i></chx_div>
                 </form>
             </chx_div>
@@ -113,7 +112,11 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
     // Replace :) with emoji icons:
     if (e_o === true) {
-        emojione.ascii = true;
+        try {
+            emojione.ascii = true;
+        } catch(e) {
+            jQuery('.shoutbox').prepend('<chx_li class="chx-emojione-error"></chx_li>');
+        }
     }
 
     // Load the comments.
@@ -256,11 +259,12 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
     }
 
 
+    
 
     // Rendering an array of shouts as HTML
     function appendComments(data) {
 
-        ul.empty();
+       ul.empty();
 
         data.forEach(function(d) {
             ul.append('<chx_li>' +
@@ -286,11 +290,6 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
             jQuery("#false_shoutbox_name").css({"padding-right": "0", "transition": "0.3s ease"});
         }
     });
-
-    if (jQuery('#icd').prop('checked')) {
-        jQuery("div.chx-pulsating-circle").show();
-        jQuery("#false_shoutbox_name").css("padding-right", "15px");
-    }
 
 
     // Loading custom scrollbar library
@@ -361,7 +360,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         jQuery(".desc3").text(helper3rdDesc);
         jQuery("#shoutbox-comment").attr("placeholder", newMessagePlaceholder);
         jQuery("head").append('<style>.shoutbox-comment-reply chx_span, .chatx_login span {font-size:0 !important}.shoutbox-comment-reply chx_span::after {content: "' + reply + '";font-size:12px} .chatx_login span::after{content: "' + login + '"; font-size: 12px}</style>'); // not good but ok for now
-        jQuery("#chx-not-sent").text(notSentError);
+        jQuery(".chx-emojione-error").text(emojioneError);
     });
 });
 
@@ -436,16 +435,6 @@ function errorNameEmpty() {
     }, 2000);
 }
 
-function errorMessageEmpty() {
-    jQuery('#chx-not-sent').css({
-        'display': 'block'
-    });
-    setTimeout(function() {
-        jQuery('#chx-not-sent').fadeOut(500);
-    }, 2000);
-}
-
-
 // Submit form if name field is filled, otherwise show warning
 function chatSubmit() {
     if (jQuery('#false_shoutbox_name').val() === '') {
@@ -505,6 +494,13 @@ if (localStorage.getItem("chat_custom_position") === null) {
     });
 }
 
+function fastTrackIsOn() {
+    if (jQuery('#icd').prop('checked')) {
+        jQuery(".chx-pulsating-circle").show();
+        jQuery("#false_shoutbox_name").css("padding-right", "15px");
+    }
+}
+
 // making ChatX appear after pageload complete
 jQuery(window).on("load", function() {
     jQuery.when(jQuery("#chatx").fadeIn(350))
@@ -513,8 +509,8 @@ jQuery(window).on("load", function() {
             jQuery(this).css({
                 "opacity": "1"
             });
+            fastTrackIsOn();
             loadNickname();
-
 
         });
 
@@ -808,13 +804,6 @@ jQuery("[name='chximg']").on('change', function() {
                     chatSubmit();
                 }
 
-                if (jQuery('#false_shoutbox_name').val() == '') {
-                    jQuery("#chx-send-message").one("click", function() {
-                        jQuery('#shoutbox-comment').val('');
-                        errorMessageEmpty();
-                    });
-
-                }
             }
             jQuery('.loading-modal').remove();
 

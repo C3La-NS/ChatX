@@ -14,5 +14,5 @@ var management = 'ChatX management';
     helper3rdDesc = 'to submit message';
     newMessagePlaceholder = 'Start typing...';
     reply = 'Reply';
-    notSentError = 'Message not sent';
     openDirectLink = 'Open direct link ';
+    emojioneError = 'Error: EmojiOne library had not been loaded before this part of code was executed. Please make sure to load EmojiOne library before ChatX script.';

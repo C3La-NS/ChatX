@@ -30,7 +30,7 @@ function restoreStyles() {
 }
 
 var url = document.location.href.replace('client/index.php',''),
-    appendUrlTo = document.getElementsByClassName('style-link')[0];
+    appendUrlTo = document.getElementsByClassName('document-url')[0];
     appendUrlTo.insertAdjacentHTML( 'afterbegin', url );
     
 

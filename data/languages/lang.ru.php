@@ -40,6 +40,7 @@ $lang['AUTO_PURGING_DESC1'] = 'Чтобы сохранить скорость Ch
 $lang['AUTO_PURGING_DESC2'] = 'Если ваш сервер поддерживает CRON, вручную создайте задачу, которая будет запускать скрипт <b>delete_old_shouts.php</b> каждые 15 минут-1 час.';
 $lang['ZERO_NOT_ALLOWED'] = 'Ноль запрещен';
 $lang['UPDATING_PLEASE_WAIT'] = 'Обновление настроек. Пожалуйста подождите.';
+$lang['TOOLTIP_EMOJIONE_DESC'] = 'Данная библиотека может замедлять загрузку вашего сайта. Обновите код виджета после приминения данной настройки.';
 
 // Index Page (Moderator)
 $lang['CHATX_WIDGET'] = 'ChatX виджет и установка';
@@ -94,3 +95,7 @@ $lang['SIGN_UP'] = 'Регистрация';
 $lang['ENTER_YOUR_NAME'] = 'Введите ваше имя';
 $lang['ENTER_YOUR_PASSWORD'] = 'Введите ваш пароль';
 $lang['LOGIN_USER_BANNED'] = 'Пользователь заблокирован';
+
+// Index Page (User)
+$lang['WELCOME_BACK'] = 'Добро пожаловать!';
+$lang['LOGGED_IN_SUCCESSFULLY'] = 'Вы успешно вошли в свой аккаунт.';

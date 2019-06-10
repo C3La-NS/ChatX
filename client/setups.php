@@ -88,7 +88,7 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
                         <input id="fastTrack_input" type="text" name="f_t" placeholder="Numbers only" value=" <?php echo $f_t; ?>">
                     </div>
                     <div style="width: 75%; float:left">
-                        <p><?php echo $lang['EMOJIONE_LIBRARY']; ?></p>
+                        <p><?php echo $lang['EMOJIONE_LIBRARY']; ?> <mark data-tooltip="<?php echo $lang['TOOLTIP_EMOJIONE_DESC']; ?>">(?)</mark></p>
                     </div>
                     <div style="width: 24.5%; float:right">
                        <input id="icd3" type="checkbox" name="e_o" <?php if( !empty($_POST['e_o']) || $e_o == 'true' ) {echo 'checked';} ?> />
