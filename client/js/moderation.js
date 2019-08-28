@@ -1,4 +1,4 @@
-$.getJSON( "./shout_history.php", function( data ) {
+$.getJSON( "./array_history_moderator.php", function( data ) {
   var items = [];
   $.each( data, function() {
     items.push( "<article><div class=first-box><input class=shoutsId readonly type=text value=" + this.id + "></div>" + "<div class=second-box><div class=name>" + this.name + "</div></div><div class=third-box><div class=text>" + this.text + "</div></div></article>" );
