@@ -104,7 +104,14 @@
 #chatx * {
     box-sizing: border-box;
 }
-
+#chatx a {
+    font-weight: normal !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+}
+#chatx .shoutbox a:hover {
+    text-decoration: underline !important;
+}
 /* creating custom chatx html-tags as an alternative to default tags */
 chx_div { /* div */
     display: block;
@@ -149,7 +156,9 @@ chx_hr { /* hr */
      font-size: 14px !important;
      line-height: 20px;
      opacity: 0;
-     transition: opacity .2s linear;
+     transition: opacity .15s linear;
+     border-radius: 7px;
+     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
 }
  #chatx.expanded chx_header {
      cursor: move !important;
@@ -181,7 +190,7 @@ chx_hr { /* hr */
     border: 0;
 }
 
-.chat_popover .chatx_login span {
+.chat_popover .chatx_login chx_span {
     vertical-align: middle !important;
     line-height: 12px;
 }
@@ -191,10 +200,9 @@ chx_hr { /* hr */
      position: relative;
      min-height: 360px;
      height: 360px; 
-     max-height: 80vh;
      border-style: solid;
      border-width: 0 1px 0 1px;
-     overflow: hidden;
+     overflow-x: hidden !important;
 }
 /* ------- webkit scroll ------- */
 /* ------- The comments content ------- */
@@ -217,13 +225,13 @@ chx_hr { /* hr */
      left: 120px;
      font-size: 43px;
      color: #f1f1f1;
-     line-height: 166px;
+     line-height: 156px;
      font-family: "chatx-icons";
      z-index: 1;
 }
  .shoutbox-content chx_li {
      position: relative;
-     padding: 8px 10px;
+     padding: 6px 10px 6px 8px;
      border-style: solid;
      border-width: 0 0 1px 0;
      z-index: 2;
@@ -234,10 +242,12 @@ chx_hr { /* hr */
      margin-right: 5px;
 }
  .shoutbox-comment {
-     display: inline;
      font-weight: 400;
-     text-align: left;
+     text-align: justify;
+     font-size: 90%;
+     margin: 0;
 }
+
  .shoutbox-comment-details {
      width: 100%;
      margin: 5px auto;
@@ -290,6 +300,7 @@ chx_hr { /* hr */
 /* ------- Writing a new comment form ------- */
  .expanded .shoutbox-form {
      display: block;
+     position: relative;
 }
  .shoutbox-form form:not(#imgur_uploader) {
      display: block;
@@ -301,23 +312,23 @@ chx_hr { /* hr */
      border-radius: 0 0 7px 7px;
 }
  .expanded #false_shoutbox_name {
-    display: inline-block;
-    position: relative;
-    width: 100%;
-    max-width: 105px;
-    height: 24px;
-    margin: 0 6px;
+    display: inline-block !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 105px !important;
+    height: 24px !important;
+    margin: 0 6px !important;
     padding: 0;
-    font-family: inherit;
-    font-size: 14px;
-    text-align: center;
-    border: 0;
-    border-bottom: 2px solid;
-    border-radius: 0;
-    box-shadow: none;
-    outline: none;
-    box-sizing: border-box;
-    vertical-align: top;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    text-align: center !important;
+    border: 0 !important;
+    border-bottom: 2px solid !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    vertical-align: top !important;
 }
  .name-required {
      display: none;
@@ -345,40 +356,30 @@ chx_hr { /* hr */
      border-style: solid;
      border-width: 10px;
 }
- .chat_btn {
+ .chx-settings-button {
      color: inherit !important;
 }
  .shoutbox-form form #shoutbox-comment {
-    vertical-align: top;
-    display: inline-block;
-    width: 237px;
-    min-height: 50px;
-    left: 0;
-    margin: 0;
-    padding: 10px 5px 5px 10px;
-    border: 0;
-    border-radius: 0;
-    outline: none;
-    resize: none;
-    font-weight: normal;
-    font: inherit;
-    font-size: inherit;
-    line-height: 18px;
-    text-indent: 24px;
-    overflow: hidden;
-    box-sizing: border-box;
+    vertical-align: top !important;
+    display: inline-block !important;
+    width: 100% !important;
+    min-height: 50px !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 10px 5px 5px 10px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    resize: none !important;
+    font-weight: normal !important;
+    font: inherit !important;
+    font-size: inherit !important;
+    line-height: 18px !important;
+    text-indent: 24px !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
 }
- .shoutbox-form form input[type=submit] {
-     background: transparent;
-     border: 0;
-     width: 33px;
-     height: 33px;
-     right: 0;
-     position: absolute;
-     outline: none;
-     cursor: pointer;
-     padding: 0;
-}
+/* was here */
  .shoutbox-content .chatx_img {
      max-width: 100%;
      max-height: 200px;
@@ -392,9 +393,11 @@ chx_hr { /* hr */
      pointer-events: none;
 }
  #chx-send-message {
-     display: inline-block;
+     position: absolute;
      vertical-align: top;
+     top: 0;
      right: 0;
+     float: right;
      width: 32px;
      height: 32px;
      margin-right: 10px;
@@ -436,28 +439,24 @@ chx_hr { /* hr */
     font-size: 20px;
     height: 21px;
 }
- .expanded .icon-gear {
+
+.expanded .icon-gear, .expanded .icon-refresh, .expanded .icon-minimize {
      position: absolute;
      display: block;
-     right: 25px;
      top: 8px;
      font-size: 20px;
+     cursor: pointer;
+}
+
+ .expanded .icon-gear {
+     right: 25px;
 }
  .expanded .icon-refresh {
-    display: inline-block;
-    font-size: 20px;
-    height: 20px;
-    margin: 0 5px 0;
-    cursor: pointer;
-    \: middle;
+     right: 49px;
 }
  .expanded .icon-minimize {
-    display: inline-block;
-    float: right;
-    font-size: 18px;
-    height: 20px;
-    cursor: pointer;
-    margin: 0 5px 0;
+     right: 5px;
+     font-size: 18px;
 }
  .chat_popover_parent {
      position: absolute;
@@ -497,26 +496,27 @@ chx_hr { /* hr */
     padding: 0 12px;
     border-top: 1px solid;
 }
-#chatx .chatx_management, #chatx .chatx_logout, #chatx .chatx_login {
-    font-size: 12px;
-    margin: 5px 0 5px 0;
-    text-decoration: none;
-    cursor: pointer;
+#chatx .chx-management-link, #chatx .chatx_logout, #chatx .chatx_login {
+    font-size: 12px !important;
+    margin: 5px 0 5px 0 !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    cursor: pointer !important;
 }
-#chatx .chatx_management {
+#chatx .chx-management-link {
     float: left;
 }
 #chatx .chatx_logout, #chatx .chatx_login {
     float: right;
 }
 
- .active .chat_popover {
+.active .chat_popover {
      display: block;
 }
  #chatx input[type=checkbox] {
      display: none;
 }
- #chatx label {
+ #chatx .chat_popover label {
      width: 45px;
      height: 25px;
      box-sizing: border-box;
@@ -527,10 +527,10 @@ chx_hr { /* hr */
      cursor: pointer;
      transition: .3s ease;
 }
- #chatx input[type=checkbox]:checked + label:before {
+ #chatx .chat_popover input[type=checkbox]:checked + label:before {
      left: 20px;
 }
- #chatx label:before {
+ #chatx .chat_popover label:before {
      transition: .3s ease;
      content: '';
      width: 19px;
@@ -544,14 +544,14 @@ chx_hr { /* hr */
 }
 
  .chx-imgur-uploader input[type=file] {
-    width: 23px;
-    height: 35px;
-    right: 32px;
-    outline: 0;
-    opacity: 0;
-    position: absolute;
-    font-size: 0;
-    cursor: pointer;
+    width: 23px !important;
+    height: 35px !important;
+    right: 32px !important;
+    outline: 0 !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    font-size: 0 !important;
+    cursor: pointer !important;
 }
  .loading-modal {
      background-color: rgba(72, 72, 72, 0.95);
@@ -590,11 +590,14 @@ img.emojione{
 }
  chx_header.ui-draggable-handle {
      bottom: 0;
-     right:30px;
-     position:fixed;
+     right: 30px;
+     position: fixed;
      width: 200px;
      cursor: auto !important;
 }
+ .expanded chx_header.ui-draggable-handle {
+     left: 0;
+ }
  .chx-container, .shoutbox-form, #false_shoutbox_name, .icon-refresh, .icon-gear, .icon-minimize, .expanded .icon-expand {
      display:none;
 }
@@ -719,7 +722,7 @@ img.emojione{
      padding: 0;
      position: relative !important;
      top: 0;
-     width: auto !important;
+     width: auto !important; /* 100% */
 }
  .scroll-wrapper > .scroll-content::-webkit-scrollbar {
      height: 0;
@@ -826,27 +829,38 @@ img.emojione{
     position: absolute;
     display: none;
     top: calc(50% - 117px);
-    left: 25px;
+    left: calc(50% - 117px);
     z-index: 3;
     width: 235px;
     height: 235px;
     border-radius: 7px;
-    padding-top: 40px;
+    padding-top: 50px;
     box-sizing: border-box;
     overflow: hidden;
 }
 .chx-login-form.active {
     display: block;
 }
-.chx-login-form input {
+.chx-login-form input[type="text"], .chx-login-form input[type="password"] {
     display: block;
-    border: 0;
+    border: 0 !important;
     margin: 10px auto;
-    padding: 10px;
-    text-align: center;
-    color: #87bfef;
-    width: 85%;
-    box-sizing: border-box;
+    padding: 10px !important;
+    text-align: center !important;
+    color: #87bfef !important;
+    width: 85% !important;
+    border-radius: 2px !important;
+    font: initial !important;
+    font-size: 13px !important;
+    font-family: sans-serif !important;
+    box-sizing: border-box !important;
+}
+
+.chx-login-form .chx-signup-form-contents input {
+    margin: 2px auto;
+}
+.chx-login-form .chx-signup-form-contents input:first-child {
+    margin-top: 10px;
 }
 
 .chx-login-button {
@@ -945,30 +959,30 @@ img.emojione{
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-.red {
+.chx-red {
     color: red;
 }
-.orange {
+.chx-orange {
     color: orange;
 }
 
-.yellow {
+.chx-yellow {
     color: yellow;
 }
-.green {
+.chx-green {
     color: green; 
 }
-.lightblue {
+.chx-lightblue {
     color: lightblue;
 }
-.blue {
+.chx-blue {
     color: blue;
 }
-.purple {
+.chx-purple {
     color: purple;
 }
 
-.chx-imgur-uploader i {
+.chx-imgur-uploader chx_i {
     font-size: 13px;
     vertical-align: sub;
 }
@@ -988,7 +1002,7 @@ img.emojione{
     cursor: pointer;
 }
 
-.chx-login-form p {
+.chx-login-form chx_p {
     font-size: 12px;
     text-align: center;
     color: #da8080;
@@ -1001,9 +1015,10 @@ img.emojione{
 }
 
 .chx-pre-textarea {
-    width: 237px;
-    display: inline-block;
+    width: calc(100% - 42px);
+    display: block;
     max-height: 105px !important; /* needed as a fix for smooth textarea resize */
+    margin-bottom: 5px;
     line-height: 0; /* why? */
     overflow-y: auto;
 }
@@ -1092,4 +1107,61 @@ html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed
     z-index: 2;
     text-transform: uppercase;
     font-size: 12px;
+}
+
+
+.chx-login-form-contents, .chx-signup-form-contents {
+  display: none;
+}
+
+.chx-switch-tab {
+    cursor: pointer;
+    display: inline-block;
+    color: #fff;
+    position: absolute;
+    font-size: 12px;
+    top: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0 6px;
+    border-radius: 3px;
+}
+.chx-switch-tab.first {
+    left: 55px;
+}
+.chx-switch-tab.second {
+    right: 55px;
+}
+
+.chx-switch-tab.active {
+    color: #87bfef;
+}
+
+.chx-form-radio {
+  display: none !important;
+}
+.chx-form-radio:checked + chx_span {
+  display: initial;
+}
+.chx-reg-disabled {
+    font-size: 100px;
+    display: block;
+    text-align: center;
+    margin: 30px 0;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.chx-pre-textarea.scrollable, #chx-new-message.scrollable {
+    box-shadow: inset 0 13px 8px -10px rgba(0, 0, 0, 0.2);
+}
+
+.chx-history {
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+.chx-history chx_span {
+    display: block;
+    padding: 1px 10px;
+    font-size: 11px;
+    text-align: right;
+    cursor: pointer;
 }

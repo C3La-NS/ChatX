@@ -57,7 +57,7 @@
     color:  #87bfef;
 }
 
-.shoutbox-content a { /* Links color in messages. "!important" property may be required in some cases */
+.shoutbox-content a, .chx-history a { /* Links color in messages and some other parts. "!important" property may be required in some cases */
     color: #5896cb !important;
 }
 
@@ -69,13 +69,14 @@
     color: #cbd0d6;
 }
 
-.shoutbox-helper, .shoutbox-content {
+.shoutbox-helper, .shoutbox-content, .chx-history {
     color: #717c87;
     border-top-color: #d5dbe1;
 }
 .shoutbox-form form:not(#imgur_uploader), .scrollbar-macosx { /* Reply form background & scrollbar background */
     background-color:  #f9fafb;
 }
+
 .shoutbox-form form:not(#imgur_uploader) { /* Reply form */
     color: #87bfef;
     border-top-color: #87bfef;
@@ -125,15 +126,15 @@
     border-left-color: transparent;
 }
 
-#chatx .chatx_management, #chatx .chatx_logout, #chatx .chatx_login {
+#chatx .chx-management-link, #chatx .chatx_logout, #chatx .chatx_login {
     color: #ccc;
 }
 
-#chatx input[type=checkbox]:checked + label {
+#chatx .chat_popover input[type=checkbox]:checked + label {
   background: #87bfef;
 }
 
-#chatx label:before {
+#chatx .chat_popover label:before {
   background: #fff;
   color: #fff;
 }
@@ -150,7 +151,7 @@
     background-color: rgba(72, 72, 72, 0.95);
 }
 
-.chx-login-form input {
+.chx-login-form input[type="text"], .chx-login-form input[type="password"] {
     background: rgba(0, 0, 0, 0.2);
 }
 
