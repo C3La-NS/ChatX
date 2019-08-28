@@ -1,8 +1,8 @@
 <?php
 include '../settings.php';
-include '../data/languages/lang.' . $l_g . '.php';
+include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
-if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
+if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
     
     $checkSettings = $repoSettings->query()
     ->limit(1, 0)
@@ -18,7 +18,7 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ChatX Settings</title>
+    <title><?php echo $lang['TITLE_SETTINGS']; ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600,700&amp;subset=cyrillic" rel="stylesheet">
     <link href="css/panel.css" rel="stylesheet">
@@ -29,7 +29,7 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
 
 <div class="admin-bar"><div class="container">
     <a href="./"><img src="../assets/img/logo.png" class="logo"></a>
-<?php if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'loggedin']) || $_SESSION[$sesPrefix . 'mod_loggedin'] ) { ?>
     <span>
         <i class="icon-user"></i>
         <?php echo $lang['NAVBAR_GREETING']; ?> <strong><?php echo $_SESSION['username']; ?>!</strong>
@@ -40,7 +40,7 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
 <?php } ?>
 </div><!-- .container --></div><!-- .admin-bar -->
 
-<?php if ( isset($_SESSION['mod_loggedin']) ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) { ?>
        
     <div id="main" class="container setups">
         <aside id="secondary" class="widget-area col-md-4" role="complementary">
@@ -79,19 +79,19 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
                         <p><?php echo $lang['RELOAD_MESSAGES_SLOW_TRACK']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
-                        <input id="slowTrack_input" type="text" name="s_t" placeholder="Numbers only" value=" <?php echo $s_t; ?>">
+                        <input id="slowTrack_input" type="text" name="s_t" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $s_t; ?>">
                     </div>
                     <div style="width: 75%; float:left">
                         <p><?php echo $lang['RELOAD_MESSAGES_FAST_TRACK']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
-                        <input id="fastTrack_input" type="text" name="f_t" placeholder="Numbers only" value=" <?php echo $f_t; ?>">
+                        <input id="fastTrack_input" type="text" name="f_t" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $f_t; ?>">
                     </div>
                     <div style="width: 75%; float:left">
                         <p><?php echo $lang['EMOJIONE_LIBRARY']; ?> <mark data-tooltip="<?php echo $lang['TOOLTIP_EMOJIONE_DESC']; ?>">(?)</mark></p>
                     </div>
                     <div style="width: 24.5%; float:right">
-                       <input id="icd3" type="checkbox" name="e_o" <?php if( !empty($_POST['e_o']) || $e_o == 'true' ) {echo 'checked';} ?> />
+                       <input id="icd3" type="checkbox" name="e_o" <?php if( !empty($_POST['e_o']) || $e_o == '1' ) {echo 'checked';} ?> />
                        <label for="icd3"></label>
                     </div>
                     <div style="width: 75%; float:left">
@@ -101,6 +101,21 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
                        <input id="icd4" type="checkbox" name="f_g" <?php if( !empty($_POST['f_g']) || $f_g == '1' ) {echo 'checked';} ?> />
                        <label for="icd4"></label>
                     </div>
+                    <div style="width: 75%; float:left">
+                        <p><?php echo $lang['MYBB_INTEGRATION']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                       <input id="icd5" type="checkbox" name="m_a" <?php if( !empty($_POST['m_a']) || $m_a == '1' ) {echo 'checked';} ?> />
+                       <label for="icd5"></label>
+                    </div>
+                    
+                    <div style="width: 75%; float:left">
+                        <p><?php echo $lang['MESSAGE_MAX_CHARS']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                        <input id="maxChar_input" type="text" name="m_c" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_c; ?>">
+                    </div>
+                    
                     <div style="width: 75%; float:left">
                         <p><?php echo $lang['LANGUAGE']; ?></p>
                     </div>
@@ -125,7 +140,7 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
 
 
 <?php 
-    if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
+    if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
       if( !empty($_POST['r_a']) ) {
         $updateSettings->restrictedAccess = '1';
         
@@ -153,10 +168,10 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
           echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';
       }
       if( !empty($_POST['e_o']) ) {
-        $updateSettings->emojiOne = 'true';
+        $updateSettings->emojiOne = '1';
         
       } else  {
-        $updateSettings->emojiOne = 'false';
+        $updateSettings->emojiOne = '0';
         
       }
       if( !empty($_POST['f_g']) ) {
@@ -165,6 +180,19 @@ if( isset( $_POST['s']) && isset($_SESSION['mod_loggedin']) ) {
       } else  {
         $updateSettings->featherLight = '0';
         
+      }
+      if( !empty($_POST['m_a']) ) {
+        $updateSettings->mybb = '1';
+        
+      } else  {
+        $updateSettings->mybb = '0';
+        
+      }
+      if( !empty($_POST['m_c'] && $_POST['m_c'] >= '1') ) {
+        $updateSettings->maxChar = preg_replace('/\D/', '', $_POST['m_c']);
+        
+      } else {
+          echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';
       }
       $updateSettings->langPack = $_POST['l_g'];
       if( !empty($_POST['s_d']) ) {

@@ -1,12 +1,12 @@
 <?php
 include '../settings.php';
-include '../data/languages/lang.' . $l_g . '.php';
+include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
-if( isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && isset($_SESSION['mod_loggedin']) ) {
+if( isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
     $repoShouts->delete($_POST["deleteShout"]);
 }
 
-if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && isset($_SESSION['mod_loggedin']) ) {
+if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
 
     $oldShouts = $repoShouts->query()
                 ->where('createdAt', '<', strtotime('-0 second'))
@@ -39,7 +39,7 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
 
 <div class="admin-bar"><div class="container">
     <a href="./"><img src="../assets/img/logo.png" class="logo"></a>
-<?php if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'loggedin']) || $_SESSION[$sesPrefix . 'mod_loggedin'] ) { ?>
     <span>
         <i class="icon-user"></i>
         <?php echo $lang['NAVBAR_GREETING']; ?> <strong><?php echo $_SESSION['username']; ?>!</strong>
@@ -51,8 +51,8 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
 </div><!-- .container --></div><!-- .admin-bar -->
 
 
-<?php if ( isset($_SESSION['mod_loggedin']) || isset($_SESSION['loggedin']) ) { ?>
-    <?php if ( isset($_SESSION['mod_loggedin']) ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'mod_loggedin']) || isset($_SESSION[$sesPrefix . 'loggedin']) ) { ?>
+    <?php if ( isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) { ?>
 
 <div id="main" class="container modpanel">
    <div class="copied"></div>
@@ -69,7 +69,7 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
       </div>
       <p><strong>2)</strong> <?php echo $lang['CHATX_WIDGET_DESC2']; ?></p>
       <p><strong>3)</strong> <?php echo $lang['CHATX_WIDGET_DESC3']; ?></p>
-      <?php if ( $e_o === "true" ) { ?>
+      <?php if ( $e_o === "1" ) { ?>
       <div class="codebox">
          &lt;script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"&gt;&lt;/script&gt;
       </div>

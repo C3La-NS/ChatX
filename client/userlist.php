@@ -1,11 +1,9 @@
 <?php
 include '../settings.php';
-include '../data/languages/lang.' . $l_g . '.php';
+include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
 
-function displayList() {} // not working function
-
-  if( isset($_SESSION['mod_loggedin']) ) {
+  if( isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
     $getProfile = $repoProfiles->query()
     ->execute();
 
@@ -15,17 +13,17 @@ function displayList() {} // not working function
     <p class="legend" style="display: none"><span class="banned">B</span> — ' . $lang['USER_BANNED'] . '</p>
     ';
     foreach($getProfile as $singleProfile) {
-        echo '<div class="u-list" style="display: none"><b>' . $singleProfile->login . '</b>'; if($singleProfile->moderator == true) {echo '<span class="moderator">M</span>';} elseif($singleProfile->banned == true) {echo '<span class="banned">B</span>';} echo '</div>';
+        echo '<div class="u-list" style="display: none"><b>' . $singleProfile->login . '</b>'; if($singleProfile->moderator === "true") {echo '<span class="moderator">M</span>';} elseif($singleProfile->banned == true) {echo '<span class="banned">B</span>';} echo '</div>';
     }
   }
 
-if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESSION['mod_loggedin']) ) {
+if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 25 && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
     
     $checkProfile = $repoProfiles->query()
     ->where( 'username', '==', mb_strtolower($_POST['u']) )
     ->execute();
     
-    if( !empty($_POST['p']) && mb_strlen($_POST['p'], 'utf-8') <= 15 && $_POST['p'] == $_POST['c_p'] ) {
+    if( !empty($_POST['p']) && mb_strlen($_POST['p'], 'utf-8') <= 16 && $_POST['p'] == $_POST['c_p'] ) {
         
       foreach($checkProfile as $profile) {
         $profile->password;
@@ -34,7 +32,7 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
     
       $profile->password = $hashed_password;
       $repoProfiles->update($profile);
-      echo '<p class="success">Password Changed!</p>';
+      echo '<p class="success">' . $lang['PASSWORD_CHANGED'] . '</p>';
 
     }
     if( isset( $_POST['s_d']) ) { 
@@ -42,14 +40,20 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
       foreach($checkProfile as $profile)
       
       $repoProfiles->delete($profile);
-      echo '<p class="success">User Deleted!</p>';
+      echo '<p class="success">' . $lang['USER_DELETED'] . '</p>';
     }
     if( isset( $_POST['s_m']) ) {
       foreach($checkProfile as $profile) {
-        $profile->moderator = "true";
+          if($profile->moderator !== "true") {
+              $profile->moderator = "true";
+              $moderatorChangedState = $lang['MODERATOR_ADDED'];
+          } else {
+               $profile->moderator = "false";
+               $moderatorChangedState = $lang['MODERATOR_REMOVED'];
+          }
       }
       $repoProfiles->update($profile);
-      echo '<p class="success">Moderator Added!</p>';
+      echo '<p class="success">'. $moderatorChangedState .'</p>';
     }
     if( isset( $_POST['s_b']) ) {
       foreach($checkProfile as $profile) {
@@ -59,14 +63,14 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
       
       $settings->bannedUsername = mb_strtolower($_POST['u']);
       $repoSettings->update($settings);
-      echo '<p class="success">User Banned!</p>';
+      echo '<p class="success">' . $lang['USER_BANNED'] . '</p>';
     }
     echo '
-    <script>
-        setTimeout(function () {
-	      $(\'.success\').fadeOut(500);
-        }, 2000);
-    </script>
+    <meta http-equiv="refresh" content="1">
+    <div class="modal-loading">
+        <svg version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" enable-background="new 0 0 0 0" xml:space="preserve"> <circle fill="#ddd" stroke="none" cx="6" cy="50" r="6"> <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1"/> </circle> <circle fill="#ddd" stroke="none" cx="26" cy="50" r="6"> <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2"/> </circle> <circle fill="#ddd" stroke="none" cx="46" cy="50" r="6"> <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3"/> </circle></svg>
+        <p>' . $lang['UPDATING_PLEASE_WAIT'] . '</p>
+    </div>    
     ';
 }
 ?>
@@ -76,7 +80,7 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>User Management</title>
+    <title><?php echo $lang['TITLE_USERS']; ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600,700&amp;subset=cyrillic" rel="stylesheet">
     <link href="css/panel.css" rel="stylesheet">
@@ -87,7 +91,7 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
 
 <div class="admin-bar"><div class="container">
     <a href="./"><img src="../assets/img/logo.png" class="logo"></a>
-<?php if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'loggedin']) || $_SESSION[$sesPrefix . 'mod_loggedin'] ) { ?>
     <span>
         <i class="icon-user"></i>
         <?php echo $lang['NAVBAR_GREETING']; ?> <strong><?php echo $_SESSION['username']; ?>!</strong>
@@ -98,7 +102,7 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 15 && isset($_SESS
 <?php } ?>
 </div><!-- .container --></div><!-- .admin-bar -->    
 
-<?php if ( isset($_SESSION['mod_loggedin']) ) { ?>
+<?php if ( isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) { ?>
 
 <div id="main" class="container userlist">
 <aside id="secondary" class="widget-area col-md-4" role="complementary">

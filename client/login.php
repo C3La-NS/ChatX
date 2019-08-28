@@ -1,6 +1,6 @@
 <?php
 include '../settings.php';
-include '../data/languages/lang.' . $l_g . '.php';
+include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 require '../vendor/autoload.php';
 
 function loggedIn_redirect () {
@@ -9,10 +9,11 @@ function loggedIn_redirect () {
   
 
 if ($r_e == '1') {
- if(!empty($_POST['reg_u']) && mb_strlen($_POST['reg_u'], 'utf-8') <= 15 && !empty($_POST['reg_p']) && mb_strlen($_POST['reg_p'], 'utf-8') <= 15 && $_POST['reg_p'] == $_POST['c_reg_p']) {
+ if(!empty($_POST['reg_u']) && mb_strlen($_POST['reg_u'], 'utf-8') <= 25 && !empty($_POST['reg_p']) && mb_strlen($_POST['reg_p'], 'utf-8') <= 16 && $_POST['reg_p'] == $_POST['c_reg_p']) {
     
     $reg_u = htmlspecialchars($_POST["reg_u"]);
     $reg_u = str_replace(array("\n", "\r"), '', $reg_u);
+    $reg_u = preg_replace('/\s+/', ' ', $reg_u);
     $reg_u = mb_strtolower($reg_u);
     
     $reg_l = htmlspecialchars($_POST["reg_u"]);
@@ -27,7 +28,7 @@ if ($r_e == '1') {
     }
 
     // Storing a new profile in does not already exists
-  if ($reg_u != $t)  {
+  if ($reg_u != $t && mb_strlen($reg_u) >= 2)  {
     $profile = new \JamesMoss\Flywheel\Document(array(
         'username' => $reg_u,
         'login' => $reg_l, //logical mistake "username" should be used instead
@@ -75,9 +76,9 @@ if(isset($_POST['s'])) {
   if (mb_strtolower(htmlspecialchars($_POST['u'])) == mb_strtolower($u) && password_verify(htmlspecialchars($_POST['p']), $p) && $b !== 'true')  {
 
       if ($m == 'true') {
-         $_SESSION['mod_loggedin'] = true;
+         $_SESSION[$sesPrefix . 'mod_loggedin'] = true;
       } else {
-         $_SESSION['loggedin'] = true;
+         $_SESSION[$sesPrefix . 'loggedin'] = true;
       }
     
       $_SESSION['username'] = $l;
@@ -113,7 +114,7 @@ if(isset($_POST['s'])) {
 
 <body>
 
-    <?php if ( isset($_SESSION['loggedin']) || $_SESSION['mod_loggedin'] ) { ?>
+    <?php if ( isset($_SESSION[$sesPrefix . 'loggedin']) || $_SESSION[$sesPrefix . 'mod_loggedin'] ) { ?>
         <?php loggedIn_redirect(); exit(); ?>
 
     <?php } else { ?>
