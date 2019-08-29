@@ -2,7 +2,7 @@
 Simple free PHP &amp; jQuery chat project with flat file database
 
 <h2>What is ChatX?</h2>
-ChatX is a highly customized and refined version of the first iteration of the ShoutBox script originally introduced on <a href="https://tutorialzine.com/2015/01/shoutbox-php-jquery">Tutorialzine</a> in 2015.
+ChatX is a highly customized and refined version of the first iteration of ShoutBox script originally introduced on <a href="https://tutorialzine.com/2015/01/shoutbox-php-jquery">Tutorialzine</a> in 2015.
 <br />
 The script uses flat file database only, built with the use of Flywheel and RelativeTime PHP libraries, jQuery, HTML, CSS. It's easy to install and modify, works perfectly with any PHP 5.3 or higher hosting services.
 <br />
@@ -79,28 +79,32 @@ ver 1.7.0
 <li>Changeble widget language (Rus/Eng)</li>
 <li>Widget works better with various websites</li>
 <li>General improvements and updates</li>
+ver 1.8.0
+<li>MyBB integration</li>
+<li>Chat history</li>
+<li>New settings options</li>
+<li>Stability & performance improvements</li>
+<li>Bug fixes</li>
 
 <h2>ToDo list:</h2>
-ChatX is still under development. We are expecting more improvements and features in future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :) Things implemented are crossed out.
-<h3>Nearest perspective:</h3>
+ChatX is still under development. We are expecting more improvements and features in the future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :)
+<h3>Short-term perspective:</h3>
 <li>Templates</li>
-<li>Chat history for users (in another tab)</li>
-<li>Integration with MyBB.ru</li>
 
-<h3>Long perspective:</h3>
+<h3>Long-term perspective:</h3>
 <li>Notification for the new messages when widget is minimized</li>
 
 <h2>Acknowledgements</h2>
-Thanks Tutorialzine for the initial shoutbox release.
+Thanks Tutorialzine for the initial shoutbox script release.
 <br />
-Thanks Alex_63 for the implementation of the fast / slow track system
+Thanks Alex_63 for the implementation of the fast & slow track system
 <br />
 Thanks me for all the patience during the development :)
 <br />
-More to come, help us and you'll be here too.
+More to come, help us and you'll be in the list too.
 
 <h2>Installation</h2>
-ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you condsider using it on other web-sites or directories, you are to complete a simple installation:
+ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you are condsidering using it on other web-sites or directories you are to complete a simple installation procedure:
 <br />
 a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
