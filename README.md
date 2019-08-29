@@ -6,7 +6,7 @@ ChatX is a highly customized and refined version of the first iteration of Shout
 <br />
 The script uses flat file database only, built with the use of Flywheel and RelativeTime PHP libraries, jQuery, HTML, CSS. It's easy to install and modify, works perfectly with any PHP 5.3 or higher hosting services.
 <br />
-The idea that stood behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
+The idea behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
 <img src="https://i.imgur.com/jPpLLtX.png">
@@ -19,19 +19,18 @@ The idea that stood behind the development of ChatX was to create an easy-to-use
 <li>Works well with any websites (more improvements to come)</li>
 <li>Compact and modern look</li>
 <li>Draggable, ability to remember coordinates on the page</li>
-<li>Autoloads new shouts through JSON every 15 sec on slow track and every 5 sec on fast track (customizable)</li>
+<li>Autoloads new shouts through JSON every 30 secs on slow track and every 5 secs on fast track (customizable through settings)</li>
 <li>Slow & fast tracks are togglable through chat settings, stored in LocalStorage</li>
-<li>Also provides manual refresh button</li>
+<li>Manual refresh button</li>
 <li>Nick-name is stored in LocalStorage, not cleared on submit anymore.</li>
 <li>Loads 20 recent shouts (customizable)</li>
-<li>Auto expanding textarea for a new message</li>
-<li>Submit on Enter</li>
+<li>Auto expanding textarea for a new message & submit on Enter</li>
 <li>XSS-free (hopefully)</li>
-<li>240 char per message. Limit also specified on backend server side</li>
+<li>240 char per message. Limit also specified on backend server side (customizable through settings)</li>
 <li>15 char limit for nick-name field (also PHP)</li>
 <li>Prohibited empty messages (PHP)</li>
 <li>Nice font-powered, scalable and customizable icons</li>
-<li>Appears after pageload (no disturbing jumps)</li>
+<li>Asynchronous loading</li>
 <li>Supports Emoji (EmojiOne, updated ver. 3.1.2)</li>
 <li>Reply system</li>
 <li>Timing with RelativeTime</li>
