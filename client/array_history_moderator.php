@@ -4,7 +4,7 @@ include '../settings.php';
 header('Content-type: application/json; charset=utf-8');
 
 
-if( !isset($_SESSION["mod_loggedin"]) ) {
+if( !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
 
     echo 'Access Denied';
     die();
