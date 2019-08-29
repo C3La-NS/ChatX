@@ -24,11 +24,14 @@ $getSettings = $repoSettings->query()
         $s_t = $settings->slowTrack;
         $e_o = $settings->emojiOne;
         $f_g = $settings->featherLight;
+        $m_a = $settings->mybb;
+        $m_c = $settings->maxChar;
         $l_g = $settings->langPack;
         $s_d = $settings->siteDomain;
         $b_u = $settings->bannedUsername;
     }
-
-$maxShoutChars = 240; /* Maximum characters for a single message */ //OLD SHOULD BE MODIFIED
-
+    
+$maxWidgetShouts = '20';
+$maxHistoryShouts = '50';
+$sesPrefix = ''; // optional session unique prefix
 header("Access-Control-Allow-Origin: $s_d");

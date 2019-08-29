@@ -3,7 +3,7 @@ include 'settings.php';
 
 $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        ->limit(20,0)
+        ->limit($maxWidgetShouts,0)
         ->execute();
 
 $results = array();
@@ -22,12 +22,12 @@ foreach($shouts as $shout) {
 
 header('Content-type: application/json; charset=utf-8');
 if ( $r_a === '1' ) {
-    if( !isset($_SESSION['loggedin']) && !isset($_SESSION['mod_loggedin']) || mb_strtolower($_SESSION['username']) === $b_u ) {
+    if( !isset($_SESSION[$sesPrefix . 'loggedin']) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']) || mb_strtolower($_SESSION['username']) === $b_u ) {
         if(mb_strtolower($_SESSION['username']) === $b_u) {
             session_unset();
             session_destroy();
         } else {
-            include 'data/languages/app_lang.extra.' . $l_g . '.php';
+            include 'data/languages/' . $l_g . '/app_lang.extra.' . $l_g . '.php';
             echo '[{"text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
         }
         die();

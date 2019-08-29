@@ -1,4 +1,5 @@
 <?php
+include 'settings.php';
 require 'vendor/autoload.php';
 
 // If you want to delete old comments, make this true. We use it to clean up the demo.
@@ -14,14 +15,13 @@ $config = new \JamesMoss\Flywheel\Config($dir, array(
 
 $repo = new \JamesMoss\Flywheel\Repository('shouts', $config);
 
-// Delete comments which are more than 3 days old if the variable is set to be true.
 
 if($deleteOldComments) {
     
     $oldShouts = $repo->query()
                 ->where('createdAt', '<', strtotime('-1 minute'))
                 ->orderBy('createdAt DESC')
-                ->limit(150, 50)
+                ->limit(999, $maxHistoryShouts)
                 ->execute();
 
     foreach($oldShouts as $old) {
