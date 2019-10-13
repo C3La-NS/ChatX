@@ -26,12 +26,12 @@ $getSettings = $repoSettings->query()
         $f_g = $settings->featherLight;
         $m_a = $settings->mybb;
         $m_c = $settings->maxChar;
+        $m_s = $settings->maxShout;
+        $m_h = $settings->maxHistory;
         $l_g = $settings->langPack;
         $s_d = $settings->siteDomain;
         $b_u = $settings->bannedUsername;
     }
-    
-$maxWidgetShouts = '20';
-$maxHistoryShouts = '50';
+
 $sesPrefix = ''; // optional session unique prefix
 header("Access-Control-Allow-Origin: $s_d");

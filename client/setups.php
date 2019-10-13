@@ -117,6 +117,18 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                     </div>
                     
                     <div style="width: 75%; float:left">
+                        <p><?php echo $lang['WIDGET_MAX_SHOUTS']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                        <input id="maxWidgetShouts_input" type="text" name="m_s" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_s; ?>">
+                    </div>
+                    <div style="width: 75%; float:left">
+                        <p><?php echo $lang['WIDGET_MAX_SHOUTS']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                        <input id="maxHistoryShouts_input" type="text" name="m_h" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_h; ?>">
+                    </div>
+                    <div style="width: 75%; float:left">
                         <p><?php echo $lang['LANGUAGE']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
@@ -190,6 +202,18 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
       }
       if( !empty($_POST['m_c'] && $_POST['m_c'] >= '1') ) {
         $updateSettings->maxChar = preg_replace('/\D/', '', $_POST['m_c']);
+        
+      } else {
+          echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';
+      }
+      if( !empty($_POST['m_s'] && $_POST['m_s'] >= '1') ) {
+        $updateSettings->maxShout = preg_replace('/\D/', '', $_POST['m_s']);
+        
+      } else {
+          echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';
+      }
+      if( !empty($_POST['m_h'] && $_POST['m_h'] >= '1') ) {
+        $updateSettings->maxHistory = preg_replace('/\D/', '', $_POST['m_h']);
         
       } else {
           echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';

@@ -1,38 +1,26 @@
 $.getJSON( "./array_history_moderator.php", function( data ) {
   var items = [];
   $.each( data, function() {
-    items.push( "<article><div class=first-box><input class=shoutsId readonly type=text value=" + this.id + "></div>" + "<div class=second-box><div class=name>" + this.name + "</div></div><div class=third-box><div class=text>" + this.text + "</div></div></article>" );
+    items.push( "<article><div class=first-box><input class=magic-checkbox type=checkbox name=deleteShout[] form=deleteShout value=" + this.id + "><label class=magic-label></label></div>" + "<div class=third-box><chx_li><chx_p class=shoutbox-comment><chx_span class=shoutbox-username><b data-loggedin=" + this.loggedIn + ">" + this.name + "</b></chx_span>" +  this.text + "</chx_p><chx_div class=shoutbox-comment-details><chx_span class=shoutbox-comment-ago>" + this.timeAgo + "</chx_span></chx_div></chx_li></div></article>" );
   });
  
   $( "<main/>", {
     "class": "list",
     html: items.join( "" )
   }).appendTo( ".shoutbox-content" );
-  
-  	$('.shoutsId').click(function() {
-	    restoreStyles();
-	    $(this).focus();
-	    $(this).select();
-	    $(this).css({"background": "#88adc7", "color": "#fff"});
-	    $("#shoutID").val($(this).val());
-	    $(".copied").text("Added to input").show().fadeOut(1200);
-    });
-  
-  
-});
 
-function restoreStyles() {
-    var ele = document.getElementsByClassName('shoutsId');
-    for (var i = 0; i < ele.length; i++ ) {
-        ele[i].style.background = "#efefef";
-        ele[i].style.color = "#717c87";
-    }
-}
+    $(".magic-checkbox").each(function(i) {
+     $(this).attr("id", (i+1));
+    });
+    $(".magic-label").each(function(i) {
+     $(this).attr("for", (i+1));
+    });
+    
+});
 
 var url = document.location.href.replace('client/index.php',''),
     appendUrlTo = document.getElementsByClassName('document-url')[0];
     appendUrlTo.insertAdjacentHTML( 'afterbegin', url );
     
-
-$( ".password-alert" ).appendTo( ".alert-box" );
-
+    
+    

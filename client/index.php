@@ -3,7 +3,11 @@ include '../settings.php';
 include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
 if( isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
-    $repoShouts->delete($_POST["deleteShout"]);
+
+    foreach($_POST["deleteShout"] as $id) {
+        $repoShouts->delete($id);
+    }
+
 }
 
 if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
@@ -30,6 +34,7 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Exo+2:400,600,700&amp;subset=cyrillic" rel="stylesheet">
     <link href="css/panel.css" rel="stylesheet">
+    <link href="css/magic-check.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 </head>
 
@@ -55,7 +60,6 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
     <?php if ( isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) { ?>
 
 <div id="main" class="container modpanel">
-   <div class="copied"></div>
    <aside id="secondary" class="widget-area col-md-4" role="complementary">
       <h2><?php echo $lang['NAVIGATION']; ?></h2>
       <li><a href="index.php"><?php echo $lang['SHOUT_MANAGEMENT']; ?></a></li>
@@ -87,11 +91,11 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
    <div id="primary" class="col-md-8 mb-xs-24">
       <div class="row">
          <section>
-            <form method="post">
+            <form id="deleteShout" method="post">
                <h1><?php echo $lang['DELETING_SHOUTS_ID']; ?></h1>
                <p><?php echo $lang['DELETING_SHOUTS_ID_DESC1']; ?></p>
                <span>
-               <input class="basic-slide" id="shoutID" type="text" name="deleteShout" placeholder="<?php echo $lang['SHOUT_ID_INPUT']; ?>" /><label for="shoutID">ID</label>
+               
                <button class="button" type="submit" value="Submit"><?php echo $lang['SHOUT_ID_DELETE']; ?></button>
                </span>
             </form>
@@ -100,9 +104,6 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
             <article class="legend">
                <div class="first-box">
                   <p><?php echo $lang['SHOUT_ID']; ?></p>
-               </div>
-               <div class="second-box">
-                  <p><?php echo $lang['SHOUT_AUTHOR']; ?></p>
                </div>
                <div class="third-box">
                   <p><?php echo $lang['SHOUT_CONTENT']; ?></p>

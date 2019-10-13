@@ -21,7 +21,7 @@ if($deleteOldComments) {
     $oldShouts = $repo->query()
                 ->where('createdAt', '<', strtotime('-1 minute'))
                 ->orderBy('createdAt DESC')
-                ->limit(999, $maxHistoryShouts)
+                ->limit(999, $m_h)
                 ->execute();
 
     foreach($oldShouts as $old) {

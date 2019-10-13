@@ -3,7 +3,7 @@ include 'settings.php';
 
 $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        ->limit($maxWidgetShouts,0)
+        ->limit($m_s,0)
         ->execute();
 
 $results = array();

@@ -12,12 +12,12 @@ if( !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
 } else {
     $posts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        ->limit($maxHistoryShouts,0)
+        ->limit($m_h,0)
         ->execute();
 
     $config = array(
-    'language' => '\RelativeTime\Languages\English',
-    'truncate' => 1,
+        'language' => '\RelativeTime\Languages\L' . $l_g,
+        'truncate' => 1,
     );
 
     $relativeTime = new \RelativeTime\RelativeTime($config);
@@ -26,10 +26,12 @@ if( !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
       $id = $post->getId();
       $text = $post->text;
       $name = $post->name;
+      $timeAgo = $relativeTime->timeAgo($post->createdAt);
       $buildArray = array(
         'id' => $id,
         'text' => $text,
-        'name' => $name
+        'name' => $name,
+        'timeAgo' => $timeAgo
       );  
       $results[] = $buildArray;
 

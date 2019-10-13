@@ -3,7 +3,7 @@ include '../settings.php';
 
 $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        ->limit($maxHistoryShouts,0)
+        ->limit($m_h,0)
         ->execute();
 
 $results = array();
