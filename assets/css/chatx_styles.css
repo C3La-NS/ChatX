@@ -204,6 +204,9 @@ chx_hr { /* hr */
      border-width: 0 1px 0 1px;
      overflow-x: hidden !important;
 }
+ #chatx.expanded .chx-container.overflow .shoutbox-content chx_li:last-child {
+     padding-bottom: 17px !important;
+ }
 /* ------- webkit scroll ------- */
 /* ------- The comments content ------- */
  .shoutbox-content {
@@ -236,6 +239,12 @@ chx_hr { /* hr */
      border-width: 0 0 1px 0;
      z-index: 2;
 }
+ .shoutbox-content chx_li:last-child {
+     padding-bottom: 17px;
+}
+ .shoutbox-content chx_li.chx-firefox-fix {
+     padding-bottom: 35px !important;
+}
  .shoutbox-username {
      display: inline;
      text-align: left;
@@ -262,6 +271,14 @@ chx_hr { /* hr */
      text-align: left;
      cursor: pointer;
 }
+ .shoutbox-comment-reply .icon-reply {
+     font-size: 18px;
+     opacity: .3;
+     transition: .3s;
+}
+ .shoutbox-comment-reply .icon-reply:hover {
+     opacity: 1;
+ }
  .shoutbox-comment-ago {
      display: inline-block;
      float: right;
@@ -272,10 +289,14 @@ chx_hr { /* hr */
 }
 /* ------- ShoutBox helper ------- */
  .shoutbox-helper {
+     display: none;
      padding: 10px 15px;
      border-style: solid;
-     border-width: 2px 0 0 0;
+     border-width: 0 0 1px 0;
 }
+ .shoutbox-helper.visible {
+     display: block;
+ }
  .shoutbox-helper chx_p {
      margin: 0;
      text-align: center;
@@ -793,6 +814,7 @@ img.emojione{
      right: 0px;
      top: 0;
      width: 0px;
+     z-index: 100;
 }
 /* scrollbar height/width & offset from container borders */
  .scrollbar-macosx > .scroll-element.scroll-x .scroll-bar {
@@ -942,7 +964,7 @@ img.emojione{
 }
 
 
-.chx-color-bb-prompt {
+.chx-color-bb-prompt, .chx-image-bb-prompt {
     position: absolute;
     display: none;
     z-index: 2;
@@ -952,7 +974,9 @@ img.emojione{
     box-sizing: border-box;
     border-radius: 0 0 7px 7px;
 }
-
+.chx-image-bb-prompt {
+    padding-top: 10px;
+}
 .icon-hue {
     font-size: 19px;
     padding: 0 1px;
@@ -1075,27 +1099,25 @@ html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed
 	display: none;
 }
 .ui-resizable-s {
+    display: none !important;
 	cursor: s-resize;
 	border-top: 1px solid #87bfef;
 	background: #f9fafb;
-	height: 14px;
+	height: 10px;
 	width: 100%;
 	bottom: 0;
 	left: 0;
-	opacity: 0;
 	transition: .5s;
 	z-index: 2 !important;
 }
-
-.ui-resizable-s:hover, .ui-resizable-s:active {
-    opacity: 1;
+.ui-resizable-s.visible {
+    display:block !important;
 }
-
 #chatx .resize-helper {
     position: absolute;
     width: 34px;
-    top: 4px;
-    padding: 1px 0;
+    top: 2px;
+    padding: 1px 0 0;
     border-width: 2px 0 2px;
     border-style: solid;
     left: calc(50% - 18px);
@@ -1155,13 +1177,48 @@ html.with-featherlight{overflow:hidden}.featherlight{display:none;position:fixed
 }
 
 .chx-history {
+    text-align: center;
     border-style: solid;
-    border-width: 1px 0 0 0;
+    border-width: 0 0 2px 0;
 }
 .chx-history chx_span {
-    display: block;
+    display: inline-block;
     padding: 1px 10px;
     font-size: 11px;
-    text-align: right;
     cursor: pointer;
+}
+
+.chx-history first {
+    text-align: left;
+}
+
+.chx-history second {
+    text-align: right;
+}
+
+.chx-image-bb-prompt input {
+    width: 80% !important;
+    border: 0 !important;
+    display: inline-block !important;
+    float: left !important;
+    background: transparent !important;
+    outline: none !important;
+    font-weight: normal !important;
+    font: inherit !important;
+    font-size: inherit !important;
+    line-height: 18px !important;
+
+}
+
+.chx-process-img {
+    padding: 3px 10px;
+    border: 1px solid;
+    display: inline-block;
+    float: right;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.scroll-x {
+    display: none !important;
 }

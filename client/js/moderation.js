@@ -15,12 +15,11 @@ $.getJSON( "./array_history_moderator.php", function( data ) {
     $(".magic-label").each(function(i) {
      $(this).attr("for", (i+1));
     });
-    
+    $(".chatx_img").removeAttr("height");
 });
 
 var url = document.location.href.replace('client/index.php',''),
     appendUrlTo = document.getElementsByClassName('document-url')[0];
     appendUrlTo.insertAdjacentHTML( 'afterbegin', url );
-    
     
     

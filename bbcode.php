@@ -16,7 +16,8 @@ function showBBcodes($text) {
 		'~\[color=(.*?)\](.*?)\[/color\]~s',
 		'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
 		'~\[url=((?:ftp|https?)://.*?)\](.*?)\[/url\]~s',
-		'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
+		'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
+		'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
 	);
 	// HTML tags to replace BBcode
 	$replace = array(
@@ -26,7 +27,8 @@ function showBBcodes($text) {
 		'<span style="color:$1;">$2</span>',
 		'<a href="$1" target="_blank">$1</a>',
 		'<a href="$1" target="_blank">$2</a>',
-		'<img class="chatx_img" src="$1" data-featherlight="$1" />'
+		'<img class="chatx_img" src="$1" data-featherlight="$1" />',
+		'<img class="chatx_img" height="$1" src="$3" data-featherlight="$2" />'
 	);
 	// Replacing the BBcodes with corresponding HTML tags
 	return preg_replace($find,$replace,$text);

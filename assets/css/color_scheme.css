@@ -4,7 +4,7 @@
                in this file.
                — STYLE: CHATX DEFAULT BLUE —
                # Author: C3La-NS
-               # More ChatX templates: https://celans.ru/chatx
+               # More ChatX templates: https://xlns.ru/chatx
 ###################################################################
 */
 
@@ -71,7 +71,7 @@
 
 .shoutbox-helper, .shoutbox-content, .chx-history {
     color: #717c87;
-    border-top-color: #d5dbe1;
+    border-bottom-color: #d5dbe1;
 }
 .shoutbox-form form:not(#imgur_uploader), .scrollbar-macosx { /* Reply form background & scrollbar background */
     background-color:  #f9fafb;
@@ -85,7 +85,7 @@
     border-right-color: #d5dbe1;
 }
 
-#shoutbox-comment { /* Textarea. Preferable to leave background transparent, but you may want to customize the text color inside textarea */
+#shoutbox-comment, input[name="url_to_img"] { /* Textarea & external image input. Preferable to leave background transparent, but you may want to customize the text color inside containers */
     background-color: transparent;
     color: #717c87;
 }
@@ -151,7 +151,7 @@
     background-color: rgba(72, 72, 72, 0.95);
 }
 
-.chx-login-form input[type="text"], .chx-login-form input[type="password"] {
+.chx-login-form input[type="text"], .chx-login-form input[type="password"], .bb-popup chx_div:active {
     background: rgba(0, 0, 0, 0.2);
 }
 

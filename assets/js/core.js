@@ -55,20 +55,23 @@ const markup = `
             </chx_div>
             <div class="chx-container scrollbar-macosx">
                 <chx_div class="shoutbox">
-                    <chx_ul class="shoutbox-content"></chx_ul>
-                    <chx_div class="chx-history">
-                        <chx_span>
-                            <a onclick="chatHistory()"></a>
-                        </chx_span>
-                    </chx_div>
                     <chx_div class="shoutbox-helper">
-                        <chx_p></chx_p>
-                        <chx_hr></chx_hr>
                         <chx_span class="chx-helper"></chx_span>
                         <chx_li><chx_span class="chx-key">Alt</chx_span> + <chx_span class="chx-key">Q</chx_span> <chx_span class="chx-desc1"></chx_span></chx_li>
                         <chx_li><chx_span class="chx-desc2"></chx_span></chx_li>
                         <chx_li><chx_span class="chx-key">Enter</chx_span> <chx_span class="chx-desc3"></chx_span></chx_li>
+                        <chx_hr></chx_hr>
+                        <chx_p></chx_p>
                     </chx_div>
+                    <chx_div class="chx-history">
+                        <chx_span class="first">
+                            <a onclick="jQuery('.shoutbox-helper').toggleClass('visible')"></a>
+                        </chx_span>
+                        <chx_span class="second">
+                            <a onclick="chatHistory()"></a>
+                        </chx_span>
+                    </chx_div>
+                    <chx_ul class="shoutbox-content"></chx_ul>
                 </chx_div>
             </div>
             <chx_div class="shoutbox-form">
@@ -92,6 +95,12 @@ const markup = `
                         <chx_i id="bb4_6" class="icon-hue chx-blue"></chx_i>
                         <chx_i id="bb4_7" class="icon-hue chx-purple"></chx_i>
                     </chx_div>
+                    <chx_div class="chx-image-bb-prompt">
+                            <input type="text" name="url_to_img" placeholder>
+                            <chx_div class="chx-process-img">
+                                <chx_span>OK</chx_span>
+                            </chx_div>
+                    </chx_div>
                     <chx_div class="chx-pre-textarea scrollbar-macosx">
                         <chx_i class="icon-plus"></chx_i>
                         <textarea id="shoutbox-comment" rows="2" data-min-rows="2" placeholder name="comment"></textarea>
@@ -112,6 +121,7 @@ document.getElementById('chatx').innerHTML = markup;
 */
 
 jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
+    
 
     // Storing some elements in variables for a cleaner code base
 
@@ -123,6 +133,10 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         ul = jQuery('chx_ul.shoutbox-content'),
         icd = jQuery('#icd');
         chx_resize = 'chx-container';
+        
+    function scrollBottom() {
+        jQuery(".chx-container").stop().animate({ scrollTop: jQuery(".shoutbox-content")[0].scrollHeight},0);
+    }
 
     // Replace :) with emoji icons (if library not loaded throw error):
     if (e_o === 1) {
@@ -214,7 +228,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         loadInt = setInterval(load, (jQuery(icd).prop('checked') ? fastTrack : slowTrack));
         jQuery("#chatx").draggable('enable');
         jQuery("#chatx").removeClass("minimized");
-
+        scrollBottom();
     });
 
     jQuery('.chat').on('click', '.icon-minimize', function() {
@@ -265,6 +279,12 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
             },
             success: function(data) {
                 appendComments(data);
+                if (!CSS.supports("( -webkit-box-reflect:unset )") && !window.resized) { // fixing issue with scrollbar in non-webkit browsers
+                    jQuery(".shoutbox-content chx_li:last-child").addClass("chx-firefox-fix");
+                }
+                if (window.atBottom) {
+                    scrollBottom();
+                }
             }
 
         });
@@ -276,9 +296,9 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
        ul.empty();
 
         data.forEach(function(d) {
-            ul.append('<chx_li>' +
+            ul.prepend('<chx_li>' +
                 '<chx_p class="shoutbox-comment"><chx_span class="shoutbox-username"><b data-loggedin="' + d.loggedIn + '">' + d.name + '</b></chx_span>' + (e_o === 1 ? emojione.toImage(d.text) : d.text) + '</chx_p>' +
-                '<chx_div class="shoutbox-comment-details"><chx_span class="shoutbox-comment-reply" data-name="' + d.name + '"><chx_span></chx_span><chx_i class="icon-reply"></chx_i></chx_span>' +
+                '<chx_div class="shoutbox-comment-details"><chx_span class="shoutbox-comment-reply" data-name="' + d.name + '"><chx_i class="icon-reply"></chx_i></chx_span>' +
                 '<chx_span class="shoutbox-comment-ago">' + d.timeAgo + '</chx_span></chx_div>' +
                 '</chx_li>');
         });
@@ -301,8 +321,21 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
     // Loading custom scrollbar library
     jQuery.getScript(chatx_server + 'assets/js/scrollbar.min.js', function() {
+        jQuery('.chx-container.scrollbar-macosx').scrollbar({
+            "onScroll": function(y){
+            if(y.scroll >= y.maxScroll - 20) {
+                window.atBottom = true;
+                jQuery('.ui-resizable-s').addClass('visible');
+            } else {
+                window.atBottom = false;
+                jQuery('.ui-resizable-s').removeClass('visible');
+            }
+            }
+        });
+        jQuery('.chx-pre-textarea.scrollbar-macosx').scrollbar();
+        
 
-        jQuery('.scrollbar-macosx').scrollbar();
+        
 
         var chx_height = localStorage.getItem(chx_resize);
 
@@ -311,16 +344,19 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         jQuery('.' + chx_resize).css(chx_height);
         
         // making ChatX appear after scrollbar library loaded as well as some other functions
-        jQuery.when(jQuery("#chatx").fadeIn(50))
+        jQuery.when(jQuery("#chatx").fadeIn(0))
             .done(function() {
                 chatxVisibility();
+                scrollBottom();
                 jQuery(this).css({
                     "opacity": "1"
                 });
                 fastTrackIsOn();
                 loadNickname();
-
+                
             });
+            
+        
     });
 
     // Loading jquery-ui.min library and executing draggable and resizable funcs afrer library is loaded
@@ -348,6 +384,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
                    localStorage.setItem(chx_resize, '{"height":"'+ maxHeight +'px"}'); 
                 }
                 jQuery("#chatx.expanded .chx-container").css({"max-height": maxHeight, "height": sizeHistoryData.height});
+                scrollBottom();
             }
         });
         jQuery('#chatx .ui-resizable-s').first().remove(); // two elements created for some reason. Not good
@@ -359,6 +396,10 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
             window.resizedFinished = setTimeout(function() {
                 jQuery(a).fadeIn(200);
             }, 500);
+            if(!window.resized) {
+                jQuery(".shoutbox-content chx_li:last-child").removeClass("chx-firefox-fix");
+            }
+            window.resized = true;
         });
         jQuery('<chx_div class="resize-helper"></chx_div>').appendTo('#chatx .ui-resizable-s');
 
@@ -386,16 +427,19 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         jQuery("input[name='p'], input[name='reg_p']").attr("placeholder", passWord);
         jQuery("input[name='p'], input[name='c_reg_p']").attr("placeholder", confirmPassWord);
         jQuery(".chx-reg-disabled-caption").text(regDisabled);
-        jQuery(".chx-history a").text(messagesHistory);
-        jQuery(".shoutbox-helper chx_p").text(newMessagesAbove);
+        jQuery(".chx-history .first a").text(chatHelper);
+        jQuery(".chx-history .second a").text(messagesHistory);
+        jQuery(".shoutbox-helper chx_p").text(newMessagesAtBottom);
         jQuery(".chx-helper").text(helper);
         jQuery(".chx-desc1").text(helper1stDesc);
         jQuery(".chx-desc2").text(helper2ndDesc);
         jQuery(".chx-desc3").text(helper3rdDesc);
         jQuery("#shoutbox-comment").attr("placeholder", newMessagePlaceholder);
-        jQuery("head").append('<style>.shoutbox-comment-reply chx_span, .chatx_login span {font-size:0 !important}.shoutbox-comment-reply chx_span::after {content: "' + reply + '";font-size:12px} .chatx_login chx_span::after {content: "' + login + '"; font-size: 12px} .chatx_logout chx_span::after {content: "' + logout + '"; font-size: 12px} .chx-mybb-login::after {content: "' + mybbSignup + '";}</style>'); // not good but ok for now
+        jQuery("input[name='url_to_img']").attr("placeholder", imgUrlPlaceholder);
+        jQuery("head").append('<style>.chatx_login span {font-size:0 !important}.chatx_login chx_span::after {content: "' + login + '"; font-size: 12px} .chatx_logout chx_span::after {content: "' + logout + '"; font-size: 12px} .chx-mybb-login::after {content: "' + mybbSignup + '";}</style>'); // not good but ok for now
         jQuery(".chx-emojione-error").text(emojioneError);
     });
+    
 });
 
 /*
@@ -487,6 +531,9 @@ function chatSubmit() {
     } else {
         jQuery("#chx-new-message").submit();
         jQuery('.chx-pre-textarea, #chx-new-message').removeClass("scrollable");
+        jQuery(".chx-container").stop().animate({ scrollTop: jQuery(".shoutbox-content")[0].scrollHeight}, 0);
+        window.resized = false;
+
     }
 }
 
@@ -550,7 +597,7 @@ function valName() {
 }
 
 function chatHistory() {
-    window.open(chatx_server + 'client/history.php','_blank','width=400,height=750,top=15,left=15')
+    window.open(chatx_server + 'client/history.php','_blank','width=400,height=750,top=15,left=15');
 }
 
 // Widget visibility on screen
@@ -647,9 +694,9 @@ jQuery(document).on('keydown', function(e) {
 });
 
 jQuery(document).on('click touchstart', function(event) {
-    if (!jQuery(event.target).closest('.bb-popup, .chx-color-bb-prompt, .icon-plus').length) {
+    if (!jQuery(event.target).closest('.bb-popup, .chx-color-bb-prompt, .chx-image-bb-prompt, .icon-plus').length) {
 
-        jQuery('.bb-popup, .chx-color-bb-prompt').fadeOut(300);
+        jQuery('.bb-popup, .chx-color-bb-prompt, .chx-image-bb-prompt').fadeOut(300);
     }
 });
 
@@ -701,7 +748,12 @@ bb4.onclick = function() {
     });
 }
 bb5.onclick = function() {
-    javascript: bbtags("shoutbox-comment", "[img]", "[/img]");
+    
+    var height = jQuery(".shoutbox-form").height();
+    jQuery(".chx-image-bb-prompt").css({
+        height: height - 3
+    });
+    jQuery(".chx-image-bb-prompt").fadeIn(300);
 }
 bb6.onclick = function() {
     javascript: bbtags("shoutbox-comment", "[url]", "[/url]");
@@ -767,8 +819,16 @@ function formButtonClick() {
         formSubmit(nameForm);
     });
 }
-
 formButtonClick();
+
+function formExtImage() {
+    jQuery(".chx-process-img").on('click', function() {
+        jQuery(".chx-image-bb-prompt").fadeOut(300);
+        loadingModal();
+        processExtImg();
+    });
+}
+formExtImage();
 
 function ajaxFormSubmitted() {
     
@@ -837,7 +897,6 @@ function loggingIn() {
     jQuery(".chatx_logout").hide();
     ajaxFormSubmitted();
     ajaxFormSubmitted = undefined;
-    
 }
 
 function loggingOut() {
@@ -876,6 +935,43 @@ function publicScenarioLoggingOut() {
     ajaxLogOutClicked();
 }
 
+function loadingModal() {
+    jQuery('<chx_div class="loading-modal"><img class="loading-image" src="' + chatx_server + 'assets/img/loading.svg"></chx_div>').appendTo('#chatx');
+}
+
+function generateImageTagAndSend(res) {
+    var data = JSON.parse(res);
+    if (res !== '' && data.link !== null) {
+        jQuery('#shoutbox-comment').val('');
+        jQuery('#shoutbox-comment').val(jQuery('#shoutbox-comment').val() + '[url=' + data.link + ']' + openDirectLink + '[/url][img h=' + data.clientHeight + ' d=' + data.link + ']' + data.thumbnail + '[/img] ');
+
+        if (jQuery('#false_shoutbox_name').val() == '') {
+            jQuery('#shoutbox-comment').attr('rows', 6);
+            errorNameEmpty();
+
+        } else {
+            chatSubmit();
+        }
+
+    }
+    jQuery('.loading-modal').remove();
+}
+
+function processExtImg() {
+    imgLink = {
+        'urlToImg': jQuery("input[name='url_to_img']").val()
+    };
+    var url = chatx_server + "imgur_uploader.php";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: imgLink,
+        success: function(res) {
+            generateImageTagAndSend(res);
+        }
+    });
+}
+
 jQuery('.chx-imgur-uploader').append('<form id="imgur_uploader"><chx_i class="icon-upload"></chx_i><input type="file" accept="image/*" name="chximg"></form>');
 
 jQuery("[name='chximg']").on('change', function() {
@@ -883,7 +979,7 @@ jQuery("[name='chximg']").on('change', function() {
     var form_data = new FormData();
     form_data.append('chximg', file_data);
     var url = chatx_server + "imgur_uploader.php";
-    jQuery('<chx_div class="loading-modal"><img class="loading-image" src="' + chatx_server + 'assets/img/loading.svg"></chx_div>').appendTo('#chatx');
+    loadingModal();
     jQuery.ajax({
         type: "POST",
         url: url,
@@ -892,22 +988,7 @@ jQuery("[name='chximg']").on('change', function() {
         enctype: 'multipart/form-data',
         processData: false,
         success: function(res) {
-
-            if (res !== '') {
-                jQuery('#shoutbox-comment').val('');
-                jQuery('#shoutbox-comment').val(jQuery('#shoutbox-comment').val() + '[url=' + res + ']' + openDirectLink + '[/url][img]' + res + '[/img] ');
-
-                if (jQuery('#false_shoutbox_name').val() == '') {
-                    jQuery('#shoutbox-comment').attr('rows', 4);
-                    errorNameEmpty();
-
-                } else {
-                    chatSubmit();
-                }
-
-            }
-            jQuery('.loading-modal').remove();
-
+            generateImageTagAndSend(res);
         }
     });
 });
