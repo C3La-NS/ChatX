@@ -3,8 +3,6 @@ include 'settings.php';
 
 $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        /* ->limit($m_s,0) */
-        /* ->limit($m_h,$m_h - $m_s) */
         ->limit($m_s,0)
         ->execute();
 
