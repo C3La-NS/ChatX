@@ -84,6 +84,14 @@ ver 1.8.0
 <li>New settings options</li>
 <li>Stability & performance improvements</li>
 <li>Bug fixes</li>
+ver 1.9.0
+<li>Shout management: multiple message selection</li>
+<li>New settings in moderator's panel</li>
+ver 2.0.0
+<li>New messages at the bottom</li>
+<li>Thumbnails for jpg and jpeg images</li>
+<li>Updated UI when uploading images from external URLs</li>
+<li>All images are hosted on Imgur.com</li>
 
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in the future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :)
