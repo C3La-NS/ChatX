@@ -123,7 +123,7 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                         <input id="maxWidgetShouts_input" type="text" name="m_s" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_s; ?>">
                     </div>
                     <div style="width: 75%; float:left">
-                        <p><?php echo $lang['WIDGET_MAX_SHOUTS']; ?></p>
+                        <p><?php echo $lang['HISTORY_MAX_SHOUTS']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
                         <input id="maxHistoryShouts_input" type="text" name="m_h" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_h; ?>">
