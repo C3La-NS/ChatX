@@ -1,4 +1,5 @@
 <?php
+include 'settings.php';
 $client_id = "b12794161e11f2b";
 
 $externalImg = htmlspecialchars($_POST['urlToImg']);
