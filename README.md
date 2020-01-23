@@ -9,7 +9,7 @@ The script uses flat file database only, built with the use of Flywheel and Rela
 The idea behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://i.imgur.com/jPpLLtX.png">
+<img src="https://i.imgur.com/ojqNUiC.png">
 
 <br />
 <h2>Main features:</h2>
@@ -83,6 +83,16 @@ ver 1.8.0
 <li>Chat history</li>
 <li>New settings options</li>
 <li>Stability & performance improvements</li>
+ver 1.9.0
+<li>Shout management: multiple message selection</li>
+<li>New settings in moderator's panel</li>
+ver 2.0.0
+<li>New messages at the bottom</li>
+<li>Thumbnails for jpg and jpeg images</li>
+<li>Updated UI when uploading images from external URLs</li>
+<li>All images are hosted on Imgur.com</li>
+ver 2.1.0
+<li>Username styling</li>
 <li>Bug fixes</li>
 
 <h2>ToDo list:</h2>
