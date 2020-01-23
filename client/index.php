@@ -133,6 +133,9 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
         <section>
           <h1><?php echo $lang['WELCOME_BACK']; ?></h1>
           <p><?php echo $lang['LOGGED_IN_SUCCESSFULLY']; ?></p>
+          <?php if ( $s_d ) { ?><hr>
+          <p><?php echo $lang['GO_TO']; ?> <a href="<?php echo $s_d; ?>"><?php echo $lang['URL_WEBSITE']; ?></a> <?php echo $lang['BEGIN_CONVERSATION']; ?></p><?php } ?>
+          
         </section>
     </div>
 </div><!-- #main.container -->

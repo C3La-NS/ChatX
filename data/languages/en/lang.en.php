@@ -111,6 +111,9 @@ $lang['LOGIN_USER_BANNED'] = 'Username banned';
 // Index Page (User)
 $lang['WELCOME_BACK'] = 'Welcome back!';
 $lang['LOGGED_IN_SUCCESSFULLY'] = 'You have successfully Logged In.';
+$lang['GO_TO'] = 'You can now go to this';
+$lang['URL_WEBSITE'] = 'WEBSITE';
+$lang['BEGIN_CONVERSATION'] = 'to begin a conversation with ChatX';
 
 // History Page
 $lang['NEW_MESSAGES_ABOVE'] = 'New messages above';

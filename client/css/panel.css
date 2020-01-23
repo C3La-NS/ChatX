@@ -364,7 +364,7 @@ img.chatx_img {
 }
 hr {
     height: 2px;
-    background: #518886;
+    background: #ddd;
     border: 0;
     margin: 40px 20px;
 }
@@ -374,11 +374,13 @@ hr {
 article {
     position: relative;
     width: 100%;
-    display: table;
-    border-bottom: 1px solid #ddd;
+    display: inline-block;
 }
 article:nth-child(even) {
     background: #fbfbfb;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #ddd;
 }
 
 article.legend {

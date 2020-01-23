@@ -111,6 +111,9 @@ $lang['LOGIN_USER_BANNED'] = 'Пользователь заблокирован'
 // Index Page (User)
 $lang['WELCOME_BACK'] = 'Добро пожаловать!';
 $lang['LOGGED_IN_SUCCESSFULLY'] = 'Вы успешно вошли в свой аккаунт.';
+$lang['GO_TO'] = 'Теперь Вы можете перейти на этот';
+$lang['URL_WEBSITE'] = 'ВЕБ-САЙТ';
+$lang['BEGIN_CONVERSATION'] = 'и начать беседу в ChatX';
 
 // History Page
 $lang['NEW_MESSAGES_ABOVE'] = 'Новые сообщения сверху';

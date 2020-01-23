@@ -110,7 +110,7 @@
   color: #51718c;
 }
 
-.icon-gear:active, .icon-refresh:active, .icon-minimize:active, .icon-expand:active, .icon-send:hover {
+.icon-gear:active, .icon-refresh:active, .icon-minimize:active, .icon-expand:active, .icon-send:hover, .featherlight-close .icon-plus {
   filter: brightness(92%);
 }
 

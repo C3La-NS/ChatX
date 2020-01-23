@@ -279,9 +279,6 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
             },
             success: function(data) {
                 appendComments(data);
-                if (!CSS.supports("( -webkit-box-reflect:unset )") && !window.resized) { // fixing issue with scrollbar in non-webkit browsers
-                    jQuery(".shoutbox-content chx_li:last-child").addClass("chx-firefox-fix");
-                }
                 if (window.atBottom) {
                     scrollBottom();
                 }
@@ -289,7 +286,6 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
         });
     }
-
     // Rendering an array of shouts as HTML
     function appendComments(data) {
 
@@ -297,7 +293,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
         data.forEach(function(d) {
             ul.prepend('<chx_li>' +
-                '<chx_p class="shoutbox-comment"><chx_span class="shoutbox-username"><b data-loggedin="' + d.loggedIn + '">' + d.name + '</b></chx_span>' + (e_o === 1 ? emojione.toImage(d.text) : d.text) + '</chx_p>' +
+                '<chx_p class="shoutbox-comment"><chx_span class="shoutbox-username"><b data-loggedin="' + d.loggedIn + '" data-name="' + d.name + '">' + d.name + '</b></chx_span>' + (e_o === 1 ? emojione.toImage(d.text) : d.text) + '</chx_p>' +
                 '<chx_div class="shoutbox-comment-details"><chx_span class="shoutbox-comment-reply" data-name="' + d.name + '"><chx_i class="icon-reply"></chx_i></chx_span>' +
                 '<chx_span class="shoutbox-comment-ago">' + d.timeAgo + '</chx_span></chx_div>' +
                 '</chx_li>');
@@ -344,7 +340,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
         jQuery('.' + chx_resize).css(chx_height);
         
         // making ChatX appear after scrollbar library loaded as well as some other functions
-        jQuery.when(jQuery("#chatx").fadeIn(0))
+        jQuery.when(jQuery("#chatx").fadeIn(150))
             .done(function() {
                 chatxVisibility();
                 scrollBottom();
@@ -353,10 +349,8 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
                 });
                 fastTrackIsOn();
                 loadNickname();
-                
             });
-            
-        
+
     });
 
     // Loading jquery-ui.min library and executing draggable and resizable funcs afrer library is loaded
@@ -396,10 +390,6 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
             window.resizedFinished = setTimeout(function() {
                 jQuery(a).fadeIn(200);
             }, 500);
-            if(!window.resized) {
-                jQuery(".shoutbox-content chx_li:last-child").removeClass("chx-firefox-fix");
-            }
-            window.resized = true;
         });
         jQuery('<chx_div class="resize-helper"></chx_div>').appendTo('#chatx .ui-resizable-s');
 
@@ -532,8 +522,6 @@ function chatSubmit() {
         jQuery("#chx-new-message").submit();
         jQuery('.chx-pre-textarea, #chx-new-message').removeClass("scrollable");
         jQuery(".chx-container").stop().animate({ scrollTop: jQuery(".shoutbox-content")[0].scrollHeight}, 0);
-        window.resized = false;
-
     }
 }
 
@@ -719,6 +707,7 @@ bb4.onclick = function() {
     jQuery(".chx-color-bb-prompt").css({
         height: height - 3
     });
+    jQuery(".chx-image-bb-prompt").fadeOut(0);
     jQuery(".chx-color-bb-prompt").fadeIn(300);
 
     bb4_1.onclick = function() {
@@ -753,6 +742,7 @@ bb5.onclick = function() {
     jQuery(".chx-image-bb-prompt").css({
         height: height - 3
     });
+    jQuery(".chx-color-bb-prompt").fadeOut(0);
     jQuery(".chx-image-bb-prompt").fadeIn(300);
 }
 bb6.onclick = function() {
