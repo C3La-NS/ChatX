@@ -129,6 +129,17 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                         <input id="maxHistoryShouts_input" type="text" name="m_h" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_h; ?>">
                     </div>
                     <div style="width: 75%; float:left">
+                        <p><?php echo $lang['SOUND_NOTIFICATION']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                        <select name="n_s">
+                          <option value="1" <?php if( $n_s == '1' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_1']; ?></option> 
+                          <option value="2" <?php if( $n_s == '2' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_2']; ?></option>
+                          <option value="3" <?php if( $n_s == '3' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_3']; ?></option>
+                          <option value="null" <?php if( $n_s == 'null' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_NULL']; ?></option>
+                        </select>
+                    </div>
+                    <div style="width: 75%; float:left">
                         <p><?php echo $lang['LANGUAGE']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
@@ -218,6 +229,7 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
       } else {
           echo '<p class="error">' . $lang['ZERO_NOT_ALLOWED'] . '</p>';
       }
+      $updateSettings->notificSound = $_POST['n_s'];
       $updateSettings->langPack = $_POST['l_g'];
       if( !empty($_POST['s_d']) ) {
         $url = preg_replace("#/$#", "", $_POST['s_d']);

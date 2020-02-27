@@ -4,6 +4,7 @@ var management = 'ChatX management';
     signup = 'Sign Up';
     mybbSignup = 'Enter room';
     logout = 'Logout';
+    chat = 'Chat';
     nameInputValue = 'Enter name';
     noNameError = 'Please insert your name';
     fastUpdate = 'Fast track update';

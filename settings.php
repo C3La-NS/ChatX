@@ -29,6 +29,7 @@ $getSettings = $repoSettings->query()
         $m_s = $settings->maxShout;
         $m_h = $settings->maxHistory;
         $l_g = $settings->langPack;
+        $n_s = $settings->notificSound;
         $s_d = $settings->siteDomain;
         $b_u = $settings->bannedUsername;
     }

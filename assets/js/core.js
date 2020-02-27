@@ -1,7 +1,7 @@
 /*
 ###################################################################
             CHATX BUILDING MARKUP, UI AND ADDING CSS STYLES
-            VERSION 1.9.0
+            VERSION 2.2.0
 ###################################################################
 */
 
@@ -16,7 +16,7 @@ const markup = `
             <chx_header>
                 <chx_div class="chx-bar">
                     <chx_i class="icon-chat"></chx_i>
-                    <chx_span>ChatX</chx_span>
+                    <chx_span></chx_span>
                     <chx_div class="chx-pulsating-circle"></chx_div>
                     <input id="false_shoutbox_name" type="name" maxlength="15" placeholder onblur="valName()"/>
                     <chx_div class="name-required"></chx_div>
@@ -28,6 +28,9 @@ const markup = `
                                 <chx_span class="chx-fast-track"></chx_span>
                                 <input type="checkbox" id="icd" name="icd" value="icd"/>
                                 <label for="icd"></label>
+                            </chx_div>
+                            <chx_div>
+                                <chx_span class="chx-sound-notific"><chx_i class="icon-unmute"></chx_i></chx_span>
                             </chx_div>
                             <chx_div>
                                 <a class="chx-management-link" target="_blank"></a>
@@ -161,7 +164,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
         if (!canPostComment) return;
 
-        var name = nameElement.val().trim();
+        var name = sessionName === '' ? nameElement.val().trim() : sessionName;
         var comment = commentElement.val().trim();
 
         if (name.length && comment.length && comment.length <= m_c) {
@@ -270,6 +273,32 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
     }
 
+    function notification() {
+        var lastId = jQuery("chx_li").last().attr('class');
+        var localId = localStorage.getItem('chx_id');
+        if (jQuery("#chatx").hasClass("minimized")) {
+            if(lastId !== localId) {
+                jQuery(".chx-bar chx_span").addClass("chx-new");
+
+            }
+        } else {
+            var lastName = jQuery(".shoutbox-username b").last().data("name");
+            soundMuted = localStorage.getItem('soundMuted');
+            if(lastId !== localId && localId !== 'denied' && lastName !== sessionName && sessionName && n_s !== 'null' && !soundMuted) {
+                var src = chatx_server + 'assets/audio/' + n_s + '.ogg';
+                var audio = new Audio(src);
+                audio.play();
+            }
+            localStorage.setItem('chx_id', lastId);
+        }
+    }
+    
+    function highlightMyMsg() {
+        if(sessionName !== '') {
+            jQuery(".shoutbox-username b[data-loggedin='true']:contains('" + sessionName + "')").closest("chx_li").attr("id", "chx-my-msg");
+        }
+    }
+
     function load() {
         jQuery.ajax({
             dataType: "json",
@@ -282,6 +311,8 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
                 if (window.atBottom) {
                     scrollBottom();
                 }
+                notification();
+                highlightMyMsg();
             }
 
         });
@@ -292,7 +323,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
        ul.empty();
 
         data.forEach(function(d) {
-            ul.prepend('<chx_li>' +
+            ul.prepend('<chx_li class="' + d.id + '">' +
                 '<chx_p class="shoutbox-comment"><chx_span class="shoutbox-username"><b data-loggedin="' + d.loggedIn + '" data-name="' + d.name + '">' + d.name + '</b></chx_span>' + (e_o === 1 ? emojione.toImage(d.text) : d.text) + '</chx_p>' +
                 '<chx_div class="shoutbox-comment-details"><chx_span class="shoutbox-comment-reply" data-name="' + d.name + '"><chx_i class="icon-reply"></chx_i></chx_span>' +
                 '<chx_span class="shoutbox-comment-ago">' + d.timeAgo + '</chx_span></chx_div>' +
@@ -349,6 +380,9 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
                 });
                 fastTrackIsOn();
                 loadNickname();
+                if(typeof soundMuted !== 'undefined' && soundMuted) {
+                    jQuery('.icon-unmute').toggleClass('icon-unmute icon-mute');
+                }
             });
 
     });
@@ -407,6 +441,7 @@ jQuery.getScript(chatx_server + 'dynamic_js.php', function() {
 
     // language pack
     jQuery.getScript(chatx_server + 'data/languages/' + l_g + '/app_lang.' + l_g + '.php', function() {
+        jQuery(".chx-bar chx_span").first().text(chat);
         jQuery("#false_shoutbox_name").attr("placeholder", nameInputValue);
         jQuery(".chx-management-link").text(management);
         jQuery(".name-required").text(noNameError);
@@ -448,12 +483,23 @@ jQuery('.icon-expand').on('click', function() {
         jQuery('#chatx').addClass("expanded", true);
         localStorage.toggled = "expanded";
     }
+    localStorage.setItem('chx_id', jQuery("chx_li").last().attr('class'));
+    jQuery(".chx-bar chx_span").removeClass("chx-new");
 
 });
 
 jQuery('.icon-minimize').on('click', function() {
     jQuery('#chatx').removeClass('expanded');
     localStorage.toggled = "minimized";
+});
+
+jQuery('.icon-unmute, .icon-mute').on('click', function() {
+    jQuery(this).toggleClass("icon-unmute icon-mute");
+    if(jQuery(this).hasClass('icon-mute')) {
+        localStorage.setItem('soundMuted', '1');
+    } else {
+        localStorage.removeItem('soundMuted');
+    }
 });
 
 // Keep nickname input in localstorage
@@ -484,9 +530,15 @@ textarea.addEventListener('input', function() {
         jQuery('.chx-pre-textarea, #chx-new-message').removeClass("scrollable");
     }
     if ( !jQuery('.shoutbox-form').visible() ) {
-        var calcFormHeight = jQuery('.chx-container').height()  - 18;
-        jQuery('.chx-container').css("height", calcFormHeight + "px");
-        localStorage.setItem(chx_resize, '{"height":"'+ calcFormHeight +'px"}');
+        if(jQuery('.chx-container').height() > 360) {
+            var calcFormHeight = jQuery('.chx-container').height()  - 18;
+            jQuery('.chx-container').css("height", calcFormHeight + "px");
+            localStorage.setItem(chx_resize, '{"height":"'+ calcFormHeight +'px"}');
+        } else {
+            var top = parseInt($('#chatx').css('top'), 10);
+            jQuery('#chatx').css('top', top - 18 + 'px')
+
+        }
     }
 });
 
@@ -679,6 +731,10 @@ jQuery(document).on('keydown', function(e) {
     if ((e.metaKey || e.altKey) && (String.fromCharCode(e.which).toLowerCase() === 'q')) {
         jQuery(".bb-popup").fadeIn(300);
     }
+});
+
+jQuery('.icon-plus, .icon-color').mousedown(function(event) {
+  event.preventDefault();
 });
 
 jQuery(document).on('click touchstart', function(event) {

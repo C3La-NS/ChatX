@@ -4,6 +4,7 @@ var management = 'Управление ChatX';
     signup = 'Регистр.';
     mybbSignup = 'Войти в конференцию';
     logout = 'Выйти';
+    chat = 'Чат';
     nameInputValue = 'Введите имя';
     noNameError = 'Введите ваше имя';
     fastUpdate = 'Быстрое обновление';

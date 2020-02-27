@@ -6,14 +6,15 @@ $b = '000';
 ?>
 
 var sessionName = '<?php echo $a ?>';
-var fastTrack = '<?php echo $f_t . $b ?>';
-var slowTrack = '<?php echo $s_t . $b ?>';
-var r_e = <?php echo $r_e ?>;
-var e_o = <?php echo $e_o ?>;
-var f_g = <?php echo $f_g ?>;
-var m_a = <?php echo $m_a ?>;
-var m_c = '<?php echo $m_c ?>';
-var l_g = '<?php echo $l_g ?>';
+fastTrack = '<?php echo $f_t . $b ?>';
+slowTrack = '<?php echo $s_t . $b ?>';
+r_e = <?php echo $r_e ?>;
+e_o = <?php echo $e_o ?>;
+f_g = <?php echo $f_g ?>;
+m_a = <?php echo $m_a ?>;
+m_c = '<?php echo $m_c ?>';
+n_s = '<?php echo $n_s ?>';
+l_g = '<?php echo $l_g ?>';
 
 <?php
 if ( $r_a === '1' ) {

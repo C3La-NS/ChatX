@@ -16,8 +16,20 @@ $config = array(
 $relativeTime = new \RelativeTime\RelativeTime($config);
         
 foreach($shouts as $shout) {
-    $shout->timeAgo = $relativeTime->timeAgo($shout->createdAt);
-    $results[] = $shout;
+    $id = $shout->getId();
+    $id = mb_substr($id, 0, 4);
+    $loggedIn = $shout->loggedIn;
+    $text = $shout->text;
+    $name = $shout->name;
+    $timeAgo = $relativeTime->timeAgo($shout->createdAt);
+    $buildArray = array(
+        'id' => $id,
+        'loggedIn' => $loggedIn,
+        'text' => $text,
+        'name' => $name,
+        'timeAgo' => $timeAgo
+    );  
+    $results[] = $buildArray;
 }
 
 header('Content-type: application/json; charset=utf-8');
@@ -28,7 +40,7 @@ if ( $r_a === '1' ) {
             session_destroy();
         } else {
             include 'data/languages/' . $l_g . '/app_lang.extra.' . $l_g . '.php';
-            echo '[{"text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
+            echo '[{"id":"denied","text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
         }
         die();
     } else {
