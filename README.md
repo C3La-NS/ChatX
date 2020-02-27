@@ -93,6 +93,11 @@ ver 2.0.0
 <li>All images are hosted on Imgur.com</li>
 ver 2.1.0
 <li>Username styling</li>
+ver 2.2.0
+<li>Notification for the new messages when widget is minimized</li>
+<li>Audio notifications for the new messages when user is logged in</li>
+<li>Highlighted messages of its owner</li>
+<li>Easier style customization with CSS vars</li>
 <li>Bug fixes</li>
 
 <h2>ToDo list:</h2>
@@ -101,7 +106,7 @@ ChatX is still under development. We are expecting more improvements and feature
 <li>Templates</li>
 
 <h3>Long-term perspective:</h3>
-<li>Notification for the new messages when widget is minimized</li>
+
 
 <h2>Acknowledgements</h2>
 Thanks Tutorialzine for the initial shoutbox script release.
