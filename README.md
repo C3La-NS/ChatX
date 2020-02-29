@@ -11,6 +11,19 @@ The idea behind the development of ChatX was to create an easy-to-use compact ch
 <h2>Preview image</h2>
 <img src="https://imgur.com/wkjwH2n.png">
 
+<h2>Why ChatX?</h2>
+
+There are plenty chatroom implementations on the web, still ChatX may be different from its many alternatives.
+But what is it about ChatX that makes it a bit special?
+<br />
+To begin with, we beleive that a chat is more convenient when it remains on screen: whatever you do or wherever you navigate on the website ChatX is always within reach but never obstructing the view. You can drag and resize it, expand or minimize within your browser viewport making it the most suitable for you. And the chat will remember every state.
+<br />
+Than, ChatX is very easy to install. Just unzip the archive on your hosting and the script is ready to go! No MySQL databases, complex dependencies or additional setups. PHP 5.3-5.6 or higher is enough. It must work nicely even on a free web-hosting. 
+<br />
+The simplicity is stupidly impressive. Yet ChatX has all the main settings a regular chat should have. And more, you can easily manage the chat global functions without a necessity to have knowledge in coding. Just a perfect solution if you're a beginner not willing to spend hours understanding things in Javascript or PHP.
+<br />
+We love ChatX wholeheartedly. And we do our best to make it user-friendly. It's free, without ads or distracting copyrights.
+
 <br />
 <h2>Main features:</h2>
 <li>Flat file storing</li>
@@ -68,7 +81,7 @@ ver 1.6.0
 <li>Json files no longer accessible directly</li>
 <li>General security improvements</li>
 <li>Complete userlist page</li>
-<li>New page - Setups.php. Easy way of editing settings</li>
+<li>New page - Setups.php. Easy way to edit settings</li>
 <li>ChatX now checks when it is outside viewpoint and restores its position</li>
 ver 1.7.0
 <li>Featherlight library allows viewing uploaded images in modal window</li>
