@@ -95,6 +95,9 @@
     color: var(--chx-eighth-color);
     border-bottom-color: var(--chx-fifth-color);
 }
+.chx-key {
+    border-color: var(--chx-secondary-color);
+}
 .shoutbox-form form:not(#imgur_uploader), .scrollbar-macosx { /* Reply form background & scrollbar background */
     background-color: var(--chx-primary-color);
 }
