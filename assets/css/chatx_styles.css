@@ -954,8 +954,9 @@ img.emojione{
 
 .chx-key {
     padding: 0px 7px;
-    border: 1px solid #87bfef;
-    border-bottom: 2px solid #87bfef;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-width: 2px;
     border-radius: 4px;
 }
 
