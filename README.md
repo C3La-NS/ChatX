@@ -103,10 +103,10 @@ ver 2.2.0
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in the future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :)
 <h3>Short-term perspective:</h3>
-<li>Templates</li>
+<li>Mobile optimization</li>
 
 <h3>Long-term perspective:</h3>
-
+<li>Template generator</li>
 
 <h2>Acknowledgements</h2>
 Thanks Tutorialzine for the initial shoutbox script release.
