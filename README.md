@@ -4,12 +4,12 @@ Simple free PHP &amp; jQuery chat project with flat file database
 <h2>What is ChatX?</h2>
 ChatX is a highly customized and refined version of the first iteration of ShoutBox script originally introduced on <a href="https://tutorialzine.com/2015/01/shoutbox-php-jquery">Tutorialzine</a> in 2015.
 <br />
-The script uses flat file database only, built with the use of Flywheel and RelativeTime PHP libraries, jQuery, HTML, CSS. It's easy to install and modify, works perfectly with any PHP 5.3 or higher hosting services.
+The script uses flat file database, built with the use of Flywheel and RelativeTime PHP libraries & jQuery. It's easy to install and modify, works great with PHP 5.6 or higher hosting services.
 <br />
-The idea behind the development of ChatX was to create an easy-to-use compact chat with draggable functionality and fully-customizable color schemes, capable of working on any web-site with the code installed.
+The idea behind the development of ChatX was to create an easy-to-use compact chat widget and fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://imgur.com/wkjwH2n.png">
+<img src="https://imgur.com/AnghnXW.png">
 
 <h2>Why ChatX?</h2>
 
