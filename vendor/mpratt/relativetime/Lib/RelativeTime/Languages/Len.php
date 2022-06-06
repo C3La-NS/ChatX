@@ -1,9 +1,12 @@
 <?php
 /**
- * English.php
+ * English
  *
  * @author  Michael Pratt <pratt@hablarmierda.net>
  * @link    http://www.michael-pratt.com/
+ * 
+ * @modified  C3La-NS
+ * @link      https://xlns.ru/
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,31 +21,31 @@ namespace RelativeTime\Languages;
 class Len extends \RelativeTime\Adapters\Language
 {
     protected $strings = array(
-        'now' => 'just now',
-        'ago' => '%s ago',
+        'now' => 'now',
+        'ago' => '%s',
         'left' => '%s left',
         'seconds' => array(
-            'plural' => '%d seconds',
-            'singular' => '%d second',
+            'plural' => '%d sec.',
+            'singular' => '%d sec.',
         ),
         'minutes' => array(
-            'plural' => '%d minutes',
-            'singular' => '%d minute',
+            'plural' => '%d min.',
+            'singular' => '%d min.',
         ),
         'hours' => array(
-            'plural' => '%d hours',
+            'plural' => '%d h.',
             'singular' => '%d hour',
         ),
         'days' => array(
-            'plural' => '%d days',
+            'plural' => '%d d.',
             'singular' => '%d day',
         ),
         'months' => array(
-            'plural' => '%d months',
-            'singular' => '%d month',
+            'plural' => '%d mo.',
+            'singular' => '%d mo.',
         ),
         'years' => array(
-            'plural' => '%d years',
+            'plural' => '%d y.',
             'singular' => '%d year',
         ),
     );

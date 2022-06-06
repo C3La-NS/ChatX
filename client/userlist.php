@@ -110,7 +110,8 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 25 && isset($_SESS
     <li><a href="index.php"><?php echo $lang['SHOUT_MANAGEMENT']; ?></a></li>
     <li><a href="userlist.php"><?php echo $lang['USER_MANAGEMENT']; ?></a></li>
     <li><a href="setups.php"><?php echo $lang['CHATX_SETUPS']; ?></a></li>
-    <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a></li>
+    <li><a href="styling.php"><?php echo $lang['CHATX_STYLING']; ?></a></li>
+    <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a> <span><?php echo $lang['APPLICATION_VERSON']; ?></span></li>
     <h2><?php echo $lang['USER_USERLIST']; ?></h2>
 </aside>
 <div id="primary" class="col-md-8 mb-xs-24">

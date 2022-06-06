@@ -80,7 +80,5 @@ if(!empty($_POST['reg_u']) && mb_strlen($_POST['reg_u'], 'utf-8') <= 25 && !empt
     
 }
 
-
-
 header("Access-Control-Allow-Credentials: true");
 echo json_encode($form_data);

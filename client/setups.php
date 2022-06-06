@@ -48,7 +48,8 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
             <li><a href="index.php"><?php echo $lang['SHOUT_MANAGEMENT']; ?></a></li>
             <li><a href="userlist.php"><?php echo $lang['USER_MANAGEMENT']; ?></a></li>
             <li><a href="setups.php"><?php echo $lang['CHATX_SETUPS']; ?></a></li>
-            <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a></li>
+            <li><a href="styling.php"><?php echo $lang['CHATX_STYLING']; ?></a></li>
+            <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a> <span><?php echo $lang['APPLICATION_VERSON']; ?></span></li>
             <h2><?php echo $lang['AUTO_PURGING']; ?></h2>
             <p><?php echo $lang['AUTO_PURGING_DESC1']; ?></p>
             <p><?php echo $lang['AUTO_PURGING_DESC2']; ?></p>
@@ -61,6 +62,7 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                 </section>
                     
                 <form id="settings" method="post">
+                    <button class="button" name="s" style="margin-top: .6em"><?php echo $lang['SAVE_SETTINGS']; ?></button>
                     <div style="width: 75%; float:left">
                         <p><?php echo $lang['LOGGED_IN_CAN_READ&SEND_MESSAGES']; ?></p>
                     </div>
@@ -101,14 +103,14 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                        <input id="icd4" type="checkbox" name="f_g" <?php if( !empty($_POST['f_g']) || $f_g == '1' ) {echo 'checked';} ?> />
                        <label for="icd4"></label>
                     </div>
+                    
                     <div style="width: 75%; float:left">
-                        <p><?php echo $lang['MYBB_INTEGRATION']; ?></p>
+                        <p><?php echo $lang['DEMO_PAGE']; ?></p>
                     </div>
                     <div style="width: 24.5%; float:right">
-                       <input id="icd5" type="checkbox" name="m_a" <?php if( !empty($_POST['m_a']) || $m_a == '1' ) {echo 'checked';} ?> />
-                       <label for="icd5"></label>
+                       <input id="icd6" type="checkbox" name="d_p" <?php if( !empty($_POST['d_p']) || $d_p == '1' ) {echo 'checked';} ?> />
+                       <label for="icd6"></label>
                     </div>
-                    
                     <div style="width: 75%; float:left">
                         <p><?php echo $lang['MESSAGE_MAX_CHARS']; ?></p>
                     </div>
@@ -133,9 +135,10 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                     </div>
                     <div style="width: 24.5%; float:right">
                         <select name="n_s">
-                          <option value="1" <?php if( $n_s == '1' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_1']; ?></option> 
-                          <option value="2" <?php if( $n_s == '2' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_2']; ?></option>
-                          <option value="3" <?php if( $n_s == '3' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_3']; ?></option>
+                          <option value="1" <?php if( $n_s == '1' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_VARIANT']; ?> 1</option> 
+                          <option value="2" <?php if( $n_s == '2' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_VARIANT']; ?> 2</option>
+                          <option value="3" <?php if( $n_s == '3' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_VARIANT']; ?> 3</option>
+                          <option value="4" <?php if( $n_s == '4' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_VARIANT']; ?> 4</option>
                           <option value="null" <?php if( $n_s == 'null' ) {echo 'selected';} ?> /><?php echo $lang['NOTIFICATION_NULL']; ?></option>
                         </select>
                     </div>
@@ -148,19 +151,37 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
                           <option value="ru" <?php if( $l_g == 'ru' ) {echo 'selected';} ?> /><?php echo $lang['LANGUAGE_RU']; ?></option>
                         </select>
                     </div>
-                    <div style="width: 65%; float:left">
-                        <p><?php echo $lang['EXTERNAL_DOMAIN']; ?></p>
-                    </div>
-                    <div style="width: 34.5%; float:right">
-                        <input id="siteDomain_input" type="text" name="s_d" placeholder="https://domain.com" value="<?php echo $s_d; ?>">
-                    </div>
+
+                    <span class="spoiler" onclick="view('t1'); return false"><center><?php echo $lang['ADDITIONAL_SETTINGS']; ?></center></span>
+                        <div id="t1" class="legacy-functions">
+                            <div style="width: 65%; float:left">
+                                <p><?php echo $lang['EXTERNAL_DOMAIN']; ?></p>
+                            </div>
+                            <div style="width: 34.5%; float:right">
+                                <input id="siteDomain_input" type="text" name="s_d" placeholder="https://domain.com" value="<?php echo $s_d; ?>">
+                            </div>
+                            <div style="width: 75%; float:left">
+                                <p><?php echo $lang['MYBB_INTEGRATION']; ?></p>
+                            </div>
+                            <div style="width: 24.5%; float:right">
+                               <input id="icd5" type="checkbox" name="m_a" <?php if( !empty($_POST['m_a']) || $m_a == '1' ) {echo 'checked';} ?> />
+                               <label for="icd5"></label>
+                            </div>
+                        </div>                    
+                    
+                    
                     <button class="button" name="s"><?php echo $lang['SAVE_SETTINGS']; ?></button>
                 </form>
             </div><!-- .row -->
         </div><!-- #primary -->
     </div><!-- #main.container -->
 
-
+    <script>
+    function view(n) {
+        style = document.getElementById(n).style;
+        style.display = (style.display == 'block') ? 'none' : 'block';
+    }
+    </script>
 
 <?php 
     if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
@@ -209,6 +230,13 @@ if( isset( $_POST['s']) && isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
         
       } else  {
         $updateSettings->mybb = '0';
+        
+      }
+      if( !empty($_POST['d_p']) ) {
+        $updateSettings->demoPage = '1';
+        
+      } else  {
+        $updateSettings->demoPage = '0';
         
       }
       if( !empty($_POST['m_c'] && $_POST['m_c'] >= '1') ) {

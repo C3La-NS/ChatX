@@ -65,7 +65,8 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
       <li><a href="index.php"><?php echo $lang['SHOUT_MANAGEMENT']; ?></a></li>
       <li><a href="userlist.php"><?php echo $lang['USER_MANAGEMENT']; ?></a></li>
       <li><a href="setups.php"><?php echo $lang['CHATX_SETUPS']; ?></a></li>
-      <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a></li>
+      <li><a href="styling.php"><?php echo $lang['CHATX_STYLING']; ?></a></li>
+      <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a> <span><?php echo $lang['APPLICATION_VERSON']; ?></span></li>
       <h2><?php echo $lang['CHATX_WIDGET']; ?></h2>
       <p><strong>1)</strong> <?php echo $lang['CHATX_WIDGET_DESC1']; ?></p>
       <div class="codebox">
@@ -73,18 +74,17 @@ if(isset( $_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'ut
       </div>
       <p><strong>2)</strong> <?php echo $lang['CHATX_WIDGET_DESC2']; ?></p>
       <p><strong>3)</strong> <?php echo $lang['CHATX_WIDGET_DESC3']; ?></p>
-      <?php if ( $e_o === "1" ) { ?>
       <div class="codebox">
-         &lt;script src="https://cdn.jsdelivr.net/npm/emojione@3.1.2/lib/js/emojione.min.js"&gt;&lt;/script&gt;
-      </div>
-      <?php } ?>
-      <div class="codebox">
-         &lt;chx_div id="chatx" class="chat" style="display: none"&gt;&lt;/chx_div&gt;
-         <br>
-         &lt;script&gt;
-         var chatx_server = "<span class=document-url></span>";
-         jQuery.getScript(chatx_server + 'assets/js/core.js');
-         &lt;/script&gt;
+        &lt;script&gt;
+        var chatx_server = '<span class=document-url></span>';
+        function chx_script(u, l) {
+            var e = document.createElement("script");
+            if (l) {e.onload = l;}
+            document.currentScript.parentNode.insertBefore(e, document.currentScript);
+            e.src = u;
+        }
+        chx_script(chatx_server + 'assets/js/core.js');
+        &lt;/script&gt;
       </div>
       <p><strong>4)</strong> <?php echo $lang['CHATX_WIDGET_DESC4']; ?></p>
    </aside>

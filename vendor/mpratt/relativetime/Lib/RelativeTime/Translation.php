@@ -31,7 +31,7 @@ class Translation
     public function __construct(array $config = array())
     {
         $this->config = array_merge(array(
-            'language' => '\RelativeTime\Languages\Russian',
+            'language' => '\RelativeTime\Languages\Lru',
             'separator' => ', ',
             'suffix' => true,
         ), $config);
@@ -86,7 +86,7 @@ class Translation
                 return new $lang();
         }
 
-        return new \RelativeTime\Languages\Russian();
+        return new \RelativeTime\Languages\Lru();
     }
 }
 ?>

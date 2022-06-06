@@ -156,7 +156,7 @@ section, .userlist form {
     text-align: center;
 }
 
-.userlist section:after, .userlist section:before {
+.userlist section:after, .userlist section:before, .styling section:first-child::after, .styling section:first-child::before {
 	top: 100%;
 	left: 50%;
 	border: solid transparent;
@@ -168,13 +168,13 @@ section, .userlist form {
 	pointer-events: none;
 }
 
-.userlist section:after {
+.userlist section:after, .styling section:first-child::after {
 	border-color: rgba(251, 251, 251, 0);
 	border-top-color: #fbfbfb;
 	border-width: 15px;
 	margin-left: -15px;
 }
-.userlist section:before {
+.userlist section:before, .styling section:first-child::before {
 	border-color: rgba(221, 221, 221, 0);
 	border-top-color: #ccc;
 	border-width: 16px;
@@ -208,6 +208,10 @@ section, .userlist form {
 
 .row:first-child {
   padding: 40px 15px;
+}
+
+.styling .row {
+  padding: 40px 15px 10px;
 }
 
 .row span {
@@ -488,7 +492,7 @@ article.legend p {
   background: #7d7d7d;
   color: #7d7d7d;
 }
-#settings div {
+#settings div:not(.legacy-functions) {
     display: inline-block;
     height: 55px;
     padding: 10px;
@@ -549,7 +553,7 @@ article.legend p {
     left: 0;
     background: #fff;
     text-align: center;
-    z-index:2;
+    z-index: 7;
 }
 .modal-loading svg {
   width: 54px;
@@ -727,4 +731,24 @@ chx_p {
 }
 .shoutbox-username {
     color: #87bfef;
+}
+
+.legacy-functions {
+    display: none;
+}
+
+.spoiler {
+    margin: 15px 0 !important;
+    padding: 10px 20px;
+    background: #fbfbfb;
+    border: 1px solid #ddd;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.help-section span {
+    padding: .2em .8em;
+    border-radius: 7px;
+    border: 1px solid;
+    border-bottom: 2px solid;
 }

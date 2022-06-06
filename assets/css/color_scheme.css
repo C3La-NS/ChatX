@@ -4,209 +4,242 @@
                in this file.
                — STYLE: CHATX DEFAULT BLUE —
                # Author: C3La-NS
-               # More ChatX templates: https://xlns.ru/chatx
+               # More ChatX templates: https://bit.ly/3pNYMeF
 ###################################################################
 */
 
 :root {
-  --chx-primary-color: #f9fafb; /* dominant color */
-  --chx-secondary-color: #87bfef; /* header, bottom buttons, authentication buttons, user nicknames, borders */
-  --chx-third-color: #fff; /* buttons, even lists */
-  --chx-forth-color: rgba(72, 72, 72, 0.95); /* pop-ups */
-  --chx-fifth-color: #d5dbe1; /* borders */
-  --chx-sixth-color: #ccc; /* pop-up texts */
-  --chx-seventh-color: #5896cb; /* reply button, history links, general links */
-  --chx-eighth-color: #717c87; /* even text lists, helper texts, time-ago */
-  --chx-nineth-color: #717c87; /* odd text lists */
-  --chx-tenth-color: rgba(255, 187, 187, 0.95); /* errors */
-  --chx-eleventh-color: #bb5a5a; /* error texts */
-  --chx-twelveth-color: #51718c; /* input placeholders */
-  --chx-thirteenth-color: #e6f3ff; /* my message */
-  
+  --chx-1-color: #f9fafb; /* dominant color */
+  --chx-2-color: #87bfef; /* header, bottom buttons, authentication buttons, user nicknames, borders */
+  --chx-2-1-color: var(--chx-6-color);
+  --chx-3-color: #fff; /* buttons, even lists */
+  --chx-4-color: rgba(72, 72, 72, 0.95); /* pop-ups */
+  --chx-5-color: #c3dff9; /* borders */
+  --chx-6-color: #f1f9ff; /* pop-up texts */
+  --chx-7-color: #5896cb; /* reply button, history links, general links */
+  --chx-8-color: #717c87; /* even text lists, helper texts, time-ago */
+  --chx-9-color: #717c87; /* odd text lists */
+  --chx-10-color: rgba(255, 187, 187, 0.95); /* errors */
+  --chx-11-color: #bb5a5a; /* error texts */
+  --chx-12-color: #51718c; /* input placeholders */
+  --chx-13-color: #e6f3ff; /* my message */
+
+  /* # # # More components # # # */
+  --chx-selection-color: rgb(135 191 239 / 45%); /* chat text selection */
+  --chx-placeholer-color: var(----chx-5-color); /* chat placeholders */
+  --chx-scrollbar-color: var(--chx-4-color); /* chat scrollbar */
 }
 
+.shoutbox-comment-time, chx_li[data="chx-img-msg"] .shoutbox-comment-ago, chx_li[data="chx-img-msg"] .chxicon-reply {
+    color: var(--chx-6-color);
+}
+
+#chatx ::selection {
+  background: var(--chx-selection-color);
+}
+
+#chatx ::placeholder {
+    color: var(--chx-placeholer-color);
+}
+
+.simplebar-scrollbar:before {
+    background: var(--chx-scrollbar-color);
+}
+
+#chatx.expanded .chx-container::after {
+  background-image: url(../img/default_bg.png); /* optional chat background image */
+  opacity: 0.03; /* optional background transparency */
+  background-repeat: repeat;
+}
+
+/*
+###################################################################
+                Properties. Advanced styling
+###################################################################
+*/
+
 #chatx .chx-bar { /* Chat header */
-    background: var(--chx-secondary-color);
-    color:  var(--chx-third-color); /* Header text and icons */
+    background: var(--chx-2-color);
+    color: var(--chx-2-1-color); /* Header text and icons */
+}
+
+.chx-bar.chx-new:after {
+    background: var(--chx-2-1-color);
 }
 
 #false_shoutbox_name {  /* Username field */
-    background: transparent;
-    color: var(--chx-third-color);
+    background: rgb(0 0 0 / 12%);
+    color: var(--chx-2-1-color);
 }
 
-.name-required {
-    background: var(--chx-tenth-color);
-    color: var(--chx-eleventh-color);
+.name-required { /* Error empty name field */
+    background: var(--chx-10-color);
+    color: var(--chx-11-color);
 }
 
 .name-required:before {
-    border-bottom-color: var(--chx-tenth-color);
+    border-bottom-color: var(--chx-10-color);
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
 }
 
 #chatx .chx-container { /* Border-color on the left side of the chat window. Right side has no border due to the scroll bar */
-    border-left-color: var(--chx-fifth-color);
-    border-right-color: var(--chx-fifth-color);
+    border-left-color: var(--chx-5-color);
+    border-right-color: var(--chx-5-color);
 }
 
-.shoutbox-content chx_li:nth-child(even) { /* Background and color for even shouts */
-    background: var(--chx-third-color);
-    color:  var(--chx-eighth-color);
+.shoutbox-content chx_li:nth-child(even), .shoutbox-history .shoutbox-history { /* Background and color for even shouts */
+    color:  var(--chx-8-color);
 }
 
-.shoutbox-content chx_li:nth-child(odd) { /* Background and color for odd shouts */
-    background:var(--chx-primary-color);
-    color:  var(--chx-nineth-color);
+.shoutbox-content chx_li:nth-child(odd), .shoutbox-history chx_li:nth-child(odd) { /* Background and color for odd shouts */
+    color:  var(--chx-9-color);
 }
 
-.shoutbox-content chx_li {
-    border-bottom-color: var(--chx-fifth-color);
+.shoutbox-content chx_li#chx-my-msg .shoutbox-comment, .shoutbox-history chx_li#chx-my-msg .shoutbox-comment {
+    background: var(--chx-13-color);
 }
 
-.shoutbox-content chx_li:last-child { /* Making the border of the last shout in the shout-list transparent so that it didn't controdict in style with the following .shoutbox-helper block border */
-    border-bottom-color: transparent;   
+.shoutbox-username { /* Author in shouts */
+    color:  var(--chx-2-color);
 }
 
-.shoutbox-content chx_li#chx-my-msg {
-    background: var(--chx-thirteenth-color);
+.shoutbox-content a, .shoutbox-history a { /* Links color in messages and some other parts. "!important" property may be required in some cases */
+    color: var(--chx-7-color) !important;
 }
 
-.shoutbox-username {
-    color:  var(--chx-secondary-color);
+.shoutbox-comment {
+    background: var(--chx-3-color);
+    border-color: var(--chx-5-color);
+}
+chx_li .shoutbox-comment::before {
+    border-right-color: var(--chx-5-color);
+}
+chx_li#chx-my-msg .shoutbox-comment::before {
+    border-left-color: var(--chx-5-color);
 }
 
-.shoutbox-content a, .chx-history a { /* Links color in messages and some other parts. "!important" property may be required in some cases */
-    color: var(--chx-seventh-color) !important;
-}
-
-.shoutbox-comment-reply { /* Reply button and icon */
-    color:  var(--chx-seventh-color);
+.shoutbox-comment-reply { /* Reply button */
+    color:  var(--chx-7-color);
 }
 
 .shoutbox-comment-ago { /* Time ago */
-    color: var(--chx-eighth-color);
+    color: var(--chx-8-color);
     opacity: .5;
 }
 
-.shoutbox-helper, .shoutbox-content, .chx-history {
-    color: var(--chx-eighth-color);
-    border-bottom-color: var(--chx-fifth-color);
-}
-.chx-key {
-    border-color: var(--chx-secondary-color);
-}
-.shoutbox-form form:not(#imgur_uploader), .scrollbar-macosx { /* Reply form background & scrollbar background */
-    background-color: var(--chx-primary-color);
+.shoutbox-content, .shoutbox-history, .chx-history { /* Chat helper container */
+    color: var(--chx-8-color);
 }
 
-.chx-color-bb-prompt, .chx-image-bb-prompt {
-    background: var(--chx-primary-color);
+.chx-history chx_i {
+    background: var(--chx-2-color);
+    color: var(--chx-6-color);
 }
 
-.ui-resizable-s {
-    background: var(--chx-primary-color);
-    border-top-color: var(--chx-secondary-color);
+.shoutbox-form form:not(#imgur_uploader), .chx-container { /* Reply form */
+    background-color: var(--chx-1-color);
+}
+
+.chx-color-bb-prompt, .chx-image-bb-prompt, .chx-link-bb-prompt {
+    background: var(--chx-3-color);
+}
+.chx-link-bb-prompt input:first-child {
+    border-bottom: 1px solid var(--chx-2-color) !important;
+}
+
+.ui-resizable-s { /* Widget resize handler */
+    background: var(--chx-1-color);
+    border-top-color: var(--chx-2-color);
 }
 
 .shoutbox-form form:not(#imgur_uploader) { /* Reply form */
-    color: var(--chx-secondary-color);
-    border-top-color: var(--chx-secondary-color);
-    border-left-color: var(--chx-fifth-color);
-    border-bottom-color: var(--chx-fifth-color);
-    border-right-color: var(--chx-fifth-color);
+    color: var(--chx-2-color);
+    border-top-color: var(--chx-2-color);
+    border-left-color: var(--chx-5-color);
+    border-bottom-color: var(--chx-5-color);
+    border-right-color: var(--chx-5-color);
 }
 
-#shoutbox-comment, input[name="url_to_img"] { /* Textarea & external image input. Preferable to leave background transparent, but you may want to customize the text color inside containers */
+#shoutbox-comment, input[name="url_to_img"], input[name="url_to_link"], input[name="link_desc"] { /* Textarea & external image input. Preferable to leave background transparent, but you may want to customize the text color inside containers */
     background-color: transparent;
-    color: var(--chx-eighth-color);
+    color: var(--chx-8-color);
 }
 
-#false_shoutbox_name::-webkit-input-placeholder {
- /* Chrome/Opera/Safari */
-  color: var(--chx-twelveth-color);
+#false_shoutbox_name::placeholder {
+    color: var(--chx-2-1-color);
+    opacity: .5;
 }
 
-#false_shoutbox_name::-moz-placeholder {
- /* Firefox 19+ */
-  color: var(--chx-twelveth-color);
-}
-
-#false_shoutbox_name:-ms-input-placeholder {
- /* IE 10+ */
-  color: var(--chx-twelveth-color);
-}
-
-.icon-gear:active, .icon-refresh:active, .icon-minimize:active, .icon-expand:active, .icon-send:hover, .featherlight-close .icon-plus {
+.chxicon-gear:active, .chxicon-refresh:active, .chxicon-minimize:active, .chxicon-expand:active, .chxicon-send:hover, .featherlight-close .chxicon-plus {
   filter: brightness(92%);
 }
 
-.loading-modal {
-    background: var(--chx-forth-color);
+.loading-modal { /* Image uploading modal container */
+    background: var(--chx-4-color);
 }
 
 .chat_popover {
-    background: var(--chx-forth-color);
-    color: var(--chx-third-color);
+    background: var(--chx-4-color);
+    color: var(--chx-6-color);
 }
 
 .chat_popover:before {
     border-top-color: transparent;
     border-right-color: transparent;
-    border-bottom-color: var(--chx-forth-color);
+    border-bottom-color: var(--chx-4-color);
     border-left-color: transparent;
 }
 
-#chatx .chx-sound-notific chx_i, #chatx .chx-management-link, #chatx .chatx_logout, #chatx .chatx_login {
-    color: var(--chx-sixth-color);
+#chatx .chx-sound-notific chx_i, #chatx .chx-push-notific chx_i, #chatx .chx-help chx_i,#chatx .chx-management-link, #chatx .chatx_logout, #chatx .chatx_login {
+    color: var(--chx-6-color);
 }
 
 #chatx .chat_popover input[type=checkbox]:checked + label {
-  background: var(--chx-secondary-color);
+  background: var(--chx-2-color);
 }
 
 #chatx .chat_popover label:before {
-  background: var(--chx-third-color);
-  color: var(--chx-third-color);
+  background: var(--chx-6-color);
+  color: var(--chx-6-color);
 }
 
 .chx-pulsating-circle:before {
-    background-color: var(--chx-third-color);
+    background-color: var(--chx-2-1-color);
 }
 
 .chx-pulsating-circle:after {
-    background-color: var(--chx-third-color);
+    background-color: var(--chx-2-1-color);
 }
 
 .chx-login-form {
-    background-color: var(--chx-forth-color);
+    background-color: var(--chx-4-color);
 }
 
-.chx-login-form .icon-plus {
-    color: var(--chx-third-color);
+.chx-login-form .chxicon-plus {
+    color: var(--chx-6-color);
 }
 
-.chx-login-form .icon-plus:hover, .chx-login-button:hover {
-    color: var(--chx-secondary-color);
+.chx-login-form .chxicon-plus:hover, .chx-login-button:hover {
+    color: var(--chx-2-color);
 }
 
 .chx-switch-tab {
-    color: var(--chx-third-color);
+    color: var(--chx-6-color);
 }
 
-.chx-switch-tab.active, .chx-bar chx_span.chx-new:after {
-    color: var(--chx-secondary-color);
+.chx-switch-tab.active, .chx-bar.chx-new:after {
+    color: var(--chx-2-color);
 }
 
 .bb-popup {
-    background: var(--chx-forth-color);
-    color: var(--chx-third-color);
+    background: var(--chx-4-color);
+    color: var(--chx-6-color);
 }
 
 .bb-popup:before {
-    border-top-color: var(--chx-forth-color);
+    border-top-color: var(--chx-4-color);
 }
 
 .chx-login-form input[type="text"], .chx-login-form input[type="password"], .bb-popup chx_div:active {
@@ -214,12 +247,12 @@
 }
 
 .chx-login-form input[type="text"], .chx-login-form input[type="password"] {
-    color: var(--chx-secondary-color) !important;
+    color: var(--chx-2-color) !important;
 }
 
 .chx-login-button {
     background: rgba(0, 0, 0, 0.2);
-    color: var(--chx-primary-color);
+    color: var(--chx-6-color);
 }
 
 .chat_popover chx_div:not(:first-child), .chx-sound-notific {
@@ -227,10 +260,22 @@
 }
 
 #chatx .resize-helper {
-    color: var(--chx-secondary-color);
+    color: var(--chx-2-color);
 }
 
-.chx-emojione-error {
-    background: var(--chx-tenth-color);
-    color: var(--chx-eleventh-color);
+.shoutbox-comment-time {
+    background: var(--chx-4-color);
+}
+
+.shoutbox-comment-time::before {
+    border-top-color: var(--chx-4-color);
+}
+
+chx_li[data="chx-img-msg"] .shoutbox-comment-details {
+    background: var(--chx-4-color);
+}
+
+.chx_down {
+    color: var(--chx-6-color);
+    background: var(--chx-2-color);
 }

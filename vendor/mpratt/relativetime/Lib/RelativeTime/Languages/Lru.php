@@ -1,10 +1,10 @@
 <?php
 /**
- * Russian.php
+ * Russian
  *
- * @author  Tolya P. (C3La-NS)  <admin@celans.ru>
- * @link    https://celans.ru/
- *
+ * @author  C3La-NS
+ * @link    https://xlns.ru
+ * 
  * This is a russian language configuration file for RelativeTime
  *
  */
@@ -17,16 +17,16 @@ namespace RelativeTime\Languages;
 class Lru extends \RelativeTime\Adapters\Language
 {
     protected $strings = array(
-        'now' => 'только что',
-        'ago' => '%s назад',
+        'now' => 'сейчас',
+        'ago' => '%s',
         'left' => '%s left',
         'seconds' => array(
             'plural' => '%d сек.',
-            'singular' => '%d секунду',
+            'singular' => '%d секунда',
         ),
         'minutes' => array(
             'plural' => '%d мин.',
-            'singular' => '%d минуту',
+            'singular' => '%d минута',
         ),
         'hours' => array(
             'plural' => '%d ч.',

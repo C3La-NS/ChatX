@@ -12,6 +12,7 @@ $lang['TITLE_MANAGEMENT'] = 'ChatX Management';
 $lang['TITLE_USERS'] = 'ChatX User Management';
 $lang['TITLE_SETTINGS'] = 'ChatX Settings';
 $lang['TITLE_HISTORY'] = 'ChatX History';
+$lang['TITLE_STYLING'] = 'CSS Editor';
 
 // Navbar
 $lang['NAVBAR_GREETING'] = 'Howdy,';
@@ -19,9 +20,10 @@ $lang['NAVBAR_LOGOUT'] = 'LogOut';
 
 // Navigation
 $lang['NAVIGATION'] = 'Navigation';
-$lang['SHOUT_MANAGEMENT'] = 'Shout Management & widget';
+$lang['SHOUT_MANAGEMENT'] = 'Shout Management & Widget';
 $lang['USER_MANAGEMENT'] = 'User Management';
 $lang['CHATX_SETUPS'] = 'ChatX Settings';
+$lang['CHATX_STYLING'] = 'CSS Editor';
 $lang['GITHUB'] = 'GtiHub';
 
 // Moderator Panel Settings
@@ -35,17 +37,17 @@ $lang['RELOAD_MESSAGES_FAST_TRACK'] = 'ChatX reloads messages in <b>fast</b> tra
 $lang['EMOJIONE_LIBRARY'] = 'Use <b>EmojiOne</b> library to replace :) with emoji:';
 $lang['FEATHERLIGHT_LIBRARY'] = 'Use <b>Featherlight</b> library to view uploaded images in a modal box:';
 $lang['MYBB_INTEGRATION'] = 'Use <b>MyBB</b> forum data to log in or sign up users automatically:';
+$lang['DEMO_PAGE'] = 'Show demonstration page with chat';
 $lang['MESSAGE_MAX_CHARS'] = 'Max characters per message:';
 $lang['WIDGET_MAX_SHOUTS'] = 'Max shouts in chat app:';
 $lang['HISTORY_MAX_SHOUTS'] = 'Max shouts in chat history:';
 $lang['SOUND_NOTIFICATION'] = 'Notification sound for new messages:';
-$lang['NOTIFICATION_1'] = 'Sample 1';
-$lang['NOTIFICATION_2'] = 'Sample 2';
-$lang['NOTIFICATION_3'] = 'Sample 3';
+$lang['NOTIFICATION_VARIANT'] = 'Sample';
 $lang['NOTIFICATION_NULL'] = 'Disabled';
 $lang['LANGUAGE'] = 'Appplication language:';
 $lang['LANGUAGE_EN'] = 'English';
 $lang['LANGUAGE_RU'] = 'Russian';
+$lang['ADDITIONAL_SETTINGS'] = 'Additional settings';
 $lang['EXTERNAL_DOMAIN'] = 'External domain where you are going to use ChatX:';
 $lang['SAVE_SETTINGS'] = 'Save Settings';
 $lang['AUTO_PURGING'] = 'Automatic Purging';
@@ -53,7 +55,7 @@ $lang['AUTO_PURGING_DESC1'] = 'In order to preserve ChatX speed it is advisable 
 $lang['AUTO_PURGING_DESC2'] = 'If your server supports CRON, create manually a job that will run <b>delete_old_shouts.php</b> script every 15 minutes-1 hour.';
 $lang['ZERO_NOT_ALLOWED'] = 'Zero is not allowed';
 $lang['UPDATING_PLEASE_WAIT'] = 'Updating settings. Please wait.';
-$lang['TOOLTIP_EMOJIONE_DESC'] = 'This library may affect loading speed of your website. Update widget code after applying this feature.';
+$lang['TOOLTIP_EMOJIONE_DESC'] = 'This library is rather heavy and may affect loading speed of your chat app';
 
 // Index Page (Moderator)
 $lang['CHATX_WIDGET'] = 'ChatX Widget & Installation';
@@ -88,7 +90,7 @@ $lang['DELETING_USERS_DESC1'] = 'Enter existing username to delete them from dat
 $lang['CHANGING_USERS_BUTTON'] = 'Delete User';
 $lang['USER_DELETED'] = 'User Deleted!';
 $lang['ADDING_MODERATORS'] = 'Adding and removing moderators';
-$lang['ADDING_MODERATORS_DESC1'] = 'Enter existing username to make them moderators.Repeat to remove moderator';
+$lang['ADDING_MODERATORS_DESC1'] = 'Enter existing username to make them moderators. Repeat to remove the moderator';
 $lang['ADDING_MODERATOR_BUTTON'] = 'Manage Moderator';
 $lang['MODERATOR_ADDED'] = 'Moderator Added!';
 $lang['MODERATOR_REMOVED'] = 'Moderator Removed!';
@@ -96,6 +98,15 @@ $lang['BLOCKING_USERS'] = 'Blocking users';
 $lang['BLOCKING_USERS_DESC1'] = 'Enter existing username to block them.';
 $lang['BLOCKING_USERS_BUTTON'] = 'Ban user';
 $lang['USER_BANNED'] = 'User Banned!';
+
+// Styling Page (Moderator)
+$lang['TEMPLATES'] = 'Templates';
+$lang['TEMPLATES_DESC1'] = 'You can find more color schemes for ChatX widget on';
+$lang['TEMPLATES_DESC1_1'] = 'this GitHub page';
+$lang['TEMPLATES_DESC2'] = 'Choose a color scheme and replace the contents up to the';
+$lang['CSS_UPDATE'] = 'Update CSS';
+$lang['CSS_EDITOR'] = 'editor';
+$lang['CSS_EDITOR_DESC1'] = 'You can customize widget color scheme and apply your own CSS rules';
 
 // User pages
 $lang['ACCESS_DENIED'] = 'ACCESS DENIED';
@@ -120,5 +131,17 @@ $lang['GO_TO'] = 'You can now go to this';
 $lang['URL_WEBSITE'] = 'WEBSITE';
 $lang['BEGIN_CONVERSATION'] = 'to begin a conversation with ChatX';
 
-// History Page
-$lang['NEW_MESSAGES_ABOVE'] = 'New messages above';
+// Help page
+$lang['TITLE_HELP'] = 'ChatX Help';
+$lang['HELP'] = 'Help';
+$lang['WIDGET_HOTKEYS'] = 'Widget Hotkeys';
+$lang['FORMATTING_MENU'] = 'to open text formatting menu';
+$lang['LOAD_MODE'] = 'to switch ajax load mode (fast/slow)';
+$lang['BOLD_TEXT'] = 'to insert bold text formatting tag';
+$lang['ITALIC_TEXT'] = 'to insert italic text formatting tag';
+$lang['UNDERLINE_TEXT'] = 'to insert underlined text formatting tag';
+$lang['SELECTION_TEXT'] = 'also applies with text selection';
+$lang['SEND_MESSAGE'] = 'to send new message';
+
+// Application version
+$lang['APPLICATION_VERSON'] = '(v. 2.3.0)';

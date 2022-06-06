@@ -1,5 +1,22 @@
 <?php
 require 'vendor/autoload.php';
+ini_set('session.gc_maxlifetime', 604800); // prob not needed
+    $secure = true;
+    $httponly = true;
+    $samesite = 'none';
+    $maxlifetime = 3060 * 60;
+    if(PHP_VERSION_ID < 70300) {
+        session_set_cookie_params($maxlifetime, '/; samesite='.$samesite, $_SERVER['HTTP_HOST'], $secure, $httponly);
+    } else {
+        session_set_cookie_params([
+            'lifetime' => $maxlifetime,
+            'path' => '/',
+            'domain' => $_SERVER['HTTP_HOST'],
+            'secure' => $secure,
+            'httponly' => $httponly,
+            'samesite' => $samesite
+        ]);
+    }
 session_name("ChatX_SESSION");
 session_start();    
 
@@ -25,6 +42,7 @@ $getSettings = $repoSettings->query()
         $e_o = $settings->emojiOne;
         $f_g = $settings->featherLight;
         $m_a = $settings->mybb;
+        $d_p = $settings->demoPage;
         $m_c = $settings->maxChar;
         $m_s = $settings->maxShout;
         $m_h = $settings->maxHistory;

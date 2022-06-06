@@ -1,11 +1,17 @@
 <?php
 include 'settings.php';
 
-$shouts = $repoShouts->query()
+if(!isset($_GET['history'])) {
+    $shouts = $repoShouts->query()
         ->orderBy('createdAt DESC')
-        ->limit($m_s,0)
+        ->limit($m_s, 0)
         ->execute();
-
+} else {
+    $shouts = $repoShouts->query()
+        ->orderBy('createdAt DESC')
+        ->limit($m_h, $m_s)
+        ->execute();
+}
 $results = array();
 
 $config = array(
@@ -27,7 +33,8 @@ foreach($shouts as $shout) {
         'loggedIn' => $loggedIn,
         'text' => $text,
         'name' => $name,
-        'timeAgo' => $timeAgo
+        'timeAgo' => $timeAgo,
+        'timeStamp' => date('d.m.Y H:i', $shout->createdAt)
     );  
     $results[] = $buildArray;
 }
@@ -39,8 +46,10 @@ if ( $r_a === '1' ) {
             session_unset();
             session_destroy();
         } else {
-            include 'data/languages/' . $l_g . '/app_lang.extra.' . $l_g . '.php';
-            echo '[{"id":"denied","text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
+            if(!isset($_GET['history'])) {
+                include 'data/languages/' . $l_g . '/app_lang.extra.' . $l_g . '.php';
+                echo '[{"id":"denied","text":"' . $lang['APP_ACCESS_DENIED'] . '","name":"ChatX","timeAgo":""}]';
+            }
         }
         die();
     } else {

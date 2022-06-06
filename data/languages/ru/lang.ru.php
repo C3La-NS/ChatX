@@ -12,6 +12,7 @@ $lang['TITLE_MANAGEMENT'] = 'Управление ChatX';
 $lang['TITLE_USERS'] = 'Управление пользователями ChatX';
 $lang['TITLE_SETTINGS'] = 'Настройки ChatX';
 $lang['TITLE_HISTORY'] = 'История ChatX';
+$lang['TITLE_STYLING'] = 'CSS редактор';
 
 // Navbar
 $lang['NAVBAR_GREETING'] = 'Привет,';
@@ -22,6 +23,7 @@ $lang['NAVIGATION'] = 'Навигация';
 $lang['SHOUT_MANAGEMENT'] = 'Сообщения и виджет';
 $lang['USER_MANAGEMENT'] = 'Пользователи';
 $lang['CHATX_SETUPS'] = 'Настройки';
+$lang['CHATX_STYLING'] = 'CSS редактор';
 $lang['GITHUB'] = 'GtiHub';
 
 // Moderator Panel Settings
@@ -35,17 +37,17 @@ $lang['RELOAD_MESSAGES_FAST_TRACK'] = 'ChatX обновляется в <b>быс
 $lang['EMOJIONE_LIBRARY'] = 'Использовать библиотеку <b>EmojiOne</b> для замены :) на эмодзи:';
 $lang['FEATHERLIGHT_LIBRARY'] = 'Использовать библиотеку <b>Featherlight</b> для просмотра загруженных изображений в модальном окне:';
 $lang['MYBB_INTEGRATION'] = 'Использовать данные <b>MyBB</b> форума для автоматической авторизации:';
+$lang['DEMO_PAGE'] = 'Показывать демонстрационную страницу с чатом';
 $lang['MESSAGE_MAX_CHARS'] = 'Максимальное число символов на сообщение:';
 $lang['WIDGET_MAX_SHOUTS'] = 'Максимальное число сообщений в чате:';
 $lang['HISTORY_MAX_SHOUTS'] = 'Максимальное число сообщений в истории чата:';
 $lang['SOUND_NOTIFICATION'] = 'Звук уведомления о новом сообщении:';
-$lang['NOTIFICATION_1'] = 'Вариант 1';
-$lang['NOTIFICATION_2'] = 'Вариант 2';
-$lang['NOTIFICATION_3'] = 'Вариант 3';
+$lang['NOTIFICATION_VARIANT'] = 'Вариант';
 $lang['NOTIFICATION_NULL'] = 'Выключено';
 $lang['LANGUAGE'] = 'Язык приложения:';
 $lang['LANGUAGE_EN'] = 'Английский';
 $lang['LANGUAGE_RU'] = 'Русский';
+$lang['ADDITIONAL_SETTINGS'] = 'Дополнительные настройки';
 $lang['EXTERNAL_DOMAIN'] = 'Внешний домен, на котором вы будете использовать ChatX:';
 $lang['SAVE_SETTINGS'] = 'Сохранить настройки';
 $lang['AUTO_PURGING'] = 'Авто-отчистка';
@@ -53,7 +55,7 @@ $lang['AUTO_PURGING_DESC1'] = 'Чтобы сохранить скорость Ch
 $lang['AUTO_PURGING_DESC2'] = 'Если ваш сервер поддерживает CRON, вручную создайте задачу, которая будет запускать скрипт <b>delete_old_shouts.php</b> каждые 15 минут-1 час.';
 $lang['ZERO_NOT_ALLOWED'] = 'Ноль запрещен';
 $lang['UPDATING_PLEASE_WAIT'] = 'Обновление настроек. Пожалуйста подождите.';
-$lang['TOOLTIP_EMOJIONE_DESC'] = 'Данная библиотека может замедлять загрузку вашего сайта. Обновите код виджета после применения данной настройки.';
+$lang['TOOLTIP_EMOJIONE_DESC'] = 'Данная библиотека достаточно объемная и может замедлять загрузку вашего чата.';
 
 // Index Page (Moderator)
 $lang['CHATX_WIDGET'] = 'ChatX виджет и установка';
@@ -97,6 +99,15 @@ $lang['BLOCKING_USERS_DESC1'] = 'Введите ник-нейм существу
 $lang['BLOCKING_USERS_BUTTON'] = 'Заблокировать пользователя';
 $lang['USER_BANNED'] = 'Пользователь заблокирован!';
 
+// Styling Page (Moderator)
+$lang['TEMPLATES'] = 'Стили';
+$lang['TEMPLATES_DESC1'] = 'Вы можете найти больше цветовых схем для ChatX на';
+$lang['TEMPLATES_DESC1_1'] = 'странице на Github';
+$lang['TEMPLATES_DESC2'] = 'Выберите подходящую цветовую схему и замените код до';
+$lang['CSS_UPDATE'] = 'Обновить CSS';
+$lang['CSS_EDITOR'] = 'редактор';
+$lang['CSS_EDITOR_DESC1'] = 'Вы можете настраивать цветовую схему виджета и прописывать собственные CSS правила';
+
 // User pages
 $lang['ACCESS_DENIED'] = 'ДОСТУП ЗАПРЕЩЕН';
 $lang['ACCESS_DENIED_DESC1'] = 'У ВАС НЕДОСТАТОЧНО ПРАВ ДЛЯ ПРОСМОТРА ЭТОЙ СТРАНИЦЫ';
@@ -120,5 +131,17 @@ $lang['GO_TO'] = 'Теперь Вы можете перейти на этот';
 $lang['URL_WEBSITE'] = 'ВЕБ-САЙТ';
 $lang['BEGIN_CONVERSATION'] = 'и начать беседу в ChatX';
 
-// History Page
-$lang['NEW_MESSAGES_ABOVE'] = 'Новые сообщения сверху';
+// Help page
+$lang['TITLE_HELP'] = 'Помощь по ChatX';
+$lang['HELP'] = 'Помощь';
+$lang['WIDGET_HOTKEYS'] = 'Горячие клавишы';
+$lang['FORMATTING_MENU'] = 'чтобы открыть меню форматирования';
+$lang['LOAD_MODE'] = 'переключить режим загрузки сообщений (быстрый/медленный)';
+$lang['BOLD_TEXT'] = 'вставить тег форматирования текста - жирный';
+$lang['ITALIC_TEXT'] = 'вставить тег форматирования текста - курсив';
+$lang['UNDERLINE_TEXT'] = 'вставить тег форматирования текста - подчеркнутый';
+$lang['SELECTION_TEXT'] = 'можно также применять с выделенным текстом';
+$lang['SEND_MESSAGE'] = 'отправить сообщение';
+
+// Application version
+$lang['APPLICATION_VERSON'] = '(v. 2.3.0)';

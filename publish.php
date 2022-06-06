@@ -7,16 +7,22 @@ include 'bbcode.php';
 
 if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 25 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $m_c && mb_strtolower($_SESSION['username']) !== $b_u) {
     
+    $userIsGuest = !isset($_SESSION[$sesPrefix . 'loggedin']) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']);
+    
     $name = htmlspecialchars($_POST["name"]);
     $name = str_replace(array("\n", "\r"), '', $name);
 
     $comment = htmlspecialchars($_POST["comment"]);
     $comment = str_replace(array("\n", "\r"), '', $comment);
+    if( $userIsGuest ) {
+        $comment = preg_replace('~https://i\.imgur\.com(*SKIP)(*FAIL)|https?://~s', '', $comment);
+        if (empty($comment)) {die();}
+    }
     $comment = showBBcodes($comment);
 
 
     if ( $r_a === '1' ) {
-        if( !isset($_SESSION[$sesPrefix . 'loggedin']) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
+        if( $userIsGuest ) {
           echo 'Access Denied';
           die();
         } else {
@@ -30,7 +36,7 @@ if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name']
         $repoShouts->store($shout);
         }
     } else {
-        if( !isset($_SESSION[$sesPrefix . 'loggedin']) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {  
+        if( $userIsGuest ) {
         $shout = new \JamesMoss\Flywheel\Document(array(
             'text' => $comment,
             'name' => $name,

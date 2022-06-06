@@ -1,9 +1,10 @@
+  
 
 <?php
 /** 
 * PHP BBCode Parser
 *
-* @author Afsal Rahim
+* @author Afsal Rahim || modified by C3La-NS
 * @link http://digitcodes.com/create-simple-php-bbcode-parser-function/
 **/
 //BBCode Parser function
@@ -17,7 +18,8 @@ function showBBcodes($text) {
 		'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
 		'~\[url=((?:ftp|https?)://.*?)\](.*?)\[/url\]~s',
 		'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-		'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s'
+		'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
+		'~((https?|ftps?):\/\/[^"<\s]+)(?![^<>]*>|[^"]*?<\/a)~si'
 	);
 	// HTML tags to replace BBcode
 	$replace = array(
@@ -28,7 +30,8 @@ function showBBcodes($text) {
 		'<a href="$1" target="_blank">$1</a>',
 		'<a href="$1" target="_blank">$2</a>',
 		'<img class="chatx_img" src="$1" data-featherlight="$1" />',
-		'<img class="chatx_img" height="$1" src="$3" data-featherlight="$2" />'
+		'<img class="chatx_img" height="$1" src="$3" data-featherlight="$2" />',
+		'<a href="$1" target="_blank">$1</a> '
 	);
 	// Replacing the BBcodes with corresponding HTML tags
 	return preg_replace($find,$replace,$text);
