@@ -26,31 +26,23 @@ We love ChatX wholeheartedly. And we do our best to make it user-friendly. It's 
 
 <br />
 <h2>Main features:</h2>
-<li>Flat file storing</li>
+<li>Flat file database</li>
 <li>Easy installation</li>
-<li>Modest. Doesn't need a bunch of dependencies, does not load your hosting resources too much</li>
-<li>Works well with any websites (more improvements to come)</li>
-<li>Compact and modern look</li>
-<li>Draggable, ability to remember coordinates on the page</li>
-<li>Autoloads new shouts through JSON every 30 secs on slow track and every 5 secs on fast track (customizable through settings)</li>
-<li>Slow & fast tracks are togglable through chat settings, stored in LocalStorage</li>
-<li>Manual refresh button</li>
-<li>Nick-name is stored in LocalStorage, not cleared on submit anymore.</li>
-<li>Loads 20 recent shouts (customizable)</li>
-<li>Auto expanding textarea for a new message & submit on Enter</li>
-<li>XSS-free (hopefully)</li>
-<li>240 char per message. Limit also specified on backend server side (customizable through settings)</li>
-<li>15 char limit for nick-name field (also PHP)</li>
-<li>Prohibited empty messages (PHP)</li>
-<li>Nice font-powered, scalable and customizable icons</li>
+<li>Modest. No need for a bunch of dependencies, does not load your hosting resources too much</li>
 <li>Asynchronous loading</li>
+<li>Works well with many websites</li>
+<li>Compact and modern look</li>
+<li>Draggable, resizable widget. Remembers position on page</li>
+<li>Modern-looking widget</li>
 <li>Supports Emoji (EmojiOne, updated ver. 3.1.2)</li>
-<li>Reply system</li>
-<li>Timing with RelativeTime</li>
+<li>Autoloads new shouts through JSON every 30 secs on slow track and every 5 secs on fast track (customizable via settings)</li>
+<li>240 char per message. Limit also specified on backend server side (customizable through settings)</li>
 <li>Languages: Eng / Rus (more to come)</li>
 <li>BB-tags: bold; italic; underlined; text color; images; links;</li>
-<li>Media uploader (to imgur.com)</li>
-<li>Separate ChatX template file for easy color customization</li>
+<li>Media uploader (via imgur.com)</li>
+<li>Easy settings and stylesheet customization</li>
+
+<h2>Changelog:</h2>
 ver 1.4.0
 <li>Close button that minifies chat</li>
 <li>Stop Get query when minimized and restore on expand</li>
