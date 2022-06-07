@@ -109,12 +109,12 @@ ver 2.3.0
 <li>Autorecognizing URLs (for users only)</li>
 <li>New menu for link insertion</li>
 <li>Ajax load paused whenever text selected in chat</li>
-<li>Ajax load paused when multiple tabs with widget are active, staying alive in curent tab</li>
+<li>Ajax load paused when multiple tabs with widget are active, staying alive in current tab</li>
 <li>New widget styling page with Ace editor in moderator's panel</li>
 <li>Refined styling tuning</li>
-<li>Minimal moblile optimization</li>
+<li>Minimal mobile optimization</li>
 <li>Hotkeys (Ctrl+B) for bold, (Ctrl+I) for italic, (Ctrl+U) for underlined formatting tags</li>
-<li>Promts on widget demo page</li>
+<li>Prompts on widget demo page</li>
 <li>Option in settings to switch off demo page</li>
 <li>Simple (dumb) push notifications for new messages in chat (for users only)</li>
 <li>New sound notification variant for new messages in chat. New sound effect when message is sent</li>
@@ -122,7 +122,7 @@ ver 2.3.0
 <li>Precise timestamp on hovering on relative time mark</li>
 <li>Dynamic loading of chat history in widget itself</li>
 <li>Optimization and improvements for Nginx</li>
-<li>Redesing of minified chat tray</li>
+<li>Redesign of minified chat tray</li>
 <li>General improvements</li>
   
 
