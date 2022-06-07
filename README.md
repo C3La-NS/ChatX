@@ -51,8 +51,8 @@ ver 1.4.0
 <li>New universal scrollbar</li>
 <li>Pulsating indicator when in fast track mode</li>
 <li>Open links in new window</li>
-<li>Simplier code (in process of developing universal widget)</li>
-<li>Upadated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
+<li>Simpler code (in process of developing universal widget)</li>
+<li>Updated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
 ver 1.5.0
 <li>a better way of loading CSS</li>
 <li>Interface translation simplified</li>
@@ -62,9 +62,9 @@ ver 1.5.0
 <li>Fixed when image was uploaded but not sent due to the empty name field</li>
 <li>script.js --> core.js</li>
 <li>Updated widget (simpler installation)</li>
-<li>Beta Authentification (login & sign up)</li>
+<li>Beta Authentication (login & sign up)</li>
 <li>Public & Private mode</li>
-<li>New Settings.php file with easilty customizable ChatX settings</li>
+<li>New Settings.php file with easily customizable ChatX settings</li>
 <li>Logged In users have a verification icon</li>
 <li>Usergroups: users and moderators.</li>
 <li>Updated Flywheel library (more developed database in perspective)</li>
@@ -82,7 +82,7 @@ ver 1.7.0
 <li>New prompt menu for bb-tags</li>
 <li>Resize widget horizontally</li>
 <li>Updates for moderator's panel with new options and settings</li>
-<li>Changeble widget language (Rus/Eng)</li>
+<li>Changeable widget language (Rus/Eng)</li>
 <li>Widget works better with various websites</li>
 <li>General improvements and updates</li>
 ver 1.8.0
