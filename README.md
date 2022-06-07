@@ -18,9 +18,9 @@ The idea behind the development of ChatX was to create an easy-to-use compact ch
 There are plenty chatroom implementations on the web, still ChatX may be different from its many alternatives.
 But what is it about ChatX that makes it a bit special?
 <br />
-To begin with, we beleive that a chat is more convenient when it remains on screen: whatever you do or wherever you navigate on the website ChatX is always within reach but never obstructing the view. You can drag and resize it, expand or minimize within your browser viewport making it the most suitable for you. And the chat will remember every state.
+To begin with, we believe that a chat is more convenient when it remains on screen: whatever you do or wherever you navigate on the website ChatX is always within reach but never obstructing the view. You can drag and resize it, expand or minimize within your browser viewport making it the most suitable for you. And the chat will remember every state.
 <br />
-Than, ChatX is very easy to install. Just unzip the archive on your hosting and the script is ready to go! No MySQL databases, complex dependencies or additional setups. PHP 5.3-5.6 or higher is enough. It must work nicely even on a free web-hosting. 
+Then, ChatX is very easy to install. Just unzip the archive on your hosting and the script is ready to go! No MySQL databases, complex dependencies or additional setups. PHP 5.3-5.6 or higher is enough. It must work nicely even on a free web-hosting. 
 <br />
 The simplicity is stupidly impressive. Yet ChatX has all the main settings a regular chat should have. And more, you can easily manage the chat global functions without a necessity to have knowledge in coding. Just a perfect solution if you're a beginner not willing to spend hours understanding things in Javascript or PHP.
 <br />
