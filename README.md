@@ -105,7 +105,26 @@ ver 2.2.0
 <li>Audio notifications for the new messages when user is logged in</li>
 <li>Highlighted messages of its owner</li>
 <li>Easier style customization with CSS vars</li>
-<li>Bug fixes</li>
+ver 2.3.0
+<li>Autorecognizing URLs (for users only)</li>
+<li>New menu for link insertion</li>
+<li>Ajax load paused whenever text selected in chat</li>
+<li>Ajax load paused when multiple tabs with widget are active, staying alive in curent tab</li>
+<li>New widget styling page with Ace editor in moderator's panel</li>
+<li>Refined styling tuning</li>
+<li>Minimal moblile optimization</li>
+<li>Hotkeys (Ctrl+B) for bold, (Ctrl+I) for italic, (Ctrl+U) for underlined formatting tags</li>
+<li>Promts on widget demo page</li>
+<li>Option in settings to switch off demo page</li>
+<li>Simple (dumb) push notifications for new messages in chat (for users only)</li>
+<li>New sound notification variant for new messages in chat. New sound effect when message is sent</li>
+<li>Switchable EmojiOne library option for Emoji in chat settings</li>
+<li>Precise timestamp on hovering on relative time mark</li>
+<li>Dynamic loading of chat history in widget itself</li>
+<li>Optimization and improvements for Nginx</li>
+<li>Redesing of minified chat tray</li>
+<li>General improvements</li>
+  
 
 <h2>ToDo list:</h2>
 ChatX is still under development. We are expecting more improvements and features in the future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :)
@@ -132,9 +151,6 @@ a) Login as Admin and navigate to /client/index.php. In the left sidebar you wil
 
 b) open /setups.php and define your external domain. For example "https://your-domain.com" (without final "/")
 If done ChatX must work correctly.
-
-<h2>Demo</h2>
-Probably coming some day
 
 
 <h2>ChatX official web-site (Russian): https://xlns.ru/blog/category/chatx/</h2>
