@@ -1124,7 +1124,7 @@ function ajaxLogOutClicked() {
             },
             success: function() {
                 jQuery.getScript(chatx_server + "dynamic_js.php");
-                jQuery(".chxicon-arrow, .chxicon-refresh").trigger("click");
+                jQuery(".chx_down .chxicon-arrow, .chxicon-refresh").trigger("click");
                 jQuery(".chx-login-form input").removeAttr("style");
                 if (r_e === 1 && jQuery(".chx-signup-form-contents chx_i").length == 0) {
                     jQuery('.chx-signup-form-contents').remove();
