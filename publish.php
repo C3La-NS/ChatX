@@ -15,7 +15,7 @@ if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name']
     $comment = htmlspecialchars($_POST["comment"]);
     $comment = str_replace(array("\n", "\r"), '', $comment);
     if( $userIsGuest ) {
-        $comment = preg_replace('~https://i\.imgur\.com(*SKIP)(*FAIL)|https?://~s', '', $comment);
+        $comment = preg_replace('~https://i\.imgur\.com(*SKIP)(*FAIL)|https?://' . $_SERVER['SERVER_NAME'] . '(*SKIP)(*FAIL)|https?://~s', '', $comment);
         if (empty($comment)) {die();}
     }
     $comment = showBBcodes($comment);
