@@ -144,7 +144,7 @@ Thanks me for all the patience during the development :)
 More to come, help us and you'll be in the list too.
 
 <h2>Installation</h2>
-ChatX works out-of-the-box on demo page (INDEX.HTML). However, if you are considering using it on other web-sites or directories you are to complete a simple installation procedure:
+ChatX works out-of-the-box on demo page (INDEX.PHP). However, if you are considering using it on other web-sites or directories you are to complete a simple installation procedure:
 <br />
 a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
 
