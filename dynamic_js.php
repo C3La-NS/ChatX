@@ -1,42 +1,52 @@
 <?php
-header("Content-type: application/javascript; charset=utf-8");
+declare(strict_types=1);
+use Firebase\JWT\JWT;
+
+header("Content-type: application/json; charset=utf-8");
 include 'settings.php';
-$a = $_SESSION['username'];
-$b = '000';
-?>
 
-var sessionName = '<?php echo $a ?>';
-fastTrack = '<?php echo $f_t . $b ?>';
-slowTrack = '<?php echo $s_t . $b ?>';
-r_e = <?php echo $r_e ?>;
-e_o = <?php echo $e_o ?>;
-f_g = <?php echo $f_g ?>;
-m_a = <?php echo $m_a ?>;
-m_c = '<?php echo $m_c ?>';
-n_s = '<?php echo $n_s ?>';
-l_g = '<?php echo $l_g ?>';
+$data = array();
 
-<?php
-if ( $r_a === '1' ) {
-     if( !isset($_SESSION[$sesPrefix . "loggedin"]) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
-        echo '
-         loggingIn();
-        '; 
-     } else {
-        echo '
-         loggingOut();
-        ';
-     }
-     
-} else {
-    if( isset($_SESSION[$sesPrefix . "loggedin"]) || isset($_SESSION[$sesPrefix . 'mod_loggedin']) ) {
-        echo '
-         publicScenarioLoggingOut();
-        ';
-    } else {
-        echo '
-         publicScenarioLoggingIn();
-        ';
+try {
+    $token = JWT::decode($authHeader, $secretKey, ['HS512']);
+    
+    if ($token->iss !== $serverName ||
+        $token->nbf > $now->getTimestamp() ||
+        $token->exp < $now->getTimestamp()) {
+            $data['sessionName'] = '';
     }
-}  
+    $data['sessionName'] = $token->data->userName;
+    
+} catch (Exception $e) {
+    $data['sessionName'] = '';
+}
+
+$b = '000';
+
+$data['fastTrack'] = $f_t . $b;
+$data['slowTrack'] = $s_t . $b;
+$data['r_e'] = $r_e;
+$data['e_o'] = $e_o;
+$data['m_a'] = $m_a;
+$data['m_c'] = $m_c;
+$data['n_s'] = $n_s;
+$data['l_g'] = $l_g;
+$data['c_s'] = $c_s;
+
+if ( $r_a === '1' ) {
+     if( !isset($token->data->loggedIn) && !isset($token->data->moderator) ) {
+        $data['loggingStatus'] = '1_1'; 
+     } else {
+        $data['loggingStatus'] = '1_0';
+     }
+} else {
+    if( isset($token->data->loggedIn) || isset($token->data->moderator) ) {
+        $data['loggingStatus'] = '2_0';
+    } else {
+        $data['loggingStatus'] = '2_1';
+    }
+}
+
+echo json_encode($data);
+
 ?>

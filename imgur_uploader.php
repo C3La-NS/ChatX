@@ -1,7 +1,6 @@
 <?php
 include 'settings.php';
-$client_id = "b12794161e11f2b";
-
+$client_id = $i_i;
 $externalImg = htmlspecialchars($_POST['urlToImg']);
 
 if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['error'] == UPLOAD_ERR_NO_FILE && !isset($externalImg)) {
@@ -58,6 +57,5 @@ if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['erro
         "thumbnail" => $thumbnail
     );
     echo json_encode($arr);
-    
 }
 ?>

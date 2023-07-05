@@ -1,58 +1,53 @@
 <?php
-include 'settings.php';
-include 'bbcode.php';
+declare(strict_types=1);
+use Firebase\JWT\JWT;
 
-    
-// Store the posted shout data to the data store
+include_once 'settings.php';
+include_once 'bbcode.php';
 
-if(isset($_POST["name"]) && isset($_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 25 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $m_c && mb_strtolower($_SESSION['username']) !== $b_u) {
-    
-    $userIsGuest = !isset($_SESSION[$sesPrefix . 'loggedin']) && !isset($_SESSION[$sesPrefix . 'mod_loggedin']);
-    
-    $name = htmlspecialchars($_POST["name"]);
-    $name = str_replace(array("\n", "\r"), '', $name);
+try {
+    $token = JWT::decode($authHeader, $secretKey, ['HS512']);
+    $bannedProfile = $repoProfiles->query()
+        ->where('username', '==', strtolower($token->data->userName))
+        ->execute();
+    foreach($bannedProfile as $profile) {
+        $b = $profile->banned;
+        $u = $profile->username;
+    }
+    if ($token->iss !== $serverName ||
+        $token->nbf > $now->getTimestamp() ||
+        $token->exp < $now->getTimestamp() ||
+        $b || !$u) {
+            exit;
+    }
+} catch (Exception $e) {
+    $userIsGuest = true;
+}
 
+if (isset($_POST["name"], $_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 25 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $m_c) {
+    $name = str_replace(["\n", "\r"], '', htmlspecialchars($_POST["name"]));
     $comment = htmlspecialchars($_POST["comment"]);
     $comment = str_replace(array("\n", "\r"), '', $comment);
-    if( $userIsGuest ) {
+    if($userIsGuest) {
         $comment = preg_replace('~https://i\.imgur\.com(*SKIP)(*FAIL)|https?://' . $_SERVER['SERVER_NAME'] . '(*SKIP)(*FAIL)|https?://~s', '', $comment);
-        if (empty($comment)) {die();}
     }
     $comment = showBBcodes($comment);
-
-
-    if ( $r_a === '1' ) {
-        if( $userIsGuest ) {
-          echo 'Access Denied';
-          die();
-        } else {
-         // Storing a new shout
-        $shout = new \JamesMoss\Flywheel\Document(array(
-            'text' => $comment,
-            'name' => $_SESSION['username'],
-            'loggedIn' => 'true', 
-            'createdAt' => time()
-        ));
-        $repoShouts->store($shout);
-        }
-    } else {
-        if( $userIsGuest ) {
-        $shout = new \JamesMoss\Flywheel\Document(array(
-            'text' => $comment,
-            'name' => $name,
-            'createdAt' => time()
-        ));
-        }
-        else {
-        $shout = new \JamesMoss\Flywheel\Document(array(
-            'text' => $comment,
-            'name' => $_SESSION['username'],
-            'loggedIn' => 'true',
-            'createdAt' => time()
-        ));
-        }
-        $repoShouts->store($shout);
-    }
     
+    if ($r_a === '1' && $userIsGuest) {
+        echo 'Access Denied';
+        die();
+    }
 
+    $shoutData = [
+        'text' => $comment,
+        'name' => $userIsGuest ? $name : $token->data->userName,
+        'createdAt' => time()
+    ];
+
+    if (!$userIsGuest) {
+        $shoutData['loggedIn'] = 'true';
+    }
+
+    $shout = new \JamesMoss\Flywheel\Document($shoutData);
+    $repoShouts->store($shout);
 }
