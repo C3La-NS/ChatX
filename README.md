@@ -131,19 +131,25 @@ Thanks to me for all the patience during the development :)
 <br />
 
 <h2>Installation</h2>
-1) Unpack the archive in an arbitrary directory on your server and navigate to it.
+1) Unpack the archive in an arbitrary directory on your server and navigate to it;
 <br />
 2) ChatX works out-of-the-box on the demo page (INDEX.PHP). You will see a minified chat box in the bottom right corner of the screen.
 <br />
-If you plan to use it on another website, you will need to complete further installation procedures:
 <br />
-a) Login as <b>admin</b> (the default password is <b>admin</b>) 
-or alternatively navigate to --your-path--<b>/chatx/client/index.php</b>
-In the left sidebar you will find ChatX widget. Copy it to your website.
-
-
-b) open /setups.php and define your external domain. For example, "https://your-domain.com" (without final "/")
-If done ChatX must work correctly.
+If you plan to embed the chat on another URL within the same website or use it on a third-party website, you will need to complete further installation procedures:
+<br />
+a) Expand the widget;
+<br />
+b) Click on <b>Gear</b> icon <b>→</b> <b>Login</b>;
+<br />
+c) In the modal box, login as <b>admin</b> (the default password is <b>admin</b>);
+<br />
+d) Click on <b>ChatX management</b> link;
+<br />
+e) In the new tab follow the steps provided in the left sidebar.
+<br />
+<br />
+If done ChatX must work correctly on any website.
 
 
 <h2>ChatX official web-site (Russian): https://xlns.ru/blog/category/chatx/</h2>
