@@ -119,6 +119,19 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Optimization and improvements for Nginx</li>
   <li>Redesign of minified chat tray</li>
   <b>ver 2.4.0</b>
+  <li>Vanilla JS code (no jQuery)</li>
+  <li>JWT for loggin in. Persistent loggin session</li>
+  <li>No jQuery-ui. Mobile support for drag&drop and resize events</li>
+  <li>Full 3rd party websites support</li>
+  <li>Custom lightbox gallery with scaling up/down features</li>
+  <li>CTRL+V to upload an image from clipboard</li>
+  <li>Automatic check for ChatX updates in moderation panel</li>
+  <li>Preset widget color schemes</li>
+  <li>Enhanced MyBB.ru integration. Keeping profile passwords in the forum storage</li>
+  <li>Overall UI improvements for the widget and moderator's panel</li>
+  <li>Updated help page</li>
+  <li>Imgur application identificator (API) field in ChatX settings</li>
+  
 </details>
 <br />
 <h2>Acknowledgements</h2>
