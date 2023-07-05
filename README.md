@@ -30,11 +30,11 @@ It's free, without any ads or distracting copyrights, and we continuously work t
 <li>Modest. No need for a bunch of dependencies, does not load your hosting resources too much</li>
 <li>Works well with many websites (including 3-rd party websites)</li>
 <li>Compact and modern widget with draggable, and resizeable functionality</li>
-<li>Languages: Eng / Rus (more to come)</li>
+<li>Languages: English / Russian</li>
 <li>BB-tags: bold; italic; underlined; text color; images; links;</li>
 <li>Media uploader (via imgur.com)</li>
 <li>Authentication system</li>
-<li>Moderation panel (shout management, user management, settings management, style customization</li>
+<li>Moderation panel (shout management, user management, settings management, style customization)</li>
 <li>Public and private mode</li>
 <li>Push and sound notifications for new messages</li>
 <br />
