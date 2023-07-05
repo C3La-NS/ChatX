@@ -39,87 +39,88 @@ It's free, without any ads or distracting copyrights, and we continuously work t
 <li>BB-tags: bold; italic; underlined; text color; images; links;</li>
 <li>Media uploader (via imgur.com)</li>
 <li>Easy settings and stylesheet customization</li>
-
-<h2>Changelog:</h2>
-ver 1.4.0
-<li>Close button that minifies chat</li>
-<li>Stop Get query when minimized and restore on expand</li>
-<li>New universal scrollbar</li>
-<li>Pulsating indicator when in fast track mode</li>
-<li>Open links in new window</li>
-<li>Simpler code (in process of developing universal widget)</li>
-<li>Updated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
-ver 1.5.0
-<li>a better way of loading CSS</li>
-<li>Interface translation simplified</li>
-<li>UI improvements</li>
-<li>Moderation page</li>
-<li>Updated icon while uploading image</li>
-<li>Fixed when image was uploaded but not sent due to the empty name field</li>
-<li>script.js --> core.js</li>
-<li>Updated widget (simpler installation)</li>
-<li>Beta Authentication (login & sign up)</li>
-<li>Public & Private mode</li>
-<li>New Settings.php file with easily customizable ChatX settings</li>
-<li>Logged In users have a verification icon</li>
-<li>Usergroups: users and moderators.</li>
-<li>Updated Flywheel library (more developed database in perspective)</li>
-ver 1.6.0
-<li>Private mode no longer in beta</li>
-<li>Passwords are hashed with PASSWORD_BCRYPT</li>
-<li>Cookies secured</li>
-<li>Json files no longer accessible directly</li>
-<li>General security improvements</li>
-<li>Complete userlist page</li>
-<li>New page - Setups.php. Easy way to edit settings</li>
-<li>ChatX now checks when it is outside viewpoint and restores its position</li>
-ver 1.7.0
-<li>Featherlight library allows viewing uploaded images in modal window</li>
-<li>New prompt menu for bb-tags</li>
-<li>Resize widget horizontally</li>
-<li>Updates for moderator's panel with new options and settings</li>
-<li>Changeable widget language (Rus/Eng)</li>
-<li>Widget works better with various websites</li>
-<li>General improvements and updates</li>
-ver 1.8.0
-<li>MyBB integration</li>
-<li>Chat history</li>
-<li>New settings options</li>
-<li>Stability & performance improvements</li>
-ver 1.9.0
-<li>Shout management: multiple message selection</li>
-<li>New settings in moderator's panel</li>
-ver 2.0.0
-<li>New messages at the bottom</li>
-<li>Thumbnails for jpg and jpeg images</li>
-<li>Updated UI when uploading images from external URLs</li>
-<li>All images are hosted on Imgur.com</li>
-ver 2.1.0
-<li>Username styling</li>
-ver 2.2.0
-<li>Notification for the new messages when widget is minimized</li>
-<li>Audio notifications for the new messages when user is logged in</li>
-<li>Highlighted messages of its owner</li>
-<li>Easier style customization with CSS vars</li>
-ver 2.3.0
-<li>Autorecognizing URLs (for users only)</li>
-<li>New menu for link insertion</li>
-<li>Ajax load paused whenever text selected in chat</li>
-<li>Ajax load paused when multiple tabs with widget are active, staying alive in current tab</li>
-<li>New widget styling page with Ace editor in moderator's panel</li>
-<li>Refined styling tuning</li>
-<li>Minimal mobile optimization</li>
-<li>Hotkeys (Ctrl+B) for bold, (Ctrl+I) for italic, (Ctrl+U) for underlined formatting tags</li>
-<li>Prompts on widget demo page</li>
-<li>Option in settings to switch off demo page</li>
-<li>Simple (dumb) push notifications for new messages in chat (for users only)</li>
-<li>New sound notification variant for new messages in chat. New sound effect when message is sent</li>
-<li>Switchable EmojiOne library option for Emoji in chat settings</li>
-<li>Precise timestamp on hovering on relative time mark</li>
-<li>Dynamic loading of chat history in widget itself</li>
-<li>Optimization and improvements for Nginx</li>
-<li>Redesign of minified chat tray</li>
-<li>General improvements</li>
+<br />
+<details> 
+  <summary><h2>Changelog (+)</h2></summary>
+  ver 1.4.0
+  <li>Close button that minifies chat</li>
+  <li>Stop Get query when minimized and restore on expand</li>
+  <li>New universal scrollbar</li>
+  <li>Pulsating indicator when in fast track mode</li>
+  <li>Open links in new window</li>
+  <li>Simpler code (in process of developing universal widget)</li>
+  <li>Updated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
+  ver 1.5.0
+  <li>a better way of loading CSS</li>
+  <li>Interface translation simplified</li>
+  <li>UI improvements</li>
+  <li>Moderation page</li>
+  <li>Updated icon while uploading image</li>
+  <li>Fixed when image was uploaded but not sent due to the empty name field</li>
+  <li>script.js --> core.js</li>
+  <li>Updated widget (simpler installation)</li>
+  <li>Beta Authentication (login & sign up)</li>
+  <li>Public & Private mode</li>
+  <li>New Settings.php file with easily customizable ChatX settings</li>
+  <li>Logged In users have a verification icon</li>
+  <li>Usergroups: users and moderators.</li>
+  <li>Updated Flywheel library (more developed database in perspective)</li>
+  ver 1.6.0
+  <li>Private mode no longer in beta</li>
+  <li>Passwords are hashed with PASSWORD_BCRYPT</li>
+  <li>Cookies secured</li>
+  <li>Json files no longer accessible directly</li>
+  <li>General security improvements</li>
+  <li>Complete userlist page</li>
+  <li>New page - Setups.php. Easy way to edit settings</li>
+  <li>ChatX now checks when it is outside viewpoint and restores its position</li>
+  ver 1.7.0
+  <li>Featherlight library allows viewing uploaded images in modal window</li>
+  <li>New prompt menu for bb-tags</li>
+  <li>Resize widget horizontally</li>
+  <li>Updates for moderator's panel with new options and settings</li>
+  <li>Changeable widget language (Rus/Eng)</li>
+  <li>Widget works better with various websites</li>
+  <li>General improvements and updates</li>
+  ver 1.8.0
+  <li>MyBB integration</li>
+  <li>Chat history</li>
+  <li>New settings options</li>
+  <li>Stability & performance improvements</li>
+  ver 1.9.0
+  <li>Shout management: multiple message selection</li>
+  <li>New settings in moderator's panel</li>
+  ver 2.0.0
+  <li>New messages at the bottom</li>
+  <li>Thumbnails for jpg and jpeg images</li>
+  <li>Updated UI when uploading images from external URLs</li>
+  <li>All images are hosted on Imgur.com</li>
+  ver 2.1.0
+  <li>Username styling</li>
+  ver 2.2.0
+  <li>Notification for the new messages when widget is minimized</li>
+  <li>Audio notifications for the new messages when user is logged in</li>
+  <li>Highlighted messages of its owner</li>
+  <li>Easier style customization with CSS vars</li>
+  ver 2.3.0
+  <li>Autorecognizing URLs (for users only)</li>
+  <li>New menu for link insertion</li>
+  <li>Ajax load paused whenever text selected in chat</li>
+  <li>Ajax load paused when multiple tabs with widget are active, staying alive in current tab</li>
+  <li>New widget styling page with Ace editor in moderator's panel</li>
+  <li>Refined styling tuning</li>
+  <li>Minimal mobile optimization</li>
+  <li>Hotkeys (Ctrl+B) for bold, (Ctrl+I) for italic, (Ctrl+U) for underlined formatting tags</li>
+  <li>Prompts on widget demo page</li>
+  <li>Option in settings to switch off demo page</li>
+  <li>Simple (dumb) push notifications for new messages in chat (for users only)</li>
+  <li>New sound notification variant for new messages in chat. New sound effect when message is sent</li>
+  <li>Switchable EmojiOne library option for Emoji in chat settings</li>
+  <li>Precise timestamp on hovering on relative time mark</li>
+  <li>Dynamic loading of chat history in widget itself</li>
+  <li>Optimization and improvements for Nginx</li>
+  <li>Redesign of minified chat tray</li>
+</details>
   
 
 <h2>ToDo list:</h2>
