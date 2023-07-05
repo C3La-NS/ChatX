@@ -25,20 +25,18 @@ It's free, without any ads or distracting copyrights, and we continuously work t
 <br />
 <h2>Main features:</h2>
 <li>Flat file database</li>
+<li>Long-polling for persistent connection</li>
 <li>Easy installation</li>
 <li>Modest. No need for a bunch of dependencies, does not load your hosting resources too much</li>
-<li>Asynchronous loading</li>
-<li>Works well with many websites</li>
-<li>Compact and modern look</li>
-<li>Draggable, resizable widget. Remembers position on page</li>
-<li>Modern-looking widget</li>
-<li>Supports Emoji (EmojiOne, updated ver. 3.1.2)</li>
-<li>Autoloads new shouts through JSON every 30 secs on slow track and every 5 secs on fast track (customizable via settings)</li>
-<li>240 char per message. Limit also specified on backend server side (customizable through settings)</li>
+<li>Works well with many websites (including 3-rd party websites)</li>
+<li>Compact and modern widget with draggable, and resizeable functionality</li>
 <li>Languages: Eng / Rus (more to come)</li>
 <li>BB-tags: bold; italic; underlined; text color; images; links;</li>
 <li>Media uploader (via imgur.com)</li>
-<li>Easy settings and stylesheet customization</li>
+<li>Authentication system</li>
+<li>Moderation panel (shout management, user management, settings management, style customization</li>
+<li>Public and private mode</li>
+<li>Push and sound notifications for new messages</li>
 <br />
 <details> 
   <summary><h2>Changelog (+)</h2></summary>
