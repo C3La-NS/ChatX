@@ -1,5 +1,5 @@
 # ChatX
-Simple free PHP &amp; jQuery chat project with flat file database
+Simple free PHP &amp; JavaScript chatroom with flat file database
 
 <h1>Demo <a href="https://codepen.io/C3La-NS/full/jOZpgRW">on CodePen</a><h1>
 
@@ -118,6 +118,7 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Dynamic loading of chat history in widget itself</li>
   <li>Optimization and improvements for Nginx</li>
   <li>Redesign of minified chat tray</li>
+  <b>ver 2.4.0</b>
 </details>
 <br />
 <h2>Acknowledgements</h2>
