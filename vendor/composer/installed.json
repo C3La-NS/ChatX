@@ -1,0 +1,330 @@
+[
+    {
+        "name": "firebase/php-jwt",
+        "version": "v5.5.1",
+        "version_normalized": "5.5.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/firebase/php-jwt.git",
+            "reference": "83b609028194aa042ea33b5af2d41a7427de80e6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/firebase/php-jwt/zipball/83b609028194aa042ea33b5af2d41a7427de80e6",
+            "reference": "83b609028194aa042ea33b5af2d41a7427de80e6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": ">=4.8 <=9"
+        },
+        "suggest": {
+            "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
+        },
+        "time": "2021-11-08T20:18:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Firebase\\JWT\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Neuman Vong",
+                "email": "neuman+pear@twilio.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Anant Narayanan",
+                "email": "anant@php.net",
+                "role": "Developer"
+            }
+        ],
+        "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+        "homepage": "https://github.com/firebase/php-jwt",
+        "keywords": [
+            "jwt",
+            "php"
+        ]
+    },
+    {
+        "name": "jamesmoss/flywheel",
+        "version": "0.6.0",
+        "version_normalized": "0.6.0.0",
+        "source": {
+            "type": "git",
+            "url": "git@github.com:jamesmoss/flywheel.git",
+            "reference": "001a7bba01ad537d119853cd86078b1b51540daf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jamesmoss/flywheel/zipball/001a7bba01ad537d119853cd86078b1b51540daf",
+            "reference": "001a7bba01ad537d119853cd86078b1b51540daf",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "mikey179/vfsstream": "^1.6",
+            "mockery/mockery": "1.* || 0.*",
+            "mustangostang/spyc": "dev-master#eba310c",
+            "phpunit/phpunit": "7.* || 4.*"
+        },
+        "suggest": {
+            "mustangostang/spyc": "You must install this if you're using the YAML or Markdown formatters."
+        },
+        "time": "2020-01-13T11:39:14+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "JamesMoss\\Flywheel\\": [
+                    "src/",
+                    "test/"
+                ]
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "James Moss",
+                "email": "james@moss.io",
+                "homepage": "http://moss.io"
+            }
+        ],
+        "description": "A lightweight, flat-file, document database",
+        "homepage": "http://github.com/jamesmoss/flywheel",
+        "keywords": [
+            "db",
+            "document",
+            "file",
+            "flat"
+        ]
+    },
+    {
+        "name": "laminas/laminas-config",
+        "version": "3.8.0",
+        "version_normalized": "3.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laminas/laminas-config.git",
+            "reference": "46baad58d0b12cf98539e04334eff40a1fdfb9a0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laminas/laminas-config/zipball/46baad58d0b12cf98539e04334eff40a1fdfb9a0",
+            "reference": "46baad58d0b12cf98539e04334eff40a1fdfb9a0",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "laminas/laminas-stdlib": "^3.6",
+            "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
+            "psr/container": "^1.0"
+        },
+        "conflict": {
+            "container-interop/container-interop": "<1.2.0",
+            "zendframework/zend-config": "*"
+        },
+        "require-dev": {
+            "laminas/laminas-coding-standard": "~2.4.0",
+            "laminas/laminas-filter": "~2.23.0",
+            "laminas/laminas-i18n": "~2.19.0",
+            "laminas/laminas-servicemanager": "~3.19.0",
+            "phpunit/phpunit": "~9.5.25"
+        },
+        "suggest": {
+            "laminas/laminas-filter": "^2.7.2; install if you want to use the Filter processor",
+            "laminas/laminas-i18n": "^2.7.4; install if you want to use the Translator processor",
+            "laminas/laminas-servicemanager": "^2.7.8 || ^3.3; if you need an extensible plugin manager for use with the Config Factory"
+        },
+        "time": "2022-10-16T14:21:22+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laminas\\Config\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "provides a nested object property based user interface for accessing this configuration data within application code",
+        "homepage": "https://laminas.dev",
+        "keywords": [
+            "config",
+            "laminas"
+        ],
+        "funding": [
+            {
+                "url": "https://funding.communitybridge.org/projects/laminas-project",
+                "type": "community_bridge"
+            }
+        ]
+    },
+    {
+        "name": "laminas/laminas-stdlib",
+        "version": "3.16.1",
+        "version_normalized": "3.16.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/laminas/laminas-stdlib.git",
+            "reference": "f4f773641807c7ccee59b758bfe4ac4ba33ecb17"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/f4f773641807c7ccee59b758bfe4ac4ba33ecb17",
+            "reference": "f4f773641807c7ccee59b758bfe4ac4ba33ecb17",
+            "shasum": ""
+        },
+        "require": {
+            "php": "~8.0.0 || ~8.1.0 || ~8.2.0"
+        },
+        "conflict": {
+            "zendframework/zend-stdlib": "*"
+        },
+        "require-dev": {
+            "laminas/laminas-coding-standard": "^2.4.0",
+            "phpbench/phpbench": "^1.2.7",
+            "phpunit/phpunit": "^9.5.26",
+            "psalm/plugin-phpunit": "^0.18.0",
+            "vimeo/psalm": "^5.0.0"
+        },
+        "time": "2022-12-03T18:48:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Laminas\\Stdlib\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "SPL extensions, array utilities, error handlers, and more",
+        "homepage": "https://laminas.dev",
+        "keywords": [
+            "laminas",
+            "stdlib"
+        ],
+        "funding": [
+            {
+                "url": "https://funding.communitybridge.org/projects/laminas-project",
+                "type": "community_bridge"
+            }
+        ]
+    },
+    {
+        "name": "mpratt/relativetime",
+        "version": "1.5.12",
+        "version_normalized": "1.5.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mpratt/RelativeTime.git",
+            "reference": "bb3f309ad7bddf531451a2b9d0da1d012e15a099"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mpratt/RelativeTime/zipball/bb3f309ad7bddf531451a2b9d0da1d012e15a099",
+            "reference": "bb3f309ad7bddf531451a2b9d0da1d012e15a099",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpstan/phpstan": "^1.4",
+            "phpunit/phpunit": "*"
+        },
+        "time": "2022-05-03T03:35:56+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "RelativeTime": "Lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Pratt",
+                "email": "pratt@hablarmierda.net",
+                "homepage": "http://www.michael-pratt.com",
+                "role": "Author/Developer"
+            }
+        ],
+        "description": "A library that calculates the time difference between two dates and returns the result in words (Example: 5 minutes ago or 5 Minutes left). The library supports other languages aswell like Spanish and German.",
+        "homepage": "https://github.com/mpratt/RelativeTime",
+        "keywords": [
+            "ago",
+            "date",
+            "future",
+            "interval",
+            "relative",
+            "time",
+            "time-ago"
+        ]
+    },
+    {
+        "name": "psr/container",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/container.git",
+            "reference": "513e0666f7216c7459170d56df27dfcefe1689ea"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/container/zipball/513e0666f7216c7459170d56df27dfcefe1689ea",
+            "reference": "513e0666f7216c7459170d56df27dfcefe1689ea",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.4.0"
+        },
+        "time": "2021-11-05T16:50:12+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Container\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "https://www.php-fig.org/"
+            }
+        ],
+        "description": "Common Container Interface (PHP FIG PSR-11)",
+        "homepage": "https://github.com/php-fig/container",
+        "keywords": [
+            "PSR-11",
+            "container",
+            "container-interface",
+            "container-interop",
+            "psr"
+        ]
+    }
+]
