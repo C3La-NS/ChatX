@@ -1,0 +1,65 @@
+/*
+###################################################################
+    Customize color scheme of your ChatX app
+    in this file.
+    STYLE: TELEGRAM DARK
+    # Author: C3La-NS
+    # More ChatX templates: https://bit.ly/3pNYMeF
+###################################################################
+*/
+
+:root {
+  --chx-1-color: #17212b; /* dominant color */
+  --chx-2-color: #242f3d; /* header, bottom buttons, authentication buttons, user nicknames, borders */
+  --chx-2-1-color: var(--chx-8-color);
+  --chx-3-color: #3f4855; /* buttons, even lists */
+  --chx-4-color: #242f3d; /* pop-ups */
+  --chx-5-color: #3f4855; /* borders */
+  --chx-6-color: #d5d5d5; /* pop-up texts */
+  --chx-7-color: #77c1ed; /* reply button, history links, general links */
+  --chx-8-color: #d5d5d5; /* even text lists, helper texts, time-ago */
+  --chx-9-color: var(--chx-8-color); /* odd text lists */
+  --chx-10-color: rgba(255, 187, 187, 0.95); /* errors */
+  --chx-11-color: #bb5a5a; /* error texts */
+  --chx-12-color: #2b5278; /* my message */
+
+  /* # # # More components # # # */
+  --chx-selection-color: #2e70a5; /* chat text selection */
+  --chx-placeholder-color: var(--chx-8-color); /* chat placeholders */
+  --chx-scrollbar-color: var(--chx-8-color); /* chat scrollbar */
+  --chx-shadows-separators-color: rgba(169, 212, 255, 0.2); /* chat box-shadows and some borders */
+}
+
+.shoutbox-comment-time, chx_li[data="chx-img-msg"] .shoutbox-comment-ago, chx_li[data="chx-img-msg"] .chxicon-reply {
+    color: var(--chx-6-color);
+}
+
+#chatx ::selection {
+  background: var(--chx-selection-color);
+}
+
+#chatx ::placeholder {
+    color: var(--chx-placeholder-color);
+}
+
+.simplebar-scrollbar:before {
+    background: var(--chx-scrollbar-color);
+}
+
+#chatx.expanded .chx-container::after {
+  background-image: url(https://imgur.com/d0BxoBJ.png); /* optional chat background image */
+  opacity: .5; /* optional background transparency */
+  background-size: cover;
+  background-position-x: center;
+}
+
+/* # # # Rewrite some rules # # # */
+#chx-my-msg .shoutbox-comment {
+  border-color: var(--chx-12-color);
+}
+#chx-my-msg .shoutbox-comment::before {
+  border-left-color: var(--chx-12-color) !important;
+}
+.shoutbox-form form:not(#imgur_uploader), #chatx .resize-helper {
+  color: var(--chx-6-color) !important;
+}

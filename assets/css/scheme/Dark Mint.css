@@ -1,0 +1,61 @@
+/*
+###################################################################
+    Customize color scheme of your ChatX app
+    in this file.
+    STYLE: CHATX DARK MINT
+    # Author: C3La-NS
+    # More ChatX templates: https://bit.ly/3pNYMeF
+###################################################################
+*/
+
+:root {
+  --chx-1-color: #06392d; /* dominant color */
+  --chx-2-color: #99cebd; /* header, bottom buttons, authentication buttons, user nicknames, borders */
+  --chx-2-1-color: var(--chx-6-color);
+  --chx-3-color: #7aa597; /* buttons, even lists */
+  --chx-4-color: rgb(104 134 117 / 95%); /* pop-ups */
+  --chx-5-color: #7aa597; /* borders */
+  --chx-6-color: #f9ffe7; /* pop-up texts */
+  --chx-7-color: #ffffff; /* reply button, history links, general links */
+  --chx-8-color: #f9ffe7; /* even text lists, helper texts, time-ago */
+  --chx-9-color: #f9ffe7; /* odd text lists */
+  --chx-10-color: rgba(255, 187, 187, 0.95); /* errors */
+  --chx-11-color: #bb5a5a; /* error texts */
+  --chx-12-color: #767676; /* my message */
+
+  /* # # # More components # # # */
+  --chx-selection-color: rgb(239 218 135 / 45%); /* chat text selection */
+  --chx-placeholder-color: var(--chx-8-color); /* chat placeholders */
+  --chx-scrollbar-color: var(--chx-6-color); /* chat scrollbar */
+  --chx-shadows-separators-color: rgba(0, 0, 0, 0.2); /* chat box-shadows and some borders */
+}
+
+.shoutbox-comment-time, chx_li[data="chx-img-msg"] .shoutbox-comment-ago, chx_li[data="chx-img-msg"] .chxicon-reply {
+    color: var(--chx-6-color);
+}
+
+#chatx ::selection {
+  background: var(--chx-selection-color);
+}
+
+#chatx ::placeholder {
+    color: var(--chx-placeholder-color);
+}
+
+.simplebar-scrollbar:before {
+    background: var(--chx-scrollbar-color);
+}
+
+#chatx.expanded .chx-container::after {
+  background-image: url(https://i.imgur.com/yyYA0s1.jpg); /* optional chat background image */
+  opacity: 0.15; /* optional background transparency */
+  background-repeat: repeat;
+  background-size: 100%;
+}
+
+#chx-my-msg .shoutbox-comment {
+    border-color: var(--chx-12-color);
+}
+#chx-my-msg .shoutbox-comment::before {
+    border-left-color: var(--chx-12-color) !important;
+}

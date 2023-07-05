@@ -1,0 +1,53 @@
+/*
+###################################################################
+    Customize color scheme of your ChatX app
+    in this file.
+    STYLE: LIGHT PURPLE
+    # Author: C3La-NS
+    # More ChatX templates: https://bit.ly/3pNYMeF
+###################################################################
+*/
+
+:root {
+  --chx-1-color: #faf3ff; /* dominant color */
+  --chx-2-color: #a49ab8; /* header, bottom buttons, authentication buttons, user nicknames, borders */
+  --chx-2-1-color: var(--chx-6-color);
+  --chx-3-color: #fff; /* buttons, even lists */
+  --chx-4-color: rgb(98 55 55 / 95%); /* pop-ups */
+  --chx-5-color: #ded8e9; /* borders */
+  --chx-6-color: #f1f9ff; /* pop-up texts */
+  --chx-7-color: #a87c7c; /* reply button, history links, general links */
+  --chx-8-color: #717c87; /* even text lists, helper texts, time-ago */
+  --chx-9-color: #717c87; /* odd text lists */
+  --chx-10-color: rgba(255, 187, 187, 0.95); /* errors */
+  --chx-11-color: #bb5a5a; /* error texts */
+  --chx-12-color: #ede4ff; /* my message */
+
+  /* # # # More components # # # */
+  --chx-selection-color: rgb(135 191 239 / 45%); /* chat text selection */
+  --chx-placeholder-color: var(--chx-8-color); /* chat placeholders */
+  --chx-scrollbar-color: var(--chx-4-color); /* chat scrollbar */
+  --chx-shadows-separators-color: rgba(0, 0, 0, 0.2); /* chat box-shadows and some borders */
+}
+
+.shoutbox-comment-time, chx_li[data="chx-img-msg"] .shoutbox-comment-ago, chx_li[data="chx-img-msg"] .chxicon-reply {
+    color: var(--chx-6-color);
+}
+
+#chatx ::selection {
+  background: var(--chx-selection-color);
+}
+
+#chatx ::placeholder {
+    color: var(--chx-placeholder-color);
+}
+
+.simplebar-scrollbar:before {
+    background: var(--chx-scrollbar-color);
+}
+
+#chatx.expanded .chx-container::after {
+  background-image: url(../../img/default_bg.png); /* optional chat background image */
+  opacity: 0.03; /* optional background transparency */
+  background-repeat: repeat;
+}

@@ -1,0 +1,75 @@
+body::after {
+    content: "";
+    background: url(../img/logo.png) center center no-repeat;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;  
+}
+.demo-title h3, .demo-desc1, .move-desc, .resize-desc {
+    color: #7d7d7d;
+    opacity: .5;
+}
+.demo-title h3 {
+    position: absolute;
+    margin: 1em 3em;
+    font-size: 20px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+.arrow {
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    opacity: .5;
+}
+.demo-desc1 {
+    position: absolute;
+    width: 150px;
+    bottom: 195px;
+    right: 195px;
+    text-align: center;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    
+}
+.containment {
+    display: none;
+    width: 150px;
+    position: absolute;
+    text-align: center;
+}
+.containment.one {
+    right: 30px;
+    top: 175px;
+}
+.containment.two {
+    right: 30px;
+    top: 360px;
+}
+.move {
+    position: absolute;
+    display: none;
+    top: 50px;
+    right: 50px;
+    opacity: .5;
+}
+.resize {
+    position: absolute;
+    display: none;
+    top: 260px;
+    right: 60px;
+    opacity: .5;
+}
+.move-desc, .resize-desc {
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.demo-title h3, .demo-desc1, .arrow, .move, .resize, .move-desc, .resize-desc {
+    user-select: none;
+    pointer-events: none;
+}

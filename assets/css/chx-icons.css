@@ -1,0 +1,111 @@
+@font-face {
+  font-family: "chatx-icons";
+  src: url(data:application/octet-stream;base64,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) format('woff2');
+  font-weight: normal;
+  font-style: normal;
+
+}
+[data-icon]:before {
+  font-family: "chatx-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class^="chxicon-"]:before,
+[class*=" chxicon-"]:before {
+  font-family: "chatx-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.chxicon-send:before {
+  content: "\e000";
+}
+.chxicon-chat:before {
+  content: "\e001";
+}
+.chxicon-gear:before {
+  content: "\e002";
+}
+.chxicon-refresh:before {
+  content: "\e003";
+}
+.chxicon-reply:before {
+  content: "\e004";
+}
+.chxicon-upload-old:before {
+  content: "\e005";
+}
+.chxicon-minimize:before {
+  content: "\e006";
+}
+.chxicon-expand:before {
+  content: "\e007";
+}
+.chxicon-login:before {
+  content: "\e008";
+}
+.chxicon-logout:before {
+  content: "\e009";
+}
+.chxicon-lock:before {
+  content: "\e00b";
+}
+.chxicon-link:before {
+  content: "\e00d";
+}
+.chxicon-photo:before {
+  content: "\e00e";
+}
+.chxicon-color:before {
+  content: "\e00f";
+}
+.chxicon-hue:before {
+  content: "\e010";
+}
+.chxicon-upload:before {
+  content: "\e011";
+}
+.chxicon-plus:before {
+  content: "\e012";
+}
+.chxicon-user:before {
+  content: "\e00a";
+}
+.chxicon-mute:before {
+  content: "\e00c";
+}
+.chxicon-unmute:before {
+  content: "\e013";
+}
+.chxicon-notification-subscribed:before {
+  content: "\e005";
+}
+.chxicon-notification-default:before {
+  content: "\e014";
+}
+.chxicon-notification-disabled:before {
+  content: "\e015";
+}
+.chxicon-pause:before {
+  content: "\e016";
+}
+.chxicon-arrow:before {
+  content: "\e017";
+}
+.chxicon-help:before {
+  content: "\e018";
+}
+.chxicon-user-2:before {
+  content: "\e019";
+}
