@@ -152,4 +152,7 @@ e) In the new tab follow the steps provided in the left sidebar.
 If done ChatX must work correctly on any website.
 
 
-<h2>ChatX official web-site (Russian): https://xlns.ru/blog/category/chatx/</h2>
+<h3>ChatX development blog: https://xlns.ru/blog/category/chatx/ (in Russian)</h3>
+<h3>ChatX knowledgebase: https://xlns.ru/wiki/ (in Russian)</h3>
+<h3>ChatX for MyBB.ru forums: http://forum.mybb.ru/viewtopic.php?id=38807 (in Russian)</h3>
+ 
