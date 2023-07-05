@@ -147,7 +147,7 @@ d) Click on <b>ChatX management</b> link;
 e) In the new tab follow the steps provided in the left sidebar.
 <br />
 <br />
-If done ChatX must work correctly on any website.
+If done ChatX should work correctly on any website.
 
 
 <h3>ChatX development blog: https://xlns.ru/blog/category/chatx/ (in Russian)</h3>
