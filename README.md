@@ -141,7 +141,13 @@ Thanks to Alex_63 for the implementation of the fast & slow track system.
 <br />
 Thanks to me for all the patience during the development :)
 <br />
-
+<h2>Requirements</h2>
+PHP 7.0+
+<br />
+HTTPS
+<br />
+CURL (for uploading images to imgur)
+<br />
 <h2>Installation</h2>
 1) Unpack the archive in an arbitrary directory on your server and navigate to it;
 <br />
