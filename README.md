@@ -42,7 +42,7 @@ It's free, without any ads or distracting copyrights, and we continuously work t
 <br />
 <details> 
   <summary><h2>Changelog (+)</h2></summary>
-  ver 1.4.0
+  <b>ver 1.4.0</b>
   <li>Close button that minifies chat</li>
   <li>Stop Get query when minimized and restore on expand</li>
   <li>New universal scrollbar</li>
@@ -50,7 +50,7 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Open links in new window</li>
   <li>Simpler code (in process of developing universal widget)</li>
   <li>Updated Draggable.js library, now ChatX works with great variety of jQuery libraries</li>
-  ver 1.5.0
+  <b>ver 1.5.0</b>
   <li>a better way of loading CSS</li>
   <li>Interface translation simplified</li>
   <li>UI improvements</li>
@@ -65,7 +65,7 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Logged In users have a verification icon</li>
   <li>Usergroups: users and moderators.</li>
   <li>Updated Flywheel library (more developed database in perspective)</li>
-  ver 1.6.0
+  <b>ver 1.6.0</b>
   <li>Private mode no longer in beta</li>
   <li>Passwords are hashed with PASSWORD_BCRYPT</li>
   <li>Cookies secured</li>
@@ -74,7 +74,7 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Complete userlist page</li>
   <li>New page - Setups.php. Easy way to edit settings</li>
   <li>ChatX now checks when it is outside viewpoint and restores its position</li>
-  ver 1.7.0
+  <b>ver 1.7.0</b>
   <li>Featherlight library allows viewing uploaded images in modal window</li>
   <li>New prompt menu for bb-tags</li>
   <li>Resize widget horizontally</li>
@@ -82,27 +82,27 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Changeable widget language (Rus/Eng)</li>
   <li>Widget works better with various websites</li>
   <li>General improvements and updates</li>
-  ver 1.8.0
+  <b>ver 1.8.0</b>
   <li>MyBB integration</li>
   <li>Chat history</li>
   <li>New settings options</li>
   <li>Stability & performance improvements</li>
-  ver 1.9.0
+  <b>ver 1.9.0</b>
   <li>Shout management: multiple message selection</li>
   <li>New settings in moderator's panel</li>
-  ver 2.0.0
+  <b>ver 2.0.0</b>
   <li>New messages at the bottom</li>
   <li>Thumbnails for jpg and jpeg images</li>
   <li>Updated UI when uploading images from external URLs</li>
   <li>All images are hosted on Imgur.com</li>
-  ver 2.1.0
+  <b>ver 2.1.0</b>
   <li>Username styling</li>
-  ver 2.2.0
+  <b>ver 2.2.0</b>
   <li>Notification for the new messages when widget is minimized</li>
   <li>Audio notifications for the new messages when user is logged in</li>
   <li>Highlighted messages of its owner</li>
   <li>Easier style customization with CSS vars</li>
-  ver 2.3.0
+  <b>ver 2.3.0</b>
   <li>Autorecognizing URLs (for users only)</li>
   <li>New menu for link insertion</li>
   <li>Ajax load paused whenever text selected in chat</li>
@@ -121,29 +121,25 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Optimization and improvements for Nginx</li>
   <li>Redesign of minified chat tray</li>
 </details>
-  
-
-<h2>ToDo list:</h2>
-ChatX is still under development. We are expecting more improvements and features in the future. However, we'd be glad if you helped us with the development. Below we enlisted main ToDo changes. Feel free to commit new ideas or working solutions :)
-<h3>Short-term perspective:</h3>
-<li>Mobile optimization</li>
-
-<h3>Long-term perspective:</h3>
-<li>Template generator</li>
-
+<br />
 <h2>Acknowledgements</h2>
-Thanks Tutorialzine for the initial shoutbox script release.
+Thanks to Tutorialzine for the initial shoutbox script release and inspiration.
 <br />
-Thanks Alex_63 for the implementation of the fast & slow track system
+Thanks to Alex_63 for the implementation of the fast & slow track system.
 <br />
-Thanks me for all the patience during the development :)
+Thanks to me for all the patience during the development :)
 <br />
-More to come, help us and you'll be in the list too.
 
 <h2>Installation</h2>
-ChatX works out-of-the-box on demo page (INDEX.PHP). However, if you are considering using it on other web-sites or directories you are to complete a simple installation procedure:
+1) Unpack the archive in an arbitrary directory on your server and navigate to it.
 <br />
-a) Login as Admin and navigate to /client/index.php. In the left sidebar you will find ChatX widget. Copy it to your website.
+2) ChatX works out-of-the-box on the demo page (INDEX.PHP). You will see a minified chat box in the bottom right corner of the screen.
+<br />
+If you plan to use it on another website, you will need to complete further installation procedures:
+<br />
+a) Login as <b>admin</b> (the default password is <b>admin</b>) 
+or alternatively navigate to --your-path--<b>/chatx/client/index.php</b>
+In the left sidebar you will find ChatX widget. Copy it to your website.
 
 
 b) open /setups.php and define your external domain. For example, "https://your-domain.com" (without final "/")
