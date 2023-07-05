@@ -14,18 +14,14 @@ The idea behind the development of ChatX was to create an easy-to-use compact ch
 <img src="https://imgur.com/AnghnXW.png">
 
 <h2>Why ChatX?</h2>
-
-There are plenty chatroom implementations on the web, still ChatX may be different from its many alternatives.
-But what is it about ChatX that makes it a bit special?
 <br />
-To begin with, we believe that a chat is more convenient when it remains on screen: whatever you do or wherever you navigate on the website ChatX is always within reach but never obstructing the view. You can drag and resize it, expand or minimize within your browser viewport making it the most suitable for you. And the chat will remember every state.
+One of the key features of ChatX is its accessibility and convenience. The chat remains on the screen and is always within reach, even while navigating the website. It is easy to drag and resize the widget within the browser viewport, and it can be expanded or minimized to suit your needs. The chat also remembers its state, so you don't have to readjust it each time you use it.
 <br />
-Then, ChatX is very easy to install. Just unzip the archive on your hosting and the script is ready to go! No MySQL databases, complex dependencies or additional setups. PHP 5.3-5.6 or higher is enough. It must work nicely even on a free web-hosting. 
+Another benefit of ChatX is its ease of installation. There is no need for complex setups or MySQL or other databases. Just unzip the archive on your hosting and you're ready to go. The script is compatible with PHP 7.0+, making it suitable even for free web hosting services.
 <br />
-The simplicity is stupidly impressive. Yet ChatX has all the main settings a regular chat should have. And more, you can easily manage the chat global functions without the necessity to have knowledge in coding. Just a perfect solution if you are a beginner not willing to spend hours understanding things in Javascript or PHP.
+Despite its simplicity, ChatX offers all the main features of a regular chat. You can easily manage the chat's global functions without needing to understand JavaScript or PHP coding.
 <br />
-We love ChatX wholeheartedly. And we do our best to make it user-friendly. It's free, without ads or distracting copyrights.
-
+It's free, without any ads or distracting copyrights, and we continuously work to improve the user experience.
 <br />
 <h2>Main features:</h2>
 <li>Flat file database</li>
