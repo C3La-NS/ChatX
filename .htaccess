@@ -1,18 +1,22 @@
 <FilesMatch \.php$>
-  <IfModule mod_headers.c>
-    Header set Access-Control-Allow-Credentials: true
-  </IfModule>
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Credentials: true
+    </IfModule>
 </FilesMatch>
 
 <FilesMatch "\.(jpg|jpeg|png|gif|js|css|woff|woff2)$">
-Header set Cache-Control "max-age=31536050"
+    Header set Cache-Control "max-age=31536050"
 </FilesMatch>
 
 <Files ~ "^delete_old_shouts\.php|json">
-  Order allow,deny
-  Deny from all
+    Order allow,deny
+    Deny from all
 </Files>
 
-php_value session.gc_maxlifetime 604800
-php_value session.cookie_lifetime 604800
-php_value session.cookie_httponly 1
+# authorization header for various servers
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
