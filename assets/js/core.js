@@ -836,7 +836,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             this.removeEventListener("click", arguments.callee);
             store.setJWT(null);
             let xhr = new XMLHttpRequest();
-            xhr.open('GET', `${chatx_server}client/logout.php`);
+            xhr.open('GET', `${chatx_server}client/logout.php?ajax`);
             xhr.send();
             xhr.onload = function() {
                 makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
