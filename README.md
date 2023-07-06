@@ -11,7 +11,7 @@ This script utilizes a flat file database and harnesses the power of <a href="ht
 The idea behind the development of ChatX was to create an easy-to-use compact chat widget with fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://imgur.com/AnghnXW.png">
+<img src="https://i.imgur.com/BlIRJZ9.png">
 
 <h2>Why ChatX?</h2>
 <br />
