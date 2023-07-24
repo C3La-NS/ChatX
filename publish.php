@@ -50,4 +50,5 @@ if (isset($_POST["name"], $_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8
 
     $shout = new \JamesMoss\Flywheel\Document($shoutData);
     $repoShouts->store($shout);
+    include 'update_ids.php';
 }

@@ -18,24 +18,10 @@ namespace RelativeTime\Languages;
 /**
  * English Translation
  */
+
 class Len extends \RelativeTime\Adapters\Language
 {
     protected $strings = array(
-        'now' => 'now',
-        'ago' => '%s',
-        'left' => '%s left',
-        'seconds' => array(
-            'plural' => '%d sec.',
-            'singular' => '%d sec.',
-        ),
-        'minutes' => array(
-            'plural' => '%d min.',
-            'singular' => '%d min.',
-        ),
-        'hours' => array(
-            'plural' => '%d h.',
-            'singular' => '%d hour',
-        ),
         'days' => array(
             'plural' => '%d d.',
             'singular' => '%d day',

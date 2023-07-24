@@ -1,0 +1,11 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Headers "Authorization"
+
+    <Files "last.json">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Order allow,deny
+        Allow from all
+    </Files>
+</IfModule>

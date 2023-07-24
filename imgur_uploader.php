@@ -3,7 +3,7 @@ include 'settings.php';
 $client_id = $i_i;
 $externalImg = htmlspecialchars($_POST['urlToImg']);
 
-if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['error'] == UPLOAD_ERR_NO_FILE && !isset($externalImg)) {
+/*if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['error'] == UPLOAD_ERR_NO_FILE && !isset($externalImg)) {
     exit();
 } else {
     
@@ -11,6 +11,16 @@ if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['erro
         $image = file_get_contents($_FILES['chximg']['tmp_name']);
     } else {
         $image = file_get_contents($externalImg);
+    }*/
+if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['error'] == UPLOAD_ERR_NO_FILE && !isset($externalImg)) {
+    exit();
+} else {
+    if (isset($_FILES['chximg']) && !empty($_FILES['chximg']['tmp_name'])) {
+        $image = file_get_contents($_FILES['chximg']['tmp_name']);
+    } elseif (!empty($externalImg)) {
+        $image = file_get_contents($externalImg);
+    } else {
+        exit(); // Exit if both $_FILES['chximg'] and $externalImg are empty
     }
     
     $ch = curl_init();
@@ -36,7 +46,8 @@ if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['erro
     $ext = explode('.', $ext);
     $ext = end($ext);
     
-    if ($ext !== png && $ext !== gif) {
+/*    if ($ext !== png && $ext !== gif) {*/
+    if ($ext !== 'png' && $ext !== 'gif') {
         $thumbnail = substr_replace($link, 'l', -4, 0);
     } else {
         $thumbnail = $link;

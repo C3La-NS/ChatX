@@ -31,7 +31,7 @@ class Translation
     public function __construct(array $config = array())
     {
         $this->config = array_merge(array(
-            'language' => '\RelativeTime\Languages\Lru',
+            'language' => '\RelativeTime\Languages\Len',
             'separator' => ', ',
             'suffix' => true,
         ), $config);
@@ -47,8 +47,6 @@ class Translation
     public function translate(array $units = array(), $direction = 0)
     {
         $lang = $this->loadLanguage();
-        if (empty($units))
-            return $lang['now'];
 
         $translation = array();
         foreach ($units as $unit => $v)
@@ -63,9 +61,8 @@ class Translation
         if (!$this->config['suffix'])
             return $string;
         else if ($direction > 0)
-            return sprintf($lang['ago'], $string);
+            return sprintf($string);
 
-        return sprintf($lang['left'], $string);
     }
 
     /**
@@ -86,7 +83,7 @@ class Translation
                 return new $lang();
         }
 
-        return new \RelativeTime\Languages\Lru();
+        return new \RelativeTime\Languages\Len();
     }
 }
 ?>

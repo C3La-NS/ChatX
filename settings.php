@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 'Off');
+ini_set('display_errors', "Off");
 require_once('vendor/autoload.php');
 
 $dir = __DIR__.'/data';
@@ -10,6 +10,7 @@ $config = new \JamesMoss\Flywheel\Config($dir, array(
 
 $repoSettings = new \JamesMoss\Flywheel\Repository('settings', $config);
 $repoShouts = new \JamesMoss\Flywheel\Repository('shouts', $config);
+$repoShoutsID = new \JamesMoss\Flywheel\Repository('id', $config);
 $repoProfiles = new \JamesMoss\Flywheel\Repository('profiles', $config);
 
 $getSettings = $repoSettings->query()

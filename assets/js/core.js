@@ -204,7 +204,7 @@ let ul = document.querySelector("chx_ul.shoutbox-content"),
     ulHist = document.querySelector('chx_ul.shoutbox-history'),
     signUpFormContents = document.querySelector('.chx-signup-form-contents');
 isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
-mouseDown = 0;
+/*mouseDown = 0;
 document.querySelector('.' + chx_resize).onmousedown = function(e) {
     if (e.target.className !== "chatx_img") {
         mouseDown = 1;
@@ -212,7 +212,7 @@ document.querySelector('.' + chx_resize).onmousedown = function(e) {
 };
 document.querySelector('.' + chx_resize).onmouseup = function() {
     mouseDown = 0;
-};
+};*/
 
 makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     let parsedResponse = JSON.parse(response);
@@ -302,6 +302,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             let canReload = true;
             refreshButton.addEventListener('click', event => {
                 if (!canReload) return false;
+                secondLoad = false;
                 load();
                 canReload = false;
                 // Allow additional reloads after 500 millisecond
@@ -350,6 +351,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         commentElement.value = "";
+                        secondLoad = false;
                         load();
                         if (sessionName) {
                             let src = chatx_server + 'assets/audio/1_1.ogg';
@@ -507,7 +509,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             });
             
             let secondLoad;
-            
+            let classesString;
             function load() {
                 if (!loadPaused) {
                     console.log('load paused');
@@ -515,8 +517,14 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 }
                 const xhr = new XMLHttpRequest();
                 xhr.responseType = "json";
-                xhr.open("GET", chatx_server + 'load.php');
-                xhr.setRequestHeader('Authorization', `${store.JWT}`);
+                if(!secondLoad) {
+                    xhr.open("GET", chatx_server + 'load.php'); 
+                    xhr.setRequestHeader('Authorization', `${store.JWT}`);
+                } else {
+                    xhr.open("GET", chatx_server + 'data/id/last.json');
+                    xhr.withCredentials = false;
+                }
+                /*xhr.setRequestHeader('Authorization', `${store.JWT}`);*/
                 xhr.onload = function() {
                     if (xhr.status !== 200) {
                         return;
@@ -525,13 +533,41 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     if (!secondLoad) {
                         appendComments(xhr.response);
                         scrollBottom();
-                    } else if ((wrapper.scrollHeight - wrapper.scrollTop - 20) <= wrapper.clientHeight && mouseDown !== 1 && !document.querySelector(".shoutbox-comment-ago:hover")) {
+
+                    // Get all chx_li elements
+                    var chxLiElements = document.querySelectorAll('chx_li');
+                    
+                    // Array to store the classes
+                    var classesArray = [];
+                    
+                    // Iterate over the chx_li elements
+                    for (var i = chxLiElements.length - 1; i >= 0; i--) {
+                      var chxLiElement = chxLiElements[i];
+                      var chxLiClass = chxLiElement.getAttribute('class');
+                      classesArray.push(chxLiClass);
+                    }
+                    
+                    // Convert the classes array to a string
+                    classesString = classesArray.join('.');
+                        
+                    } else if ((wrapper.scrollHeight - wrapper.scrollTop - 20) <= wrapper.clientHeight /*&& mouseDown !== 1*/ && !document.querySelector(".shoutbox-comment-ago:hover")) {
                         if (ulHist.children.length > 0) {
                             ulHist.innerHTML = "";
                             document.querySelector('.chx-history chx_i').style.display = "block";
                             document.querySelector('.chx-history chx_div').style.display = "none";
                         }
-                        appendComments(xhr.response);
+                        let json = xhr.response;
+                            values = json.IDs;
+                            valuesString = values.join('.');
+                        if (classesString == valuesString || classesString == 'denied') {
+                            return;
+                        } else {
+                            secondLoad = false;
+                            load();
+                            return;
+                        }
+                                                
+                        /*appendComments(xhr.response);*/
                         scrollBottom();
                     }
                     secondLoad = true;
@@ -810,6 +846,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 parsedResponse = JSON.parse(response);
                 setDynamicAuthenticationVars();
                 if (data.success) {
+                  secondLoad = false;
                   refreshButton.click();
                 } else {
                   if (!document.querySelector(`form[name=${activeForm}] chx_p`)) {

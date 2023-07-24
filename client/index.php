@@ -1,17 +1,27 @@
 <?php
-include '../settings.php';
-include 'jwt_verify.php';
-include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
+include_once '../settings.php';
+include_once 'jwt_verify.php';
+include_once '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
-if(isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && $is_valid_moderator) {
+/*if(isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && $is_valid_moderator) {
 
     foreach($_POST["deleteShout"] as $id) {
         $repoShouts->delete($id);
     }
+    include '../update_ids.php';
 
+}*/
+if (isset($_POST["deleteShout"]) && $is_valid_moderator) {
+    foreach ($_POST["deleteShout"] as $id) {
+        if (mb_strlen($id, 'utf-8') <= 9) {
+            $repoShouts->delete($id);
+        }
+    }
+    include '../update_ids.php';
 }
 
-if(isset($_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && $is_valid_moderator) {
+
+/*if(isset($_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && $is_valid_moderator) {
 
     $oldShouts = $repoShouts->query()
                 ->where('createdAt', '<', strtotime('-0 second'))
@@ -20,7 +30,21 @@ if(isset($_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf
     foreach($oldShouts as $old) {
         $repoShouts->delete($old);
     }
+    include '../update_ids.php';
 
+}*/
+if (isset($_POST["deleteAllShouts"]) && $is_valid_moderator) {
+    $deleteAllShouts = $_POST['deleteAllShouts'];
+    if (is_array($deleteAllShouts) && mb_strlen($deleteAllShouts[0], 'utf-8') <= 3) {
+        $oldShouts = $repoShouts->query()
+            ->where('createdAt', '<', strtotime('-0 second'))
+            ->execute();
+
+        foreach ($oldShouts as $old) {
+            $repoShouts->delete($old);
+        }
+        include '../update_ids.php';
+    }
 }
 ?>
 

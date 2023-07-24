@@ -80,30 +80,39 @@ class Repository
      * Returns all the documents within this repo.
      *
      * @return array An array of Documents.
+     * 
+     * ADDED SUPPORT FOR PHP 8+ (BY C3La-NS)
      */
     public function findAll()
     {
         $ext       = $this->formatter->getFileExtension();
         $files     = $this->getAllFiles();
         $documents = array();
-
+    
         foreach ($files as $file) {
             $fp       = fopen($file, 'r');
-            $contents = fread($fp, filesize($file));
-            fclose($fp);
-
-            $data = $this->formatter->decode($contents);
-
-            if (null !== $data) {
-                $doc = new $this->documentClass((array) $data);
-                $doc->setId($this->getIdFromPath($file, $ext));
-
-                $documents[] = $doc;
+            $fileSize = filesize($file);
+            
+            if ($fileSize > 0) {
+                $contents = fread($fp, $fileSize);
+                fclose($fp);
+    
+                $data = $this->formatter->decode($contents);
+    
+                if (null !== $data) {
+                    $doc = new $this->documentClass((array) $data);
+                    $doc->setId($this->getIdFromPath($file, $ext));
+    
+                    $documents[] = $doc;
+                }
+            } else {
+                fclose($fp);
             }
         }
-
+    
         return $documents;
     }
+
 
     /**
      * Returns a single document based on it's ID

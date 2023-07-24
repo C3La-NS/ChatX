@@ -1,5 +1,5 @@
 # ChatX
-Simple free PHP &amp; JavaScript chatroom with flat file database
+Simple free PHP &amp; jQuery chat project with flat file database
 
 <h1>Demo <a href="https://codepen.io/C3La-NS/full/jOZpgRW">on CodePen</a><h1>
 
@@ -11,7 +11,7 @@ This script utilizes a flat file database and harnesses the power of <a href="ht
 The idea behind the development of ChatX was to create an easy-to-use compact chat widget with fully-customizable color schemes, capable of working on any web-site with the code installed.
 <br />
 <h2>Preview image</h2>
-<img src="https://i.imgur.com/BlIRJZ9.png">
+<img src="https://imgur.com/AnghnXW.png">
 
 <h2>Why ChatX?</h2>
 <br />
@@ -118,20 +118,6 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Dynamic loading of chat history in widget itself</li>
   <li>Optimization and improvements for Nginx</li>
   <li>Redesign of minified chat tray</li>
-  <b>ver 2.4.0</b>
-  <li>Vanilla JS code (no jQuery)</li>
-  <li>JWT for loggin in. Persistent loggin session</li>
-  <li>No jQuery-ui. Mobile support for drag&drop and resize events</li>
-  <li>Full 3rd party websites support</li>
-  <li>Custom lightbox gallery with scaling up/down features</li>
-  <li>CTRL+V to upload an image from clipboard</li>
-  <li>Automatic check for ChatX updates in moderation panel</li>
-  <li>Preset widget color schemes</li>
-  <li>Enhanced MyBB.ru integration. Keeping profile passwords in the forum storage</li>
-  <li>Overall UI improvements for the widget and moderator's panel</li>
-  <li>Updated help page</li>
-  <li>Imgur application identificator (API) field in ChatX settings</li>
-  
 </details>
 <br />
 <h2>Acknowledgements</h2>
@@ -141,13 +127,7 @@ Thanks to Alex_63 for the implementation of the fast & slow track system.
 <br />
 Thanks to me for all the patience during the development :)
 <br />
-<h2>Requirements</h2>
-PHP 7.0+
-<br />
-HTTPS
-<br />
-CURL (for uploading images to imgur)
-<br />
+
 <h2>Installation</h2>
 1) Unpack the archive in an arbitrary directory on your server and navigate to it;
 <br />
@@ -173,5 +153,4 @@ If done ChatX should work correctly on any website.
 <h3>ChatX development blog: https://xlns.ru/blog/category/chatx/ (in Russian)</h3>
 <h3>ChatX knowledgebase: https://xlns.ru/wiki/ (in Russian)</h3>
 <h3>ChatX for MyBB.ru forums: http://forum.mybb.ru/viewtopic.php?id=38807 (in Russian)</h3>
- <br />
- <a href="https://www.buymeacoffee.com/C3LaNS" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+ 

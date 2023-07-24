@@ -17,21 +17,6 @@ namespace RelativeTime\Languages;
 class Lru extends \RelativeTime\Adapters\Language
 {
     protected $strings = array(
-        'now' => 'сейчас',
-        'ago' => '%s',
-        'left' => '%s left',
-        'seconds' => array(
-            'plural' => '%d сек.',
-            'singular' => '%d секунда',
-        ),
-        'minutes' => array(
-            'plural' => '%d мин.',
-            'singular' => '%d минута',
-        ),
-        'hours' => array(
-            'plural' => '%d ч.',
-            'singular' => '%d час',
-        ),
         'days' => array(
             'plural' => '%d дн.',
             'singular' => '%d день',

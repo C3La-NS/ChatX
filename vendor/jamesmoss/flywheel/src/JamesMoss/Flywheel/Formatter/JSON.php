@@ -11,7 +11,7 @@ class JSON implements FormatInterface
 
     public function encode(array $data)
     {
-        $options = defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE : null; // modified by C3La-NS
+        $options = JSON_UNESCAPED_UNICODE; /*defined('JSON_PRETTY_PRINT') ? JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE : null;*/ // modified by C3La-NS
 
         return json_encode($data, $options);
     }

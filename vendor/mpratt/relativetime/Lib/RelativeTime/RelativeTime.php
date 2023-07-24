@@ -35,7 +35,7 @@ class RelativeTime
     public function __construct(array $config = array())
     {
         $this->config = array_merge(array(
-            'language' => '\RelativeTime\Languages\Russian',
+            'language' => '\RelativeTime\Languages\Len',
             'separator' => ', ',
             'suffix' => true,
             'truncate' => 0,
@@ -133,9 +133,6 @@ class RelativeTime
             'years'   => (int) $interval->y,
             'months'  => (int) $interval->m,
             'days'    => (int) $interval->d,
-            'hours'   => (int) $interval->h,
-            'minutes' => (int) $interval->i,
-            'seconds' => (int) $interval->s,
         ));
 
         if (empty($units))
