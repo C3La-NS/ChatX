@@ -173,4 +173,5 @@ If done ChatX should work correctly on any website.
 <h3>ChatX development blog: https://xlns.ru/blog/category/chatx/ (in Russian)</h3>
 <h3>ChatX knowledgebase: https://xlns.ru/wiki/ (in Russian)</h3>
 <h3>ChatX for MyBB.ru forums: http://forum.mybb.ru/viewtopic.php?id=38807 (in Russian)</h3>
- 
+<br />
+<a href="https://www.buymeacoffee.com/C3LaNS" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
