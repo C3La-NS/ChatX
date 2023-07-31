@@ -28,6 +28,7 @@ foreach($getSettings as $settings) {
     $m_c = $settings->maxChar;
     $m_s = $settings->maxShout;
     $m_h = $settings->maxHistory;
+    $s_o = $settings->screenOptimized;
     $i_i = $settings->imgurID;
     $l_g = $settings->langPack;
     $n_s = $settings->notificSound;

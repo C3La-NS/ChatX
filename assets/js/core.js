@@ -226,6 +226,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         n_s = parsedResponse.n_s;
         l_g = parsedResponse.l_g;
         c_s = parsedResponse.c_s;
+        s_o = parsedResponse.s_o;
     let loggingStatus;
 
     function setDynamicAuthenticationVars() {
@@ -244,7 +245,10 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     }
     
     setDynamicAuthenticationVars();
-    
+    // optimize widget for larger screens
+    if (s_o === "1") {
+        load_css(chatx_server + 'assets/css/screen_optimized.css');
+    }
     // loading chat color scheme
     load_css(chatx_server + 'assets/css/scheme/' + c_s + '.css');
 
@@ -506,6 +510,9 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     pulsatingCircle.style.display = "none";
                     falseShoutBoxName.style.cssText = "padding-right: 0; transition: 0.3s ease;";
                 }
+                if(r_e == '1' && !sessionName) {
+                    falseShoutBoxName.style.visibility = "hidden";
+                }
             });
             
             let secondLoad;
@@ -521,7 +528,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     xhr.open("GET", chatx_server + 'load.php'); 
                     xhr.setRequestHeader('Authorization', `${store.JWT}`);
                 } else {
-                    xhr.open("GET", chatx_server + 'data/id/last.json');
+                    xhr.open("GET", chatx_server + 'data/id/last_items.json');
                     xhr.withCredentials = false;
                 }
                 /*xhr.setRequestHeader('Authorization', `${store.JWT}`);*/

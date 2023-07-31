@@ -4,7 +4,7 @@ $lastShouts = $repoShouts->query()
     ->limit($m_s, 0)
     ->execute();
 
-$n=0;
+/*$n=0;*/
 foreach ($lastShouts as $lastShout) {
 /*    $results[] = [
         ++$n => mb_substr($lastShout->getId(), 0, 4),
@@ -12,6 +12,6 @@ foreach ($lastShouts as $lastShout) {
     $results[] = mb_substr($lastShout->getId(), 0, 4);
 
 }
-$IDs = $repoShoutsID->findById('last');
+$IDs = $repoShoutsID->findById('last_items');
 $IDs->IDs = $results;
 $repoShoutsID->update($IDs);

@@ -2,7 +2,7 @@
     Header set Access-Control-Allow-Origin "*"
     Header set Access-Control-Allow-Headers "Authorization"
 
-    <Files "last.json">
+    <Files "last_items.json">
         Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
         Header set Pragma "no-cache"
         Order allow,deny

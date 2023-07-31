@@ -50,6 +50,11 @@ if(isset( $_POST['s']) && $is_valid_moderator) {
     if( !empty($_POST['m_h'] && $_POST['m_h'] >= '1') ) {
       $updateSettings->maxHistory = preg_replace('/\D/', '', htmlspecialchars($_POST['m_h']));
     }
+    if ( !empty($_POST['s_o']) ) {
+      $updateSettings->screenOptimized = '1';
+    } else {
+      $updateSettings->screenOptimized = '0';
+    }
     if( !empty($_POST['i_i']) ) {
       $updateSettings->imgurID = htmlspecialchars(trim($_POST['i_i']));
     }
@@ -175,6 +180,14 @@ if(isset( $_POST['s']) && $is_valid_moderator) {
                     </div>
                     <div style="width: 24.5%; float:right">
                         <input id="maxHistoryShouts_input" type="text" name="m_h" placeholder="<?php echo $lang['NUMBERS_ONLY']; ?>" value=" <?php echo $m_h; ?>">
+                    </div>
+                    
+                    <div style="width: 75%; float:left">
+                        <p><?php echo $lang['SCREEN_OPTIMIZED']; ?></p>
+                    </div>
+                    <div style="width: 24.5%; float:right">
+                       <input id="icd4" type="checkbox" name="s_o" <?php if( !empty($_POST['s_o']) || $s_o == '1' ) {echo 'checked';} ?> />
+                       <label for="icd4"></label>
                     </div>
 
                     <div style="width: 75%; float:left">

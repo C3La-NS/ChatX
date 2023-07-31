@@ -1,0 +1,65 @@
+/* scale up widget for larger screens */
+@media screen and (min-width: 600px) {
+    #chatx {
+        width: 325px;
+        font-size: 16px !important;
+    }
+    .chx-bar .chxicon-user {
+        top: 10px;
+        font-size: 16px;
+    }
+    .expanded #false_shoutbox_name {
+        font-size: 90% !important;
+    }
+    #chatx.expanded .chx-container {
+        min-height: 440px;
+    }
+    .shoutbox-content, .shoutbox-history {
+        line-height: 22px;
+    }
+    .shoutbox-content chx_li, .shoutbox-history chx_li {
+        padding: 2px 12px 2px 10px;
+    }
+    .shoutbox-comment::before {
+        left: -6px;
+        border-width: 6px;
+        margin-left: -6px;
+    }
+    #chx-my-msg .shoutbox-comment::before {
+        right: -12px;
+    }
+    .shoutbox-content .chatx_img, .shoutbox-history .chatx_img {
+        max-height: 250px;
+    }
+    [data-loggedIn="true"]:before {
+        font-size: 13px;
+    }
+    .shoutbox-comment-ago {
+        font-size: 12px;
+    }
+    .chx-history chx_i {
+        width: 30px;
+        height: 30px;
+        line-height: 28px;
+        font-size: 16px;
+    }
+    .chx_down {
+        top: -55px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+    }
+    .chxicon-plus {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    #chx-send-message {
+        width: 34px;
+        height: 34px;
+        font-size: 34px;
+    }
+    .bb-popup {
+        width: 190px;
+    }
+}
