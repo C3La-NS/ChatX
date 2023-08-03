@@ -4,43 +4,30 @@ declare(strict_types=1);
 
 use Firebase\JWT\JWT;
 include_once 'settings.php';
-/*$results = [];
-if(isset($_GET['ids_only'])) {
-    $results = $repoShoutsID->findById('last');
-} else {*/
-    $shouts = $repoShouts->query()
-        ->orderBy('createdAt DESC')
-        ->limit(isset($_GET['history']) ? $m_h : $m_s, isset($_GET['history']) ? $m_s : 0)
-        ->execute();
 
-    $results = [];
-    $config = ['language' => '\RelativeTime\Languages\L' . $l_g, 'truncate' => 1];
-    $relativeTime = new \RelativeTime\RelativeTime($config);
-    
-/*    foreach ($shouts as $shout) {
-        $results[] = [
-            'id' => mb_substr($shout->getId(), 0, 4),
-            'loggedIn' => $shout->loggedIn,
-            'text' => $shout->text,
-            'name' => $shout->name,
-            'timeAgo' => $relativeTime->timeAgo($shout->createdAt),
-            'timeStamp' => date('d.m.Y H:i', $shout->createdAt),
-        ];
-    }*/
-    foreach ($shouts as $shout) {
-        $timeAgoValue = empty($relativeTime->timeAgo($shout->createdAt)) ? date('H:i', $shout->createdAt) : $relativeTime->timeAgo($shout->createdAt);
-    
-        $results[] = [
-            'id' => mb_substr($shout->getId(), 0, 4),
-            'loggedIn' => $shout->loggedIn,
-            'text' => $shout->text,
-            'name' => $shout->name,
-            'timeAgo' => $timeAgoValue,
-            'timeStamp' => date('d.m.Y H:i', $shout->createdAt),
-        ];
-    }
+$shouts = $repoShouts->query()
+    ->orderBy('createdAt DESC')
+    ->limit(isset($_GET['history']) ? $m_h : $m_s, isset($_GET['history']) ? $m_s : 0)
+    ->execute();
 
-/*}*/
+$results = [];
+$config = ['language' => '\RelativeTime\Languages\L' . $l_g, 'truncate' => 1];
+$relativeTime = new \RelativeTime\RelativeTime($config);
+
+foreach ($shouts as $shout) {
+    $timeAgo = $relativeTime->timeAgo($shout->createdAt);
+    $timeAgoValue = empty($timeAgo) ? date('H:i', $shout->createdAt) : $timeAgo;
+
+    $results[] = [
+        'id' => mb_substr($shout->getId(), 0, 4),
+        'loggedIn' => $shout->loggedIn,
+        'text' => $shout->text,
+        'name' => $shout->name,
+        'timeAgo' => $timeAgoValue,
+        'timeStamp' => date('d.m.Y H:i', $shout->createdAt),
+    ];
+}
+
 header('Content-type: application/json; charset=utf-8');
 
 try {

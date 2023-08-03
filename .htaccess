@@ -8,7 +8,7 @@
     Header set Cache-Control "max-age=31536050"
 </FilesMatch>
 
-<Files ~ "^delete_old_shouts\.php|json">
+<Files ~ "^delete_old_shouts\.php|^update_ids\.php|json">
     Order allow,deny
     Deny from all
 </Files>

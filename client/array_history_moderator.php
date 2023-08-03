@@ -25,12 +25,13 @@ if(!$is_valid_moderator) {
       $text = $post->text;
       $name = $post->name;
       $timeAgo = $relativeTime->timeAgo($post->createdAt);
+      $timeAgoValue = empty($timeAgo) ? date('H:i', $shout->createdAt) : $timeAgo;
       $buildArray = array(
         'id' => $id,
         'loggedIn' => $loggedIn,
         'text' => $text,
         'name' => $name,
-        'timeAgo' => $timeAgo
+        'timeAgo' => $timeAgoValue
       );  
       $results[] = $buildArray;
 

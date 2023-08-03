@@ -510,7 +510,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     pulsatingCircle.style.display = "none";
                     falseShoutBoxName.style.cssText = "padding-right: 0; transition: 0.3s ease;";
                 }
-                if(r_e == '1' && !sessionName) {
+                if(loggingStatus.startsWith('1') && !sessionName) {
                     falseShoutBoxName.style.visibility = "hidden";
                 }
             });

@@ -3,14 +3,6 @@ include_once '../settings.php';
 include_once 'jwt_verify.php';
 include_once '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
-/*if(isset( $_POST["deleteShout"]) && mb_strlen($_POST['deleteShout'], 'utf-8') <=9 && $is_valid_moderator) {
-
-    foreach($_POST["deleteShout"] as $id) {
-        $repoShouts->delete($id);
-    }
-    include '../update_ids.php';
-
-}*/
 if (isset($_POST["deleteShout"]) && $is_valid_moderator) {
     foreach ($_POST["deleteShout"] as $id) {
         if (mb_strlen($id, 'utf-8') <= 9) {
@@ -20,22 +12,9 @@ if (isset($_POST["deleteShout"]) && $is_valid_moderator) {
     include '../update_ids.php';
 }
 
-
-/*if(isset($_POST["deleteAllShouts"]) && mb_strlen($_POST['deleteAllShouts'], 'utf-8') <=3 && $is_valid_moderator) {
-
-    $oldShouts = $repoShouts->query()
-                ->where('createdAt', '<', strtotime('-0 second'))
-                ->execute();
-
-    foreach($oldShouts as $old) {
-        $repoShouts->delete($old);
-    }
-    include '../update_ids.php';
-
-}*/
 if (isset($_POST["deleteAllShouts"]) && $is_valid_moderator) {
     $deleteAllShouts = $_POST['deleteAllShouts'];
-    if (is_array($deleteAllShouts) && mb_strlen($deleteAllShouts[0], 'utf-8') <= 3) {
+    if (mb_strlen($deleteAllShouts[0], 'utf-8') <= 1) {
         $oldShouts = $repoShouts->query()
             ->where('createdAt', '<', strtotime('-0 second'))
             ->execute();
@@ -125,7 +104,7 @@ if (isset($_POST["deleteAllShouts"]) && $is_valid_moderator) {
             <p><?php echo $lang['CLEARING_ALL_DATA_DESC1']; ?></p>
             <form method="post">
                <span>
-               <input type="hidden" name="deleteAllShouts" value="yes" />
+               <input type="hidden" name="deleteAllShouts" value="1" />
                <button class="button-delete-all" type="submit" value="Submit"><?php echo $lang['DELETE_EVERYTHING']; ?></button>
                </span>
             </form>

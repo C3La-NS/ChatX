@@ -40,6 +40,7 @@ $lang['DEMO_PAGE'] = 'Show demonstration page with chat';
 $lang['MESSAGE_MAX_CHARS'] = 'Max characters per message:';
 $lang['WIDGET_MAX_SHOUTS'] = 'Max shouts in chat app:';
 $lang['HISTORY_MAX_SHOUTS'] = 'Max shouts in chat history:';
+$lang['SCREEN_OPTIMIZED'] = 'Optimize the widget size for larger screens:';
 $lang['IMGUR_IDENTIFICATOR'] = 'Imgur application identificator (API):';
 $lang['SOUND_NOTIFICATION'] = 'Notification sound for new messages:';
 $lang['NOTIFICATION_VARIANT'] = 'Sample';
@@ -135,4 +136,4 @@ $lang['CLIPBOARD_IMG'] = 'upload image from clipboard';
 $lang['SEND_MESSAGE'] = 'to send new message';
 
 // Application version
-$lang['APPLICATION_VERSON'] = '2.4.0';
+$lang['APPLICATION_VERSON'] = '2.5.0';

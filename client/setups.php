@@ -45,7 +45,10 @@ if(isset( $_POST['s']) && $is_valid_moderator) {
       $updateSettings->maxChar = preg_replace('/\D/', '', htmlspecialchars($_POST['m_c']));
     }
     if( !empty($_POST['m_s'] && $_POST['m_s'] >= '1') ) {
-      $updateSettings->maxShout = preg_replace('/\D/', '', htmlspecialchars($_POST['m_s']));
+      $maxShoutsEsc = htmlspecialchars($_POST['m_s']);
+      $updateSettings->maxShout = preg_replace('/\D/', '', $maxShoutsEsc);
+      $m_s = $maxShoutsEsc;
+      include '../update_ids.php';
     }
     if( !empty($_POST['m_h'] && $_POST['m_h'] >= '1') ) {
       $updateSettings->maxHistory = preg_replace('/\D/', '', htmlspecialchars($_POST['m_h']));

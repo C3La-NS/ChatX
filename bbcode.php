@@ -6,81 +6,18 @@
 * @link http://digitcodes.com/create-simple-php-bbcode-parser-function/
 **/
 //BBCode Parser function
-/*function showBBcodes($text) {
-	// BBcode array
-	$find = array(
-		'~\[b\](.*?)\[/b\]~s',
-		'~\[i\](.*?)\[/i\]~s',
-		'~\[u\](.*?)\[/u\]~s',
-		'~\[color=(.*?)\](.*?)\[/color\]~s',
-		'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
-		'~\[url=((?:ftp|https?)://.*?)\](.*?)\[/url\]~s',
-		'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-		'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-		'~((https?|ftps?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a))~si'
-	);
-	// HTML tags to replace BBcode
-	$replace = array(
-		'<b>$1</b>',
-		'<i>$1</i>',
-		'<span style="text-decoration:underline;">$1</span>',
-		'<span style="color:$1;">$2</span>',
-		'<a href="$1" target="_blank">$1</a>',
-		'<a href="$1" target="_blank">$2</a>',
-		'<img class="chatx_img" src="$1" data-chxlightbox="$1" />',
-		'<img class="chatx_img" height="$1" src="$3" data-chxlightbox="$2" />',
-		'<a href="$1" target="_blank">$1</a> '
-	);
-	// Replacing the BBcodes with corresponding HTML tags
-	return preg_replace($find,$replace,$text);
-}*/
-
-/*function showBBcodes($text) {
-// BBcode array
-$find = array(
-'~\[b\](\S+)\[/b\]~s',
-'~\[i\](\S+)\[/i\]~s',
-'~\[u\](\S+)\[/u\]~s',
-'~\[color=(.*?)\](\S+)\[/color\]~s',
-'~\[url\]((?:ftp|https?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)\[/url\]~s',
-'~\[url=((?:ftp|https?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)\](\S+)\[/url\]~s',
-'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-'~((https?|ftps?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)~si'
-);
-// HTML tags to replace BBcode
-$replace = array(
-'<b>$1</b>',
-'<i>$1</i>',
-'<span style="text-decoration:underline;">$1</span>',
-'<span style="color:$1;">$2</span>',
-'<a href="$1" target="_blank">$1</a>',
-'<a href="$1" target="_blank">$2</a>',
-'<img class="chatx_img" src="$1" data-chxlightbox="$1" />',
-'<img class="chatx_img" height="$1" src="$3" data-chxlightbox="$2" />',
-'<a href="$1" target="_blank">$1</a> '
-);
-// Replacing the BBcodes with corresponding HTML tags
-return preg_replace($find,$replace,$text);
-}*/
 
 function showBBcodes($text) {
     // BBcode array
     $find = array(
-        '~\[b\](.+?\S+)\[/b\]~s',
-        '~\[i\](.+?\S+)\[/i\]~s',
-        '~\[u\](.+?\S+)\[/u\]~s',
-        '~\[color=(.*?)\](.+?\S+)\[/color\]~s',
+        '~\[b\](.+?\S)\s*\[/b\]~s',
+        '~\[i\](.+?\S)\s*\[/i\]~s',
+        '~\[u\](.+?\S)\s*\[/u\]~s',
+        '~\[color=(.*?)\](.+?\S)\s*\[/color\]~s',
 		'~\[url\]((?:ftp|https?)://.*?)\[/url\]~s',
 		'~\[url=((?:ftp|https?)://.*?)\](.*?)\[/url\]~s',
-		'~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-		'~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
+		'~\[img h=(.*?) d=(.*?)\](https?://i\.imgur\.com.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
 		'~((https?|ftps?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a))~si'
-/*        '~\[url\]((?:ftp|https?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)\[/url\]~s',
-        '~\[url=((?:ftp|https?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)\](.+?\S+)\[/url\]~s',
-        '~\[img\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-        '~\[img h=(.*?) d=(.*?)\](https?://.*?\.(?:jpg|jpeg|gif|png|bmp))\[/img\]~s',
-        '~((https?|ftps?):\/\/[^"<\s]+(?:\?[^"<\s]*)?(?![^<>]*>|[^"]*?<\/a)(#\S*)?)~si'*/
     );
 
     // HTML tags to replace BBcode
@@ -91,7 +28,6 @@ function showBBcodes($text) {
         '<span style="color:$1;">$2</span>',
         '<a href="$1" target="_blank">$1</a>',
         '<a href="$1" target="_blank">$2</a>',
-        '<img class="chatx_img" src="$1" data-chxlightbox="$1" />',
         '<img class="chatx_img" height="$1" src="$3" data-chxlightbox="$2" />',
         '<a href="$1" target="_blank">$1</a> '
     );

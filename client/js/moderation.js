@@ -26,8 +26,7 @@ xhr.onreadystatechange = function() {
             if (closestLi) closestLi.setAttribute("id", "chx-my-msg");
         }
     }
-    
-    
+
     function lightBoxInitiation() {
         var images = document.querySelectorAll('img[data-chxlightbox]');
         images.forEach(function(image) {

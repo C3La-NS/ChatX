@@ -1,5 +1,5 @@
 /* scale up widget for larger screens */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1600px) {
     #chatx {
         width: 325px;
         font-size: 16px !important;

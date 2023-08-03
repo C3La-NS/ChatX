@@ -50,18 +50,6 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 25 && $is_valid_mo
     exit;
 }
 
-if($is_valid_moderator) {
-$getProfile = $repoProfiles->query()
-->execute();
-    echo '
-    <p class="total" style="display: none">' . $lang['REGISTERED_USERS'] . '<b>' . $getProfile->total() . '</b></p>
-    <p class="legend" style="display: none"><span class="moderator">M</span> — ' . $lang['USER_MODERATOR'] . '</p>
-    <p class="legend" style="display: none"><span class="banned">B</span> — ' . $lang['USER_BANNED'] . '</p>
-    ';
-    foreach($getProfile as $singleProfile) {
-        echo '<div class="u-list col-md-10 col-lg-5" style="display: none"><b>' . $singleProfile->login . '</b>'; if($singleProfile->moderator === "true") {echo '<span class="moderator">M</span>';} elseif($singleProfile->banned == true) {echo '<span class="banned">B</span>';} echo '</div>';
-    }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -102,7 +90,41 @@ $getProfile = $repoProfiles->query()
     <li><a href="https://github.com/C3La-NS/ChatX"><?php echo $lang['GITHUB']; ?></a> <span>(v. <?php echo $lang['APPLICATION_VERSON']; ?>)</span></li>
     <h2><?php echo $lang['USER_USERLIST']; ?></h2>
     <div class="container userlist">
-        <div class="row"></div>
+        <div class="row">
+        <?php
+        if ($is_valid_moderator) {
+            $getProfile = $repoProfiles->query()
+                ->execute();
+            ob_start(); // Start output buffering
+            
+        ?>
+            <p class="total" style="display: none"><?=$lang['REGISTERED_USERS'] ?><b><?=$getProfile->total() ?></b></p>
+            <p class="legend" style="display: none"><span class="moderator">M</span> — <?=$lang['USER_MODERATOR'] ?></p>
+            <p class="legend" style="display: none"><span class="banned">B</span> — <?=$lang['USER_BANNED'] ?></p>
+            <?php foreach ($getProfile as $singleProfile) { ?>
+            <div class="u-list col-md-10 col-lg-5" style="display: none">
+                <b><?=$singleProfile->login ?></b>
+                <?php if ($singleProfile->moderator === "true") { ?>
+                    <span class="moderator">M</span>
+                <?php } elseif ($singleProfile->banned == true) { ?>
+                    <span class="banned">B</span>
+                <?php } ?>
+            </div>
+            <?php }
+            $htmlOutput = ob_get_clean(); // Get the output from buffer
+            $tidyConfig = array(
+                'indent' => true,
+                'indent-spaces' => 4,
+                'wrap' => 0,
+                'show-body-only' => true,
+            );
+            $tidy = new Tidy();
+            $tidy->parseString($htmlOutput, $tidyConfig);
+            $tidy->cleanRepair();
+            echo $tidy;
+        }
+        ?>
+        </div>
     </div>
 </aside>
 <div id="primary" class="col-md-8 mb-xs-24">
@@ -195,13 +217,13 @@ $getProfile = $repoProfiles->query()
 </div><!-- #main.container -->
 
 <script>
-    const elements = document.querySelectorAll('.total, .u-list, .legend');
-    const targetElement = document.querySelector('#secondary .row');
+    /*const elements = document.querySelectorAll('.total, .u-list, .legend');
+    const targetElement = document.querySelector('#secondary .row');*/
     const currentVersion = "<?php echo $lang['APPLICATION_VERSON']; ?>";
     
-    elements.forEach(element => {
+/*    elements.forEach(element => {
       targetElement.appendChild(element);
-    });
+    });*/
 </script>
 <script src="js/app-version.js"></script>
 
