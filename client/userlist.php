@@ -91,39 +91,17 @@ if( !empty($_POST['u']) && mb_strlen($_POST['u'], 'utf-8') <= 25 && $is_valid_mo
     <h2><?php echo $lang['USER_USERLIST']; ?></h2>
     <div class="container userlist">
         <div class="row">
-        <?php
-        if ($is_valid_moderator) {
-            $getProfile = $repoProfiles->query()
-                ->execute();
-            ob_start(); // Start output buffering
-            
-        ?>
-            <p class="total" style="display: none"><?=$lang['REGISTERED_USERS'] ?><b><?=$getProfile->total() ?></b></p>
-            <p class="legend" style="display: none"><span class="moderator">M</span> — <?=$lang['USER_MODERATOR'] ?></p>
-            <p class="legend" style="display: none"><span class="banned">B</span> — <?=$lang['USER_BANNED'] ?></p>
-            <?php foreach ($getProfile as $singleProfile) { ?>
-            <div class="u-list col-md-10 col-lg-5" style="display: none">
-                <b><?=$singleProfile->login ?></b>
-                <?php if ($singleProfile->moderator === "true") { ?>
-                    <span class="moderator">M</span>
-                <?php } elseif ($singleProfile->banned == true) { ?>
-                    <span class="banned">B</span>
-                <?php } ?>
-            </div>
-            <?php }
-            $htmlOutput = ob_get_clean(); // Get the output from buffer
-            $tidyConfig = array(
-                'indent' => true,
-                'indent-spaces' => 4,
-                'wrap' => 0,
-                'show-body-only' => true,
-            );
-            $tidy = new Tidy();
-            $tidy->parseString($htmlOutput, $tidyConfig);
-            $tidy->cleanRepair();
-            echo $tidy;
-        }
-        ?>
+<?php
+if ($is_valid_moderator) {
+    $getProfile = $repoProfiles->query()->execute();
+?>
+            <p class="total"><?= $lang['REGISTERED_USERS'] ?><b><?= $getProfile->total() ?></b></p>
+            <p class="legend"><span class="moderator">M</span> — <?= $lang['USER_MODERATOR'] ?></p>
+            <p class="legend"><span class="banned">B</span> — <?= $lang['USER_BANNED'] ?></p>
+<?php foreach ($getProfile as $singleProfile) : ?>
+            <div class='u-list col-md-10 col-lg-5'><b><?= $singleProfile->login ?></b><?php if ($singleProfile->moderator === "true") : ?><span class="moderator">M</span><?php endif; ?><?php if ($singleProfile->banned == true) : ?><span class="banned">B</span><?php endif; ?></div>
+<?php endforeach; ?>
+<?php } ?>
         </div>
     </div>
 </aside>
