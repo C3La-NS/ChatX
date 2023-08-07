@@ -195,13 +195,7 @@ if ($is_valid_moderator) {
 </div><!-- #main.container -->
 
 <script>
-    /*const elements = document.querySelectorAll('.total, .u-list, .legend');
-    const targetElement = document.querySelector('#secondary .row');*/
     const currentVersion = "<?php echo $lang['APPLICATION_VERSON']; ?>";
-    
-/*    elements.forEach(element => {
-      targetElement.appendChild(element);
-    });*/
 </script>
 <script src="js/app-version.js"></script>
 

@@ -406,6 +406,7 @@ chx_p {
 	box-shadow: none;
 	cursor: pointer;
 	outline: none;
+	z-index: 2;
 }
 /* ------- Placeholders and some fixes ------- */
 #false_shoutbox_name::-webkit-input-placeholder {
@@ -868,7 +869,7 @@ img.emojione {
 .chx-color-bb-prompt, .chx-image-bb-prompt, .chx-link-bb-prompt {
 	position: absolute;
 	display: none;
-	z-index: 2;
+	z-index: 3;
 	width: calc(100% - 1px);
 	padding: 15px 10px 0 10px;
 	box-sizing: border-box;
@@ -1491,6 +1492,37 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
 	border: 6px solid #fff;
 	border-color: #fff transparent #fff transparent;
 	animation: lds-dual-ring 1.2s linear infinite;
+}
+
+.progress-bar-wrapper {
+    position: absolute;
+    /*display: none;*/
+    right: 8px;
+    top: 11px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.progress-bar-circle-blue {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke: var(--chx-8-color);
+    stroke-dasharray: 0;
+    transition: stroke-dasharray 0.2s linear;
+}
+
+.progress-bar-circle-red {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke: var(--chx-10-color);
+    stroke-dasharray: 0;
+    transition: stroke-dasharray 0.2s linear;
 }
 
 @keyframes lds-dual-ring {

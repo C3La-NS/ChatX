@@ -131,6 +131,12 @@ const markup = `
                     <chx_div id="chx-send-message">
                         <chx_i class="chxicon-send"></chx_i>
                     </chx_div>
+                    <chx_div class="progress-bar-wrapper">
+                        <svg class="progress-bar-svg" width="32" height="32">
+                            <circle class="progress-bar-circle-blue" cx="15" cy="15" r="14"></circle>
+                            <circle class="progress-bar-circle-red" cx="15" cy="15" r="14"></circle>
+                        </svg>
+                    </chx_div>
                 </form>
             </chx_div>
         </chx_div>
@@ -204,15 +210,6 @@ let ul = document.querySelector("chx_ul.shoutbox-content"),
     ulHist = document.querySelector('chx_ul.shoutbox-history'),
     signUpFormContents = document.querySelector('.chx-signup-form-contents');
 isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
-/*mouseDown = 0;
-document.querySelector('.' + chx_resize).onmousedown = function(e) {
-    if (e.target.className !== "chatx_img") {
-        mouseDown = 1;
-    }
-};
-document.querySelector('.' + chx_resize).onmouseup = function() {
-    mouseDown = 0;
-};*/
 
 makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     let parsedResponse = JSON.parse(response);
@@ -573,8 +570,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                             load();
                             return;
                         }
-                                                
-                        /*appendComments(xhr.response);*/
                         scrollBottom();
                     }
                     secondLoad = true;
@@ -1163,6 +1158,42 @@ function pushNotification() {
 }
 pushNotification();
 
+
+const progressBarWrapper = document.querySelector('.progress-bar-wrapper');
+const progressBarBlueCircle = document.querySelector('.progress-bar-circle-blue');
+const progressBarRedCircle = document.querySelector('.progress-bar-circle-red');
+const maxSymbols = 240;
+const twentyFivePercent = maxSymbols * 0.25;
+
+function updateProgressBar() {
+    const numSymbols = commentElement.value.length;
+    const progressPercentage = (numSymbols / maxSymbols) * 100;
+
+    const dashArrayValue = (progressPercentage / 100) * (2 * Math.PI * 14);
+
+    progressBarBlueCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * 14}`;
+    progressBarRedCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * 14}`;
+    
+    if (numSymbols > 0) {
+        progressBarWrapper.style.display = 'block';
+    } else {
+        progressBarWrapper.style.display = 'none';
+    }
+
+    if (maxSymbols - numSymbols <= twentyFivePercent) {
+        progressBarRedCircle.style.display = 'block';
+        progressBarBlueCircle.style.display = 'none';
+    } else {
+        progressBarRedCircle.style.display = 'none';
+        progressBarBlueCircle.style.display = 'block';
+    }
+}
+
+commentElement.addEventListener('input', updateProgressBar);
+
+updateProgressBar();
+
+
 commentElement.addEventListener('input', function() {
   this.rows = 2;
   this.rows = countRows(this.scrollHeight);
@@ -1238,6 +1269,7 @@ function chatSubmit() {
     localStorage.removeItem('chx_text');
     localStorage.removeItem('chx_rows');
     commentElement.setAttribute("rows", 2);
+    progressBarWrapper.style.display = 'none'; //test article F symbol count
 }
 // invoke chatsubmit() when clicked on submit button
 const sendMessageBtn = document.querySelector('#chx-send-message');
@@ -1325,22 +1357,20 @@ function bbtags(h, a, i) {
         var c = g.scrollTop;
         var e = g.selectionStart;
         var f = g.selectionEnd;
-        g.value = g.value.substring(0, g.selectionStart) + a + g.value.substring(g.selectionStart, g.selectionEnd) + i + g.value.substring(g.selectionEnd, g.value.length);
-        g.selectionStart = e;
-        g.selectionEnd = f + a.length + i.length;
-        g.scrollTop = c;
-    } else {
-        if (document.selection && document.selection.createRange) {
-            g.focus();
-            var b = document.selection.createRange();
-            if (b.text != "") {
-                b.text = a + b.text + i;
-            } else {
-                b.text = a + "REPLACE" + i;
-            }
-            g.focus();
+        var selectedText = g.value.substring(g.selectionStart, g.selectionEnd);
+        
+        if (selectedText === '') {
+            g.value = g.value.substring(0, e) + a + i + g.value.substring(f, g.value.length);
+            g.selectionStart = e + a.length;
+            g.selectionEnd = e + a.length;
+        } else {
+            g.value = g.value.substring(0, e) + a + selectedText + i + g.value.substring(f, g.value.length);
+            g.selectionStart = e + a.length;
+            g.selectionEnd = f + a.length + i.length;
         }
-    }
+        
+        g.scrollTop = c;
+    } 
     commentElement.rows = countRows(commentElement.scrollHeight);
 }
 document.addEventListener('keydown', function(e) {
