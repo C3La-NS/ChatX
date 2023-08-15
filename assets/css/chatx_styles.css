@@ -1496,9 +1496,8 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
 
 .progress-bar-wrapper {
     position: absolute;
-    /*display: none;*/
-    right: 8px;
-    top: 11px;
+    right: 7px;
+    top: 10px;
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -1506,21 +1505,14 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
     overflow: hidden;
     z-index: 1;
 }
-
-.progress-bar-circle-blue {
-    fill: none;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke: var(--chx-8-color);
-    stroke-dasharray: 0;
-    transition: stroke-dasharray 0.2s linear;
+.progress-bar-svg {
+    width: 32px;
+    height: 32px;
 }
-
-.progress-bar-circle-red {
+.progress-bar-circle {
     fill: none;
     stroke-width: 3;
     stroke-linecap: round;
-    stroke: var(--chx-10-color);
     stroke-dasharray: 0;
     transition: stroke-dasharray 0.2s linear;
 }

@@ -132,9 +132,8 @@ const markup = `
                         <chx_i class="chxicon-send"></chx_i>
                     </chx_div>
                     <chx_div class="progress-bar-wrapper">
-                        <svg class="progress-bar-svg" width="32" height="32">
-                            <circle class="progress-bar-circle-blue" cx="15" cy="15" r="14"></circle>
-                            <circle class="progress-bar-circle-red" cx="15" cy="15" r="14"></circle>
+                        <svg class="progress-bar-svg">
+                            <circle class="progress-bar-circle"></circle>
                         </svg>
                     </chx_div>
                 </form>
@@ -205,7 +204,9 @@ const refreshButton = document.querySelectorAll(".chxicon-refresh")[0],
     pulsatingCircle = document.querySelector(".chx-pulsating-circle"),
     chxColorBbPrompt = document.querySelector(".chx-color-bb-prompt"),
     chxImageBbPrompt = document.querySelector(".chx-image-bb-prompt"),
-    chxLinkBbPrompt = document.querySelector(".chx-link-bb-prompt");
+    chxLinkBbPrompt = document.querySelector(".chx-link-bb-prompt"),
+    progressBarWrapper = document.querySelector('.progress-bar-wrapper'),
+    progressBarCircle = document.querySelector('.progress-bar-circle');
 let ul = document.querySelector("chx_ul.shoutbox-content"),
     ulHist = document.querySelector('chx_ul.shoutbox-history'),
     signUpFormContents = document.querySelector('.chx-signup-form-contents');
@@ -242,9 +243,24 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     }
     
     setDynamicAuthenticationVars();
+    
     // optimize widget for larger screens
     if (s_o === "1") {
         load_css(chatx_server + 'assets/css/screen_optimized.css');
+        // Function to check screen width
+        function scr_l() {
+          return window.innerWidth >= 1600;
+        }
+        function handleWindowResize() {
+          const dimensions = scr_l() ? { cx: "18", cy: "18", r: "17" } : { cx: "15", cy: "15", r: "14" };
+        
+          for (const attr in dimensions) {
+            progressBarCircle.setAttribute(attr, dimensions[attr]);
+          }
+          updateProgressBar();
+        }
+        window.onresize = handleWindowResize;
+        handleWindowResize();
     }
     // loading chat color scheme
     load_css(chatx_server + 'assets/css/scheme/' + c_s + '.css');
@@ -1057,6 +1073,32 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         } catch (e) {}
     }
     
+    function updateProgressBar() {
+        /*let circ_rad = progressBarCircle.getAttribute("r");*/
+        const circ_rad = parseFloat(progressBarCircle.getAttribute("r"));
+        const numSymbols = commentElement.value.length;
+        const progressPercentage = (numSymbols / m_c) * 100;
+        const dashArrayValue = (progressPercentage / 100) * (2 * Math.PI * circ_rad);
+    
+        progressBarCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * circ_rad}`;
+        
+        if (numSymbols > 0) {
+            progressBarWrapper.style.display = 'block';
+        } else {
+            progressBarWrapper.style.display = 'none';
+        }
+    
+        if (m_c - numSymbols <= m_c * 0.25) {
+            progressBarCircle.style.stroke = 'var(--chx-10-color)';
+        } else {
+            progressBarCircle.style.stroke = 'var(--chx-8-color)';
+        }
+    }
+    
+    commentElement.addEventListener('input', updateProgressBar);
+    
+    updateProgressBar();
+    
     getScript(chatx_server + 'assets/js/img-gallery.js');
     
     Promise.all([
@@ -1157,42 +1199,6 @@ function pushNotification() {
     }
 }
 pushNotification();
-
-
-const progressBarWrapper = document.querySelector('.progress-bar-wrapper');
-const progressBarBlueCircle = document.querySelector('.progress-bar-circle-blue');
-const progressBarRedCircle = document.querySelector('.progress-bar-circle-red');
-const maxSymbols = 240;
-const twentyFivePercent = maxSymbols * 0.25;
-
-function updateProgressBar() {
-    const numSymbols = commentElement.value.length;
-    const progressPercentage = (numSymbols / maxSymbols) * 100;
-
-    const dashArrayValue = (progressPercentage / 100) * (2 * Math.PI * 14);
-
-    progressBarBlueCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * 14}`;
-    progressBarRedCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * 14}`;
-    
-    if (numSymbols > 0) {
-        progressBarWrapper.style.display = 'block';
-    } else {
-        progressBarWrapper.style.display = 'none';
-    }
-
-    if (maxSymbols - numSymbols <= twentyFivePercent) {
-        progressBarRedCircle.style.display = 'block';
-        progressBarBlueCircle.style.display = 'none';
-    } else {
-        progressBarRedCircle.style.display = 'none';
-        progressBarBlueCircle.style.display = 'block';
-    }
-}
-
-commentElement.addEventListener('input', updateProgressBar);
-
-updateProgressBar();
-
 
 commentElement.addEventListener('input', function() {
   this.rows = 2;
@@ -1492,7 +1498,7 @@ function formSubmit(nameForm) {
     let inputs = form.querySelectorAll("input");
     let emptyInputs = [...inputs].filter(input => input.value === "");
     if (emptyInputs.length) {
-        emptyInputs.forEach(input => input.style.boxShadow = "inset 0px 0px 0px 1px #bb5a5a");
+        emptyInputs.forEach(input => input.style.boxShadow = "inset 0px 0px 0px 1px var(--chx-11-color)");
     } else {
         if (!isFirefox()) {
             form.dispatchEvent(new SubmitEvent('submit'));
@@ -1535,10 +1541,13 @@ document.querySelector(".chx-process-link").addEventListener("click", function()
     if (c && d) {
         commentElement.value = '[url=' + c + ']' + d + '[/url]';
         commentElement.rows = countRows(commentElement.scrollHeight);
-        chxLinkBbPrompt.style.display = "none";
         a.value = "";
         b.value = "";
     }
+    if((!c && !d) || (c && d)) {
+        chxLinkBbPrompt.style.display = "none";
+    }
+
 });
 var managementLink = document.querySelector(".chx-management-link");
 managementLink.setAttribute("href", chatx_server + "client/index.php");
@@ -1550,7 +1559,7 @@ function loadingModal() {
 
 function generateImageTagAndSend(res) {
     let data = JSON.parse(res);
-    if (res !== "" && data.link !== null) {
+    if (!data.error && data.link !== 'null') {
         commentElement.value = "[img h=" + data.clientHeight + " d=" + data.link + "]" + data.thumbnail + "[/img] ";
         document.querySelector("input[name='url_to_img']").value = "";
         // check if false_shoutbox_name is empty
@@ -1560,6 +1569,8 @@ function generateImageTagAndSend(res) {
         } else {
             chatSubmit();
         }
+    } else {
+        console.error(data.error);
     }
     document.querySelector('.loading-modal').remove();
 }
