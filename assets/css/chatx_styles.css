@@ -17,7 +17,7 @@
 .chxicon-pause {
 	display: none;
 	position: absolute;
-	right: 80px;
+	right: 28%;
 	top: 12px;
 	font-size: 12px;
 	z-index: 1;
@@ -233,7 +233,11 @@ chx_p {
 .shoutbox-comment-contents {
 	display: inline;
 	word-wrap: anywhere;
-	user-select: text !important;
+	white-space: pre-line;
+}
+
+.shoutbox-comment *:not(.shoutbox-username b):not(.shoutbox-comment-ago) {
+    user-select: text !important;
 }
 
 .shoutbox-comment-details {
@@ -1502,17 +1506,18 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
     height: 32px;
     border-radius: 50%;
     border: 1px solid;
-    overflow: hidden;
+    box-sizing: content-box !important;
     z-index: 1;
 }
 .progress-bar-svg {
     width: 32px;
     height: 32px;
+    overflow: visible;
 }
 .progress-bar-circle {
     fill: none;
     stroke-width: 3;
-    stroke-linecap: round;
+    stroke-linecap: butt;
     stroke-dasharray: 0;
     transition: stroke-dasharray 0.2s linear;
 }

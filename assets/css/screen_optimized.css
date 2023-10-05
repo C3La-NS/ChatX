@@ -63,16 +63,8 @@
         width: 190px;
     }
     .progress-bar-wrapper {
-        right: 5px;
-        top: 8px;
-        width: 38px;
-        height: 38px;
+        right: 8px;
+        top: 10px;
     }
-    .progress-bar-svg {
-        width: 38px;
-        height: 38px;
-    }
-    .progress-bar-circle {
-        stroke-width: 5;
-    }
+
 }

@@ -1,7 +1,7 @@
 /*
 ###################################################################
             CHATX BUILDING MARKUP, UI AND ADDING CSS STYLES
-            VERSION 2.4.0
+            VERSION 2.5.0
 ###################################################################
 */
 
@@ -133,7 +133,7 @@ const markup = `
                     </chx_div>
                     <chx_div class="progress-bar-wrapper">
                         <svg class="progress-bar-svg">
-                            <circle class="progress-bar-circle"></circle>
+                            <circle class="progress-bar-circle" cx="50%" cy="50%" r="50%"></circle>
                         </svg>
                     </chx_div>
                 </form>
@@ -247,20 +247,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     // optimize widget for larger screens
     if (s_o === "1") {
         load_css(chatx_server + 'assets/css/screen_optimized.css');
-        // Function to check screen width
-        function scr_l() {
-          return window.innerWidth >= 1600;
-        }
-        function handleWindowResize() {
-          const dimensions = scr_l() ? { cx: "18", cy: "18", r: "17" } : { cx: "15", cy: "15", r: "14" };
-        
-          for (const attr in dimensions) {
-            progressBarCircle.setAttribute(attr, dimensions[attr]);
-          }
-          updateProgressBar();
-        }
-        window.onresize = handleWindowResize;
-        handleWindowResize();
     }
     // loading chat color scheme
     load_css(chatx_server + 'assets/css/scheme/' + c_s + '.css');
@@ -774,16 +760,8 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 });
                 chatx.style.display = "block";
             }, "0")
-
         });
-
-    // Submit by Enter
-    commentElement.addEventListener("keypress", function(event) {
-        if (event.keyCode === 10 || event.keyCode === 13) {
-            event.preventDefault();
-            chatSubmit();
-        }
-    });
+    
     // Saving, storing & retreiving nickname in localstorage
     const loadNickname = () => {
       if (!sessionName) {
@@ -1072,15 +1050,15 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
           }
         } catch (e) {}
     }
-    
+
     function updateProgressBar() {
-        /*let circ_rad = progressBarCircle.getAttribute("r");*/
-        const circ_rad = parseFloat(progressBarCircle.getAttribute("r"));
+        const circ_radius_percentage = parseFloat(progressBarCircle.getAttribute("r"));
         const numSymbols = commentElement.value.length;
         const progressPercentage = (numSymbols / m_c) * 100;
-        const dashArrayValue = (progressPercentage / 100) * (2 * Math.PI * circ_rad);
+        const circ_circumference = 2 * Math.PI * (circ_radius_percentage / 3.15);
+        const dashArrayValue = (progressPercentage / 100) * circ_circumference;
     
-        progressBarCircle.style.strokeDasharray = `${dashArrayValue} ${2 * Math.PI * circ_rad}`;
+        progressBarCircle.style.strokeDasharray = `${dashArrayValue} ${circ_circumference}`;
         
         if (numSymbols > 0) {
             progressBarWrapper.style.display = 'block';
@@ -1094,11 +1072,41 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             progressBarCircle.style.stroke = 'var(--chx-8-color)';
         }
     }
-    
+
     commentElement.addEventListener('input', updateProgressBar);
     
     updateProgressBar();
+
+    // Submit by Enter
+    commentElement.addEventListener("keypress", function(event) {
+        if (event.keyCode === 10 || event.keyCode === 13) {
+            event.preventDefault();
+            chatSubmit();
+        }
+    });
     
+    // Set new line with Ctrl+Enter
+    commentElement.addEventListener('keydown', function(event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+            event.preventDefault();
+            const currentCursorPosition = commentElement.selectionStart;
+            const text = commentElement.value;
+            if (text.charAt(currentCursorPosition - 1) === '\n' && text.charAt(currentCursorPosition - 2) === '\n') {
+                return;
+            }
+            const newText = text.slice(0, currentCursorPosition) + '\n' + text.slice(currentCursorPosition);
+            commentElement.value = newText;
+            commentElement.selectionStart = commentElement.selectionEnd = currentCursorPosition + 1;
+            commentElement.rows = countRows(commentElement.scrollHeight);
+            const cursorLineNumber = text.substr(0, currentCursorPosition).split('\n').length;
+            const lineHeight = commentElement.scrollHeight / commentElement.rows;
+            let wrapper = document.querySelector(".chx-pre-textarea .simplebar-content-wrapper");
+            wrapper.scrollTop = cursorLineNumber * lineHeight;
+            wrapper.scrollTop -= 6; // fixing scroll issue
+            updateProgressBar();
+        }
+    });
+
     getScript(chatx_server + 'assets/js/img-gallery.js');
     
     Promise.all([
@@ -1230,6 +1238,8 @@ commentElement.addEventListener('input', function() {
 function countRows(scrollHeight) {
     return Math.floor(scrollHeight / 18); // 18px = line-height
 }
+// Set initial row count
+commentElement.rows = countRows(commentElement.scrollHeight);
 
 // Load text and number of rows from localstorage
 const commentText = localStorage.getItem('chx_text');
@@ -1280,12 +1290,7 @@ function chatSubmit() {
 // invoke chatsubmit() when clicked on submit button
 const sendMessageBtn = document.querySelector('#chx-send-message');
 sendMessageBtn.addEventListener('click', chatSubmit);
-// Disable new lines by enter
-commentElement.addEventListener('keydown', function(e) {
-    let s = commentElement.value;
-    s = s.replace(/\n/g, '');
-    commentElement.value = s;
-});
+
 const chatPopoverLinks = document.querySelectorAll('.chat_popover_parent a');
 for (let link of chatPopoverLinks) {
     link.addEventListener('click', function() {

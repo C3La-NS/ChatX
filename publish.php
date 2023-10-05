@@ -27,7 +27,7 @@ try {
 if (isset($_POST["name"], $_POST["comment"]) && mb_strlen($_POST['name'], 'utf-8') <= 25 && !empty($_POST['comment']) && mb_strlen($_POST['comment'], 'utf-8') <= $m_c) {
     $name = str_replace(["\n", "\r"], '', htmlspecialchars($_POST["name"]));
     $comment = htmlspecialchars($_POST["comment"]);
-    $comment = str_replace(array("\n", "\r"), '', $comment);
+    $comment = preg_replace('/(\r?\n){3,}/', "\n\n", $comment);
     if($userIsGuest) {
         $comment = preg_replace('~https://i\.imgur\.com(*SKIP)(*FAIL)|https?://' . $_SERVER['SERVER_NAME'] . '(*SKIP)(*FAIL)|\[url=https?://(*SKIP)(*FAIL)|https?://~s', '', $comment);
     }

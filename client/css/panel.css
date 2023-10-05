@@ -628,6 +628,7 @@ chx_li {
     font-size: 100%;
     margin: 0;
     word-wrap: anywhere;
+    white-space: pre-line;
 }
 .shoutbox-username {
     display: inline;
