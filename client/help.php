@@ -49,6 +49,7 @@ include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
          <p><span>Ctrl</span> + <span>V</span> <?php echo $lang['CLIPBOARD_IMG']; ?></p>
          <hr>
          <p><span>Enter</span> <?php echo $lang['SEND_MESSAGE']; ?></p>
+         <p><span>Ctrl</span> + <span>Enter</span> <?php echo $lang['SET_NEWLINE']; ?></p>
       </section>
    </div>
 </div>

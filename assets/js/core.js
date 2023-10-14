@@ -29,7 +29,7 @@ const markup = `
                     <chx_i class="chxicon-user"></chx_i>
                     <chx_div class="chx-pulsating-circle"></chx_div>
                     <chx_i class="chxicon-pause"></chx_i>
-                    <input id="false_shoutbox_name" type="name" maxlength="15" placeholder /*onblur="valName()"*//>
+                    <input id="false_shoutbox_name" type="name" maxlength="15" placeholder />
                     <chx_div class="name-required"></chx_div>
                     <chx_i class="chxicon-refresh"></chx_i>
                     <chx_div class="chat_popover_parent">
@@ -81,7 +81,7 @@ const markup = `
                     <chx_div class="chx-history">
                         <chx_span>
                             <chx_i class="chxicon-arrow"></chx_i>
-                            <chx_div>Ранее в чате</chx_div>
+                            <chx_div></chx_div>
                         </chx_span>
                     </chx_div>
                     <chx_ul class="shoutbox-content"></chx_ul>
@@ -124,9 +124,11 @@ const markup = `
                             </chx_div>
                             <input type="text" name="link_desc" placeholder>
                     </chx_div>
-                    <chx_div data-simplebar class="chx-pre-textarea">
-                        <chx_i class="chxicon-plus"></chx_i>
-                        <textarea id="shoutbox-comment" rows="2" data-min-rows="2" placeholder name="comment"></textarea>
+                    <chx_div class="chx-hard-wrapper">
+                        <chx_div class="chx-scroll-wrapper no-scrollbar">
+                            <chx_i class="chxicon-plus"></chx_i>
+                            <chx_div id="shoutbox-comment" name="comment" contenteditable="true"></chx_div>
+                        </chx_div>
                     </chx_div>
                     <chx_div id="chx-send-message">
                         <chx_i class="chxicon-send"></chx_i>
@@ -206,11 +208,13 @@ const refreshButton = document.querySelectorAll(".chxicon-refresh")[0],
     chxImageBbPrompt = document.querySelector(".chx-image-bb-prompt"),
     chxLinkBbPrompt = document.querySelector(".chx-link-bb-prompt"),
     progressBarWrapper = document.querySelector('.progress-bar-wrapper'),
-    progressBarCircle = document.querySelector('.progress-bar-circle');
+    progressBarCircle = document.querySelector('.progress-bar-circle'),
+    notificSoundIcon = document.querySelector('.chx-sound-notific chx_i');
 let ul = document.querySelector("chx_ul.shoutbox-content"),
     ulHist = document.querySelector('chx_ul.shoutbox-history'),
-    signUpFormContents = document.querySelector('.chx-signup-form-contents');
-isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+    signUpFormContents = document.querySelector('.chx-signup-form-contents'),
+/*isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;*/
+    isMobile = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
 
 makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     let parsedResponse = JSON.parse(response);
@@ -272,7 +276,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 e.preventDefault();
                 if (!canPostComment) return;
                 let name = sessionName === '' ? nameElement.value.trim() : sessionName;
-                let comment = commentElement.value.trim();
+                let comment = commentElement.innerText.trim();
                 if (name.length && comment.length && comment.length <= m_c) {
                     publish(name, comment);
                     // Prevent new shouts from being published
@@ -287,7 +291,11 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 document.querySelectorAll('.chxicon-reply').forEach(function(el) {
                     el.addEventListener('click', function(e) {
                         let replyName = e.target.closest('.shoutbox-comment-reply').dataset.name;
-                        commentElement.value = '@' + '[b]' + replyName + '[/b] ';
+                        commentElement.innerText = '@' + '[b]' + replyName + '[/b]';
+                        triggerInputAtKeydown();
+                        const lastNode = commentElement.lastChild; 
+                        const sel = window.getSelection();
+                        setCursorAfterNode(sel, lastNode); 
                         commentElement.focus();
                     });
                 });
@@ -296,9 +304,9 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             function soundMuted() {
                 soundMuted = localStorage.getItem('soundMuted');
                 if (typeof soundMuted !== 'undefined' && soundMuted) {
-                    let notificicon = document.querySelector('.chx-sound-notific chx_i');
-                    notificicon.classList.remove('chxicon-unmute');
-                    notificicon.classList.add('chxicon-mute');
+                    /*let notificicon = document.querySelector('.chx-sound-notific chx_i');*/
+                    notificSoundIcon.classList.remove('chxicon-unmute');
+                    notificSoundIcon.classList.add('chxicon-mute');
                 }
             }
             // Clicking the refresh button will force the load function
@@ -353,7 +361,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 xhr.withCredentials = true;
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        commentElement.value = "";
+                        commentElement.innerText = "";
                         secondLoad = false;
                         load();
                         if (sessionName) {
@@ -498,8 +506,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     ul.prepend(li);
                 });
             }
-            // Max length of new message in textarea
-            commentElement.setAttribute('maxlength', m_c);
             // Making bleeping online indicator when fast-track update is on
             icd.addEventListener("click", function() {
                 if (this.checked) {
@@ -518,7 +524,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             let classesString;
             function load() {
                 if (!loadPaused) {
-                    console.log('load paused');
                     return;
                 }
                 const xhr = new XMLHttpRequest();
@@ -727,7 +732,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 isDragging = false
                 let clientY = e.clientY || e.touches[0].clientY;
                 let newHeight = startHeight + clientY - startY;
-                let maxHeight = window.innerHeight - chatx.offsetTop - (window.innerHeight - document.documentElement.clientHeight) - shoutboxForm.offsetHeight - 36;
+                let maxHeight = window.innerHeight - chatx.offsetTop - (window.innerHeight - document.documentElement.clientHeight) - shoutboxForm.offsetHeight - 46 /*why?*/;
                 if (newHeight > maxHeight) {
                     newHeight = maxHeight;
                 }
@@ -773,7 +778,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
 
     function lightBoxInitiation() {
         // Get all images with data-chxFullSize attribute
-        var images = document.querySelectorAll('img[data-chxlightbox]');
+        let images = document.querySelectorAll('img[data-chxlightbox]');
         // Attach click event listener to each image
         images.forEach(function(image) {
             image.addEventListener('click', function() {
@@ -1052,59 +1057,199 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     }
 
     function updateProgressBar() {
-        const circ_radius_percentage = parseFloat(progressBarCircle.getAttribute("r"));
-        const numSymbols = commentElement.value.length;
-        const progressPercentage = (numSymbols / m_c) * 100;
-        const circ_circumference = 2 * Math.PI * (circ_radius_percentage / 3.15);
-        const dashArrayValue = (progressPercentage / 100) * circ_circumference;
-    
-        progressBarCircle.style.strokeDasharray = `${dashArrayValue} ${circ_circumference}`;
-        
+        const numSymbols = commentElement.innerText.length;
+
         if (numSymbols > 0) {
+            const circ_radius_percentage = parseFloat(progressBarCircle.getAttribute("r"));
+            const progressPercentage = (numSymbols / m_c) * 100;
+            const circ_circumference = 2 * Math.PI * (circ_radius_percentage / 3.15);
+            const dashArrayValue = (progressPercentage / 100) * circ_circumference;
+            const stroke = (m_c - numSymbols <= m_c * 0.25) ? 'var(--chx-10-color)' : 'var(--chx-8-color)';
+
+            Object.assign(progressBarCircle.style, {
+                strokeDasharray: `${dashArrayValue} ${circ_circumference}`,
+                stroke: stroke,
+            });
+
             progressBarWrapper.style.display = 'block';
         } else {
             progressBarWrapper.style.display = 'none';
         }
-    
-        if (m_c - numSymbols <= m_c * 0.25) {
-            progressBarCircle.style.stroke = 'var(--chx-10-color)';
-        } else {
-            progressBarCircle.style.stroke = 'var(--chx-8-color)';
-        }
     }
 
-    commentElement.addEventListener('input', updateProgressBar);
-    
     updateProgressBar();
 
-    // Submit by Enter
+    // Submit message by Enter
     commentElement.addEventListener("keypress", function(event) {
-        if (event.keyCode === 10 || event.keyCode === 13) {
+        if ((event.key === "Enter" || event.key === "NumpadEnter") && !isMobile) {
             event.preventDefault();
             chatSubmit();
         }
     });
+
+    // Trigger newline on Ctrl+Enter
+    commentElement.addEventListener('keydown', function (event) {
+        const isEnterPress = event.key === "Enter" && (event.ctrlKey || event.metaKey || isMobile);
     
-    // Set new line with Ctrl+Enter
-    commentElement.addEventListener('keydown', function(event) {
-        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+        // ignore the event if the element is empty
+        if (isEnterPress && commentElement.textContent.trim() === "") {
             event.preventDefault();
-            const currentCursorPosition = commentElement.selectionStart;
-            const text = commentElement.value;
-            if (text.charAt(currentCursorPosition - 1) === '\n' && text.charAt(currentCursorPosition - 2) === '\n') {
-                return;
-            }
-            const newText = text.slice(0, currentCursorPosition) + '\n' + text.slice(currentCursorPosition);
-            commentElement.value = newText;
-            commentElement.selectionStart = commentElement.selectionEnd = currentCursorPosition + 1;
-            commentElement.rows = countRows(commentElement.scrollHeight);
-            const cursorLineNumber = text.substr(0, currentCursorPosition).split('\n').length;
-            const lineHeight = commentElement.scrollHeight / commentElement.rows;
-            let wrapper = document.querySelector(".chx-pre-textarea .simplebar-content-wrapper");
-            wrapper.scrollTop = cursorLineNumber * lineHeight;
-            wrapper.scrollTop -= 6; // fixing scroll issue
-            updateProgressBar();
+            return;
         }
+    
+        if (isEnterPress) {
+            event.preventDefault();
+    
+            // Check if the scroll is close to bottom
+            const closeToBottom = scrollCloseToBottom();
+    
+            // Get the Selection object, if it's available
+            const sel = window.getSelection();
+            if (sel && sel.rangeCount) {
+                let range = sel.getRangeAt(0);
+    
+                // Create a <br> and insert it into the range
+                const br = document.createElement('br');
+                range.deleteContents();
+                range.insertNode(br);
+    
+                // Move the cursor to the end of the line
+                setCursorAfterNode(sel, br);
+            }
+    
+            triggerInputAtKeydown();
+    
+            // If we were close to bottom, scroll there
+            if (closeToBottom) {
+                const scrollWrapper = document.querySelector('.chx-scroll-wrapper.no-scrollbar');
+                scrollWrapper.scrollTop = scrollWrapper.scrollHeight;
+            }
+        }
+    });
+
+    commentElement.addEventListener('focus', (e) => {
+        if (!e.target.innerText.trim()) {
+            e.target.style.transform = 'translateX(24px)';
+            e.target.style.textIndent= '0px';
+        } else {
+            e.target.style.textIndent= '24px';
+        }
+    });
+    
+    commentElement.addEventListener('input', (e) => {
+        if (e.target.innerText.trim()) {
+            e.target.style.textIndent= '24px';
+            e.target.style.transform = 'translateX(0px)';
+        } else {
+            e.target.style.transform = 'translateX(24px)';
+            e.target.style.textIndent= '0px';
+        }
+    });
+
+    var icon2 = form.querySelector('.chxicon-plus'); // SHOULD BE RENAMED
+    var iconInitialTop = icon2.offsetTop; // SHOULD BE RENAMED
+      document.querySelector(".chx-scroll-wrapper.no-scrollbar").addEventListener('scroll', function() {
+        icon2.style.top = (iconInitialTop - this.scrollTop) + 'px';
+    });
+
+    // handle placeholder
+    commentElement.addEventListener('blur', function() {
+        if (this.textContent === '') {
+            this.classList.add("empty");
+        }
+    });
+    commentElement.addEventListener('focus', function() {
+        this.classList.remove("empty");
+    });
+    // <br> element must be added in the end of text for smooth new-lines insertion
+    function ensureBrAtEnd(element) {
+        let lastChild = element.lastChild;
+        if (!lastChild || lastChild.nodeName.toLowerCase() !== 'br') {
+            const br = document.createElement('br');
+            element.appendChild(br);
+            if (element.lastChild !== br) {
+                element.insertBefore(br, element.lastChild);
+            }
+        }
+    }
+    // move cursor to the end of the line
+    function setCursorAfterNode(sel, node) {
+        const range = document.createRange();
+        range.setStartAfter(node);
+        range.collapse(true);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+    // scroll automatically if close to bottom
+    function scrollCloseToBottom() {
+        const scrollWrapper = document.querySelector('.chx-scroll-wrapper.no-scrollbar');
+        const offset = 20;
+        return scrollWrapper.scrollTop + scrollWrapper.clientHeight + offset >= scrollWrapper.scrollHeight;
+    }
+    // make commentElement plain-text only
+    function handleInputAsPlainText(e) {
+        e.preventDefault();
+        const text = (e.clipboardData || e.dataTransfer).getData('text/plain');
+        const sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            var range = sel.getRangeAt(0);
+            range.deleteContents();
+    
+            const textNode = document.createTextNode(text);
+            range.insertNode(textNode);
+    
+            range.setStartAfter(textNode);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+    }
+    // set max characters for commentElement
+    function processInput() {
+        let content = commentElement.innerHTML;
+        const maxLength = m_c;
+    
+        let brCount = (content.match(/<br>/g) || []).length;
+    
+        // Counting the <br> tag as 1 instead of the actual 4
+        let lengthWithoutBrTags = content.length - (brCount * 3);
+    
+        // If length considering <br> as one character is still less than max length
+        if (lengthWithoutBrTags > maxLength) {
+            let newLength = maxLength + (brCount * 3);
+    
+            let cleanedContent = content;
+            let strippedContentLength = cleanedContent.replace(/<br>/g, '').length;
+    
+            // While the content is too long
+            while (strippedContentLength > newLength) {
+                // Remove the last character
+                cleanedContent = cleanedContent.substring(0, cleanedContent.length - 1);
+                strippedContentLength = cleanedContent.replace(/<br>/g, '').length;
+            }
+            commentElement.innerHTML = cleanedContent;
+            commentElement.blur();
+        }
+    }
+    // listen to events
+    commentElement.addEventListener('input', function() {
+        ensureBrAtEnd(commentElement);
+        processInput();
+        var lastNode = commentElement.lastChild;
+        if (lastNode && lastNode.nodeName === 'BR' && commentElement.textContent.trim() === '') {
+            commentElement.removeChild(lastNode);
+        }
+        updateProgressBar();
+    });
+    commentElement.addEventListener('paste', function(e) {
+        handleInputAsPlainText(e);
+        processInput();
+        triggerInputAtKeydown();
+    });
+    commentElement.addEventListener('drop', function(e) {
+        handleInputAsPlainText(e);
+        processInput();
+        triggerInputAtKeydown();
     });
 
     getScript(chatx_server + 'assets/js/img-gallery.js');
@@ -1138,7 +1283,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
               regDisabledCaption.textContent = regDisabled;
             }
             document.querySelector(".chx-history chx_div").textContent = recentlyInChat;
-            commentElement.placeholder = newMessagePlaceholder;
+            commentElement.setAttribute('placeholder', newMessagePlaceholder);
             document.querySelector("input[name='url_to_img']").placeholder = imgUrlPlaceholder;
             document.querySelector("input[name='url_to_link']").placeholder = linkUrlPlaceholder;
             document.querySelector("input[name='link_desc']").placeholder = linkDesc;
@@ -1171,6 +1316,14 @@ document.querySelectorAll('.chxicon-unmute, .chxicon-mute').forEach(el => {
         }
     });
 });
+
+function triggerInputAtKeydown() {
+    var ev = new Event('input', {
+        bubbles: true,
+        cancelable: true,
+    });
+    commentElement.dispatchEvent(ev);
+}
 
 function pushNotification() {
     if (window.Notification) {
@@ -1208,54 +1361,22 @@ function pushNotification() {
 }
 pushNotification();
 
+// adding scrollbar to commentElement
 commentElement.addEventListener('input', function() {
-  this.rows = 2;
-  this.rows = countRows(this.scrollHeight);
-  const elements = document.querySelectorAll('.chx-pre-textarea, #chx-new-message');
-
-  elements.forEach(el => {
-    if (this.rows >= 6) {
-      el.classList.add("scrollable");
-    } else {
-      el.classList.remove("scrollable");
-    }
-  });
-
-  if (this.rows > 2 && this.rows <= 5 && isElementCloseToBottom(commentElement)) {
-    if (container.clientHeight > 360) {
-      let calcFormHeight = container.clientHeight - 18;
-      container.style.height = calcFormHeight + "px";
-      localStorage.setItem(chx_resize, '{"height":"' + calcFormHeight + 'px"}');
-    } else {
-      let top = parseInt(chatx.style.top, 10);
-      chatx.style.top = top - 18 + 'px';
-    }
-  }
-  localStorage.setItem('chx_text', commentElement.value);
-  localStorage.setItem('chx_rows', this.rows);
+    const messageForm = document.querySelector('#chx-new-message');
+        if (commentElement.clientHeight > 105) {
+          messageForm.classList.add("scrollable");
+        } else {
+          messageForm.classList.remove("scrollable");
+        }
+    localStorage.setItem('chx_text', commentElement.innerText);
 });
 
-function countRows(scrollHeight) {
-    return Math.floor(scrollHeight / 18); // 18px = line-height
-}
-// Set initial row count
-commentElement.rows = countRows(commentElement.scrollHeight);
-
-// Load text and number of rows from localstorage
+// Load text from localstorage
 const commentText = localStorage.getItem('chx_text');
-const getRows = localStorage.getItem('chx_rows');
 if (commentText !== null && commentText.trim() !== '') {
-    commentElement.value = commentText;
-    commentElement.rows = getRows;
+    commentElement.innerText = commentText;
 } 
-
-function isElementCloseToBottom(element) {
-  var elementRect = element.getBoundingClientRect();
-  var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  var distanceToBottom = windowHeight - elementRect.bottom;
-  
-  return distanceToBottom <= 1;
-}
 
 // Shows a warning message if the name input is empty.
 function showNameRequiredWarning() {
@@ -1272,7 +1393,7 @@ function chatSubmit() {
     if (falseShoutBoxName.value.trim() === '') {
         showNameRequiredWarning();
     }
-    const preTextarea = document.querySelector('.chx-pre-textarea');
+    const preTextarea = document.querySelector('.chx-scroll-wrapper'); // rename and probably move to the top the const
     const messageForm = document.querySelector('#chx-new-message');
     preTextarea.classList.remove("scrollable");
     messageForm.classList.remove("scrollable");
@@ -1283,9 +1404,7 @@ function chatSubmit() {
         messageForm.requestSubmit();
     }
     localStorage.removeItem('chx_text');
-    localStorage.removeItem('chx_rows');
-    commentElement.setAttribute("rows", 2);
-    progressBarWrapper.style.display = 'none'; //test article F symbol count
+    progressBarWrapper.style.display = 'none';
 }
 // invoke chatsubmit() when clicked on submit button
 const sendMessageBtn = document.querySelector('#chx-send-message');
@@ -1336,54 +1455,88 @@ function fastTrackIsOn() {
 
 function chatxVisibility() {
     let options = {
-        root: null, // It can be null if you want to check visibility relative to the viewport
-        rootMargin: "0px", // margins around the root.
-        threshold: 1.0 // fully visible
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0 
     }
     let observer = new IntersectionObserver(handleIntersect, options);
-    /*chatx = document.querySelector('#chatx');*/
-    chx_container = document.querySelector('#chatx.expanded .chx-container');
-
+        chx_container = document.querySelector('#chatx .chx-container');
+        style = window.getComputedStyle(commentElement);
+        lineHeight = style.getPropertyValue('line-height');
+        lineHeight = parseFloat(lineHeight);
+    let shouldObserveForm = true;
     function handleIntersect(entries, observer) {
         entries.forEach(entry => {
-            if (!entry.isIntersecting) {
+            let expanded = chatx.classList.contains('expanded');
+            if (entry.target == form && !entry.isIntersecting && expanded) {
+                if (shouldObserveForm) {
+                    if (chx_container.clientHeight > 360) {
+                        let calcFormHeight = chx_container.clientHeight - lineHeight /*18*/;
+                        chx_container.style.height = calcFormHeight + "px";
+                        localStorage.setItem(chx_resize, '{"height":"' + calcFormHeight + 'px"}');
+                    } else {
+                        let top = parseInt(chatx.style.top, 10);
+                        chatx.style.top = top - lineHeight /*18*/ + 'px';
+                    }
+                    let positionData = JSON.parse(localStorage.getItem('chat_custom_position'));
+                        positionData.chatx.top = parseInt(chatx.style.top, 10);
+                    localStorage.setItem('chat_custom_position', JSON.stringify(positionData));
+                }
+            }
+            else if (entry.target == chx_container && !entry.isIntersecting && expanded) {
+                shouldObserveForm = false;
                 let keysToRemove = ["chx-container", "chat_custom_position"];
-                resizeActivated = true;
                 for (key of keysToRemove) {
                     localStorage.removeItem(key);
                 }
                 chatx.style.top = "15px";
                 chatx.style.left = "15px";
                 chx_container.style.height = "360px";
+            } else if (entry.target == chx_container && entry.isIntersecting && expanded) {
+                shouldObserveForm = true;
             }
         });
     }
-    observer.observe(chatx);
+    observer.observe(chx_container);
+    observer.observe(form);
 }
 
-function bbtags(h, a, i) {
-    var g = document.getElementById(h);
-    g.focus();
-    if (g.setSelectionRange) {
-        var c = g.scrollTop;
-        var e = g.selectionStart;
-        var f = g.selectionEnd;
-        var selectedText = g.value.substring(g.selectionStart, g.selectionEnd);
-        
-        if (selectedText === '') {
-            g.value = g.value.substring(0, e) + a + i + g.value.substring(f, g.value.length);
-            g.selectionStart = e + a.length;
-            g.selectionEnd = e + a.length;
-        } else {
-            g.value = g.value.substring(0, e) + a + selectedText + i + g.value.substring(f, g.value.length);
-            g.selectionStart = e + a.length;
-            g.selectionEnd = f + a.length + i.length;
+function bbtags(element, a, i) {
+    commentElement.focus();
+    var sel, range, html;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.getRangeAt && sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            if (!commentElement.contains(range.commonAncestorContainer)) { // if the selection is part of element
+                return;
+            }
+            var selectedText = range.toString();
+            if (selectedText !== '') { // if there's a selection
+                html = a + selectedText + i;
+                var newNode = document.createTextNode(html);
+                range.deleteContents();
+                range.insertNode(newNode);
+            } else { // if no selection
+                var startNode = document.createTextNode(i);
+                var endNode = document.createTextNode(a);
+                var middleNode = document.createTextNode('');
+                range.deleteContents();
+                range.insertNode(startNode);
+                range.insertNode(middleNode);
+                range.insertNode(endNode);
+                range.setStart(middleNode, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+            triggerInputAtKeydown();
         }
-        
-        g.scrollTop = c;
-    } 
-    commentElement.rows = countRows(commentElement.scrollHeight);
+    } else if (document.selection && document.selection.createRange) {
+        document.selection.createRange().text = a + selectedText + i;
+    }
 }
+
 document.addEventListener('keydown', function(e) {
     let a = e.metaKey || e.altKey;
     let b = String.fromCharCode(e.which).toLowerCase();
@@ -1391,7 +1544,7 @@ document.addEventListener('keydown', function(e) {
     let d = commentElement.matches(':focus');
     if ((a) && (b === 'q')) {
         e.preventDefault();
-        document.querySelectorAll(".bb-popup").forEach(function(element) {
+        [...document.querySelectorAll(".bb-popup")].forEach(function(element) {
             element.style.display = (element.style.display === 'none') ? 'block' : 'none';
         });
         return false;
@@ -1403,20 +1556,21 @@ document.addEventListener('keydown', function(e) {
     }
     if ((c) && (b === 'b') && d) {
         e.preventDefault();
-        bbtags("shoutbox-comment", "[b]", "[/b]");
+        bbtags(commentElement, "[b]", "[/b]");
         return false;
     }
     if ((c) && (b === 'i') && d) {
         e.preventDefault();
-        bbtags("shoutbox-comment", "[i]", "[/i]");
+        bbtags(commentElement, "[i]", "[/i]");
         return false;
     }
     if ((c) && (b === 'u') && d) {
         e.preventDefault();
-        bbtags("shoutbox-comment", "[u]", "[/u]");
+        bbtags(commentElement, "[u]", "[/u]");
         return false;
     }
 });
+
 document.addEventListener("click", function(event) {
     if (!event.target.closest('.bb-popup, .chx-color-bb-prompt, .chx-image-bb-prompt, .chx-link-bb-prompt, .chxicon-plus') && window.getSelection().toString() == "") {
         let elements = document.querySelectorAll('.bb-popup, .chx-color-bb-prompt, .chx-image-bb-prompt, .chx-link-bb-prompt');
@@ -1544,8 +1698,8 @@ document.querySelector(".chx-process-link").addEventListener("click", function()
     let c = a.value;
     let d = b.value;
     if (c && d) {
-        commentElement.value = '[url=' + c + ']' + d + '[/url]';
-        commentElement.rows = countRows(commentElement.scrollHeight);
+        commentElement.innerText = '[url=' + c + ']' + d + '[/url]';
+        triggerInputAtKeydown();
         a.value = "";
         b.value = "";
     }
@@ -1565,11 +1719,9 @@ function loadingModal() {
 function generateImageTagAndSend(res) {
     let data = JSON.parse(res);
     if (!data.error && data.link !== 'null') {
-        commentElement.value = "[img h=" + data.clientHeight + " d=" + data.link + "]" + data.thumbnail + "[/img] ";
+        commentElement.innerText = "[img h=" + data.clientHeight + " d=" + data.link + "]" + data.thumbnail + "[/img] ";
         document.querySelector("input[name='url_to_img']").value = "";
-        // check if false_shoutbox_name is empty
         if (falseShoutBoxName.value === "") {
-            commentElement.setAttribute('rows', 6);
             showNameRequiredWarning();
         } else {
             chatSubmit();

@@ -180,7 +180,7 @@ chx_p {
 }
 
 .shoutbox-content chx_li:last-child {
-	padding-bottom: 17px;
+	padding-bottom: 6px;
 }
 
 .shoutbox-username {
@@ -357,24 +357,19 @@ chx_p {
 }
 
 .shoutbox-form form #shoutbox-comment {
-	vertical-align: top !important;
-	display: inline-block !important;
-	width: 100% !important;
-	min-height: 50px !important;
-	left: 0 !important;
-	margin: 0 !important;
-	padding: 10px 5px 5px 10px !important;
-	border: 0 !important;
-	border-radius: 0 !important;
-	outline: none !important;
-	resize: none !important;
-	font-weight: normal !important;
-	font: inherit !important;
-	font-size: inherit !important;
-	line-height: 18px !important;
-	text-indent: 24px !important;
-	overflow: hidden !important;
-	box-sizing: border-box !important;
+	vertical-align: top;
+	min-height: 52px;
+	padding: 10px 5px 5px 10px;
+	outline: none;
+	line-height: 18px;
+	text-indent: 24px;
+    overflow: hidden;
+	box-sizing: border-box;
+	word-break: break-word;
+}
+#shoutbox-comment:empty:before {
+    content: attr(placeholder);
+    cursor: text;
 }
 
 .shoutbox-content .chatx_img, .shoutbox-history .chatx_img {
@@ -846,7 +841,7 @@ img.emojione {
 	line-height: 35px;
 	text-transform: uppercase;
 	border-radius: 4px;
-	z-index: 3;
+	z-index: 4;
 	font-weight: bold;
 }
 
@@ -933,6 +928,10 @@ img.emojione {
 	cursor: pointer;
 }
 
+form .chxicon-plus {
+    z-index: 1;
+}
+
 .chxicon-hue {
 	cursor: pointer;
 }
@@ -949,13 +948,17 @@ img.emojione {
 	margin: 0;
 }
 
-.chx-pre-textarea {
+.chx-hard-wrapper {
+    position: relative;
+    overflow: hidden; /*hide plus icon*/
+}
+.chx-scroll-wrapper {
 	width: calc(100% - 42px);
 	display: block;
 	max-height: 105px !important;
  /* needed as a fix for smooth textarea resize */
 	margin-bottom: 5px;
-	overflow-y: auto;
+	overscroll-behavior-y: none;
 }
 
 .chx-login-form .chxicon-plus {
@@ -981,11 +984,10 @@ img.emojione {
 
 #resizer {
 	display: none;
-	position: absolute;
+	position: relative;
 	cursor: s-resize;
 	height: 10px;
 	width: 100%;
-	margin-top: -10px;
 	border-width: 1px;
 	border-bottom-width: 0;
 	border-style: solid;
@@ -1111,7 +1113,8 @@ img.emojione {
 }
 
 .chx-bar.chx-new:after {
-	content: "1";
+	content: "\e01a";
+	font-family: "chatx-icons";
 	width: 35px;
 	height: 35px;
 	position: absolute;
@@ -1121,7 +1124,7 @@ img.emojione {
 	border-radius: 100%;
 	text-align: center;
 	line-height: 35px;
-	font-size: 30px;
+	font-size: 22px;
 	border: 2px solid;
 	box-shadow: 0 0 10px var(--chx-shadows-separators-color);
 	animation: bounce 1.2s infinite;
@@ -1264,6 +1267,7 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
 	position: relative;
 	display: block;
 	height: 100%;
+	outline: 0;
  /* Required for horizontal native scrollbar to not appear if parent is taller than natural height */
 	width: auto;
 	max-width: 100%;
@@ -1404,6 +1408,18 @@ chx_li[data="chx-img-msg"]:not(#chx-my-msg) .shoutbox-comment-time::before {
 [data-simplebar-direction='rtl'] .simplebar-track.simplebar-vertical {
 	right: auto;
 	left: 0;
+}
+
+/* For Webkit browsers like Chrome, Safari */
+.no-scrollbar {
+    overflow-y: scroll;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .hs-dummy-scrollbar-size {

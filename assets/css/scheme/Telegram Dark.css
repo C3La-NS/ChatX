@@ -13,9 +13,9 @@
   --chx-2-color: #242f3d; /* header, bottom buttons, authentication buttons, user nicknames, borders */
   --chx-2-1-color: var(--chx-8-color);
   --chx-3-color: #3f4855; /* buttons, even lists */
-  --chx-4-color: #242f3d; /* pop-ups */
+  --chx-4-color: #244362; /* pop-ups */
   --chx-5-color: #3f4855; /* borders */
-  --chx-6-color: #d5d5d5; /* pop-up texts */
+  --chx-6-color: #77c1ed; /* pop-up texts */
   --chx-7-color: #77c1ed; /* reply button, history links, general links */
   --chx-8-color: #d5d5d5; /* even text lists, helper texts, time-ago */
   --chx-9-color: var(--chx-8-color); /* odd text lists */

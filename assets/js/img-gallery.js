@@ -75,7 +75,21 @@ function openModal(img) {
     // When the user clicks anywhere outside image on the modal box, close it
     modal.onclick = function(event) {
         if (event.target.tagName !== 'IMG') {
-            modal.parentNode.removeChild(modal);
+            closeModal(modal);
         }
     };
+
+    // Listen for escape key press and close modal when ESC is pressed
+    // Built-in which code for ESC key is 27
+    document.addEventListener('keydown', function(event) {
+        // the check `event.target === modal` ensures that modal is currently active/open
+        if (event.which === 27 && modal !== null) {
+            closeModal(modal);
+        }
+    });
+}
+function closeModal(modal) {
+    if(modal && modal.parentNode) {
+        modal.parentNode.removeChild(modal);
+    }
 }

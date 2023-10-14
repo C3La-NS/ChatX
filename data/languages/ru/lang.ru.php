@@ -134,6 +134,7 @@ $lang['UNDERLINE_TEXT'] = 'вставить тег форматирования 
 $lang['SELECTION_TEXT'] = 'можно также применять с выделенным текстом';
 $lang['CLIPBOARD_IMG'] = 'загрузить изображение из буфера обмена';
 $lang['SEND_MESSAGE'] = 'отправить сообщение';
+$lang['SET_NEWLINE'] = 'перейти на новую строку';
 
 // Application version
 $lang['APPLICATION_VERSON'] = '2.5.0';
