@@ -21,26 +21,29 @@
 	color: var(--chx-2-1-color);
 }
 
-.name-required, .mybbRegPrompt {
+.name-required {
  /* Error empty name field */
 	background: var(--chx-10-color);
 	color: var(--chx-11-color);
 }
 
-.mybbRegPrompt.mybb-reload {
+.mybbRegPrompt, .mybbRegPrompt.mybb-reload {
 	background: var(--chx-2-color);
 	color: var(--chx-3-color);
 }
 
-.name-required:before, .mybbRegPrompt:before {
+.name-required:before {
 	border-bottom-color: var(--chx-10-color);
+}
+
+.mybbRegPrompt:before, .mybbRegPrompt.mybb-reload:before {
+	border-bottom-color: var(--chx-2-color);
+}
+
+.name-required:before, .mybbRegPrompt:before, .mybbRegPrompt.mybb-reload:before {
 	border-top-color: transparent;
 	border-left-color: transparent;
 	border-right-color: transparent;
-}
-
-.mybbRegPrompt.mybb-reload:before {
-	border-bottom-color: var(--chx-2-color);
 }
 
 #chatx .chx-container {

@@ -30,7 +30,6 @@ const markup = `
                     <chx_div class="chx-pulsating-circle"></chx_div>
                     <chx_i class="chxicon-pause"></chx_i>
                     <input id="false_shoutbox_name" type="name" maxlength="15" placeholder />
-                    <chx_div class="name-required"></chx_div>
                     <chx_i class="chxicon-refresh"></chx_i>
                     <chx_div class="chat_popover_parent">
                         <a class="chx-settings-button"><chx_i class="chxicon-gear"></chx_i></a>
@@ -60,21 +59,7 @@ const markup = `
                     <chx_i class="chxicon-minimize"></chx_i><chx_i class="chxicon-expand"></chx_i>
                 </chx_div>
             </chx_header>
-            <chx_div class="chx-login-form">
-                <chx_i class="chxicon-plus chx-close"></chx_i>
-                <label class="chx-switch-tab first" for="chx-login-form"></label>
-                <input class="chx-form-radio" type="radio" id="chx-login-form" name="chx-switch" checked="checked"/>
-                <chx_span class="chx-login-form-contents">
-                <form name="chx-login">
-                    <input type="text" name="u" placeholder>
-                    <input type="password" name="p" placeholder>
-                    <chx_div class="chx-login-button chxicon-login"></chx_div>
-                </form>
-                </chx_span>
-                <label class="chx-switch-tab second" for="chx-signup-form"></label>
-                <input class="chx-form-radio" type="radio" id="chx-signup-form" name="chx-switch"/>
-                <chx_span class="chx-signup-form-contents"></chx_span>
-            </chx_div>
+
             <div data-simplebar class="chx-container">
                 <chx_div class="shoutbox">
                     <chx_ul class="shoutbox-history"></chx_ul>
@@ -193,27 +178,27 @@ function makeXHRRequest(url, method) {
 }
 
 // Storing some elements for a cleaner code base
-const refreshButton = document.querySelectorAll(".chxicon-refresh")[0],
-    shoutboxForm = document.querySelector('.shoutbox-form'),
+const chatx = document.getElementById("chatx"),
+    refreshButton = chatx.querySelectorAll(".chxicon-refresh")[0],
+    shoutboxForm = chatx.querySelector('.shoutbox-form'),
     form = shoutboxForm.querySelector('form'),
     nameElement = form.querySelector('#shoutbox-name'),
-    falseShoutBoxName = document.querySelector("#false_shoutbox_name"),
+    falseShoutBoxName = chatx.querySelector("#false_shoutbox_name"),
+    iconExpand = chatx.querySelector('.chxicon-expand'),
+    iconMinimized = chatx.querySelector('.chxicon-minimize'),
     commentElement = form.querySelector('#shoutbox-comment'),
     icd = document.getElementById('icd'),
     chx_resize = 'chx-container',
-    container = document.querySelector(".chx-container"),
-    chatx = document.querySelector("#chatx"),
-    pulsatingCircle = document.querySelector(".chx-pulsating-circle"),
-    chxColorBbPrompt = document.querySelector(".chx-color-bb-prompt"),
-    chxImageBbPrompt = document.querySelector(".chx-image-bb-prompt"),
-    chxLinkBbPrompt = document.querySelector(".chx-link-bb-prompt"),
-    progressBarWrapper = document.querySelector('.progress-bar-wrapper'),
-    progressBarCircle = document.querySelector('.progress-bar-circle'),
-    notificSoundIcon = document.querySelector('.chx-sound-notific chx_i');
-let ul = document.querySelector("chx_ul.shoutbox-content"),
-    ulHist = document.querySelector('chx_ul.shoutbox-history'),
-    signUpFormContents = document.querySelector('.chx-signup-form-contents'),
-/*isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;*/
+    container = chatx.querySelector(".chx-container"),
+    pulsatingCircle = chatx.querySelector(".chx-pulsating-circle"),
+    chxColorBbPrompt = chatx.querySelector(".chx-color-bb-prompt"),
+    chxImageBbPrompt = chatx.querySelector(".chx-image-bb-prompt"),
+    chxLinkBbPrompt = chatx.querySelector(".chx-link-bb-prompt"),
+    progressBarWrapper = chatx.querySelector('.progress-bar-wrapper'),
+    progressBarCircle = chatx.querySelector('.progress-bar-circle'),
+    notificSoundIcon = chatx.querySelector('.chx-sound-notific chx_i');
+let ul = chatx.querySelector("chx_ul.shoutbox-content"),
+    ulHist = chatx.querySelector('chx_ul.shoutbox-history'),
     isMobile = /iPhone|iPad|iPod|Android/.test(navigator.userAgent);
 
 makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
@@ -230,6 +215,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         c_s = parsedResponse.c_s;
         s_o = parsedResponse.s_o;
     let loggingStatus;
+    let setDynamicAuthenticationVarsCalled;
 
     function setDynamicAuthenticationVars() {
         sessionName = parsedResponse.sessionName;
@@ -244,6 +230,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         } else if (loggingStatus == "2_1") {
             publicScenarioLoggingIn();
         }
+        setDynamicAuthenticationVarsCalled = true;
     }
     
     setDynamicAuthenticationVars();
@@ -262,7 +249,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         .then(() => {
             // Trigger scroll to bottom of chat content
             function scrollBottom() {
-                let wrapper = document.querySelector(".simplebar-content-wrapper");
+                const wrapper = chatx.querySelector(".simplebar-content-wrapper");
                 wrapper.scrollTop = wrapper.scrollHeight - wrapper.clientHeight;
             }
             // Replace text smiles with emoji icons if library is on:
@@ -288,7 +275,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             };
             // Clicking on the REPLY button writes the name of the person you want to reply to into the textbox.
             function replySystem() {
-                document.querySelectorAll('.chxicon-reply').forEach(function(el) {
+                chatx.querySelectorAll('.chxicon-reply').forEach(function(el) {
                     el.addEventListener('click', function(e) {
                         let replyName = e.target.closest('.shoutbox-comment-reply').dataset.name;
                         commentElement.innerText = '@' + '[b]' + replyName + '[/b]';
@@ -304,7 +291,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             function soundMuted() {
                 soundMuted = localStorage.getItem('soundMuted');
                 if (typeof soundMuted !== 'undefined' && soundMuted) {
-                    /*let notificicon = document.querySelector('.chx-sound-notific chx_i');*/
                     notificSoundIcon.classList.remove('chxicon-unmute');
                     notificSoundIcon.classList.add('chxicon-mute');
                 }
@@ -331,19 +317,19 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 loadInt = setInterval(load, (this.checked ? fastTrack : slowTrack));
                 localStorage.setItem('intLoad', this.checked ? 1 : 0);
             });
-            document.querySelector('.chxicon-expand').addEventListener('click', function() {
+            iconExpand.addEventListener('click', function() {
                 loadInt = setInterval(load, (icd.checked ? fastTrack : slowTrack));
                 chatx.classList.remove("minimized");
                 if (localStorage.toggled != "expanded") {
                     chatx.classList.add("expanded", true);
                     localStorage.toggled = "expanded";
                 }
-                localStorage.setItem('chx_id', document.querySelector(".shoutbox-content > chx_li:last-child").getAttribute('class'));
-                document.querySelectorAll(".chx-bar").forEach(elem => elem.classList.remove("chx-new"));
+                localStorage.setItem('chx_id', chatx.querySelector(".shoutbox-content > chx_li:last-child").getAttribute('class'));
+                chatx.querySelectorAll(".chx-bar").forEach(elem => elem.classList.remove("chx-new"));
                 scrollBottom();
             });
             // Managing widget draggable and resizable state when minimized or expanded
-            document.querySelector('.chxicon-minimize').addEventListener('click', function() {
+            iconMinimized.addEventListener('click', function() {
                 clearInterval(loadInt);
                 chatx.classList.add('minimized');
                 chatx.classList.remove('expanded');
@@ -378,14 +364,14 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             
             // Visual & audio notifications
             function notification() {
-                const shoutboxContent = document.querySelector(".shoutbox-content > chx_li:last-child");
+                const shoutboxContent = chatx.querySelector(".shoutbox-content > chx_li:last-child");
                 const lastId = shoutboxContent.getAttribute('class');
                 const localId = localStorage.getItem('chx_id');
                 const lastName = shoutboxContent.querySelector(".shoutbox-username b").dataset.name;
             
                 if (lastId && lastId !== localId && lastId !== 'denied') {
                     if (chatx.classList.contains("minimized")) {
-                        document.querySelector(".chx-bar").classList.add("chx-new");
+                        chatx.querySelector(".chx-bar").classList.add("chx-new");
                     } else {
                         const soundMuted = localStorage.getItem('soundMuted');
                         const shouldPlaySound = !soundMuted && lastName !== sessionName && sessionName && n_s !== 'null';
@@ -398,7 +384,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             
                         if (shouldShowNotification) {
                             const thumbnail = `${chatx_server}assets/img/logo_shutter.png`;
-                            const message = [...document.querySelectorAll('.shoutbox-comment-contents')].pop().textContent;
+                            const message = [...chatx.querySelectorAll('.shoutbox-comment-contents')].pop().textContent;
                             new Notification(`${lastName} ${pushNotificationMessageSent}`, { body: message, icon: thumbnail });
                         }
             
@@ -409,7 +395,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             
             // Highlights user's messages as well as displays user icon at bar
             function highlightMyMsg() {
-                const userIcon = document.querySelector(".chx-bar .chxicon-user");
+                const userIcon = chatx.querySelector(".chx-bar .chxicon-user");
                 const loggedInClass = "chxlogged-in";
             
                 function updateElementId(element, id) {
@@ -422,7 +408,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 }
             
                 if (sessionName !== '') {
-                    const elements = document.querySelectorAll(".shoutbox-username b[data-loggedin='true']");
+                    const elements = chatx.querySelectorAll(".shoutbox-username b[data-loggedin='true']");
                     elements.forEach(element => {
                         if (element.textContent === sessionName) {
                             updateElementId(element, "chx-my-msg");
@@ -431,7 +417,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     userIcon.classList.add(loggedInClass);
                 } else {
                     userIcon.classList.remove(loggedInClass);
-                    const elements = document.querySelectorAll(".shoutbox-username b:not([data-loggedin='true'])");
+                    const elements = chatx.querySelectorAll(".shoutbox-username b:not([data-loggedin='true'])");
             
                     if (localStorage.nameElement) {
                         elements.forEach(element => {
@@ -463,6 +449,13 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     if (closestLi) closestLi.setAttribute("data", "chx-img-msg");
                 });
             }
+            
+            // Listen for visibilitychange event on the document
+            document.addEventListener('visibilitychange', function() {
+              if (!document.hidden) {
+                highlightMyMsg();
+              }
+            }); // mobile crome fix
 
             // Rendering an array of shouts as HTML
             function appendComments(data) {
@@ -561,7 +554,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     // Convert the classes array to a string
                     classesString = classesArray.join('.');
                         
-                    } else if ((wrapper.scrollHeight - wrapper.scrollTop - 20) <= wrapper.clientHeight /*&& mouseDown !== 1*/ && !document.querySelector(".shoutbox-comment-ago:hover")) {
+                    } else if ((wrapper.scrollHeight - wrapper.scrollTop - 20) <= wrapper.clientHeight && !document.querySelector(".shoutbox-comment-ago:hover")) {
                         if (ulHist.children.length > 0) {
                             ulHist.innerHTML = "";
                             document.querySelector('.chx-history chx_i').style.display = "block";
@@ -702,7 +695,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 }
             }
 
-            // disables scrolling on mobile devices when dragging handler
+            // Disable scrolling on mobile devices when dragging handler
             el_1.addEventListener('touchmove', function(event) {
                 event.preventDefault();
             }, {
@@ -751,8 +744,8 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 fastTrackIsOn();
                 loadNickname();
                 soundMuted();
-                shoutboxForm.insertAdjacentHTML('beforeend', '<chx_div class="chx_down"><chx_i class="chxicon-arrow"></chx_i></chx_div>');
-                var wrapper = document.querySelector(".simplebar-content-wrapper");
+                shoutboxForm.insertAdjacentHTML('afterbegin', '<chx_div class="chx_down"><chx_i class="chxicon-arrow"></chx_i></chx_div>');
+                const wrapper = document.querySelector(".simplebar-content-wrapper");
                 backButton = document.querySelector(".chx_down");
                 wrapper.addEventListener('scroll', function(e) {
                     backButton.style.display = "block";
@@ -789,47 +782,134 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         });
     }
 
-    function setRegForm() {
-        if (r_e === "1") {
-            if (document.querySelectorAll(".chx-signup-form-contents form").length === 0) {
-                let form = document.createElement("form");
-                form.name = "chx-signup";
-                let input1 = document.createElement("input");
-                input1.type = "text";
-                input1.name = "reg_u";
-                input1.placeholder = "";
-                input1.required = true;
-                let input2 = document.createElement("input");
-                input2.type = "password";
-                input2.name = "reg_p";
-                input2.placeholder = "";
-                input2.setAttribute( "autocomplete", "new-password" );
-                input2.required = true;
-                let input3 = document.createElement("input");
-                input3.type = "password";
-                input3.name = "c_reg_p";
-                input3.placeholder = "";
-                input3.required = true;
-                let div = document.createElement("chx_div");
-                div.className = "chx-login-button chxicon-login";
-                form.appendChild(input1);
-                form.appendChild(input2);
-                form.appendChild(input3);
-                form.appendChild(div);
-                signUpFormContents.appendChild(form);
+    function createElement(type, config) {
+        let elem = document.createElement(type);
+        for (let attr in config) {
+            if (attr === 'append') {
+                elem.appendChild(config[attr]);
             }
-        } else {
-            let i = document.createElement("chx_i");
-            i.className = "chxicon-lock chx-reg-disabled";
-            let p = document.createElement("chx_p");
-            p.className = "chx-reg-disabled-caption";
-            signUpFormContents.appendChild(i);
-            signUpFormContents.appendChild(p);
+            else if (attr === 'childNodes') {
+                config[attr].forEach(child => 
+                    elem.appendChild(createElement(child.type, child.config)));
+            }
+            else if (attr === 'classList') {
+                config[attr].forEach(cls => elem.classList.add(cls));
+            }
+            else if (config.hasOwnProperty(attr)) {
+                elem[attr] = config[attr];
+            }
         }
+        return elem;
+    }
+
+    // Function for handling input events
+    function handleInput() {
+      if(this.value){
+        this.parentNode.style.cssText = "color:transparent";
+      } else {
+        this.parentNode.style.cssText = "color:var(--chx-5-color)";
+      }
     }
     
+    function setLoginForm() {
+        if (document.querySelectorAll(".chx-login-form").length === 0) {
+            let div = createElement('chx_div', {
+                classList: ['chx-login-form'],
+                childNodes: [
+                    { type: 'chx_i', config: { classList: ['chxicon-plus', 'chx-close'] } },
+                    { type: 'label', config: { classList: ['chx-switch-tab', 'first'], htmlFor: 'chx-login-form' } },
+                    { type: 'input', config: { id: 'chx-login-form', name: 'chx-switch', type: 'radio', checked: true, classList: ['chx-form-radio'] } },
+                    { type: 'chx_span', config: {
+                        classList: ['chx-login-form-contents'],
+                        childNodes: [
+                            { type: 'form', config: {
+                                name: 'chx-login',
+                                childNodes: [
+                                    { type: 'chx_div', config: {
+                                        classList: ['chx-name-wrapper'], 
+                                        childNodes: [
+                                            { type: 'input', config: { type: 'text', name: 'u', oninput : handleInput } }
+                                        ]
+                                    }},
+                                    { type: 'chx_div', config: {
+                                        classList: ['chx-password-wrapper'], 
+                                        childNodes: [
+                                            { type: 'input', config: { type: 'password', name: 'p', oninput : handleInput } }
+                                        ]
+                                    }},
+                                    { type: 'chx_div', config: { classList: ['chx-login-button', 'chxicon-login'] } }
+                                ]
+                            } } 
+                        ]
+                    }},
+                    { type: 'label', config: { classList: ['chx-switch-tab', 'second'], htmlFor: 'chx-signup-form' } },
+                    { type: 'input', config: { id: 'chx-signup-form', name: 'chx-switch', type: 'radio', classList: ['chx-form-radio'] } },
+                    { type: 'chx_span', config: { classList: ['chx-signup-form-contents'] }}
+                ]
+            });
+    
+            chatx.appendChild(div);
+        }
+    }
+
+    function setRegForm() {
+        if (r_e === "1" && document.querySelectorAll(".chx-signup-form-contents form").length === 0) {
+            let form = createElement('form', {
+                name: 'chx-signup',
+                childNodes: [
+                    { 
+                        type: 'chx_div', 
+                        config: { 
+                            classList: ['chx-name-wrapper'],
+                            childNodes: [
+                                { type: 'input', config: { type: 'text', name: 'reg_u', oninput : handleInput, required: true } }
+                            ]
+                        } 
+                    },
+                    { 
+                        type: 'chx_div', 
+                        config: { 
+                            classList: ['chx-password-wrapper'],
+                            childNodes: [
+                                { type: 'input', config: { type: 'password', name: 'reg_p', oninput : handleInput, autocomplete: 'new-password', required: true } }
+                            ]
+                        } 
+                    },
+                    { 
+                        type: 'chx_div', 
+                        config: { 
+                            classList: ['chx-password-confirm-wrapper'],
+                            childNodes: [
+                                { type: 'input', config: { type: 'password', name: 'c_reg_p', oninput : handleInput, required: true } }
+                            ]
+                        }
+                    },
+                    { type: 'div', config: { classList: ['chx-login-button', 'chxicon-login'] } }
+                ]
+            });
+    
+            chatx.querySelector('.chx-signup-form-contents').appendChild(form);
+        } 
+        else if (r_e !== "1") {
+            chatx.querySelector('.chx-signup-form-contents').append(createElement("div", { classList: ['chxicon-lock', 'chx-reg-disabled'] }), createElement("div", { classList: ['chx-reg-disabled-caption'] }));
+        }
+    }
+
+    function setFormTabs() {
+        var signUpForm = document.querySelector('.chx-signup-form-contents');
+        var tabs = document.querySelectorAll('.chx-switch-tab');
+        if (window.getComputedStyle(signUpForm).display !== 'initial') {
+            tabs[0].classList.add('active');
+        }
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                tabs.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    }
+
     function ajaxFormSubmitted() {
-      setRegForm(); // doubling!
       const forms = document.querySelectorAll(".chx-login-form form");
       forms.forEach(form => {
         form.addEventListener("submit", function(e) {
@@ -845,7 +925,12 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
               store.setJWT(data.jwt);
               makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 parsedResponse = JSON.parse(response);
-                setDynamicAuthenticationVars();
+                if (data.success) {
+                    setDynamicAuthenticationVarsCalled = false;
+                }
+                if (!setDynamicAuthenticationVarsCalled) {
+                    setDynamicAuthenticationVars();
+                }
                 if (data.success) {
                   secondLoad = false;
                   refreshButton.click();
@@ -866,7 +951,6 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
           e.preventDefault();
         });
       });
-      ajaxFormSubmitted = undefined;
     }
 
     function ajaxLogOutClicked() {
@@ -881,8 +965,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     parsedResponse = JSON.parse(response);
                     setDynamicAuthenticationVars();
                     document.querySelector(".chx_down").click();
-                    document.querySelector(".chxicon-refresh").click();
-                    document.querySelectorAll(".chx-login-form input").forEach(input => input.removeAttribute("style"));
+                    refreshButton.click();
                 });
             }
         });
@@ -916,19 +999,23 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             chxI.classList.add(iconClass);
         }
     }
-
     function publicScenarioLoggingOut() {
         issetSession();
         const loginForm = document.querySelector('.chx-login-form');
         falseShoutBoxName.value = sessionName;
         falseShoutBoxName.disabled = true;
         if (loginForm) {
-            loginForm.style.display = "none";
+            loginForm.remove();
         }
         ajaxLogOutClicked();
     }
     
     function publicScenarioLoggingIn() {
+        setLoginForm();
+        setFormTabs();
+        setRegForm();
+        formButtonClick();
+        
         issetSession();
         const loginForm = document.querySelector('.chx-login-form');
         falseShoutBoxName.value = sessionName;
@@ -939,14 +1026,15 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         document.querySelector('.chxicon-plus.chx-close').addEventListener('click', () => {
             loginForm.style.display = 'none';
         });
-        try {
-            ajaxFormSubmitted();
-        } catch (error) {
-            console.warn(error);
-        }
+        ajaxFormSubmitted();
     }
     
     function loggingIn() {
+        setLoginForm();
+        setFormTabs();
+        setRegForm();
+        formButtonClick();
+        
         falseShoutBoxName.style.visibility = "hidden";
         chatx.addEventListener("click", (e) => {
             const target = e.target;
@@ -957,24 +1045,23 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                 loginForm.style.display = "block";
             }
         });
-        try {
-            ajaxFormSubmitted();
-        } catch (error) {
-            console.warn(error);
-        }
+        ajaxFormSubmitted();
     }
     
     function loggingOut() {
         issetSession();
+        const loginForm = document.querySelector('.chx-login-form');
         falseShoutBoxName.style.visibility = "visible";
         falseShoutBoxName.value = sessionName;
         falseShoutBoxName.disabled = true;
-        document.querySelector(".chx-login-form").style.display = "none";
+        if (loginForm) {
+            loginForm.remove();
+        }
         ajaxLogOutClicked();
     }
 
-    const transferName = () => document.getElementById("shoutbox-name").value = document.getElementById("false_shoutbox_name").value;
-    document.getElementById("false_shoutbox_name").addEventListener("blur", transferName);
+    const transferName = () => nameElement.value = falseShoutBoxName.value;
+    falseShoutBoxName.addEventListener("blur", transferName);
 
     // MyBB integration if option is on
     if (m_a === "1") {
@@ -1023,6 +1110,13 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                         mybbRegPrompt = document.createElement("chx_div");
                     reg_u.value = UserLogin;
                     reg_p.value = c_reg_p.value = setPassword;
+                    let ev = new Event('input', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    reg_u.dispatchEvent(ev);
+                    reg_p.dispatchEvent(ev);
+                    c_reg_p.dispatchEvent(ev);                    
                     reg_u.readOnly = reg_p.readOnly = c_reg_p.readOnly = true;
                     mybbRegPrompt.classList.add("mybbRegPrompt");
                     document.querySelector("form[name='chx-signup']").appendChild(mybbRegPrompt);
@@ -1146,10 +1240,10 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         }
     });
 
-    var icon2 = form.querySelector('.chxicon-plus'); // SHOULD BE RENAMED
-    var iconInitialTop = icon2.offsetTop; // SHOULD BE RENAMED
-      document.querySelector(".chx-scroll-wrapper.no-scrollbar").addEventListener('scroll', function() {
-        icon2.style.top = (iconInitialTop - this.scrollTop) + 'px';
+    let iconPlusPrompt = form.querySelector('.chxicon-plus');
+        iconInitialTop = iconPlusPrompt.offsetTop;
+    document.querySelector(".chx-scroll-wrapper.no-scrollbar").addEventListener('scroll', function() {
+        iconPlusPrompt.style.top = (iconInitialTop - this.scrollTop) + 'px';
     });
 
     // handle placeholder
@@ -1186,11 +1280,23 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         const offset = 20;
         return scrollWrapper.scrollTop + scrollWrapper.clientHeight + offset >= scrollWrapper.scrollHeight;
     }
+
     // make commentElement plain-text only
     function handleInputAsPlainText(e) {
         e.preventDefault();
-        const text = (e.clipboardData || e.dataTransfer).getData('text/plain');
+        const maxChars = m_c;
+        let text = (e.clipboardData || e.dataTransfer).getData('text/plain');
         const sel = window.getSelection();
+    
+        let content = commentElement.innerHTML;
+        let brCount = (content.match(/<br>/g) || []).length;
+        let lengthWithoutBrTags = content.length - (brCount * 3);
+    
+        if (lengthWithoutBrTags + text.length > maxChars) {
+            let spaceRemaining = maxChars - lengthWithoutBrTags;
+            text = text.substring(0, spaceRemaining);
+        } 
+    
         if (sel.getRangeAt && sel.rangeCount) {
             var range = sel.getRangeAt(0);
             range.deleteContents();
@@ -1204,34 +1310,21 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             sel.addRange(range);
         }
     }
+
     // set max characters for commentElement
     function processInput() {
-        let content = commentElement.innerHTML;
-        const maxLength = m_c;
-    
-        let brCount = (content.match(/<br>/g) || []).length;
-    
-        // Counting the <br> tag as 1 instead of the actual 4
-        let lengthWithoutBrTags = content.length - (brCount * 3);
-    
-        // If length considering <br> as one character is still less than max length
-        if (lengthWithoutBrTags > maxLength) {
-            let newLength = maxLength + (brCount * 3);
-    
-            let cleanedContent = content;
-            let strippedContentLength = cleanedContent.replace(/<br>/g, '').length;
-    
-            // While the content is too long
-            while (strippedContentLength > newLength) {
-                // Remove the last character
-                cleanedContent = cleanedContent.substring(0, cleanedContent.length - 1);
-                strippedContentLength = cleanedContent.replace(/<br>/g, '').length;
+        const maxChars = m_c;
+        commentElement.addEventListener('keydown', e => {
+            let content = commentElement.innerHTML;
+            let brCount = (content.match(/<br>/g) || []).length;
+            let lengthWithoutBrTags = content.length - (brCount * 3);
+            if (lengthWithoutBrTags > maxChars && !e.metaKey && !e.ctrlKey && e.keyCode !== 8 && e.keyCode !== 13) {
+                e.preventDefault();
             }
-            commentElement.innerHTML = cleanedContent;
-            commentElement.blur();
-        }
+        });
     }
-    // listen to events
+
+    // Listen to events
     commentElement.addEventListener('input', function() {
         ensureBrAtEnd(commentElement);
         processInput();
@@ -1243,13 +1336,10 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     });
     commentElement.addEventListener('paste', function(e) {
         handleInputAsPlainText(e);
-        processInput();
         triggerInputAtKeydown();
     });
     commentElement.addEventListener('drop', function(e) {
         handleInputAsPlainText(e);
-        processInput();
-        triggerInputAtKeydown();
     });
 
     getScript(chatx_server + 'assets/js/img-gallery.js');
@@ -1261,23 +1351,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             document.querySelector(".chx-bar chx_span").textContent = chat;
             falseShoutBoxName.placeholder = nameInputValue;
             document.querySelector(".chx-management-link").textContent = management;
-            document.querySelector(".name-required").textContent = noNameError;
             document.querySelector(".chx-fast-track").textContent = fastUpdate;
-            document.querySelector(".chx-switch-tab.first").textContent = login;
-            document.querySelector(".chx-switch-tab.second").textContent = signup;
-            let inputUsernames = document.querySelectorAll("input[name='u'], input[name='reg_u']");
-            inputUsernames.forEach(function(inputUsername) {
-                inputUsername.placeholder = userName;
-            });
-            let inputPasswords = document.querySelectorAll("input[name='p'], input[name='reg_p']");
-            inputPasswords.forEach(function(inputPassword) {
-                inputPassword.placeholder = passWord;
-            });
-            let inputConfirmPassWord = document.querySelector("input[name='c_reg_p']");
-            
-            if (inputConfirmPassWord) {
-              inputConfirmPassWord.placeholder = confirmPassWord;
-            }
             let regDisabledCaption = document.querySelector(".chx-reg-disabled-caption");
             if (regDisabledCaption) {
               regDisabledCaption.textContent = regDisabled;
@@ -1289,13 +1363,13 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
             document.querySelector("input[name='link_desc']").placeholder = linkDesc;
             var style = document.createElement("style");
             style.innerHTML = ".chatx_login span {font-size:0 !important}.chatx_login chx_span::after {content: '" + login + "'; font-size: 12px}" +
-                ".chatx_logout chx_span::after {content: '" + logout + "'; font-size: 12px} .mybbRegPrompt::after {content: '" + mybbSignup + "'; }" +
-                ".mybbRegPrompt.mybb-reload::after {content: 'reload page';}";
+                ".chatx_logout chx_span::after {content: '" + logout + "'; font-size: 12px} .mybbRegPrompt::after {content: '" + mybbSignup + "'}" +
+                ".mybbRegPrompt.mybb-reload::after {content: '" + reloadPage + "'} .name-required::after {content: '" + noNameError + "'}" +
+                ".chx-switch-tab.first::after {content: '" + login + "'} .chx-switch-tab.second::after {content: '" + signup + "'}" +
+                ".chx-name-wrapper::before {content: '" + userName + "'} .chx-password-wrapper::before {content: '" + passWord + "'}" +
+                ".chx-password-confirm-wrapper::before {content: '" + confirmPassWord + "'}";
             document.querySelector("head").appendChild(style);
         });
-        
-        setRegForm();
-        formButtonClick();
 });
 /*
 ###################################################################
@@ -1318,7 +1392,7 @@ document.querySelectorAll('.chxicon-unmute, .chxicon-mute').forEach(el => {
 });
 
 function triggerInputAtKeydown() {
-    var ev = new Event('input', {
+    let ev = new Event('input', {
         bubbles: true,
         cancelable: true,
     });
@@ -1376,18 +1450,27 @@ commentElement.addEventListener('input', function() {
 const commentText = localStorage.getItem('chx_text');
 if (commentText !== null && commentText.trim() !== '') {
     commentElement.innerText = commentText;
-} 
+}
 
 // Shows a warning message if the name input is empty.
+let warningTimeout;
 function showNameRequiredWarning() {
-    if(falseShoutBoxName !== null) {
-        const nameRequiredWarning = document.querySelector('.name-required');
-        nameRequiredWarning.style.display = 'block';
-        setTimeout(() => {
-            nameRequiredWarning.style.display = 'none';
-        }, 2000);
+    if (falseShoutBoxName.style.visibility === 'hidden') return;
+
+    const parentEl = document.querySelector('.chx-bar');
+    let nameRequiredWarning = document.querySelector('.name-required');
+
+    if (!nameRequiredWarning) {
+        nameRequiredWarning = document.createElement('chx_div');
+        nameRequiredWarning.classList.add('name-required');
+        parentEl.appendChild(nameRequiredWarning);
     }
+    
+    clearTimeout(warningTimeout);
+    warningTimeout = setTimeout(() => nameRequiredWarning.remove(), 2000);
 }
+
+
 // Submits the chat form if the name input is filled.
 function chatSubmit() {
     if (falseShoutBoxName.value.trim() === '') {
@@ -1406,7 +1489,7 @@ function chatSubmit() {
     localStorage.removeItem('chx_text');
     progressBarWrapper.style.display = 'none';
 }
-// invoke chatsubmit() when clicked on submit button
+// Invoke chatsubmit() when clicked on submit button
 const sendMessageBtn = document.querySelector('#chx-send-message');
 sendMessageBtn.addEventListener('click', chatSubmit);
 
@@ -1460,7 +1543,6 @@ function chatxVisibility() {
         threshold: 1.0 
     }
     let observer = new IntersectionObserver(handleIntersect, options);
-        chx_container = document.querySelector('#chatx .chx-container');
         style = window.getComputedStyle(commentElement);
         lineHeight = style.getPropertyValue('line-height');
         lineHeight = parseFloat(lineHeight);
@@ -1470,20 +1552,20 @@ function chatxVisibility() {
             let expanded = chatx.classList.contains('expanded');
             if (entry.target == form && !entry.isIntersecting && expanded) {
                 if (shouldObserveForm) {
-                    if (chx_container.clientHeight > 360) {
-                        let calcFormHeight = chx_container.clientHeight - lineHeight /*18*/;
-                        chx_container.style.height = calcFormHeight + "px";
+                    if (container.clientHeight > 360) {
+                        let calcFormHeight = container.clientHeight - lineHeight;
+                        container.style.height = calcFormHeight + "px";
                         localStorage.setItem(chx_resize, '{"height":"' + calcFormHeight + 'px"}');
                     } else {
                         let top = parseInt(chatx.style.top, 10);
-                        chatx.style.top = top - lineHeight /*18*/ + 'px';
+                        chatx.style.top = top - lineHeight + 'px';
                     }
                     let positionData = JSON.parse(localStorage.getItem('chat_custom_position'));
                         positionData.chatx.top = parseInt(chatx.style.top, 10);
                     localStorage.setItem('chat_custom_position', JSON.stringify(positionData));
                 }
             }
-            else if (entry.target == chx_container && !entry.isIntersecting && expanded) {
+            else if (entry.target == container && !entry.isIntersecting && expanded) {
                 shouldObserveForm = false;
                 let keysToRemove = ["chx-container", "chat_custom_position"];
                 for (key of keysToRemove) {
@@ -1491,13 +1573,13 @@ function chatxVisibility() {
                 }
                 chatx.style.top = "15px";
                 chatx.style.left = "15px";
-                chx_container.style.height = "360px";
-            } else if (entry.target == chx_container && entry.isIntersecting && expanded) {
+                container.style.height = "360px";
+            } else if (entry.target == container && entry.isIntersecting && expanded) {
                 shouldObserveForm = true;
             }
         });
     }
-    observer.observe(chx_container);
+    observer.observe(container);
     observer.observe(form);
 }
 
@@ -1578,7 +1660,8 @@ document.addEventListener("click", function(event) {
             element.style.display = "none";
         });
     }
-})
+});
+
 const plusIcons = document.querySelectorAll('.shoutbox-form .chxicon-plus');
 plusIcons.forEach(function(plusIcon) {
     plusIcon.addEventListener('click', function() {
@@ -1638,20 +1721,6 @@ for (let i = 0; i < colors.length; i++) {
   };
 }
 
-var signUpForm = document.querySelector('.chx-signup-form-contents');
-var tabs = document.querySelectorAll('.chx-switch-tab');
-if (window.getComputedStyle(signUpForm).display !== 'initial') {
-    tabs[0].classList.add('active');
-}
-tabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-        tabs.forEach(function(tab) {
-            tab.classList.remove('active');
-        });
-        this.classList.add('active');
-    });
-});
-
 function formSubmit(nameForm) {
     let form = document.querySelector(`form[name=${nameForm}]`);
     let inputs = form.querySelectorAll("input");
@@ -1667,25 +1736,21 @@ function formSubmit(nameForm) {
         return false;
     }
 }
-document.querySelectorAll('.chx-login-form-contents, .chx-signup-form-contents').forEach(function(element) {
-    element.addEventListener('keydown', function(event) {
-        if (event.which === 13) {
-            let nameForm = element.querySelector('form').getAttribute('name');
-            formSubmit(nameForm);
-        }
-    });
-});
 
-function formButtonClick() {
-    const buttons = document.querySelectorAll('.chx-login-button');
-    buttons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            let form = this.closest('form');
-            let nameForm = form ? form.getAttribute('name') : '';
-            formSubmit(nameForm);
-        });
-    });
-}
+const formButtonClick = () => {
+    document.querySelectorAll('.chx-login-button').forEach(button =>
+        button.addEventListener('click', () =>
+            formSubmit(button.closest('form')?.getAttribute('name') || '')
+        )
+    );
+
+    document.querySelectorAll('.chx-login-form-contents, .chx-signup-form-contents').forEach(element =>
+        element.addEventListener('keydown', ({which}) => {
+            if (which === 13) 
+                formSubmit(element.querySelector('form').getAttribute('name'));
+        })
+    );
+};
 
 document.querySelector(".chx-process-img").addEventListener("click", function() {
     chxImageBbPrompt.style.display = "none";

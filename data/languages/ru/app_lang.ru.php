@@ -12,6 +12,7 @@ var management = 'Управление ChatX';
     passWord = 'Пароль';
     confirmPassWord = 'Пароль еще раз';
     regDisabled = 'Регистрация сейчас отключена';
+    reloadPage = 'Перезагрузите страницу';
     recentlyInChat = 'Ранее в чате';
     imgUrlPlaceholder = 'Вставьте URL картинки...';
     linkUrlPlaceholder = 'Вставьте URL ссылки...';

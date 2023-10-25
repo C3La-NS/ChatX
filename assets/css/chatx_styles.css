@@ -335,7 +335,6 @@ chx_p {
 }
 
 .name-required {
-	display: none;
 	top: 3.3em;
 	z-index: 3;
 }
@@ -794,7 +793,7 @@ img.emojione {
 	margin: 2px auto;
 }
 
-.chx-login-form .chx-signup-form-contents input:first-child {
+.chx-login-form .chx-signup-form-contents chx_div:first-child {
 	margin-top: 10px;
 }
 
@@ -814,6 +813,17 @@ img.emojione {
 
 .chx-login-button:hover {
 	transition: .5s;
+}
+
+.chx-name-wrapper::before, .chx-password-wrapper::before, .chx-password-confirm-wrapper::before {
+    position: absolute;
+    line-height: 35px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: -1;
+}
+.chx-name-wrapper, .chx-password-wrapper, .chx-password-confirm-wrapper {
+    color: var(--chx-5-color);
 }
 
 [data-loggedIn="true"]:before {
@@ -869,7 +879,7 @@ img.emojione {
 	position: absolute;
 	display: none;
 	z-index: 3;
-	width: calc(100% - 1px);
+	width: calc(100% - 2px);
 	padding: 15px 10px 0 10px;
 	box-sizing: border-box;
 	border-radius: 0 0 5px 5px;

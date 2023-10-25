@@ -1,93 +1,121 @@
 function openModal(img) {
-    // Get the full-size image URL from the data attribute
     var imgUrl = img.getAttribute('data-chxlightbox');
-    // Create a new image element with the full-size image URL
     var fullSizeImg = document.createElement('img');
-        fullSizeUrl = document.createElement('a');
+    var fullSizeUrl = document.createElement('a');
+    var modal = document.createElement('div');
+    var close = document.createElement('chx_i');
+    var source = document.createElement('chx_i');
+
     fullSizeImg.setAttribute('src', imgUrl);
     fullSizeUrl.setAttribute('href', imgUrl);
     fullSizeUrl.setAttribute('target', '_blank');
-    // Create a modal box element and add the full-size image
-    var modal = document.createElement('div');
-    close = document.createElement('chx_i');
-    source = document.createElement('chx_i');
+
     modal.setAttribute('class', 'modal');
     close.setAttribute('class', 'chxicon-plus');
     source.setAttribute('class', 'chxicon-logout');
+
     modal.appendChild(fullSizeImg);
-    // Add the modal box to the page
     document.body.appendChild(modal);
     modal.appendChild(close);
     fullSizeUrl.appendChild(source);
     modal.appendChild(fullSizeUrl);
-    // Keep track of the current scale factor and image position
+
     var scale = 1.0;
-    var position = {
-        x: 0,
-        y: 0
-    };
-    // When the user scrolls with the mouse wheel, scale the image
-    modal.addEventListener('wheel', function(event) {
-        event.preventDefault();
-        // Determine the direction and amount of the scroll
-        var delta = Math.sign(-event.deltaY);
-        var amount = delta * 0.1;
-        // Calculate the new scale factor
-        scale += amount;
-        // Constrain the scale factor to a minimum of 0.1 and a maximum of 3.0
-        scale = Math.max(scale, 0.7);
-        scale = Math.min(scale, 4.0);
-        // Apply the new scale factor to the image
-        fullSizeImg.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
-    });
-    // When the user clicks and drags the image, move it within the modal
+    var position = { x: 0, y: 0 };
+
     var isDragging = false;
-    var lastMousePosition = {
-        x: 0,
-        y: 0
-    };
-    fullSizeImg.addEventListener('mousedown', function(event) {
+    var lastMousePosition = { x: 0, y: 0 };
+
+    fullSizeImg.addEventListener('mousedown', function (event) {
         event.preventDefault();
-        // Store the current mouse position and start dragging
         lastMousePosition.x = event.clientX;
         lastMousePosition.y = event.clientY;
         isDragging = true;
     });
-    window.addEventListener('mousemove', function(event) {
+
+    window.addEventListener('mousemove', function (event) {
         if (isDragging) {
-            // Calculate the distance the mouse has moved since the last event
             var deltaX = event.clientX - lastMousePosition.x;
             var deltaY = event.clientY - lastMousePosition.y
-            // Update the stored mouse position to the current position
             lastMousePosition.x = event.clientX;
             lastMousePosition.y = event.clientY;
-            // Update the position of the image within the modal
             position.x += deltaX / scale;
             position.y += deltaY / scale;
-            // Apply the new position to the image
             fullSizeImg.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
         }
     });
-    window.addEventListener('mouseup', function(event) {
-        // Stop dragging
+
+    window.addEventListener('mouseup', function (event) {
         isDragging = false;
     });
-    // When the user clicks anywhere outside image on the modal box, close it
-    modal.onclick = function(event) {
+
+    fullSizeImg.addEventListener('wheel', function (event) {
+        event.preventDefault();
+        var delta = Math.sign(-event.deltaY);
+        var amount = delta * 0.1;
+        scale += amount;
+        scale = Math.max(scale, 0.7);
+        scale = Math.min(scale, 4.0);
+        fullSizeImg.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
+    });
+
+    var initialTouchPosition = { x: 0, y: 0 };
+    var initialTouchDistance;
+
+    fullSizeImg.addEventListener('touchstart', function (event) {
+        event.preventDefault();
+        if (event.touches.length == 2) {
+            initialTouchDistance = getTouchDistance(event.touches[0], event.touches[1]);
+            initialTouchPosition = {
+                x: (event.touches[0].pageX + event.touches[1].pageX) / 2,
+                y: (event.touches[0].pageY + event.touches[1].pageY) / 2
+            };
+        }
+    });
+
+    fullSizeImg.addEventListener('touchmove', function (event) {
+        event.preventDefault();
+        if (event.touches.length == 2 && initialTouchDistance) {
+            var newTouchDistance = getTouchDistance(event.touches[0], event.touches[1]);
+            var scaleChange = newTouchDistance / initialTouchDistance;
+            scale = Math.max(0.7, Math.min(scale * scaleChange, 4.0));
+            var currentTouchPosition = {
+                x: (event.touches[0].pageX + event.touches[1].pageX) / 2,
+                y: (event.touches[0].pageY + event.touches[1].pageY) / 2
+            };
+            position.x += (currentTouchPosition.x - initialTouchPosition.x) / scale;
+            position.y += (currentTouchPosition.y - initialTouchPosition.y) / scale;
+            fullSizeImg.style.transform = `scale(${scale}) translate(${position.x}px, ${position.y}px)`;
+            initialTouchPosition = currentTouchPosition;
+            initialTouchDistance = newTouchDistance;
+        }
+    });
+
+    fullSizeImg.addEventListener('touchend', function (event) {
+        if (event.touches.length < 2) {
+            initialTouchDistance = null;
+        }
+    });
+
+    modal.onclick = function (event) {
         if (event.target.tagName !== 'IMG') {
             closeModal(modal);
         }
     };
 
-    // Listen for escape key press and close modal when ESC is pressed
-    // Built-in which code for ESC key is 27
     document.addEventListener('keydown', function(event) {
-        // the check `event.target === modal` ensures that modal is currently active/open
         if (event.which === 27 && modal !== null) {
             closeModal(modal);
         }
     });
 }
+
+function getTouchDistance(touch1, touch2) {
+    var dx = touch1.pageX - touch2.pageX;
+    var dy = touch1.pageY - touch2.pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 function closeModal(modal) {
     if(modal && modal.parentNode) {
         modal.parentNode.removeChild(modal);

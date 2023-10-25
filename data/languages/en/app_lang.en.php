@@ -12,6 +12,7 @@ var management = 'ChatX management';
     passWord = 'Password';
     confirmPassWord = 'Confirm Password';
     regDisabled = 'Registration is disabled at the moment';
+    reloadPage = 'Reload page';
     recentlyInChat = 'Recently in chat';
     imgUrlPlaceholder = 'Insert image URL...';
     linkUrlPlaceholder = 'Insert link URL...';
