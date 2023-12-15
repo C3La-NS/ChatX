@@ -35,6 +35,7 @@ foreach($getSettings as $settings) {
     $j_k = $settings->jwtKey;
     $c_s = $settings->colorScheme;
     $s_d = $settings->siteDomain;
+    $r_s = $settings->randomString;
 }
 if($j_k) {
     $secretKey  = $j_k;

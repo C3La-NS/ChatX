@@ -95,6 +95,7 @@ $lang['TEMPLATES'] = 'Templates';
 $lang['TEMPLATES_DESC1'] = 'You can find more color schemes for ChatX widget on';
 $lang['TEMPLATES_DESC1_1'] = 'this GitHub page';
 $lang['TEMPLATES_DESC2'] = 'Choose a color scheme and replace the contents up to the';
+$lang['CUSTOM_STYLE'] = 'Custom style';
 $lang['CSS_UPDATE'] = 'Update CSS';
 $lang['CSS_EDITOR'] = 'editor';
 $lang['CSS_EDITOR_DESC1'] = 'You can customize widget color scheme and apply your own CSS rules';

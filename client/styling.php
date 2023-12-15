@@ -5,26 +5,38 @@ include '../data/languages/' . $l_g . '/lang.' . $l_g . '.php';
 
 $file_path = '../assets/css/scheme/Custom Template.css';
 $css_File = file_get_contents($file_path);
-$css_Modified .= htmlspecialchars($_POST["updateCSS"]);
+$css_Modified = htmlspecialchars($_POST["updateCSS"]);
 
-if( isset($_POST["s"]) && $is_valid_moderator ) {
-    file_put_contents($file_path, $css_Modified);
-    echo "<script> location.href='redirect.php'; </script>";
-    exit;
-}
-if(isset($_POST["s_t"]) && $is_valid_moderator) {
-    $checkSettings = $repoSettings->query()
-    ->limit(1, 0)
-    ->execute();
-    foreach($checkSettings as $updateSettings);
+$checkSettings = $repoSettings->query()->limit(1, 0)->execute();
+foreach ($checkSettings as $updateSettings);
 
-    if( !empty($_POST['colorScheme']) ) {
-        $updateSettings->colorScheme = htmlspecialchars(trim($_POST['colorScheme']));
+if ($is_valid_moderator) {
+    if(isset($_POST["s"])) {
+        $updateSettings->randomString = generateRandomString(5);
+        file_put_contents($file_path, $css_Modified);
+    } elseif (isset($_POST["s_t"])) {
+        if(!empty($_POST['colorScheme'])) {
+            $updateSettings->colorScheme = htmlspecialchars(trim($_POST['colorScheme']));
+        }
     }
-    $repoSettings->update($updateSettings);
     
-    echo "<script> location.href='redirect.php'; </script>";
-    exit; 
+    if(isset($_POST["s"]) || isset($_POST["s_t"])) {
+        $repoSettings->update($updateSettings);
+        echo "<script> location.href='redirect.php'; </script>";
+        exit;
+    }
+}
+
+function generateRandomString($length) {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $randomString = '';
+    $charCount = strlen($characters);
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charCount - 1)];
+    }
+
+    return $randomString;
 }
 ?>
 
@@ -123,7 +135,7 @@ if(isset($_POST["s_t"]) && $is_valid_moderator) {
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div style="background: #fdf6e3" class="template-select">
-                        <p>Свой стиль</p>
+                        <p><?php echo $lang['CUSTOM_STYLE']; ?></p>
                         <input class="magic-checkbox" type="radio" name="colorScheme" value="Custom Template"><label class="magic-label"></label>
                     </div>
                 </div>

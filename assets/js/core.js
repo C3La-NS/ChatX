@@ -214,6 +214,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         l_g = parsedResponse.l_g;
         c_s = parsedResponse.c_s;
         s_o = parsedResponse.s_o;
+        r_s = parsedResponse.r_s;
     let loggingStatus;
     let setDynamicAuthenticationVarsCalled;
 
@@ -240,7 +241,7 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
         load_css(chatx_server + 'assets/css/screen_optimized.css');
     }
     // loading chat color scheme
-    load_css(chatx_server + 'assets/css/scheme/' + c_s + '.css');
+    load_css(chatx_server + 'assets/css/scheme/' + c_s + '.css' + (c_s == 'Custom Template' ? '?v=' + r_s : ''));
 
     Promise.all([
             getScript(chatx_server + 'assets/js/simplebar.js'),
@@ -537,22 +538,14 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                     if (!secondLoad) {
                         appendComments(xhr.response);
                         scrollBottom();
-
-                    // Get all chx_li elements
-                    var chxLiElements = document.querySelectorAll('chx_li');
-                    
-                    // Array to store the classes
-                    var classesArray = [];
-                    
-                    // Iterate over the chx_li elements
-                    for (var i = chxLiElements.length - 1; i >= 0; i--) {
-                      var chxLiElement = chxLiElements[i];
-                      var chxLiClass = chxLiElement.getAttribute('class');
-                      classesArray.push(chxLiClass);
-                    }
-                    
-                    // Convert the classes array to a string
-                    classesString = classesArray.join('.');
+                        let chxLiElements = document.querySelectorAll('chx_li');
+                            idsArray = [];
+                        for (let i = chxLiElements.length - 1; i >= 0; i--) {
+                            let chxLiElement = chxLiElements[i];
+                                chxLiClass = chxLiElement.getAttribute('class');
+                            idsArray.push(chxLiClass);
+                        }
+                        sortedIds = idsArray.sort();
                         
                     } else if ((wrapper.scrollHeight - wrapper.scrollTop - 20) <= wrapper.clientHeight && !document.querySelector(".shoutbox-comment-ago:hover")) {
                         if (ulHist.children.length > 0) {
@@ -562,9 +555,27 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
                         }
                         let json = xhr.response;
                             values = json.IDs;
-                            valuesString = values.join('.');
-                        if (classesString == valuesString || classesString == 'denied') {
-                            return;
+                            valuesString = values.join(',');
+                            xhrIdsArray = [];
+                        xhrIdsArray.push(...values);
+                        sortedXhrIds = xhrIdsArray.sort();
+                        
+                        // Function to compare arrays
+                        function arraysHaveSameElements(arr1, arr2) {
+                            if (arr1.length !== arr2.length) {
+                                return false;
+                            }
+                            for (var i = 0; i < arr1.length; i++) {
+                                if (arr1[i] !== arr2[i]) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        }
+                        let idsMatch = arraysHaveSameElements(sortedIds, sortedXhrIds);
+
+                        if (idsMatch || idsArray.length === 0 || JSON.stringify(idsArray) === '["denied"]') {
+                          return;
                         } else {
                             secondLoad = false;
                             load();
@@ -1312,28 +1323,25 @@ makeXHRRequest(chatx_server + 'dynamic_js.php', 'GET').then(function(response) {
     }
 
     // set max characters for commentElement
-    function processInput() {
-        const maxChars = m_c;
-        commentElement.addEventListener('keydown', e => {
-            let content = commentElement.innerHTML;
-            let brCount = (content.match(/<br>/g) || []).length;
-            let lengthWithoutBrTags = content.length - (brCount * 3);
-            if (lengthWithoutBrTags > maxChars && !e.metaKey && !e.ctrlKey && e.keyCode !== 8 && e.keyCode !== 13) {
-                e.preventDefault();
-            }
-        });
-    }
+    commentElement.addEventListener('keydown', e => {
+        let content = commentElement.innerHTML;
+        let brCount = (content.match(/<br>/g) || []).length;
+        let lengthWithoutBrTags = content.length - (brCount * 4);
+        if (lengthWithoutBrTags > m_c && !e.metaKey && !e.ctrlKey && e.keyCode !== 8 && e.keyCode !== 13) {
+            e.preventDefault();
+        }
+    });
 
     // Listen to events
     commentElement.addEventListener('input', function() {
         ensureBrAtEnd(commentElement);
-        processInput();
         var lastNode = commentElement.lastChild;
         if (lastNode && lastNode.nodeName === 'BR' && commentElement.textContent.trim() === '') {
             commentElement.removeChild(lastNode);
         }
         updateProgressBar();
     });
+    
     commentElement.addEventListener('paste', function(e) {
         handleInputAsPlainText(e);
         triggerInputAtKeydown();

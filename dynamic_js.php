@@ -33,6 +33,7 @@ $data['n_s'] = $n_s;
 $data['l_g'] = $l_g;
 $data['c_s'] = $c_s;
 $data['s_o'] = $s_o;
+$data['r_s'] = $r_s;
 
 if ( $r_a === '1' ) {
      if( !isset($token->data->loggedIn) && !isset($token->data->moderator) ) {

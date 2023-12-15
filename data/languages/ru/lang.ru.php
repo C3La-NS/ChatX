@@ -95,6 +95,7 @@ $lang['TEMPLATES'] = 'Стили';
 $lang['TEMPLATES_DESC1'] = 'Вы можете найти больше цветовых схем для ChatX на';
 $lang['TEMPLATES_DESC1_1'] = 'странице на Github';
 $lang['TEMPLATES_DESC2'] = 'Выберите подходящую цветовую схему и замените код до';
+$lang['CUSTOM_STYLE'] = 'Свой стиль';
 $lang['CSS_UPDATE'] = 'Обновить CSS';
 $lang['CSS_EDITOR'] = 'редактор';
 $lang['CSS_EDITOR_DESC1'] = 'Вы можете настраивать цветовую схему виджета и прописывать собственные CSS правила';
