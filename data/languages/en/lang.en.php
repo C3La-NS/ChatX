@@ -138,4 +138,4 @@ $lang['SEND_MESSAGE'] = 'to send new message';
 $lang['SET_NEWLINE'] = 'go to next line';
 
 // Application version
-$lang['APPLICATION_VERSON'] = '2.5.0';
+$lang['APPLICATION_VERSON'] = '2.5.1';

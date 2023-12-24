@@ -1,7 +1,7 @@
 /*
 ###################################################################
             CHATX BUILDING MARKUP, UI AND ADDING CSS STYLES
-            VERSION 2.5.0
+            VERSION 2.5.1
 ###################################################################
 */
 
@@ -1816,7 +1816,8 @@ function processExtImg() {
             generateImageTagAndSend(xhr.responseText);
         }
     };
-    xhr.send('urlToImg' + '=' + imgLink);
+    /*xhr.send('urlToImg' + '=' + imgLink);*/
+    xhr.send('urlToImg' + '=' + encodeURIComponent(imgLink));
 }
 let imgur_upload_form = '<form id="imgur_uploader"><chx_i class="chxicon-upload"></chx_i><input id="imgur_uploader_input" type="file" accept="image/*" name="chximg"></form>';
 document.querySelector(".chx-imgur-uploader").insertAdjacentHTML('beforeend', imgur_upload_form);

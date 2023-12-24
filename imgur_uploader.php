@@ -1,10 +1,10 @@
 <?php
 include 'settings.php';
 $client_id = $i_i;
-$externalImg = htmlspecialchars($_POST['urlToImg']);
+$externalImg = $_POST['urlToImg'];
 
 if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['error'] == UPLOAD_ERR_NO_FILE && !isset($externalImg)) {
-    echo json_encode(array("error" => "No file uploaded and no external image URL provided")); // what for
+    echo json_encode(array("error" => "No file uploaded and no external image URL provided"));
     die();
 } else {
     if (isset($_FILES['chximg']) && !empty($_FILES['chximg']['tmp_name'])) {
@@ -14,11 +14,15 @@ if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['erro
             die();
         }
     } elseif (!empty($externalImg)) {
-        $image = file_get_contents($externalImg);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $externalImg);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        $image = curl_exec($ch);
         if ($image === false) {
             echo json_encode(array("error" => "Failed to download image from external URL"));
             die();
         }
+        curl_close($ch);
     } else {
         echo json_encode(array("error" => "No file uploaded and no external image URL provided"));
         die();
@@ -96,4 +100,3 @@ if (!isset($_FILES['chximg']) && !isset($externalImg) || $_FILES['chximg']['erro
     );
     echo json_encode($arr);
 }
-?>
