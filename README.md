@@ -131,6 +131,15 @@ It's free, without any ads or distracting copyrights, and we continuously work t
   <li>Overall UI improvements for the widget and moderator's panel</li>
   <li>Updated help page</li>
   <li>Imgur application identificator (API) field in ChatX settings</li>
+  <b>ver 2.5.0</b>
+  <li>PHP 8.0+ support</li>
+  <li>Content editable input field for new messages</li>
+  <li>CTRL+ENTER for new lines</li>
+  <li>A static file for checking updates in chat</li>
+  <li>Visual indicator for characters left in input field</li>
+  <li>Empty bbtags no longer transformed into html</li>
+  <li>Login form is inserted in DOM when it is expected for it</li>
+  <li>Non-transparent .png files are shown in thumbnails</li>
   
 </details>
 <br />
